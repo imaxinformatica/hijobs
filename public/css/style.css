@@ -1,0 +1,673 @@
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+div#barra-top {
+    background: #ccc;
+    height: 30px;
+}
+
+ul#top-type {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+ul#top-type li {
+    padding: 5px 10px;
+}
+
+ul#top-type li:hover{
+    cursor: pointer;
+}
+
+ul#top-type li a{
+	color: #000;
+}
+
+ul#top-type li a:hover, ul#top-type li a:focus{
+	text-decoration: none;
+}
+
+.active {
+    background: #fff;
+    height: 30px;
+    margin-top: 0px;
+}
+
+.active a{
+	font-weight: bold;
+}
+
+.active-menu a{
+    font-weight: bold !important;
+    color: #f68b19 !important;
+}
+
+a.logo img {
+    margin-bottom: 5px;
+}
+
+.navbar{
+	margin-bottom: 0;
+}
+
+.navbar-default{
+	border-color: #fff;
+    background: #fff;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    margin-top: 11px;
+    font-size: 15px;
+}
+
+ul.nav.navbar-nav.navbar-right li a{
+	font-weight: 100;
+	color: #000;
+}
+
+li#login {
+    border: 1px solid #f68b19;
+    margin-top: 7px;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+li#login a{
+    color: #f68b19;
+    margin-top: -8px;
+}
+
+section.search {
+    background: url(../images/banner.jpg);
+    min-height: 400px;
+    box-shadow: 1px 1px 50px #000;
+    background-size: cover;
+}
+
+section.search-company{
+    background: url(../images/banner-empresa.jpg);
+    min-height: 400px;
+    box-shadow: 1px 1px 50px #000;
+    background-size: cover;
+}
+
+section.curriculum, section.search-vacancies{
+    box-shadow: none;
+}
+
+section.curriculum div.search-job{
+    padding: 20px 20px 40px;
+}
+
+div.search-job {
+    background: rgba(33, 50, 71, 0.85);
+    min-height: 400px;
+    padding: 20px;
+}
+
+div.search-job h1{
+    color: #fff;
+    font-weight: bold;
+}
+
+label {
+    color: #fff;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+div.search-job input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: none;
+    outline: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+form#register-curriculum input{
+    padding: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+form#register-curriculum p{
+    margin-top: 25px;
+}
+
+form#register-curriculum p a{
+    color: #f68b19;
+}
+
+form#register-curriculum p a:hover, form#register-curriculum p a:focus{
+    text-decoration: none;
+    color: #f68b19;
+}
+
+div.search-job #office {
+    background-image: url(../images/lupa.png);
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 12px;
+}
+
+div.search-job #place {
+    background-image: url(../images/maps.png);
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 12px;
+}
+
+div.search-job #user {
+    background-image: url(../images/user.png);
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 12px;
+}
+
+div.search-job p{
+	color: #fff;
+}
+
+div.search-company{
+	background: transparent;
+}
+
+button.btn-orange {
+    background: #f68b19;
+    border: none;
+    color: #fff;
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+    outline: none;
+}
+
+section.new-job {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+section.new-job h3 {
+    color: #213247;
+    font-weight: bold;
+    margin: 50px 0;
+}
+
+div.box-new-job {
+    margin: 30px 0;
+}
+
+div.box-new-job img {
+    width: 75px;
+    margin-bottom: 10px;
+}
+
+div.box-new-job p{
+    color: #213247;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+div.order {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    left: 80px;
+}
+
+div.vacancy {
+    left: 115px;
+}
+
+div.application {
+    left: 95px;
+}
+
+div.order p{
+    background: #213247;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    color: #fff;
+}
+
+section.new-job button.btn-orange{
+	font-weight: bold;
+}
+
+section.result-job {
+    color: #000;
+    background: #f7f7f7;
+    padding: 30px 0;
+}
+
+p.title-section{
+	margin-top: 15px;
+}
+
+div.box-result-job {
+    line-height: 27px;
+    color: #000;
+    background: #fff;
+    box-shadow: 0px 0px 15px #ccc;
+    padding: 10px 20px;
+    margin: 15px 0;
+}
+
+div.box-result-job p{
+    margin-bottom: 0;
+}
+
+div.box-result-job span{
+	color: #213247;
+	font-weight: bold;
+}
+
+div.box-result-job p.pay{
+	color: #213247;
+	font-weight: 300;
+	font-size: 13px;
+}
+
+div.box-result-job a{
+    color: #f68b19;
+    text-decoration: underline;
+}
+
+div.box-company {
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0px 0px 15px #ccc;
+    background: #fff;
+    margin: 20px 0;
+}
+
+div.box-company img{
+    margin: 15px 0;
+    max-width: 127px;
+}
+
+div.box-company p{
+	margin: 0;
+}
+
+div.box-cities {
+    margin-top: 15px;
+}
+
+div.box-cities ul{
+    list-style: none;
+    padding: 0;
+    line-height: 25px;
+}
+
+div.box-cities ul li a{
+	color: #000;
+	font-size: 15px;
+}
+
+div.box-cities ul li a:hover{
+	text-decoration: none;
+}
+
+section.recrutamento{
+	text-align: center;
+	background: #f7f7f7;
+}
+
+section.recrutamento h2{
+	color: #213247;
+    font-weight: bold;
+    margin: 50px 0 30px;
+}
+
+section.recrutamento div.box-new-job {
+    box-shadow: 0px 0px 25px #e0dede;
+    background: #fff;
+    padding: 30px 0 15px;
+    margin-bottom: 50px;
+}
+
+section.recrutamento div.box-new-job img{
+	margin-bottom: 25px;
+}
+
+section.recrutamento div.box-new-job p{
+	font-size: 17px;
+}
+
+p.title-box-recrutamento {
+    margin-bottom: 20px;
+}
+
+div.box-new-job p.content-box-recrutamento{
+    color: #000;
+    font-weight: 300;
+    font-size: 14px !important;
+}
+
+section.result-search {
+    background: #f7f7f7;
+    padding: 30px 0;
+}
+
+div.box-result-search {
+    background: #fff;
+    padding: 5px 10px;
+    box-shadow: 1px 1px 15px #ccc;
+    margin-bottom: 25px;
+}
+
+div.box-result-search label{
+    color: #000;
+    font-weight: 400;
+}
+
+div.box-result-search input, div.box-result-search select{
+    width: 100%;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+button.btn-blue {
+    background: #00bff3;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+}
+
+img.icon-vagas {
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 15px;
+}
+
+p.total-vagas {
+    margin-top: 5px;
+    color: #878787;
+    font-size: 17px;
+}
+
+div.result-vacancies{
+    padding: 20px 25px;
+}
+
+div.result-vacancies span{
+    color: #f27a00;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+div.result-vacancies #salario{
+    margin-top: 7px;
+}
+
+button.btn-result {
+    background-color: #f57b00;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    color: #fff;
+    padding: 0;
+    border-radius: 2px;
+    width: 200px;
+}
+
+button.btn-result  p{
+    margin-bottom: 0;
+    margin-top: 8px;
+}
+
+div.border {
+    float: left;
+    background: #e17000;
+    padding: 5px;
+    border-radius: 2px 0 0 2px;
+}
+
+section.cadastro-dados{
+    padding-top: 0;
+    padding-bottom: 30px;
+}
+
+section.cadastro-dados h1{
+    color: #000;
+    font-weight: bold;
+}
+
+div.etapas{
+    margin: 20px 0 40px;
+}
+
+div.etapas h3 {
+    margin: 13px 0 14px;
+    color: #ccc;
+}
+
+div.etapas img{
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    width: 10px;
+}
+
+div.evolucao {
+    float: left;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+div.evolucao p{
+    margin-top: 4px;
+    color: #ccc;
+    font-weight: bold;
+}
+
+div.dados-pessoais input, div.dados-pessoais select{
+    border: 1px solid #00bff3;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+div.dados-pessoais textarea{
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+}
+
+div.dados-pessoais h4{
+    margin: 35px 0 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+div.dados-pessoais hr{
+    margin: 15px 0;
+    border-top: 1px solid #ccc;
+    width: 45%;
+}
+
+div.dados-pessoais div.border{
+    background: #00b2e3;
+}
+
+div.dados-pessoais button.btn-result{
+    background: #00bff3;
+}
+
+label.info-adc{
+    font-weight: bold !important;
+    margin: 0;
+}
+
+label.lbl-caracteristicas{
+    font-size: 15px;
+}
+
+.lbl-caracteristicas {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin: 15px 0;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.lbl-caracteristicas input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+}
+
+.check-radio{
+    border-radius: 100%;
+}
+
+/* When the checkbox is checked, add a blue background */
+.lbl-caracteristicas input:checked ~ .checkmark {
+    background-color: #00bff3;
+    border: 3px solid #00bff3;
+}
+
+footer {
+    margin-top: 30px;
+}
+
+div.box-footer{
+	color: #000;
+}
+
+div.box-footer ul{
+    list-style: none;
+    padding: 0;
+    line-height: 22px;
+}
+
+div.box-footer ul li a{
+	color: #000;
+}
+
+div.box-footer ul li a:hover{
+	text-decoration: none;
+}
+
+div.creditos {
+    padding: 15px;
+    margin-top: 20px;
+}
+
+div.creditos img{
+	width: 80px;
+	margin-bottom: 10px;
+}
+
+@media(max-width: 768px){
+	.container>.navbar-header{
+		margin-left: 0;
+	}
+
+	.navbar-toggle{
+		margin-top: 25px;
+	}
+
+	.navbar-default .navbar-toggle {
+	    border-color: #000;
+	}
+
+	.navbar-default .navbar-toggle .icon-bar {
+	    background-color: #f68b19;
+	}
+
+	li#login{
+		padding-left: 0;
+	}
+
+	li#login a{
+		margin-top: -4px;
+	}
+
+	section.new-job h3{
+		margin: 50px 0 0;
+	}
+
+	div.box-footer {
+	    margin-bottom: 25px;
+	}
+}
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}

@@ -13,12 +13,19 @@
 
 Route::get('/', function () {
     return view('candidate.pages.index');
-});
+})->name('index');
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
-  Route::get('/novo-usuario', 'Candidate\CandidateController@create')->name('create');
-  Route::post('/novo-usuario/dados', 'Candidate\CandidateController@data')->name('dados');
-  Route::post('/novo-usuario/update', 'Candidate\CandidateController@update')->name('update');
+  Route::get('/novo-candidato', 'Candidate\CandidateController@create')->name('create');
+  Route::post('/novo-candidato/dados', 'Candidate\CandidateController@data')->name('data');
+  Route::post('/novo-candidato/update', 'Candidate\CandidateController@update')->name('update');
+  Route::get('/buscar-vagas', 'Candidate\CandidateController@search')->name('search');
+  Route::get('/candidato/editar/{id}', 'Candidate\CandidateController@edit')->name('edit');
+  Route::post('candidato/formacao', 'Candidate\CandidateController@formation')->name('formation');
+  Route::post('candidato/experiencia', 'Candidate\CandidateController@experience')->name('experience');
+  Route::post('candidato/idiomas', 'Candidate\CandidateController@language')->name('language');
+  Route::post('candidato/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
+
 
   //Controle de Registro e Login
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');

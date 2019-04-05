@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Passo a passo para concluir seu currículo</h1>
-                <li id="login"><a href="{{route('candidate.edit', ['id' => $candidate_id])}}">PERFIL </a></li>
             </div>
         </div>
         <div class="row">
@@ -52,7 +51,7 @@
                 <div class="box-result-search result-vacancies dados-pessoais">
                     <form action="{{route('candidate.update')}}" method="POST">
                         {{ csrf_field() }}
-                        <input type="hidden" name="candidate_id" value="{{$candidate_id}}">
+                        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Dados pessoais</h4>
@@ -64,19 +63,19 @@
                                 <select name="state_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option value="{{$state->id}}" <?php if($state->id == $candidate->state_id){ echo 'selected'; } ?>>{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
                                 <label for="cpf">CPF</label>
-                                <input type="text" class="input-cpf" name="cpf" placeholder="Digite seu CPF">
+                                <input type="text" class="input-cpf" value="{{$candidate->cpf}}" name="cpf" placeholder="Digite seu CPF">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="phone">Telefone</label>
-                                <input type="text" class="input-phone" name="phone" placeholder="Seu telefone">
+                                <input type="text" class="input-phone" value="{{$candidate->phone}}" name="phone" placeholder="Seu telefone">
                             </div>
                             <div class="col-sm-5">
                                 <label for="birthdate">Data de nascimento</label>
@@ -88,18 +87,18 @@
                                 <label for="marital_status">Estado civil</label>
                                 <select name="marital_status">
                                     <option selected disabled>Selecione</option>
-                                    <option>Solteiro</option>
-                                    <option>Casado</option>
-                                    <option>Divorciado</option>
-                                    <option>Viúvo</option>
+                                    <option value="solteiro" <?php if($candidate->marital_status ==     'solteiro'){ echo 'selected'; } ?>>Solteiro</option>
+                                    <option value="casado" <?php if($candidate->marital_status ==   'casado'){ echo 'selected'; } ?>>Casado</option>
+                                    <option  value="divorciado"<?php if($candidate->marital_status == 'divorciado'){ echo 'selected'; } ?>>Divorciado</option>
+                                    <option value="viuvo" <?php if($candidate->marital_status ==   'viúvo'){ echo 'selected'; } ?>>Viúvo</option>
                                 </select>
                             </div>
                             <div class="col-sm-5">
                                 <label for="sex">Sexo</label>
                                 <select name="sex">
                                     <option selected disabled>Selecione</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Feminino</option>
+                                    <option value="M" <?php if($candidate->sex ==     'M'){ echo 'selected'; } ?>>Masculino</option>
+                                    <option value="F" <?php if($candidate->sex ==     'F'){ echo 'selected'; } ?>>Feminino</option>
                                 </select>
                             </div>
                         </div>
@@ -131,21 +130,21 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="linkedin">Linkedin</label>
-                                <input type="text" name="linkedin" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="linkedin" value="{{$candidate->linkedin}}" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="facebook">Facebook</label>
-                                <input type="text" name="facebook" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="facebook" value="{{$candidate->facebook}}" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="twitter">Twitter</label>
-                                <input type="text" name="twitter" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="twitter" value="{{$candidate->twitter}}" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="blog">Blog</label>
-                                <input type="text" name="blog" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="blog" value="{{$candidate->blog}}" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
@@ -155,12 +154,13 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button class="btn-result">
+                                <button class="btn-result act-formation" data-id="{{$candidate->id}}">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
                                     </div>
                                     <p>Incluir nova</p>
                                 </button>
+          
                             </div>
                         </div>
                         <div class="row">
@@ -170,7 +170,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button class="btn-result">
+                                <button class="btn-result act-experience">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
                                     </div>
@@ -185,7 +185,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button class="btn-result">
+                                <button class="btn-result act-language">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
                                     </div>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button class="btn-result">
+                                <button class="btn-result act-knowledge">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
                                     </div>
@@ -244,10 +244,14 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="travel"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas">
+                                    <input type="radio" value="1" <?php if($candidate->travel ==     '1'){ echo 'checked'; } ?> name="travel"><span class="checkmark check-radio"></span>Sim
+                                </label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="travel"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas">
+                                    <input type="radio" value="0" <?php if($candidate->travel ==     '0'){ echo 'checked'; } ?> name="travel"><span class="checkmark check-radio"></span>Não
+                                </label>
                             </div>
                         </div>
                         <div class="row">
@@ -257,10 +261,14 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="change"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas">
+                                    <input type="radio" value="1" <?php if($candidate->change ==     '1'){ echo 'checked'; } ?> name="change"><span class="checkmark check-radio"></span>Sim
+                                </label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="change"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas">
+                                    <input type="radio" value="0" <?php if($candidate->change ==     '0'){ echo 'checked'; } ?> name="change"><span class="checkmark check-radio"></span>Não
+                                </label>
                             </div>
                         </div>
                         <div class="row">
@@ -311,7 +319,7 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="salary">Pretenção salarial mínima</label>
-                                <input type="text" class="input-money" name="salary" placeholder="Ex:. 2500">
+                                <input type="text" class="input-money" value="{{$candidate->salary}}" name="salary" placeholder="Ex:. 2500">
                             </div>
                             <div class="col-sm-5">
                                 <label for="estadotrab">Estado onde deseja trabalhar</label>

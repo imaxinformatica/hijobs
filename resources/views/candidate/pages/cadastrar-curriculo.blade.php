@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-10 col-sm-offset-1">
                             <h1>Cadastre o seu currículo</h1>
-                            <form id="register-curriculum" method="POST" action="{{ url('/candidate/register') }}">
+                            <form id="register-curriculum" method="POST" action="{{ route('candidate.data') }}">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-sm-6">

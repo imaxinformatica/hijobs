@@ -16,6 +16,8 @@ class CreateFormationsTable extends Migration
         Schema::create('formations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 191);
+            $table->integer('country_id');
+            $table->integer('state_id')->nullable();
             $table->timestamps();
         });
     }

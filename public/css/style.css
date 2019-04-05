@@ -114,7 +114,8 @@ div.search-job h1{
 }
 
 label {
-    color: #fff;
+    /*corrigir cor #fff*/
+    color: #808080;
     font-weight: 400;
     margin-top: 5px;
 }

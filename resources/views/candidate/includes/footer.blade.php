@@ -50,7 +50,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <img src="images/logo.png"><br>
+                    <img src="{{asset('images/logo.png')}}"><br>
                     <span>&copy; 2019 Hi Jobs. Todos os direitos reservados.</span>
                 </div>
             </div>
@@ -92,6 +92,29 @@
         allowZero: true,
         symbolStay: true
     });
+
+//Modals
+    //Formação
+$('.act-formation').on('click', function (e) {
+    e.preventDefault();
+    $('#candidateFormation').modal('show');
+  });
+    //Experiencia
+$('.act-experience').on('click', function (e) {
+    e.preventDefault();
+    $('#candidateExperience').modal('show');
+  });
+    //Idioma
+$('.act-language').on('click', function (e) {
+    e.preventDefault();
+    $('#candidateLanguage').modal('show');
+  });
+    //Conhecimento de Informatica
+$('.act-knowledge').on('click', function (e) {
+    e.preventDefault();
+    $('#candidateKnowledge').modal('show');
+  });
+
 
     $(document).ready( function(){
         $('#special').hide();

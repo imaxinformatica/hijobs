@@ -16,9 +16,13 @@ class Candidate extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'cpf', 'state_id','phone', 'birthdate',
+        'marital_status', 'sex', 'special','special_description',
+        'linkedin', 'facebook','twitter', 'blog', 'travel', 'change',
+        'journey_id','contract_type_id', 'max_hierarchy_id', 'salary',
     ];
-
+            
+           
     /**
      * The attributes that should be hidden for arrays.
      *

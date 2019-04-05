@@ -21,16 +21,42 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="logo" href="index.php"><img src="images/logo.png"></a>
+          <a class="logo" href="index.php"><img src="{{asset('images/logo.png')}}"></a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="buscar-vagas">BUSCAR VAGAS</a></li>
-          <li><a href="cadastrar-curriculo">CADASTRAR CURRÍCULO</a></li>
+          <li><a href="{{route('candidate.register')}}">CADASTRAR CURRÍCULO</a></li>
           <li id="login"><a href="#">LOGIN</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
 </header>
+
+@if(session()->has('success'))
+  <!-- Main row -->
+  <div class="row">
+    <!-- Left col -->
+    <section class="col-sm-12">
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{session('success')}}
+      </div>
+    </section>
+  </div>
+@endisset
+
+@if ($errors->any())
+  @foreach ($errors->all() as $error)
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ $error }}
+      </div>
+    </div>
+  </div>
+  @endforeach
+@endif

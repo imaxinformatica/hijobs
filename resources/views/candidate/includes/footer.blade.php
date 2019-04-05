@@ -57,6 +57,9 @@
         </div>
     </div>
 </footer> 
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <script type="text/javascript">
     $('#top-candidate').click( function(){
@@ -68,4 +71,37 @@
         $(this).addClass('active');
         $('#top-candidate').removeClass('active');
     }); 
-</script>  
+//Mascaras
+    $( document ).ready(function() {
+        $('.input-cep').inputmask({"mask": "99999-999", "placeholder":"_"});
+        $('.input-cpf').inputmask({"mask": "999.999.999-99", "placeholder":"_"});
+    });
+
+    $('.input-phone').focusout( function(){
+        var phone = $(this).val().replace(/\D/g, '');
+        if(phone.length > 10){
+            $(this).inputmask({"mask": "(99) 99999-9999", "placeholder":" "});
+        } else {
+            $(this).inputmask({"mask": "(99) 9999-99999", "placeholder":" "});
+        }
+    });
+
+    $(".input-money").maskMoney({
+        thousands:'.', 
+        decimal:',', 
+        allowZero: true,
+        symbolStay: true
+    });
+
+    $(document).ready( function(){
+        $('#special').hide();
+        $('.isSpecial').change(function() {
+            if($(this).is(":checked")) {
+                $('#special').show();
+            } else{
+                $('#special').hide();
+            }   
+        });
+    });
+</script> 
+

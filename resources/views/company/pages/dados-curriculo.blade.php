@@ -23,7 +23,7 @@
                                 </div>
                                 <h3>Dados de acesso</h3>
                             </div>
-                            <img src="{{asset('images/barra.png')}}">
+                            <img src="images/barra.png">
                         </div>
                         <div class="col-sm-4">
                             <div class="number">
@@ -32,7 +32,7 @@
                                 </div>
                                 <h3>Dados do currículo</h3>
                             </div> 
-                            <img src="{{asset('images/barra.png')}}">                       
+                            <img src="images/barra.png">                       
                         </div>
                         <div class="col-sm-4">
                             <div class="number">
@@ -49,9 +49,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('candidate.update')}}" method="POST">
-                        {{ csrf_field() }}
-    
+                    <form action="#" method="POST">
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Dados pessoais</h4>
@@ -59,67 +57,79 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <label for="state_id">Estado</label>
-                                <select name="state_id">
+                                <label for="pais">País</label>
+                                <select name="pais">
                                     <option selected disabled>Selecione</option>
-                                    @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
-                                    @endforeach
+                                    <option>Brasil</option>
+                                    <option>Brasil</option>
+                                    <option>Brasil</option>
+                                    <option>Brasil</option>
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="cpf">CPF</label>
-                                <input type="text" class="input-cpf" name="cpf" placeholder="Digite seu CPF">
+                                <label for="cpf">CEP</label>
+                                <input type="text" name="cpf" placeholder="Digite seu CPF">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="phone">Telefone</label>
-                                <input type="text" class="input-phone" name="phone" placeholder="Seu telefone">
+                                <input type="text" name="phone" placeholder="Seu telefone">
                             </div>
                             <div class="col-sm-5">
-                                <label for="birthdate">Data de nascimento</label>
-                                <input type="text" name="birthdate" placeholder="Sua data de nascimento">
+                                <label for="nascimento">Data de nascimento</label>
+                                <input type="text" name="nascimento" placeholder="Sua data de nascimento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <label for="marital_status">Estado civil</label>
-                                <select name="marital_status">
+                                <label for="estado">Estado civil</label>
+                                <select name="estado">
                                     <option selected disabled>Selecione</option>
                                     <option>Solteiro</option>
-                                    <option>Casado</option>
-                                    <option>Divorciado</option>
-                                    <option>Viúvo</option>
+                                    <option>Solteiro</option>
+                                    <option>Solteiro</option>
+                                    <option>Solteiro</option>
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="sex">Sexo</label>
-                                <select name="sex">
+                                <label for="sexo">Sexo</label>
+                                <select name="sexo">
                                     <option selected disabled>Selecione</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Feminino</option>
+                                    <option>Masculino</option>
+                                    <option>Masculino</option>
+                                    <option>Masculino</option>
+                                    <option>Masculino</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label class="lbl-caracteristicas"><input type="checkbox" class="isSpecial" name="isSpecial"><span class="checkmark"></span>Pessoa com deficiência física</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="deficiencia"><span class="checkmark"></span>Pessoa com deficiência física</label>
                             </div>
                         </div>
-                        <div class="row" id="special">
                         <hr>
-                            @foreach($specials as $special)
+                        <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark" ></span>{{$special->name}}</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="auditiva"><span class="checkmark"></span>Auditiva</label>
                             </div>
-                            @endforeach
-                           
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="fisica"><span class="checkmark"></span>Física</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="visual"><span class="checkmark"></span>Visual</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="reabilitados"><span class="checkmark"></span>Reabilitados</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="psicossocial"><span class="checkmark"></span>Psicossocial</label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="special_description" style="margin-top: 20px;">Condições especiais</label>
-                                <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
+                                <label for="condicoes" style="margin-top: 20px;">Condições especiais</label>
+                                <textarea name="condicoes" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -156,7 +166,7 @@
                             <div class="col-sm-6">
                                 <button class="btn-result">
                                     <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
+                                        <img src="images/icon-plus.png">
                                     </div>
                                     <p>Incluir nova</p>
                                 </button>
@@ -171,7 +181,7 @@
                             <div class="col-sm-6">
                                 <button class="btn-result">
                                     <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
+                                        <img src="images/icon-plus.png">
                                     </div>
                                     <p>Incluir nova</p>
                                 </button>
@@ -186,7 +196,7 @@
                             <div class="col-sm-6">
                                 <button class="btn-result">
                                     <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
+                                        <img src="images/icon-plus.png">
                                     </div>
                                     <p>Incluir novo</p>
                                 </button>
@@ -201,7 +211,7 @@
                             <div class="col-sm-6">
                                 <button class="btn-result">
                                     <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
+                                        <img src="images/icon-plus.png">
                                     </div>
                                     <p>Incluir novo</p>
                                 </button>
@@ -218,11 +228,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            @foreach($drivers as $driver)
                             <div class="col-sm-1">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$driver->id}}" name="drivers[]"><span class="checkmark"></span>{{$driver->name}}</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>A</label>
                             </div>
-                            @endforeach
+                            <div class="col-sm-1">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>B</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>C</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>D</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>E</label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -230,11 +250,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            @foreach($vehicles as $vehicle)
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$vehicle->id}}" name="vehicles[]"><span class="checkmark"></span>{{$vehicle->name}}</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="veiculo"><span class="checkmark"></span>Caminhão</label>
                             </div>
-                            @endforeach
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="veiculo"><span class="checkmark"></span>Carro</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="veiculo"><span class="checkmark"></span>Moto</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="lbl-caracteristicas"><input type="checkbox" name="tipo"><span class="checkmark"></span>Outro</label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -243,10 +270,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="travel"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas"><input type="radio" name="viajar"><span class="checkmark check-radio"></span>Sim</label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="travel"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas"><input type="radio" name="viajar"><span class="checkmark check-radio"></span>Não</label>
                             </div>
                         </div>
                         <div class="row">
@@ -256,10 +283,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="change"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas"><input type="radio" name="casa"><span class="checkmark check-radio"></span>Sim</label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="change"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas"><input type="radio" name="casa"><span class="checkmark check-radio"></span>Não</label>
                             </div>
                         </div>
                         <div class="row">
@@ -269,48 +296,36 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <label for="journey_id">Jornada</label>
-                                <select name="journey_id">
+                                <label for="jornada">Jornada</label>
+                                <select name="jornada">
                                     <option selected disabled>Selecione</option>
-                                    @foreach($journeys as $journey)
-                                    <option value="{{$journey->id}}">{{$journey->name}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="contract_type_id">Tipo de contrato</label>
-                                <select name="contract_type_id">
+                                <label for="contrato">Tipo de contrato</label>
+                                <select name="contrato">
                                     <option selected disabled>Selecione</option>
-                                    @foreach($contract_types as $contract)
-                                    <option value="{{$contract->id}}">{{$contract->name}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <label for="min_hierarchy_id">Nível hierárquico mínimo</label>
-                                <select name="min_hierarchy_id">
+                                <label for="nivelmin">Nível hierárquico mínimo</label>
+                                <select name="nivelmin">
                                     <option selected disabled>Selecione</option>
-                                    @foreach($hierarchies as $hierarchy)
-                                    <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="max_hierarchy_id">Nível hierárquico máximo</label>
-                                <select name="max_hierarchy_id">
+                                <label for="nivelmax">Nível hierárquico máximo</label>
+                                <select name="nivelmax">
                                     <option selected disabled>Selecione</option>
-                                    @foreach($hierarchies as $hierarchy)
-                                    <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <label for="salary">Pretenção salarial mínima</label>
-                                <input type="text" class="input-money" name="salary" placeholder="Ex:. 2500">
+                                <label for="pretencao">Pretenção salarial mínima</label>
+                                <input type="text" name="pretencao" placeholder="Seu telefone">
                             </div>
                             <div class="col-sm-5">
                                 <label for="estadotrab">Estado onde deseja trabalhar</label>
@@ -330,5 +345,4 @@
         </div>        
     </div> 
 </section>
-
 @stop

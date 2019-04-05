@@ -34,7 +34,6 @@ class CandidateController extends Controller
             'occupation'        => 'required',
             'password'          => 'required|min:6|confirmed',
         ]);
-        // return dd($request);
         $candidate = new Candidate;
         $candidate->name        = $request->name;
         $candidate->email       = $request->email;
@@ -71,24 +70,66 @@ class CandidateController extends Controller
         ->with('candidate', $candidate);
     }
 
-    public function formation()
+    public function formation(Request $request)
     {
-            
+            return dd($request);
+
+            $formation = new CandidateFormation;
+            $formation->name        = $request->name;
+            $formation->country_id  = $request->country_id;
+            $formation->state_id    = $request->state_id;
+            $formation->level       = $request->level;
+            $formation->course      = $request->course;
+            $formation->situation   = $request->situation;
+            $formation->start       = $request->start;
+            $formation->finish      = $request->finish;
+
+            $formation->save();
+
+            return redirect()->back()->with('success', 'Formação incluída com sucesso!');
     }
 
-    public function experience()
+    public function experience(Request $request)
     {
-            
+            return dd($request);
+            $experience = new CandidateExperience;
+            $experience->name           = $request->name;
+            $experience->hierarchy_id   = $request->hierarchy_id;
+            $experience->description    = $request->description;
+            $experience->country_id     = $request->country_id;
+            $experience->state_id       = $request->state_id;
+            $experience->start          = $request->start;
+            $experience->finish         = $request->finish;
+
+            $formation->save();
+
+            return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
     }
 
-    public function language()
+    public function language(Request $request)
     {
-            
+            return dd($request);
+
+            $language = new CandidateLanguage;
+            $language->language_id = $request->language_id;
+            $language->level       = $request->level;
+
+            $language->save();
+
+            return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
     }
 
-    public function knowledge()
+    public function knowledge(Request $request)
     {
-            
+            return dd($request);
+
+            $knowledge = new CandidateKnowledge;
+            $knowledge->type_id         = $request->type_id;
+            $knowledge->knowledge_id    = $request->knowledge_id;
+
+            $knowledge->save();
+
+            return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
     }
 
     public function update(Request $request)

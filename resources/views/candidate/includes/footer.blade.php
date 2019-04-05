@@ -120,9 +120,9 @@ $('.act-knowledge').on('click', function (e) {
         $('#special').hide();
         $('.isSpecial').change(function() {
             if($(this).is(":checked")) {
-                $('#special').show();
+                $('#special').slideDown();
             } else{
-                $('#special').hide();
+                $('#special').slideUp();
             }   
         });
     });

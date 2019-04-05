@@ -5,7 +5,6 @@
       <form method="POST" action="{{route('candidate.formation')}}">
         {{csrf_field()}}
         <div class="modal-header">
-          <input type="hidden" name="id_batch">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -23,16 +22,18 @@
               <label for="country">País</label>
               <select id="country" name="country" class="form-control">
                 <option selected disabled>País..</option>
-                <option value="caixa">Brasil</option>
+                <option value="1">Brasil</option>
               </select>
             </div>
             <div class="col-sm-6">
-              <label for="state">Estado</label>
-              <select id="state" name="state" class="form-control">
+              <label for="state_id">Estado</label>
+              <select id="state_id" name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
+                @isset($states)
                 @foreach($states as $state)
                 <option value="{{$state->id}}">{{$state->name}}</option>
                 @endforeach
+                @endisset
               </select>
             </div>
           </div>
@@ -41,7 +42,6 @@
               <label for="level">Nível</label>
               <select id="level" name="level" class="form-control">
                 <option selected disabled>Nível..</option>
-                <option value="0">Ensino Fundamental (1º Grau)</option>
                 <option value="1">Curso extra-curricular/Profissionalizante</option>
                 <option value="2">Ensino Médio (2º Grau)</option>
                 <option value="3">Curso Técnico</option>
@@ -49,6 +49,7 @@
                 <option value="5">Pós Graduação - Especialização/MBA</option>
                 <option value="6">Pós Graduação - Mestrado</option>
                 <option value="7">Pós Graduação - Doutorado</option>
+                <option value="8">Ensino Fundamental (1º Grau)</option>
               </select>
             </div>
             <div class="col-sm-6">
@@ -56,10 +57,10 @@
               <select id="course" name="course" class="form-control">
                 <option selected disabled>Curso..</option>
                 <option selected disabled>Nível..</option>
-                <option value="0">Ensino Fundamental (1º Grau)</option>
                 <option value="1">Informática</option>
                 <option value="2">Ensino Médio (2º Grau)</option>
                 <option value="3">Curso Técnico</option>
+                <option value="4">Ensino Fundamental (1º Grau)</option>
               </select>
             </div>
           </div>
@@ -68,9 +69,9 @@
               <label for="situation">Situação</label>
               <select id="situation" name="situation" class="form-control">
                 <option selected disabled>Situação..</option>
-                <option value="0">Concluído</option>
-                <option value="1">Cursando</option>
-                <option value="2">Trancado</option>
+                <option value="concluido">Concluído</option>
+                <option value="cursando">Cursando</option>
+                <option value="trancado">Trancado</option>
               </select>
             </div>
             <div class="col-sm-3">
@@ -102,7 +103,6 @@
       <form method="POST" action="{{route('candidate.experience')}}">
         {{csrf_field()}}
         <div class="modal-header">
-          <input type="hidden" name="id_batch">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -121,57 +121,52 @@
               <input type="text" name="name" placeholder="Indique seu Cargo.." class="form-control" id="name">
             </div>
             <div class="col-sm-6">
-              <label for="country">Nível Hierárquico</label>
-              <select id="country" name="country" class="form-control">
+              <label for="hierarchy_id">Nível Hierárquico</label>
+              <select id="hierarchy_id" name="hierarchy_id" class="form-control">
                 <option selected disabled>Selecione..</option>
-                <option value="caixa">Estagiário</option>
-                <option value="caixa">Operacional</option>
-                <option value="caixa">Auxiliar</option>
-                <option value="caixa">Assistente</option>
-                <option value="caixa">Trainee</option>
-                <option value="caixa">Encarregado</option>
-                <option value="caixa">Supervisor</option>
-                <option value="caixa">Consultor</option>
-                <option value="caixa">Especialista</option>
-                <option value="caixa">Coordenador</option>
-                <option value="caixa">Gerente</option>
-                <option value="caixa">Diretor</option>
+                @isset($hierarchies)
+                @foreach($hierarchies as $hierarchy)
+                <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-12">
-              <label for="description">Descrição Atividadees</label>
+              <label for="description">Descrição das Atividadees</label>
               <textarea class="form-control" id="description" name="description" rows="3"></textarea>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-6">
-              <label for="country">País</label>
-              <select id="country" name="country" class="form-control">
+              <label for="country_id">País</label>
+              <select id="country_id" name="country_id" class="form-control">
                 <option selected disabled>País..</option>
-                <option value="caixa">Brasil</option>
+                <option value="1">Brasil</option>
               </select>
             </div>
             <div class="col-sm-6">
-              <label for="state">Estado</label>
-              <select id="state" name="state" class="form-control">
+              <label for="state_id">Estado</label>
+              <select id="state_id" name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
+                @isset($states)
                 @foreach($states as $state)
                 <option value="{{$state->id}}">{{$state->name}}</option>
                 @endforeach
+                @endisset
               </select>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-6">
-              <label for="state">Cidade</label>
-              <select id="state" name="state" class="form-control">
+              <label for="city_id">Cidade</label>
+              <select id="city_id" name="city_id" class="form-control">
                 <option selected disabled>Cidade..</option>
-                <option value="0">São Paulo</option>
-                <option value="0">Guarulhos</option>
-                <option value="0">Santos</option>
-                <option value="0">ABC</option>
+                <option value="1">São Paulo</option>
+                <option value="2">Guarulhos</option>
+                <option value="3">Santos</option>
+                <option value="4">ABC</option>
               </select>
             </div>
             <div class="col-sm-3">
@@ -204,7 +199,6 @@
       <form method="POST" action="{{route('candidate.language')}}">
         {{csrf_field()}}
         <div class="modal-header">
-          <input type="hidden" name="id_batch">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -216,20 +210,22 @@
               <label for="language">Idioma</label>
               <select id="language" name="language" class="form-control">
                 <option selected disabled>Selecione..</option>
+                @isset($languages)
                 @foreach($languages as $language)
-                <option value="$language->id">{{$language->name}}</option>
+                <option value="{{$language->id}}">{{$language->name}}</option>
                 @endforeach
+                @endisset
               </select>
             </div>
             <div class="col-sm-6">
               <label for="level">Nível</label>
               <select id="level" name="level" class="form-control">
                 <option selected disabled>Selecione..</option>
-                <option value="caixa">Básico</option>
-                <option value="caixa">Intermediário</option>
-                <option value="caixa">Avançado</option>
-                <option value="caixa">Fluente</option>
-                <option value="caixa">Nativo</option>
+                <option value="basico">Básico</option>
+                <option value="intermediario">Intermediário</option>
+                <option value="avancado">Avançado</option>
+                <option value="fluente">Fluente</option>
+                <option value="nativo">Nativo</option>
               </select>
             </div>
           </div>
@@ -253,7 +249,6 @@
       <form method="POST" action="{{route('candidate.knowledge')}}">
         {{csrf_field()}}
         <div class="modal-header">
-          <input type="hidden" name="id_batch">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -262,8 +257,8 @@
         <div class="box-body">
           <div class="form-group" >
             <div class="col-sm-6">
-              <label for="language">Tipo</label>
-              <select id="language" name="language" class="form-control">
+              <label for="type_id">Tipo</label>
+              <select id="type_id" name="type" class="form-control">
                 <option selected disabled>Selecione..</option>
                
                 <option value="0">Programação</option>
@@ -271,14 +266,14 @@
               </select>
             </div>
             <div class="col-sm-6">
-              <label for="level">Habilidade</label>
-              <select id="level" name="level" class="form-control">
+              <label for="knowledge_id">Habilidade</label>
+              <select id="knowledge_id" name="knowledge_id" class="form-control">
                 <option selected disabled>Selecione..</option>
-                <option value="caixa">PHP</option>
-                <option value="caixa">Java</option>
-                <option value="caixa">Javascript</option>
-                <option value="caixa">Pacote Office</option>
-                <option value="caixa">C#</option>
+                <option value="1">PHP</option>
+                <option value="2">Java</option>
+                <option value="3">Javascript</option>
+                <option value="4">Pacote Office</option>
+                <option value="5">C#</option>
               </select>
             </div>
           </div>

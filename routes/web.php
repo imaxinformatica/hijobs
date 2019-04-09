@@ -17,9 +17,10 @@ Route::get('/', function () {
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
   Route::get('/novo-candidato', 'Candidate\CandidateController@create')->name('create');
-  Route::post('/novo-candidato/dados', 'Candidate\CandidateController@data')->name('data');
+  Route::post('/novo-candidato/store', 'Candidate\CandidateController@store')->name('store');
+  Route::get('/novo-candidato/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo-candidato/update', 'Candidate\CandidateController@update')->name('update');
-  Route::get('/buscar-vagas', 'Candidate\CandidateController@search')->name('search');
+  Route::get('/novo-candidato/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
   Route::get('/candidato/editar/{id}', 'Candidate\CandidateController@edit')->name('edit');
   Route::post('candidato/formacao', 'Candidate\CandidateController@formation')->name('formation');
   Route::post('candidato/experiencia', 'Candidate\CandidateController@experience')->name('experience');

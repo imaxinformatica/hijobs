@@ -17,6 +17,7 @@ class CreateCandidateLanguageTable extends Migration
             $table->increments('id');
             $table->integer('language_id');
             $table->string('level');
+            $table->integer('candidate_id');
             $table->timestamps();
         });
     }

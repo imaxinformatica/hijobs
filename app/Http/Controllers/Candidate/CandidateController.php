@@ -4,18 +4,25 @@ namespace App\Http\Controllers\Candidate;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Candidate;
 use App\State;
-use App\Special;
 use App\Driver;
+use App\Special;
+use App\Country;
 use App\Journey;
 use App\Vehicle;
 use App\Language;
+use App\Candidate;
 use App\Hierarchy;
+use App\Knowledge;
 use App\ContractType;
-use App\CandidateSpecial;
+use App\Subknowledge;
 use App\CandidateDriver;
 use App\CandidateVehicle;
+use App\CandidateSpecial;
+use App\CandidateLanguage;
+use App\CandidateKnowledge;
+use App\CandidateFormation;
+use App\CandidateExperience;
 use Auth;
 
 class CandidateController extends Controller
@@ -25,7 +32,7 @@ class CandidateController extends Controller
     	return view('candidate.pages.cadastrar-curriculo');
     }
 
-    public function data(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'name'              => 'required',
@@ -44,15 +51,28 @@ class CandidateController extends Controller
         $candidate->save();
 
         Auth::guard('candidate')->loginUsingId($candidate->id, true);
+        
+        return redirect(route('candidate.data', ['id' => $candidate->id]));
+        
+    }
+
+    public function data($id)
+    {
+        $candidate = Candidate::find($id);
+
         return view('candidate.pages.dados-curriculo')
         ->with('states', State::all())
+        ->with('countries', Country::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
         ->with('vehicles', Vehicle::all())
         ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate_id', $candidate->id);
+        ->with('candidate', $candidate);
     }
 
     public function edit($id)
@@ -67,52 +87,53 @@ class CandidateController extends Controller
         ->with('languages', Language::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
+        ->with('formations', CandidateFormation::where('candidate_id', $id))
         ->with('candidate', $candidate);
     }
 
     public function formation(Request $request)
     {
-            return dd($request);
+        $formation = new CandidateFormation;
+        $formation->name            = $request->name;
+        $formation->country_id      = $request->country_id;
+        $formation->state_id        = $request->state_id;
+        $formation->level           = $request->level;
+        $formation->course          = $request->course;
+        $formation->situation       = $request->situation;
+        $formation->start           = $request->start;
+        $formation->finish          = $request->finish;
+        $formation->candidate_id    = $request->candidate_id;
 
-            $formation = new CandidateFormation;
-            $formation->name        = $request->name;
-            $formation->country_id  = $request->country_id;
-            $formation->state_id    = $request->state_id;
-            $formation->level       = $request->level;
-            $formation->course      = $request->course;
-            $formation->situation   = $request->situation;
-            $formation->start       = $request->start;
-            $formation->finish      = $request->finish;
+        $formation->save();
 
-            $formation->save();
-
-            return redirect()->back()->with('success', 'Formação incluída com sucesso!');
+        return redirect()->back()->with('success', 'Formação incluída com sucesso!');
     }
 
     public function experience(Request $request)
     {
-            return dd($request);
             $experience = new CandidateExperience;
             $experience->name           = $request->name;
+            $experience->occupation     = $request->occupation;
             $experience->hierarchy_id   = $request->hierarchy_id;
             $experience->description    = $request->description;
             $experience->country_id     = $request->country_id;
             $experience->state_id       = $request->state_id;
             $experience->start          = $request->start;
             $experience->finish         = $request->finish;
+            $experience->candidate_id   = $request->candidate_id;
 
-            $formation->save();
+            $experience->save();
 
             return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
     }
 
     public function language(Request $request)
     {
-            return dd($request);
 
             $language = new CandidateLanguage;
-            $language->language_id = $request->language_id;
-            $language->level       = $request->level;
+            $language->language_id      = $request->language_id;
+            $language->level            = $request->level;
+            $language->candidate_id    = $request->candidate_id;
 
             $language->save();
 
@@ -121,11 +142,11 @@ class CandidateController extends Controller
 
     public function knowledge(Request $request)
     {
-            return dd($request);
-
+        // return dd($request);
             $knowledge = new CandidateKnowledge;
-            $knowledge->type_id         = $request->type_id;
-            $knowledge->knowledge_id    = $request->knowledge_id;
+            $knowledge->knowledge_id        = $request->knowledge_id;
+            $knowledge->subknowledge_id     = $request->subknowledge_id;
+            $knowledge->candidate_id        = $request->candidate_id;
 
             $knowledge->save();
 
@@ -209,11 +230,28 @@ class CandidateController extends Controller
             }
         }
         $candidate->save();
-        return redirect(route('candidate.search'));
+        return redirect(route('candidate.better', ['id' => $candidate->id]));
     }
 
-    public function search()
+    public function better($id)
     {
-        return view('candidate.pages.buscar-vagas');
+        $candidate = Candidate::find($id);
+        foreach ($candidate->languages as $language) {
+            $lang = CandidateLanguage::where('candidate_id', $candidate->id)->where('language_id', $language->id)->first();
+            $language->level = $lang->level;
+        }
+        return view('candidate.pages.curriculum.better-curriculum')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('subknowledges', Subknowledge::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('contract_types', ContractType::all())
+        ->with('candidate', $candidate);
     }
 }

@@ -15,8 +15,9 @@ class CreateCandidateKnowledgeTable extends Migration
     {
         Schema::create('candidate_knowledge', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type_id');
             $table->integer('knowledge_id');
+            $table->integer('subknowledge_id');
+            $table->integer('candidate_id');
             $table->timestamps();
         });
     }

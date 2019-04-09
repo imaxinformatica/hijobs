@@ -16,12 +16,14 @@ class CreateCandidateExperienceTable extends Migration
         Schema::create('candidate_experience', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('occupation');       
             $table->integer('hierarchy_id');
             $table->longText('description');
             $table->integer('country_id');
-            $table->integer('state_id');
+            $table->integer('state_id')->nullable();
             $table->string('start');
-            $table->string('finish');
+            $table->string('finish')->nullable();
+            $table->integer('candidate_id');
             $table->timestamps();
         });
     }

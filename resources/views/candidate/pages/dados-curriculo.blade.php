@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Passo a passo para concluir seu currículo</h1>
-                <li id="login"><a href="{{route('candidate.edit', ['id' => $candidate_id])}}">PERFIL </a></li>
+                
             </div>
         </div>
         <div class="row">
@@ -52,7 +52,7 @@
                 <div class="box-result-search result-vacancies dados-pessoais">
                     <form action="{{route('candidate.update')}}" method="POST">
                         {{ csrf_field() }}
-                        <input type="hidden" name="candidate_id" value="{{$candidate_id}}">
+                        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Dados pessoais</h4>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-sm-5">
                                 <label for="birthdate">Data de nascimento</label>
-                                <input type="text" name="birthdate" placeholder="Sua data de nascimento">
+                                <input type="text" class="input-date" name="birthdate" placeholder="Sua data de nascimento">
                             </div>
                         </div>
                         <div class="row">
@@ -115,9 +115,6 @@
                                 <label class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark" ></span>{{$special->name}}</label>
                             </div>
                             @endforeach
-                           
-                        </div>
-                        <div class="row">
                             <div class="col-sm-12">
                                 <label for="special_description" style="margin-top: 20px;">Condições especiais</label>
                                 <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
@@ -146,66 +143,6 @@
                             <div class="col-sm-6">
                                 <label for="blog">Blog</label>
                                 <input type="text" name="blog" placeholder="Informe a url do seu perfil">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4>Formação acadêmica</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button class="btn-result">
-                                    <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
-                                    </div>
-                                    <p>Incluir nova</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4>Experiência profissional</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button class="btn-result">
-                                    <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
-                                    </div>
-                                    <p>Incluir nova</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4>Idiomas</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button class="btn-result">
-                                    <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
-                                    </div>
-                                    <p>Incluir novo</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4>Conhecimentos de informática</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button class="btn-result">
-                                    <div class="border">
-                                        <img src="{{asset('images/icon-plus.png')}}">
-                                    </div>
-                                    <p>Incluir novo</p>
-                                </button>
                             </div>
                         </div>
                         <div class="row">

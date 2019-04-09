@@ -61,6 +61,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+
 <script type="text/javascript">
     $('#top-candidate').click( function(){
         $(this).addClass('active');
@@ -93,6 +96,18 @@
         symbolStay: true
     });
 
+    $('.input-date').datepicker({
+      language: 'pt-BR',
+      format: 'dd/mm/yyyy',
+      autoclose: true
+    });
+
+    $('.input-month').datepicker({
+      language: 'pt-BR',
+      format: 'mm/yyyy',
+      autoclose: true
+    });
+
 //Modals
     //Formação
 $('.act-formation').on('click', function (e) {
@@ -115,16 +130,34 @@ $('.act-knowledge').on('click', function (e) {
     $('#candidateKnowledge').modal('show');
   });
 
-
-    $(document).ready( function(){
-        $('#special').hide();
-        $('.isSpecial').change(function() {
-            if($(this).is(":checked")) {
-                $('#special').slideDown();
-            } else{
-                $('#special').slideUp();
-            }   
-        });
+$(document).ready(function(){
+    $("#situation").change(function(){
+    var situation = $(this).val();
+    if (situation == 'trancado') {
+        $('#finish').hide();
+    }else{
+        $('#finish').show();
+    }
     });
+    $('#country_id').change(function(){
+        var country = $(this).val();
+        if (country != '1') {
+            $('#state_id').hide();
+        }else{
+            $('#state_id').show();
+        }
+    });
+});
+
+$(document).ready( function(){
+    $('#special').hide();
+    $('.isSpecial').change(function() {
+        if($(this).is(":checked")) {
+            $('#special').slideDown();
+        } else{
+            $('#special').slideUp();
+        }   
+    });
+});
 </script> 
 

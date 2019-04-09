@@ -16,9 +16,12 @@ class DatabaseSeeder extends Seeder
         $this->call(HierarchiesSeeder::class);
         $this->call(StatesSeeder::class);
         $this->call(JourneysSeeder::class);
-        // $this->call(KnowledgesSeeder::class);
+        $this->call(KnowledgesSeeder::class);
+        $this->call(SubknowledgesSeeder::class);
         $this->call(LanguagesSeeder::class);
         $this->call(SpecialsSeeder::class);
         $this->call(VehiclesSeeder::class);
+        $this->call(CountriesSeeder::class);
+        
     }
 }

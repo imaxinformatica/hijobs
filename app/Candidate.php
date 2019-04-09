@@ -42,4 +42,25 @@ class Candidate extends Authenticatable
     {
         $this->notify(new CandidateResetPassword($token));
     }
+
+    public function formations()
+    {
+        return $this->hasMany('App\CandidateFormation');
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany('App\CandidateExperience');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany('App\Language');
+    }
+
+    public function knowledges()
+    {
+        return $this->belongsToMany('App\Knowledge');
+    }
+    
 }

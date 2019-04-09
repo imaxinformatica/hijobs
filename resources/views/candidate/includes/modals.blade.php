@@ -4,6 +4,9 @@
     <div class="modal-content">
       <form method="POST" action="{{route('candidate.formation')}}">
         {{csrf_field()}}
+        @isset($candidate)
+        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+        @endisset
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -19,15 +22,19 @@
           </div>
           <div class="form-group">
             <div class="col-sm-6">
-              <label for="country">País</label>
-              <select id="country" name="country" class="form-control">
+              <label for="country_id">País</label>
+              <select id="country_id" name="country_id" class="form-control">
                 <option selected disabled>País..</option>
-                <option value="1">Brasil</option>
+                @isset($countries)
+                @foreach($countries as $country)
+                <option value="{{$country->id}}">{{$country->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" id="state_id">
               <label for="state_id">Estado</label>
-              <select id="state_id" name="state_id" class="form-control">
+              <select name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
                 @isset($states)
                 @foreach($states as $state)
@@ -56,7 +63,6 @@
               <label for="course">Curso..</label>
               <select id="course" name="course" class="form-control">
                 <option selected disabled>Curso..</option>
-                <option selected disabled>Nível..</option>
                 <option value="1">Informática</option>
                 <option value="2">Ensino Médio (2º Grau)</option>
                 <option value="3">Curso Técnico</option>
@@ -64,6 +70,7 @@
               </select>
             </div>
           </div>
+          <hr>
           <div class="form-group">
             <div class="col-sm-6">
               <label for="situation">Situação</label>
@@ -74,19 +81,23 @@
                 <option value="trancado">Trancado</option>
               </select>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3" id="start">
               <label for="start">Início</label>
-              <input type="text" name="start" placeholder="MM/AAAA" class="form-control" id="start">
+              <input type="text"  name="start" placeholder="MM/AAAA" class="form-control input-month" id="start">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3" id="finish">
               <label for="finish">Conclusão</label>
-              <input type="text" name="finish" placeholder="MM/AAAA" class="form-control" id="finish">
+              <input type="text"  name="finish" placeholder="MM/AAAA" class="form-control input-month" id="finish">
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Incluir</button>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -96,12 +107,16 @@
 </div>
 <!--/.Formação-->
 
+
 <!--Experiencia Profissional-->
 <div class="modal fade" id="candidateExperience">
   <div class="modal-dialog">
     <div class="modal-content">
       <form method="POST" action="{{route('candidate.experience')}}">
         {{csrf_field()}}
+        @isset($candidate)
+        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+        @endisset
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -117,8 +132,8 @@
           </div>
           <div class="form-group" >
             <div class="col-sm-6">
-              <label for="name">Cargo</label>
-              <input type="text" name="name" placeholder="Indique seu Cargo.." class="form-control" id="name">
+              <label for="occupation">Cargo</label>
+              <input type="text" name="occupation" placeholder="Indique seu Cargo.." class="form-control" id="name">
             </div>
             <div class="col-sm-6">
               <label for="hierarchy_id">Nível Hierárquico</label>
@@ -143,12 +158,16 @@
               <label for="country_id">País</label>
               <select id="country_id" name="country_id" class="form-control">
                 <option selected disabled>País..</option>
-                <option value="1">Brasil</option>
+                @isset($countries)
+                @foreach($countries as $country)
+                <option value="{{$country->id}}">{{$country->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" id="state_id">
               <label for="state_id">Estado</label>
-              <select id="state_id" name="state_id" class="form-control">
+              <select  name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
                 @isset($states)
                 @foreach($states as $state)
@@ -169,20 +188,26 @@
                 <option value="4">ABC</option>
               </select>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="start">Início</label>
-              <input type="text" name="start" placeholder="MM/AAAA" class="form-control" id="start">
+              <input type="text" name="start" placeholder="MM/AAAA" class="form-control input-month" id="start">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="finish">Conclusão</label>
-              <input type="text" name="finish" placeholder="MM/AAAA" class="form-control" id="finish">
+              <input type="text" name="finish" placeholder="MM/AAAA" class="form-control input-month" id="finish">
+            </div>
+            <div class="col-sm-2">
+              <label class="lbl-caracteristicas actually"><input type="checkbox" name="actually"><span class="checkmark"></span>Atual</label>
             </div>
           </div>
-          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Incluir</button>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -192,12 +217,16 @@
 </div>
 <!--/.Experiencia Profissional-->
        
+
 <!--Idioma-->
 <div class="modal fade" id="candidateLanguage">
   <div class="modal-dialog">
     <div class="modal-content">
       <form method="POST" action="{{route('candidate.language')}}">
         {{csrf_field()}}
+        @isset($candidate)
+        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+        @endisset
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -207,8 +236,8 @@
         <div class="box-body">
           <div class="form-group" >
             <div class="col-sm-6">
-              <label for="language">Idioma</label>
-              <select id="language" name="language" class="form-control">
+              <label for="language_id">Idioma</label>
+              <select id="language_id" name="language_id" class="form-control">
                 <option selected disabled>Selecione..</option>
                 @isset($languages)
                 @foreach($languages as $language)
@@ -221,18 +250,22 @@
               <label for="level">Nível</label>
               <select id="level" name="level" class="form-control">
                 <option selected disabled>Selecione..</option>
-                <option value="basico">Básico</option>
-                <option value="intermediario">Intermediário</option>
-                <option value="avancado">Avançado</option>
-                <option value="fluente">Fluente</option>
-                <option value="nativo">Nativo</option>
+                <option value="Básico">Básico</option>
+                <option value="Intermediário">Intermediário</option>
+                <option value="Avançado">Avançado</option>
+                <option value="Fluente">Fluente</option>
+                <option value="Nativo">Nativo</option>
               </select>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Incluir</button>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -248,39 +281,48 @@
     <div class="modal-content">
       <form method="POST" action="{{route('candidate.knowledge')}}">
         {{csrf_field()}}
+        @isset($candidate)
+        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+        @endisset
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">Incluir Idioma</h4>
+          <h4 class="modal-title">Incluir Conhecimentos em Informática</h4>
         </div>
         <div class="box-body">
           <div class="form-group" >
             <div class="col-sm-6">
-              <label for="type_id">Tipo</label>
-              <select id="type_id" name="type" class="form-control">
+              <label for="knowledge_id">Tipo</label>
+              <select id="knowledge_id" name="knowledge_id" class="form-control">
                 <option selected disabled>Selecione..</option>
-               
-                <option value="0">Programação</option>
-                
+                @isset($knowledges)
+                @foreach($knowledges as $knowledge)
+                <option value="{{$knowledge->id}}">{{$knowledge->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
             <div class="col-sm-6">
-              <label for="knowledge_id">Habilidade</label>
-              <select id="knowledge_id" name="knowledge_id" class="form-control">
+              <label for="subknowledge_id">Habilidade</label>
+              <select id="subknowledge_id" name="subknowledge_id" class="form-control">
                 <option selected disabled>Selecione..</option>
-                <option value="1">PHP</option>
-                <option value="2">Java</option>
-                <option value="3">Javascript</option>
-                <option value="4">Pacote Office</option>
-                <option value="5">C#</option>
+                @isset($subknowledges)
+                @foreach($subknowledges as $subknowledge)
+                <option value="{{$subknowledge->id}}">{{$subknowledge->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Incluir</button>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

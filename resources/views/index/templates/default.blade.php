@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        @include('company.includes.head')
+        @include('index.includes.head')
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
         
-        @include('company.includes.header')
+        @include('index.includes.header')
 
 
         @yield('content')
 
-        @include('company.includes.modals')
+        @include('index.includes.modals')
         
-        @include('company.includes.footer')
+        @include('index.includes.footer')
         
     </body>
 

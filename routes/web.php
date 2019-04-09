@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('candidate.pages.index');
+    return view('index.index');
 })->name('index');
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
+  Route::get('/candidato', function (){return view('candidate.pages.index');})->name('index');
   Route::get('/novo-candidato', 'Candidate\CandidateController@create')->name('create');
   Route::post('/novo-candidato/store', 'Candidate\CandidateController@store')->name('store');
   Route::get('/novo-candidato/dados/{id}', 'Candidate\CandidateController@data')->name('data');
@@ -26,7 +27,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
   Route::post('candidato/experiencia', 'Candidate\CandidateController@experience')->name('experience');
   Route::post('candidato/idiomas', 'Candidate\CandidateController@language')->name('language');
   Route::post('candidato/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
-
+  Route::get('candidato/pesquisar', 'Candidate\CandidateController@search')->name('search');
 
   //Controle de Registro e Login
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');
@@ -43,7 +44,21 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 });
 
 //Empresa
-Route::group(['prefix' => 'company'], function () {
+Route::group(['prefix' => 'company', 'as'=>'company.',], function () {
+  Route::get('/empresa', function (){return view('company.pages.index-empresa');})->name('index');
+  // Route::get('/novo-candidato', 'Candidate\CompanyController@create')->name('create');
+  // Route::post('/novo-candidato/store', 'Candidate\CompanyController@store')->name('store');
+  // Route::get('/novo-candidato/dados/{id}', 'Candidate\CompanyController@data')->name('data');
+  // Route::post('/novo-candidato/update', 'Candidate\CompanyController@update')->name('update');
+  // Route::get('/novo-candidato/melhorar/{id}', 'Candidate\CompanyController@better')->name('better');
+  // Route::get('/candidato/editar/{id}', 'Candidate\CompanyController@edit')->name('edit');
+  // Route::post('candidato/formacao', 'Candidate\CompanyController@formation')->name('formation');
+  // Route::post('candidato/experiencia', 'Candidate\CompanyController@experience')->name('experience');
+  // Route::post('candidato/idiomas', 'Candidate\CompanyController@language')->name('language');
+  // Route::post('candidato/conhecimento', 'Candidate\CompanyController@knowledge')->name('knowledge');
+  // Route::get('candidato/pesquisar', 'Candidate\CompanyController@search')->name('search');
+
+
   Route::get('/login', 'CompanyAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'CompanyAuth\LoginController@login');
   Route::post('/logout', 'CompanyAuth\LoginController@logout')->name('logout');

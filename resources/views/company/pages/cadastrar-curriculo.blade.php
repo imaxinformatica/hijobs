@@ -1,4 +1,4 @@
-@extends('candidate.templates.default')
+@extends('index.templates.default')
 
 @section('title', 'Home')
 
@@ -13,7 +13,8 @@
                     <div class="row">
                         <div class="col-sm-10 col-sm-offset-1">
                             <h1>Cadastre o seu currículo</h1>
-                            <form id="register-curriculum">
+                            <form id="register-curriculum" method="POST" action="{{ route('candidate.store') }}">
+                                {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="name">Nome</label>
@@ -27,11 +28,11 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="cep">CEP</label>
-                                        <input type="text" name="cep" placeholder="Seu CEP">
+                                        <input type="text" class="input-cep" name="cep" placeholder="Seu CEP">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="cargo">Cargo desejado</label>
-                                        <input type="text" name="cargo" placeholder="Cargo desejado">
+                                        <label for="occupation">Cargo desejado</label>
+                                        <input type="text" name="occupation" placeholder="Cargo desejado">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -40,8 +41,8 @@
                                         <input type="password" name="password" placeholder="Digite uma senha">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="confirmation">Confirmação de senha</label>
-                                        <input type="password" name="confirmation" placeholder="Confirme sua senha">
+                                        <label for="password_confirmation">Confirmação de senha</label>
+                                        <input type="password" name="password_confirmation" placeholder="Confirme sua senha">
                                     </div>
                                 </div>
                                 <div class="row">

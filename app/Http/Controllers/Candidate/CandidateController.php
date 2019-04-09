@@ -46,7 +46,7 @@ class CandidateController extends Controller
         $candidate->email       = $request->email;
         $candidate->cep         = $request->cep;
         $candidate->occupation  = $request->occupation;
-        $candidate->password    = $request->password;
+        $candidate->password    = bcrypt($request->password);
 
         $candidate->save();
 
@@ -78,6 +78,8 @@ class CandidateController extends Controller
     public function edit($id)
     {
         $candidate = Candidate::find($id);
+
+        $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
         return view('candidate.pages.curriculum.edit-curriculum')
         ->with('states', State::all())
         ->with('drivers', Driver::all())
@@ -240,6 +242,7 @@ class CandidateController extends Controller
             $lang = CandidateLanguage::where('candidate_id', $candidate->id)->where('language_id', $language->id)->first();
             $language->level = $lang->level;
         }
+
         return view('candidate.pages.curriculum.better-curriculum')
         ->with('states', State::all())
         ->with('countries', Country::all())
@@ -253,5 +256,10 @@ class CandidateController extends Controller
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
         ->with('candidate', $candidate);
+    }
+
+    public function search()
+    {
+        return view('candidate.pages.buscar-vagas');
     }
 }

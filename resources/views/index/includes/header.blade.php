@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-sm-12">
           <ul id="top-type">
-            <li id="top-candidate" ><a href="{{url('/')}}">CANDIDATOS</a></li>
-            <li id="top-company" class="active"><a href="index-empresa">EMPRESAS</a></li>
+            <li id="top-candidate" class="active"><a href="{{url('/')}}">CANDIDATOS</a></li>
+            <li id="top-company" ><a href="{{route('company.index')}}">EMPRESAS</a></li>
           </ul>
         </div>
       </div>
@@ -21,13 +21,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="logo" href="{{route('candidate.index')}}"><img src="{{asset('images/logo.png')}}"></a>
+          <a class="logo" href="{{url('/')}}"><img src="{{asset('images/logo.png')}}"></a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="buscar-vagas">BUSCAR CANDIDATOS</a></li>
-          <!-- <li><a href="{{route('candidate.edit', ['id' => 1])}}">LOGIN</a></li> -->
+          <li><a href="buscar-vagas">BUSCAR VAGAS</a></li>
+          <li><a href="{{route('candidate.create')}}">CADASTRAR CURRÍCULO</a></li>
           <li id="login"><a href="#">LOGIN</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->

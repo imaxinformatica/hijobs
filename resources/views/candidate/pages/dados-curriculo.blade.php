@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Passo a passo para concluir seu currículo</h1>
-                
             </div>
         </div>
         <div class="row">
@@ -88,10 +87,10 @@
                                 <label for="marital_status">Estado civil</label>
                                 <select name="marital_status">
                                     <option selected disabled>Selecione</option>
-                                    <option>Solteiro</option>
-                                    <option>Casado</option>
-                                    <option>Divorciado</option>
-                                    <option>Viúvo</option>
+                                    <option value="Solteiro">Solteiro</option>
+                                    <option value="Casado">Casado</option>
+                                    <option value="Divorciado">Divorciado</option>
+                                    <option value="Viúvo">Viúvo</option>
                                 </select>
                             </div>
                             <div class="col-sm-5">

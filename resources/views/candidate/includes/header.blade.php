@@ -21,14 +21,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="logo" href="index.php"><img src="{{asset('images/logo.png')}}"></a>
+          <a class="logo" href="{{route('candidate.index')}}"><img src="{{asset('images/logo.png')}}"></a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="buscar-vagas">BUSCAR VAGAS</a></li>
-          <li><a href="{{route('candidate.create')}}">CADASTRAR CURRÍCULO</a></li>
-          <li id="login"><a href="#">LOGIN</a></li>
+          <li><a href="{{route('candidate.edit', ['id' => 1])}}">PERFIL</a></li>
+          <li id="login"><a href="#">SAIR</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>

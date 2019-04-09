@@ -1,4 +1,4 @@
-@extends('candidate.templates.default')
+@extends('company.templates.default')
 
 @section('title', 'Home')
 
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="box-new-job">
-                    <img src="images/megafone.png" alt="Passo-a-passo">
+                    <img src="{{asset('images/megafone.png')}}" alt="Passo-a-passo">
                     <p class="title-box-recrutamento">Divulgue corretamente</p>
                     <p class="content-box-recrutamento">Divulgue vagas e alcance talentos</p>
                     <p class="content-box-recrutamento">Receba currículos compatíveis</p>
@@ -79,7 +79,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="box-new-job">
-                    <img src="images/lupa-search.png" alt="Passo-a-passo">
+                    <img src="{{asset('images/lupa-search.png')}}" alt="Passo-a-passo">
                     <p class="title-box-recrutamento">Recrute de forma eficaz</p>
                     <p class="content-box-recrutamento">Busque profissionais por região</p>
                     <p class="content-box-recrutamento">Utilize nossos filtros avançados</p>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="box-new-job">
-                    <img src="images/settings.png" alt="Passo-a-passo">
+                    <img src="{{asset('images/settings.png')}}" alt="Passo-a-passo">
                     <p class="title-box-recrutamento">Gerencie e acompanhe</p>
                     <p class="content-box-recrutamento">Acompanhe a candidatura</p>
                     <p class="content-box-recrutamento">Gerencie e contate candidatos</p>

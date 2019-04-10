@@ -16,10 +16,12 @@ class CreateOpportunitiesTable extends Migration
         Schema::create('opportunities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->double('salary')->nullable();
             $table->longtext('activity')->nullable();
             $table->longtext('requiriments')->nullable();
-            $table->integer('company_id');
+            $table->longtext('comments_special')->nullable();
+            $table->double('salary')->nullable();
+            $table->integer('contract_type_id');
+            $table->integer('state_id');
             $table->timestamps();
         });
     }

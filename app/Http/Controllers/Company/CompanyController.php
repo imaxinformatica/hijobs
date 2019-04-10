@@ -124,4 +124,9 @@ class CompanyController extends Controller
         ->with('contract_types', ContractType::all())
         ->with('company', $company);
     }
+
+    public function storeOpportunity(Request $request)
+    {
+        return dd($request);        
+    }
 }

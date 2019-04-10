@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('candidate.update')}}" method="POST">
+                    <form action="{{route('company.opportunity.store')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">

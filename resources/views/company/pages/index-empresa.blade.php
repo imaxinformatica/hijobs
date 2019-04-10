@@ -35,17 +35,18 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-4 search-job search-company">
                 <h1>Cadastrar vaga</h1>
-                <form>
+                <form action="{{route('company.store')}}" method="POST">
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="user" type="text" name="user" placeholder="Cargo ou Área Profissional">
+                            <input id="user" type="text" name="opportunity" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="place" type="text" name="place" placeholder="Cidade da empresa">
-                            <p>Exemplos: São Paulo, Rio de Janeiro etc.</p>
+                            <input id="place" type="text" name="email" placeholder="E-mail" required>
+                            <!-- <p>Exemplos: São Paulo, Rio de Janeiro etc.</p> -->
                         </div>
                     </div>
                     <div class="row">

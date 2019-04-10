@@ -78,6 +78,7 @@
     $( document ).ready(function() {
         $('.input-cep').inputmask({"mask": "99999-999", "placeholder":"_"});
         $('.input-cpf').inputmask({"mask": "999.999.999-99", "placeholder":"_"});
+        $('.input-cnpj').inputmask({"mask": "99.999.999/9999-99", "placeholder":"_"});
     });
 
     $('.input-phone').focusout( function(){

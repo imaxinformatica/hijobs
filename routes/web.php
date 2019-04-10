@@ -46,17 +46,16 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 //Empresa
 Route::group(['prefix' => 'company', 'as'=>'company.',], function () {
   Route::get('/empresa', function (){return view('company.pages.index-empresa');})->name('index');
-  // Route::get('/novo-candidato', 'Candidate\CompanyController@create')->name('create');
-  // Route::post('/novo-candidato/store', 'Candidate\CompanyController@store')->name('store');
-  // Route::get('/novo-candidato/dados/{id}', 'Candidate\CompanyController@data')->name('data');
-  // Route::post('/novo-candidato/update', 'Candidate\CompanyController@update')->name('update');
-  // Route::get('/novo-candidato/melhorar/{id}', 'Candidate\CompanyController@better')->name('better');
-  // Route::get('/candidato/editar/{id}', 'Candidate\CompanyController@edit')->name('edit');
-  // Route::post('candidato/formacao', 'Candidate\CompanyController@formation')->name('formation');
-  // Route::post('candidato/experiencia', 'Candidate\CompanyController@experience')->name('experience');
-  // Route::post('candidato/idiomas', 'Candidate\CompanyController@language')->name('language');
-  // Route::post('candidato/conhecimento', 'Candidate\CompanyController@knowledge')->name('knowledge');
-  // Route::get('candidato/pesquisar', 'Candidate\CompanyController@search')->name('search');
+  Route::post('/nova-empresa/store', 'Company\CompanyController@store')->name('store');
+  Route::get('/nova-empresa/dados/{id}', 'Company\CompanyController@data')->name('data');
+  Route::post('/nova-empresa/update', 'Company\CompanyController@update')->name('update');
+  Route::get('/nova-empresa/vaga/{id}', 'Company\CompanyController@opportunity')->name('opportunity');
+  // Route::get('/candidato/editar/{id}', 'Company\CompanyController@edit')->name('edit');
+  // Route::post('candidato/formacao', 'Company\CompanyController@formation')->name('formation');
+  // Route::post('candidato/experiencia', 'Company\CompanyController@experience')->name('experience');
+  // Route::post('candidato/idiomas', 'Company\CompanyController@language')->name('language');
+  // Route::post('candidato/conhecimento', 'Company\CompanyController@knowledge')->name('knowledge');
+  // Route::get('candidato/pesquisar', 'Company\CompanyController@search')->name('search');
 
 
   Route::get('/login', 'CompanyAuth\LoginController@showLoginForm')->name('login');

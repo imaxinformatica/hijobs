@@ -1,4 +1,4 @@
-@extends('candidate.templates.default')
+@extends('company.templates.default')
 
 @section('title', 'Home')
 

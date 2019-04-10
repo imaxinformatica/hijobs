@@ -28,9 +28,9 @@
                         <div class="col-sm-6">
                             <div class="number">
                                 <div class="evolucao">
-                                    <p>3</p>
+                                    <p>2</p>
                                 </div>
-                                <h3>Dados da empresa</h3>
+                                <h3>Finalizar Cadastro</h3>
                             </div>                        
                         </div>
                     </div>
@@ -89,10 +89,10 @@
                                 <input type="text" name="cnpj" class="input-cnpj" placeholder="CNPJ">
                             </div>
                             <div class="col-sm-6">
-                                <label for="occupation_area">Área de Atuação</label>
-                                <select name="occupation_area">
+                                <label for="occupation_area_id">Área de Atuação</label>
+                                <select name="occupation_area_id">
                                     <option selected disabled>Selecione</option>
-                                    <option value="informatica">Informatica</option>
+                                    <option value="1">Informatica</option>
                                 </select>
                             </div>
                         </div>
@@ -102,27 +102,22 @@
                                 <input type="text" class="input-cep"  name="cep" placeholder="Seu CEP">
                             </div>
                             <div class="col-sm-6">
-                                <label for="street">Logradouro</label>
+                                <label for="street">Logradouro / RUa</label>
                                 <input type="text" name="street" placeholder="Logradouro">
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number"  placeholder="Número e Complemento">
+                                <input type="text" name="number"  placeholder="Número / Complemento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <label for="nehighbor">Bairro</label>
-                                <input type="text" name="nehighbor" placeholder="Bairro">
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" name="neighborhood" placeholder="Bairro">
                             </div>
                             <div class="col-sm-4">
-                                <label for="state_id">Estado</label>
-                                <select name="state_id">
-                                    <option selected disabled>Selecione</option>
-                                    @foreach($states as $state)
-                                    <option value="{{$state->id}}" >{{$state->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="state">Estado</label>
+                                <input type="text"  name="state" placeholder="Cidade">
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>

@@ -20,8 +20,12 @@ class CreateCompaniesTable extends Migration
             $table->string('phone', 191)->nullable();
             $table->longtext('description', 191)->nullable();
             $table->string('cnpj', 191)->nullable();
-            $table->string('occupation_area', 191)->nullable();
+            $table->integer('occupation_area_id')->nullable();
             $table->string('cep', 191)->nullable();
+            $table->string('street', 191)->nullable();
+            $table->string('state', 191)->nullable();
+            $table->string('city', 191)->nullable();
+            $table->string('neighborhood', 191)->nullable();
             $table->string('number', 191)->nullable();
             $table->string('linkedin', 191)->nullable();
             $table->string('facebook', 191)->nullable();

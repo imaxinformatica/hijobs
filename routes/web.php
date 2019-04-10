@@ -49,12 +49,11 @@ Route::group(['prefix' => 'company', 'as'=>'company.',], function () {
   Route::post('/nova-empresa/store', 'Company\CompanyController@store')->name('store');
   Route::get('/nova-empresa/dados/{id}', 'Company\CompanyController@data')->name('data');
   Route::post('/nova-empresa/update', 'Company\CompanyController@update')->name('update');
-  Route::get('/nova-empresa/vaga/{id}', 'Company\CompanyController@opportunity')->name('opportunity');
+  Route::get('/vagas/{id}', 'Company\CompanyController@opportunities')->name('opportunities');
+  Route::get('/vaga/criar', 'Company\CompanyController@createOpportunity')->name('opportunity.create');
   Route::post('/vaga/store', 'Company\CompanyController@storeOpportunity')->name('opportunity.store');
-  // Route::post('candidato/formacao', 'Company\CompanyController@formation')->name('formation');
-  // Route::post('candidato/experiencia', 'Company\CompanyController@experience')->name('experience');
-  // Route::post('candidato/idiomas', 'Company\CompanyController@language')->name('language');
-  // Route::post('candidato/conhecimento', 'Company\CompanyController@knowledge')->name('knowledge');
+  Route::get('/vaga/editar/{id}', 'Company\CompanyController@editOpportunity')->name('opportunity.edit');
+  Route::post('/vaga/update', 'Company\CompanyController@updateOpportunity')->name('opportunity.update');
   // Route::get('candidato/pesquisar', 'Company\CompanyController@search')->name('search');
 
 

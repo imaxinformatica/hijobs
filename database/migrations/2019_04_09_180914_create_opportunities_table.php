@@ -19,9 +19,14 @@ class CreateOpportunitiesTable extends Migration
             $table->longtext('activity')->nullable();
             $table->longtext('requiriments')->nullable();
             $table->longtext('comments_special')->nullable();
+            $table->string('time')->nullable();
+            $table->longtext('additionally')->nullable();
             $table->double('salary')->nullable();
-            $table->integer('contract_type_id');
-            $table->integer('state_id');
+            $table->integer('num')->nullable();
+            $table->integer('contract_type_id')->nullable();
+            $table->integer('state_id')->nullable();
+            $table->integer('company_id');
+            $table->boolean('publish')->nullable();
             $table->timestamps();
         });
     }

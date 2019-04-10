@@ -13,6 +13,14 @@
                     <form method="POST" action="#">
                         <div class="row">
                             <div class="col-sm-12">
+                                <a href="{{route('company.opportunity.create')}}">
+                                    <button class="btn-result">
+                                        <div class="border">
+                                            <img src="{{asset('images/icon-plus.png')}}">
+                                        </div>
+                                        <p>Criar vaga</p>
+                                    </button>
+                                </a>
                                 <label for="cargo">Cargo ou área profissional</label>
                                 <select name="cargo">
                                     <option selected disabled>Selecione</option>
@@ -72,58 +80,49 @@
             <div class="col-sm-8">
                 <div class="row">
                     <div class="col-sm-12">
-                        <img class="icon-vagas" src="images/icon-result.png">
-                        <p class="total-vagas">215 vagas de emprego para <b>analista de sistemas</b></p>
+                        <img class="icon-vagas" src="{{asset('images/icon-result.png')}}">
+                        <p class="total-vagas">{{$company->opportunities()->count()}} vaga(s) de emprego</p>
                     </div>
                 </div>
+                @foreach($company->opportunities as $opportunity)
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">
-                            <span>Analista de Sistemas Sênior</span>
-                            <p id="salario">De R$7.000,00 a R$15.000,00<p>
-                            <p><b>5 vagas</b></p>
-                            <p>Analisar o bom desempenho de sistemas implantados, solucionar problemas técnicos e elaborar manuais. Experiência com Docker e com micro serviços.</p>
-                            <button class="btn-result">
-                                <div class="border">
-                                    <img src="images/icon-plus.png">
-                                </div>
-                                <p>Mais detalhes da vaga</p>
-                            </button>
+                            <span>{{$opportunity->name}}</span>
+                            <p id="salario">{{number_format($opportunity->salary, '2', ',', '.')}}<p>
+                            <p><b>{{$opportunity->num}} vaga(s)</b></p>
+                            <p>{{$opportunity->activity}}</p>
+                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                                <button class="btn-result">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Editar Vaga</p>
+                                </button>
+                            </a>
+                            @if($opportunity->publish == 1)
+                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                                <button class="btn-result">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Publicar Vaga</p>
+                                </button>
+                            </a>
+                            @else
+                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                                <button class="btn-result">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Remover Vaga</p>
+                                </button>
+                            </a>
+                            @endif
                         </div>   
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="box-result-search result-vacancies">
-                            <span>Analista de Sistemas Sênior</span>
-                            <p id="salario">De R$7.000,00 a R$15.000,00<p>
-                            <p><b>5 vagas</b></p>
-                            <p>Analisar o bom desempenho de sistemas implantados, solucionar problemas técnicos e elaborar manuais. Experiência com Docker e com micro serviços.</p>
-                            <button class="btn-result">
-                                <div class="border">
-                                    <img src="images/icon-plus.png">
-                                </div>
-                                <p>Mais detalhes da vaga</p>
-                            </button>
-                        </div>   
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="box-result-search result-vacancies">
-                            <span>Analista de Sistemas Sênior</span>
-                            <p id="salario">De R$7.000,00 a R$15.000,00<p>
-                            <p><b>5 vagas</b></p>
-                            <p>Analisar o bom desempenho de sistemas implantados, solucionar problemas técnicos e elaborar manuais. Experiência com Docker e com micro serviços.</p>
-                            <button class="btn-result">
-                                <div class="border">
-                                    <img src="images/icon-plus.png">
-                                </div>
-                                <p>Mais detalhes da vaga</p>
-                            </button>
-                        </div>   
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>        
     </div> 

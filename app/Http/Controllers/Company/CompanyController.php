@@ -38,6 +38,7 @@ class CompanyController extends Controller
         $opportunity = new Opportunity;
         $opportunity->name 			= $request->opportunity;
         $opportunity->company_id 	= $company->id;
+        $opportunity->publish       = 1;
 
         $opportunity->save();
 
@@ -61,29 +62,34 @@ class CompanyController extends Controller
     {
 
         $this->validate($request, [
-            'name'          	=> 'required',
-            'email'                  => [
+            'name'          	    => 'required',
+            'trade'                 => 'required',
+            'email'                 => [
                 'required',
                 Rule::unique('companies')->ignore($request->company_id)
             ],
-            'password'      	=> 'required|min:6|confirmed',
-            'phone'    			=> 'required',
-            'description'   	=> 'required',
-            'cnpj'          	=> 'required',
-            'occupation_area'   => 'required',
-            'cep'  				=> 'required',
+            'password'      	    => 'required|min:6|confirmed',
+            'phone'    			    => 'required',
+            'description'   	    => 'required|max:500',
+            'cnpj'          	    => 'required',
+            'occupation_area_id'    => 'required',
+            'cep'  				    => 'required',
         ]);
 
-        $company                   	= Company::find($request->company_id);
-        $company->name              = $request->name;
-        $company->phone            	= $request->phone;
-        $company->email   			= $request->email;
-        $company->password      	= $request->password;
-        $company->description       = $request->description;
-        $company->cnpj           	= $request->cnpj;
-        $company->occupation_area   = $request->occupation_area;
-        $company->cep         		= $request->cep;
-        $company->number 			= $request->number;
+        $company                   	   = Company::find($request->company_id);
+        $company->name                 = $request->name;
+        $company->phone            	   = $request->phone;
+        $company->email   			   = $request->email;
+        $company->password      	   = $request->password;
+        $company->description          = $request->description;
+        $company->cnpj           	   = $request->cnpj;
+        $company->occupation_area_id   = $request->occupation_area_id;
+        $company->cep         		   = $request->cep;
+        $company->street               = $request->street;
+        $company->neighborhood 		   = $request->neighborhood;
+        $company->city                 = $request->city;
+        $company->state                = $request->state;
+        $company->number               = $request->number;
 
         // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
         //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
@@ -103,14 +109,15 @@ class CompanyController extends Controller
         $company->blog                = $request->blog;
 
         $company->save();
-        return redirect(route('company.opportunity', ['id' => $company->id]));
+        return redirect(route('company.opportunities', ['id' => $company->id]));
     }
 
-    public function opportunity($id)
+    public function opportunities($id)
     {
         $company = Company::find($id);
+        // return dd($company->opportunities);
 
-        return view('company.pages.opportunity.opportunity')
+        return view('company.pages.opportunity.index')
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('drivers', Driver::all())
@@ -125,8 +132,67 @@ class CompanyController extends Controller
         ->with('company', $company);
     }
 
+
+    public function createOpportunity()
+    {
+        return 'teste';
+        $auth = Auth::user();
+
+        return dd($auth);        
+    }
+
     public function storeOpportunity(Request $request)
     {
         return dd($request);        
+    }
+    public function editOpportunity($id)
+    {
+        $opportunity = Opportunity::find($id);
+        return view('company.pages.opportunity.edit')
+        ->with('states', State::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('opportunity', $opportunity);
+    }
+
+
+    public function updateOpportunity(Request $request)
+    {
+
+        $this->validate($request, [
+            'name'              => 'required',
+            'activity'          => 'required',
+            'requiriments'      => 'required',
+            'contract_type_id'  => 'required',
+            'time'              => 'required',
+            'state_id'          => 'required',
+            'city'              => 'required',
+            'num'               => 'required',
+        ]);   
+        $opportunity = Opportunity::find($request->id);
+        $opportunity->name              = $request->name;
+        $opportunity->activity          = $request->activity;
+        $opportunity->requiriments      = $request->requiriments;
+        $opportunity->contract_type_id  = $request->contract_type_id;
+        $opportunity->time              = $request->time;
+        $opportunity->additionally      = $request->additionally;
+        $opportunity->state_id          = $request->state_id;
+        $opportunity->num               = $request->num;
+        $opportunity->salary            = str_replace(',', '.', str_replace('.', '', $request->salary));
+        // $opportunity->city              = $request->city;
+        if (isset($request->isCombining)) {
+            $opportunity->salary        = 0;
+        }
+        
+        
+        if (isset($request->isSpecial)) {
+
+
+        }
+        $opportunity->save();
+
+        return redirect()->back();
+
     }
 }

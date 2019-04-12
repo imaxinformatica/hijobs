@@ -17,8 +17,6 @@ Route::get('/', function () {
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
   Route::get('/candidato', function (){return view('candidate.pages.index');})->name('index');
-  Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
-  Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
   Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
@@ -39,6 +37,8 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
   //Controle de Registro e Login
+  Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
+  Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'CandidateAuth\LoginController@login');
   Route::post('/logout', 'CandidateAuth\LoginController@logout')->name('logout');

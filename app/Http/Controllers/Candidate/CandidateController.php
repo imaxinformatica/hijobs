@@ -9,6 +9,8 @@ use App\Driver;
 use App\Special;
 use App\Country;
 use App\Journey;
+use App\Level;
+use App\Course;
 use App\Vehicle;
 use App\Language;
 use App\Candidate;
@@ -23,7 +25,6 @@ use App\CandidateVehicle;
 use App\CandidateSpecial;
 use App\CandidateLanguage;
 use App\CandidateKnowledge;
-use App\CandidateFormation;
 use App\CandidateExperience;
 use Auth;
 
@@ -94,7 +95,6 @@ class CandidateController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('formations', CandidateFormation::where('candidate_id', $candidate->id))
         ->with('candidate', $candidate);
     }
 
@@ -194,7 +194,7 @@ class CandidateController extends Controller
 
     public function formation(Request $request)
     {
-        $formation = new CandidateFormation;
+        $formation = new Formation;
         $formation->name            = $request->name;
         $formation->country_id      = $request->country_id;
         $formation->state_id        = $request->state_id;
@@ -211,7 +211,7 @@ class CandidateController extends Controller
     }
     public function formationDestroy($id)
     {
-        $formation = CandidateFormation::find($id);
+        $formation = Formation::find($id);
 
         $formation->delete();
 
@@ -301,6 +301,8 @@ class CandidateController extends Controller
         ->with('countries', Country::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
+        ->with('levels', Level::all())
+        ->with('courses', Course::all())
         ->with('vehicles', Vehicle::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
@@ -324,7 +326,6 @@ class CandidateController extends Controller
         ->with('languages', Language::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('formations', CandidateFormation::where('candidate_id', $candidate->id))
         ->with('candidate', $candidate);
     }
 

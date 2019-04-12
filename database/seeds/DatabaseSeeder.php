@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DriversSeeder::class);
         $this->call(HierarchiesSeeder::class);
         $this->call(StatesSeeder::class);
+        $this->call(LevelsSeeder::class);
         $this->call(JourneysSeeder::class);
+        $this->call(CoursesSeeder::class);
         $this->call(KnowledgesSeeder::class);
         $this->call(SubknowledgesSeeder::class);
         $this->call(LanguagesSeeder::class);

@@ -18,6 +18,12 @@ class CreateFormationsTable extends Migration
             $table->string('name', 191);
             $table->integer('country_id');
             $table->integer('state_id')->nullable();
+            $table->string('level_id');
+            $table->integer('course_id');
+            $table->string('situation');
+            $table->string('start');
+            $table->string('finish')->nullable();
+            $table->integer('candidate_id');
             $table->timestamps();
         });
     }

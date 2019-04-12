@@ -49,24 +49,23 @@
               <label for="level">Nível</label>
               <select id="level" name="level" class="form-control">
                 <option selected disabled>Nível..</option>
-                <option value="1">Curso extra-curricular/Profissionalizante</option>
-                <option value="2">Ensino Médio (2º Grau)</option>
-                <option value="3">Curso Técnico</option>
-                <option value="4">Ensino Superior</option>
-                <option value="5">Pós Graduação - Especialização/MBA</option>
-                <option value="6">Pós Graduação - Mestrado</option>
-                <option value="7">Pós Graduação - Doutorado</option>
-                <option value="8">Ensino Fundamental (1º Grau)</option>
+                @isset($levels)
+                @foreach($levels as $level)
+                <option value="{{$level->id}}">{{$level->name}}</option>
+                @endforeach
+                @endisset
+                
               </select>
             </div>
             <div class="col-sm-6">
               <label for="course">Curso..</label>
               <select id="course" name="course" class="form-control">
                 <option selected disabled>Curso..</option>
-                <option value="1">Informática</option>
-                <option value="2">Ensino Médio (2º Grau)</option>
-                <option value="3">Curso Técnico</option>
-                <option value="4">Ensino Fundamental (1º Grau)</option>
+                @isset($courses)
+                @foreach($courses as $course)
+                <option value="{{$course->id}}">{{$course->name}}</option>
+                @endforeach
+                @endisset
               </select>
             </div>
           </div>

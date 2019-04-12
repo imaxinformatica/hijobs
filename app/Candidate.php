@@ -90,7 +90,7 @@ class Candidate extends Authenticatable
 
     public function formations()
     {
-        return $this->hasMany('App\CandidateFormation');
+        return $this->hasMany('App\Formation');
     }
 
     public function experiences()

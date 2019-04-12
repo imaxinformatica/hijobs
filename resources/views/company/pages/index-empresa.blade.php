@@ -35,7 +35,7 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-4 search-job search-company">
                 <h1>Cadastrar vaga</h1>
-                <form action="{{route('company.store')}}" method="POST">
+                <form action="{{route('company.session')}}" method="POST">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-12">

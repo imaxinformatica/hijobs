@@ -26,8 +26,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="buscar-vagas">BUSCAR CANDIDATOS</a></li>
-          <!-- <li><a href="{{route('candidate.edit', ['id' => 1])}}">LOGIN</a></li> -->
+          <li><a href="{{route('opportunity.index')}}s">CRIAR VAGAS</a></li>
+          <li><a href="{{route('company.show')}}">VISUALIZAR PERFIL</a></li>
+          <li><a href="{{route('company.candidate')}}s">BUSCAR CANDIDATOS</a></li>
           <li id="login"><a href="#">LOGIN</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->

@@ -4,8 +4,223 @@ namespace App\Http\Controllers\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\State;
+use App\Country;
+use App\Driver;
+use App\Journey;
+use App\Vehicle;
+use App\Special;
+use App\Language;
+use App\Knowledge;
+use App\Subknowledge;
+use App\OpportunitySpecial;
+use App\OpportunityCity;
+use App\ContractType;
+use App\Hierarchy;
+use App\Opportunity;
+use App\OpportunityState;
+use Auth;
 class OpportunityController extends Controller
 {
-    //
+    public function index()
+    {
+        $company = Auth::guard('company')->user();
+        return view('company.pages.opportunity.index')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('company', $company);
+    }
+
+    public function create()
+    {
+        $auth = Auth::guard('company')->user();
+
+        $company = Auth::guard('company')->user();
+        return view('company.pages.opportunity.create')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('company', $company);   
+    }
+
+    public function store(Request $request)
+    {
+    	$this->validate($request, [
+            'name'              => 'required',
+            'activity'          => 'required',
+            'requiriments'      => 'required',
+            'contract_type_id'  => 'required',
+            'time'              => 'required',
+            'state_id'          => 'required',
+            'city_id'           => 'required',
+            'num'               => 'required',
+        ]); 
+
+
+        $auth = Auth::guard('company')->user();
+
+    	$opportunity = new Opportunity;
+        $opportunity->name              = $request->name;
+        $opportunity->activity          = $request->activity;
+        $opportunity->requiriments      = $request->requiriments;
+        $opportunity->contract_type_id  = $request->contract_type_id;
+        $opportunity->time              = $request->time;
+        $opportunity->additionally      = $request->additionally;
+        $opportunity->num               = $request->num;
+        $opportunity->company_id 		= $auth->id;
+        $opportunity->publish       	= 1;
+        $opportunity->salary            = str_replace(',', '.', str_replace('.', '', $request->salary));
+   
+        if (isset($request->isCombining)) {
+            $opportunity->salary        = 0;
+        }
+        
+
+        $opportunity->save();
+        if (isset($request->isSpecial)) {
+        	foreach ($request->specials as $special) {
+        		$esp = new OpportunitySpecial;
+        		$esp->opportunity_id = $opportunity->id;
+        		$esp->special_id     = $special;
+        		$esp->save();
+        	}
+             $opportunity->comments_special = $request->comments_special;
+             $opportunity->save();
+        }
+
+        if (isset($request->city_id)) {
+            foreach ($request->city_id as $cities) {
+                $city                   = new OpportunityCity;
+                $city->opportunity_id   = $opportunity->id; 
+                $city->city_id          = $cities;
+                $city->save();
+            }
+        }
+
+        if (isset($request->state_id)) {
+            foreach ($request->state_id as $states) {
+                $state                   = new OpportunityState;
+                $state->opportunity_id   = $opportunity->id; 
+                $state->state_id          = $states;
+                $state->save();
+            }
+        }
+
+        return redirect(route('opportunity.index'));      
+    }
+
+    public function edit($id)
+    {
+        $opportunity = Opportunity::find($id);
+        return view('company.pages.opportunity.edit')
+        ->with('states', State::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('opportunity', $opportunity);
+    }
+
+
+    public function update(Request $request)
+    {
+
+        $this->validate($request, [
+            'name'              => 'required',
+            'activity'          => 'required',
+            'requiriments'      => 'required',
+            'contract_type_id'  => 'required',
+            'time'              => 'required',
+            'state_id'          => 'required',
+            'city_id'           => 'required',
+            'num'               => 'required',
+        ]);   
+        $opportunity = Opportunity::find($request->id);
+
+        $opportunity->name              = $request->name;
+        $opportunity->activity          = $request->activity;
+        $opportunity->requiriments      = $request->requiriments;
+        $opportunity->contract_type_id  = $request->contract_type_id;
+        $opportunity->time              = $request->time;
+        $opportunity->additionally      = $request->additionally;
+        $opportunity->num               = $request->num;
+        $opportunity->publish       	= 1;
+        $opportunity->salary            = str_replace(',', '.', str_replace('.', '', $request->salary));
+        // $opportunity->city              = $request->city;
+        if (isset($request->isCombining)) {
+            $opportunity->salary        = 0;
+        }
+        
+
+        if (isset($request->isSpecial)) {
+            foreach ($request->special as $special) {
+                $esp = new OpportunitySpecial;
+                $esp->opportunity_id = $opportunity->id;
+                $esp->special_id     = $special;
+                $esp->save();
+            }
+            $opportunity->comments_special = $request->comments_special;
+        }
+
+
+        if (isset($request->city_id)) {
+            foreach ($request->city_id as $cities) {
+                $city                   = new OpportunityCity;
+                $city->opportunity_id   = $opportunity->id; 
+                $city->city_id          = $cities;
+                $city->save();
+            }
+        }
+
+        if (isset($request->state_id)) {
+            foreach ($request->state_id as $states) {
+                $state                   = new OpportunityCity;
+                $state->opportunity_id   = $candidate->id; 
+                $state->city_id          = $states;
+                $state->save();
+            }
+        }
+
+        $opportunity->save();
+
+        return redirect()->back();
+    }
+
+    public function publish($id)
+    {
+		$op = Opportunity::find($id);
+        
+		if (
+		$op->name    			== NULL || $op->name    		   == '' ||
+        $op->activity           == NULL || $op->activity           == '' || 
+        $op->requiriments       == NULL || $op->requiriments       == '' ||
+        $op->contract_type_id   == NULL || $op->contract_type_id   == '' ||
+        $op->time               == NULL || $op->time               == '' ||
+        $op->num 				== NULL || $op->num 			   == '' 
+    	) {
+			
+		return redirect()->back()->with('success', 'Finalizar o cadastro da vaga!');				
+		}
+
+		$op->publish = 2;
+		$op->save();
+
+		return redirect()->back()->with('success', 'Vaga publicada com sucesso!');
+
+    }
+
+    public function destroy($id)
+    {
+    	$op = Opportunity::find($id);
+        
+        
+    	$op->publish = 1;
+    	$op->save();
+
+    	return redirect()->back()->with('success', 'Vaga removida com sucesso!');
+    }
 }

@@ -10,17 +10,17 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="box-result-search">
+                    <a href="{{route('opportunity.create')}}">
+                        <button class="btn-result">
+                            <div class="border">
+                                <img src="{{asset('images/icon-plus.png')}}">
+                            </div>
+                            <p>Criar vaga</p>
+                        </button>
+                    </a>
                     <form method="POST" action="#">
                         <div class="row">
                             <div class="col-sm-12">
-                                <a href="{{route('company.opportunity.create')}}">
-                                    <button class="btn-result">
-                                        <div class="border">
-                                            <img src="{{asset('images/icon-plus.png')}}">
-                                        </div>
-                                        <p>Criar vaga</p>
-                                    </button>
-                                </a>
                                 <label for="cargo">Cargo ou área profissional</label>
                                 <select name="cargo">
                                     <option selected disabled>Selecione</option>
@@ -89,10 +89,10 @@
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">
                             <span>{{$opportunity->name}}</span>
-                            <p id="salario">{{number_format($opportunity->salary, '2', ',', '.')}}<p>
+                            <p id="salario">R$ {{number_format($opportunity->salary, '2', ',', '.')}}<p>
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p>{{$opportunity->activity}}</p>
-                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                            <a href="{{route('opportunity.edit', ['id' => $opportunity->id])}}">
                                 <button class="btn-result">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -101,7 +101,7 @@
                                 </button>
                             </a>
                             @if($opportunity->publish == 1)
-                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                            <a href="{{route('opportunity.publish', ['id' => $opportunity->id])}}">
                                 <button class="btn-result">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -110,7 +110,7 @@
                                 </button>
                             </a>
                             @else
-                            <a href="{{route('company.opportunity.edit', ['id' => $opportunity->id])}}">
+                            <a href="{{route('opportunity.destroy', ['id' => $opportunity->id])}}">
                                 <button class="btn-result">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">

@@ -26,39 +26,49 @@
                             </div>
                         </div>
                         <div class="row">
-                                    <div class="col-sm-5">
-                                        <label for="name">Nome</label>
-                                        <input type="text" name="name" value="{{$candidate->name}}" placeholder="Seu nome completo">
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <label for="email">E-mail</label>
-                                        <input type="email" name="email" value="{{$candidate->email}}" placeholder="Seu e-mail">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label for="cep">CEP</label>
-                                        <input type="text" class="input-cep" value="{{$candidate->cep}}" name="cep" placeholder="Seu CEP">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="street">Logradouro</label>
-                                        <input type="text" name="street" placeholder="Logradouro">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label for="nehighbor">Bairro</label>
-                                        <input type="text" name="nehighbor" placeholder="Bairro">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="city">Cidade</label>
-                                        <input type="text"  name="city" placeholder="Cidade">
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <label for="number">Número</label>
-                                        <input type="text" name="number"  placeholder="Número e Complemento">
-                                    </div>
-                                </div>
+                            <div class="col-sm-6">
+                                <label for="name">Nome</label>
+                                <input type="text" name="name" value="{{$candidate->name}}" placeholder="Seu nome completo">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="email">E-mail</label>
+                                <input type="email" name="email" value="{{$candidate->email}}" placeholder="Seu e-mail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="password">Senha</label>
+                                <input type="password" name="password" placeholder="Digite uma senha">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password_confirmation">Confirmação de senha</label>
+                                <input type="password" name="password_confirmation" placeholder="Confirme sua senha">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="input-cep" value="{{$candidate->cep}}" name="cep" placeholder="Seu CEP">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="street">Logradouro</label>
+                                <input type="text" name="street" placeholder="Logradouro">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="nehighbor">Bairro</label>
+                                <input type="text" name="nehighbor" placeholder="Bairro">
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="city">Cidade</label>
+                                <input type="text"  name="city" placeholder="Cidade">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="number">Número</label>
+                                <input type="text" name="number"  placeholder="Número e Complemento">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="state_id">Estado</label>
@@ -252,10 +262,182 @@
                                 <input type="text" value="{{number_format($candidate->salary, 2, ',', '.')}}" class="input-money" name="salary" placeholder="Ex:. 2500">
                             </div>
                             <div class="col-sm-5">
-                                <label for="estadotrab">Estado onde deseja trabalhar</label>
-                                <select name="estadotrab">
-                                    <option selected disabled>Selecione</option>
+                                <label for="state_work">Estado onde deseja trabalhar</label>
+                                <select name="state_work[]" class="state-work" multiple="multiple">
+                                    @foreach($states as $state)
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>Formação acadêmica</h4>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">Instuição</th>
+                                          <th scope="col">Formação</th>
+                                          <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($candidate->formations as $formation)
+                                        <tr>
+                                            <td>{{$formation->name}}</td>
+                                            <td>{{$formation->name}}</td>
+                                            <td>
+                                                <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
+                                                    X
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn-result act-formation">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Incluir nova</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>Experiência profissional</h4>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">Cargo</th>
+                                          <th scope="col">Empresa</th>
+                                          <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($candidate->experiences as $experience)
+                                        <tr>
+                                            <td>{{$experience->occupation}}</td>
+                                            <td>{{$experience->name}}</td>
+                                            <td>
+                                                <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
+                                                    X
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn-result act-experience">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Incluir nova</p>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>Idiomas</h4>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Idioma</th>
+                                            <th scope="col">Nível</th>
+                                            <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($candidate->languages as $language)
+                                        <tr>
+                                              <td>{{$language->name}}</td>
+                                              <td>{{$language->pivot->level}}</td>
+                                              <td>
+                                                <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
+                                                    X
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn-result act-language">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Incluir novo</p>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>Conhecimentos de informática</h4>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Idioma</th>
+                                            <th scope="col">Nível</th>
+                                            <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($candidate->knowledges as $knowledge)
+                                        <tr>
+                                            <td>{{$knowledge->name}}</td>
+                                            <td>{{$knowledge->name}}</td>
+                                            <td>
+                                                <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
+                                                    X
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn-result act-knowledge">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Incluir novo</p>
+                                </button>
                             </div>
                         </div>
                         <div class="row">

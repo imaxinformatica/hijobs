@@ -64,6 +64,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script type="text/javascript">
     $('#top-candidate').click( function(){
         $(this).addClass('active');
@@ -139,12 +141,12 @@ $(document).ready(function(){
         $('#finish').show();
     }
     });
-    $('#country_id').change(function(){
+    $('.country_id').change(function(){
         var country = $(this).val();
         if (country != '1') {
-            $('#state_id').hide();
+            $('.state_id').hide();
         }else{
-            $('#state_id').show();
+            $('.state_id').show();
         }
     });
 });
@@ -158,6 +160,15 @@ $(document).ready( function(){
             $('#special').slideUp();
         }   
     });
+});
+
+$(document).ready(function() {
+    $('#knowledge_id').change(function(){
+        var knowledge_id = $(this).val();
+        alert(knowledge_id);
+    });
+    $('.state-work').select2();
+    $('.subknowledge').select2();
 });
 </script> 
 

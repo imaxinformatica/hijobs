@@ -194,12 +194,13 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <button class="btn-orange">
-                        <a href="{{route('candidate.search')}}">Finalizar Curriculo meu currículo</a>
-                    </button>
+                    <a href="{{route('candidate.search')}}">
+                        <button class="btn-orange">
+                        Finalizar meu Currículo
+                        </button>
+                    </a>
                 </div>
             </div>
-            
         </div>
     </div>
 </section>

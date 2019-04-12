@@ -43,6 +43,51 @@ class Candidate extends Authenticatable
         $this->notify(new CandidateResetPassword($token));
     }
 
+    public function special()
+    {
+        return $this->belongsToMany('App\Special');
+    }
+
+    public function driver()
+    {
+        return $this->belongsToMany('App\Driver');
+    }
+
+    public function journey()
+    {
+        return $this->belongsTo('App\Journey');   
+    }
+
+    public function contract_type()
+    {
+        return $this->belongsTo('App\ContractType');   
+    }
+
+    public function max_hierarchy()
+    {
+        return $this->belongsTo('App\Hierarchy', 'max_hierarchy_id');   
+    }
+
+    public function min_hierarchy()
+    {
+        return $this->belongsTo('App\Hierarchy', 'min_hierarchy_id');   
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsToMany('App\Vehicle');
+    }
+
+    public function stateWork()
+    {
+        return $this->belongsToMany('App\State');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
     public function formations()
     {
         return $this->hasMany('App\CandidateFormation');
@@ -55,7 +100,7 @@ class Candidate extends Authenticatable
 
     public function languages()
     {
-        return $this->belongsToMany('App\Language');
+        return $this->belongsToMany('App\Language', 'candidate_language')->withPivot('level');;
     }
 
     public function knowledges()

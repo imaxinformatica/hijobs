@@ -23,7 +23,7 @@
           <div class="form-group">
             <div class="col-sm-6">
               <label for="country_id">País</label>
-              <select id="country_id" name="country_id" class="form-control">
+              <select name="country_id" class="form-control country_id">
                 <option selected disabled>País..</option>
                 @isset($countries)
                 @foreach($countries as $country)
@@ -32,7 +32,7 @@
                 @endisset
               </select>
             </div>
-            <div class="col-sm-6" id="state_id">
+            <div class="col-sm-6 state_id" >
               <label for="state_id">Estado</label>
               <select name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
@@ -156,7 +156,7 @@
           <div class="form-group">
             <div class="col-sm-6">
               <label for="country_id">País</label>
-              <select id="country_id" name="country_id" class="form-control">
+              <select name="country_id" class="form-control country_id">
                 <option selected disabled>País..</option>
                 @isset($countries)
                 @foreach($countries as $country)
@@ -165,7 +165,7 @@
                 @endisset
               </select>
             </div>
-            <div class="col-sm-6" id="state_id">
+            <div class="col-sm-6 state_id">
               <label for="state_id">Estado</label>
               <select  name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
@@ -304,9 +304,8 @@
               </select>
             </div>
             <div class="col-sm-6">
-              <label for="subknowledge_id">Habilidade</label>
-              <select id="subknowledge_id" name="subknowledge_id" class="form-control">
-                <option selected disabled>Selecione..</option>
+              <label for="subknowledge_id">Habilidades</label>
+              <select id="subknowledge_id" name="subknowledge_id[]" class="form-control subknowledge" multiple="multiple">
                 @isset($subknowledges)
                 @foreach($subknowledges as $subknowledge)
                 <option value="{{$subknowledge->id}}">{{$subknowledge->name}}</option>

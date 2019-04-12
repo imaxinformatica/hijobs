@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('company.opportunity.store')}}" method="POST">
+                    <form action="{{route('candidate.update')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">
@@ -250,9 +250,11 @@
                                 <input type="text" class="input-money" name="salary" placeholder="Ex:. 2500">
                             </div>
                             <div class="col-sm-5">
-                                <label for="estadotrab">Estado onde deseja trabalhar</label>
-                                <select name="estadotrab">
-                                    <option selected disabled>Selecione</option>
+                                <label for="state_work">Estado onde deseja trabalhar</label>
+                                <select name="state_work[]" class="state-work" multiple="multiple">
+                                    @foreach($states as $state)
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

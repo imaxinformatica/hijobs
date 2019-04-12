@@ -135,7 +135,9 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <button class="btn-orange">Finalizar meu cadastro</button>
+                                <a href="{{route('company.edit')}}">
+                                    <button class="btn-orange" type="button">Editar meu cadastro</button>
+                                </a>
                             </div>
                         </div>
                     </form>

@@ -16,6 +16,7 @@ use App\Hierarchy;
 use App\Knowledge;
 use App\ContractType;
 use App\Subknowledge;
+use App\CandidateState;
 use App\CandidateDriver;
 use App\CandidateVehicle;
 use App\CandidateSpecial;
@@ -75,84 +76,25 @@ class CandidateController extends Controller
         ->with('candidate', $candidate);
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $candidate = Candidate::find($id);
+        $candidate = Auth::guard('candidate')->user();
 
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
-        return view('candidate.pages.curriculum.edit-curriculum')
+        return view('candidate.pages.curriculum.edit')
         ->with('states', State::all())
+        ->with('countries', Country::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
         ->with('vehicles', Vehicle::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('formations', CandidateFormation::where('candidate_id', $id))
+        ->with('formations', CandidateFormation::where('candidate_id', $candidate->id))
         ->with('candidate', $candidate);
-    }
-
-    public function formation(Request $request)
-    {
-        $formation = new CandidateFormation;
-        $formation->name            = $request->name;
-        $formation->country_id      = $request->country_id;
-        $formation->state_id        = $request->state_id;
-        $formation->level           = $request->level;
-        $formation->course          = $request->course;
-        $formation->situation       = $request->situation;
-        $formation->start           = $request->start;
-        $formation->finish          = $request->finish;
-        $formation->candidate_id    = $request->candidate_id;
-
-        $formation->save();
-
-        return redirect()->back()->with('success', 'Formação incluída com sucesso!');
-    }
-
-    public function experience(Request $request)
-    {
-            $experience = new CandidateExperience;
-            $experience->name           = $request->name;
-            $experience->occupation     = $request->occupation;
-            $experience->hierarchy_id   = $request->hierarchy_id;
-            $experience->description    = $request->description;
-            $experience->country_id     = $request->country_id;
-            $experience->state_id       = $request->state_id;
-            $experience->start          = $request->start;
-            $experience->finish         = $request->finish;
-            $experience->candidate_id   = $request->candidate_id;
-
-            $experience->save();
-
-            return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
-    }
-
-    public function language(Request $request)
-    {
-
-            $language = new CandidateLanguage;
-            $language->language_id      = $request->language_id;
-            $language->level            = $request->level;
-            $language->candidate_id    = $request->candidate_id;
-
-            $language->save();
-
-            return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
-    }
-
-    public function knowledge(Request $request)
-    {
-        // return dd($request);
-            $knowledge = new CandidateKnowledge;
-            $knowledge->knowledge_id        = $request->knowledge_id;
-            $knowledge->subknowledge_id     = $request->subknowledge_id;
-            $knowledge->candidate_id        = $request->candidate_id;
-
-            $knowledge->save();
-
-            return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
     }
 
     public function update(Request $request)
@@ -170,6 +112,7 @@ class CandidateController extends Controller
             'min_hierarchy_id'  => 'required',
             'max_hierarchy_id'  => 'required',
             'salary'            => 'required',
+            'password'          =>  'min:6|confirmed'
         ]);
 
         $candidate                   = Candidate::find($request->candidate_id);
@@ -187,6 +130,10 @@ class CandidateController extends Controller
         $candidate->salary           = str_replace(',','.', str_replace('.','', $request->salary));
         $candidate->birthdate        = implode("-", array_reverse(explode("/", $request->birthdate)));
 
+        if ($request->password != NULL) {
+            $candidate->password     = bcrypt($request->password); 
+        }
+
         // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
         //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
         // }
@@ -203,9 +150,9 @@ class CandidateController extends Controller
         $candidate->facebook            = $request->facebook;
         $candidate->twitter             = $request->twitter;
         $candidate->blog                = $request->blog;
-
-        if (isset($request->special)) {
-            foreach ($request->special as $specials) {
+            // return dd($request);
+        if (isset($request->isSpecial)) {
+            foreach ($request->specials as $specials) {
                 $special               = new CandidateSpecial;
                 $special->candidate_id = $candidate->id; 
                 $special->special_id   = $specials;
@@ -231,9 +178,114 @@ class CandidateController extends Controller
                 $vehicle->save();
             }
         }
+
+        if (isset($request->state_work)) {
+            foreach ($request->state_work as $works) {
+                $work               = new CandidateState;
+                $work->candidate_id = $candidate->id; 
+                $work->state_id   = $works;
+                $work->save();
+            }
+        }
         $candidate->save();
         return redirect(route('candidate.better', ['id' => $candidate->id]));
     }
+
+    public function formation(Request $request)
+    {
+        $formation = new CandidateFormation;
+        $formation->name            = $request->name;
+        $formation->country_id      = $request->country_id;
+        $formation->state_id        = $request->state_id;
+        $formation->level           = $request->level;
+        $formation->course          = $request->course;
+        $formation->situation       = $request->situation;
+        $formation->start           = $request->start;
+        $formation->finish          = $request->finish;
+        $formation->candidate_id    = $request->candidate_id;
+
+        $formation->save();
+
+        return redirect()->back()->with('success', 'Formação incluída com sucesso!');
+    }
+    public function formationDestroy($id)
+    {
+        $formation = CandidateFormation::find($id);
+
+        $formation->delete();
+
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
+    }
+
+    public function experience(Request $request)
+    {
+            $experience = new CandidateExperience;
+            $experience->name           = $request->name;
+            $experience->occupation     = $request->occupation;
+            $experience->hierarchy_id   = $request->hierarchy_id;
+            $experience->description    = $request->description;
+            $experience->country_id     = $request->country_id;
+            $experience->state_id       = $request->state_id;
+            $experience->start          = $request->start;
+            $experience->finish         = $request->finish;
+            $experience->candidate_id   = $request->candidate_id;
+
+            $experience->save();
+
+            return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
+    }
+    public function CandidateExperience($id)
+    {
+        $experience = Knowledge::find($id);
+
+        $experience->delete();
+
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
+    }
+
+    public function language(Request $request)
+    {
+
+            $language = new CandidateLanguage;
+            $language->language_id      = $request->language_id;
+            $language->level            = $request->level;
+            $language->candidate_id    = $request->candidate_id;
+
+            $language->save();
+
+            return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
+    }
+    public function languageDestroy($id)
+    {
+        $language = CandidateLanguage::find($id);
+
+        $language->delete();
+
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
+    }
+
+    public function knowledge(Request $request)
+    {
+        // return dd($request);
+            $knowledge = new CandidateKnowledge;
+            $knowledge->knowledge_id        = $request->knowledge_id;
+            $knowledge->subknowledge_id     = $request->subknowledge_id;
+            $knowledge->candidate_id        = $request->candidate_id;
+
+            $knowledge->save();
+
+            return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
+    }
+
+    public function knowledgeDestroy($id)
+    {
+        $knowledge = CandidateKnowledge::find($id);
+
+        $knowledge->delete();
+
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
+    }
+
 
     public function better($id)
     {
@@ -243,7 +295,7 @@ class CandidateController extends Controller
             $language->level = $lang->level;
         }
 
-        return view('candidate.pages.curriculum.better-curriculum')
+        return view('candidate.pages.curriculum.better')
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('drivers', Driver::all())
@@ -255,6 +307,23 @@ class CandidateController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
+        ->with('candidate', $candidate);
+    }
+
+    public function show(){
+        $candidate = Auth::guard('candidate')->user();
+
+        $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
+        return view('candidate.pages.curriculum.show')
+        ->with('states', State::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('contract_types', ContractType::all())
+        ->with('formations', CandidateFormation::where('candidate_id', $candidate->id))
         ->with('candidate', $candidate);
     }
 

@@ -18,3 +18,5 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />

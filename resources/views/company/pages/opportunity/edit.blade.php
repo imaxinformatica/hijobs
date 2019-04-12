@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('company.opportunity.update')}}" method="POST">
+                    <form action="{{route('opportunity.update')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$opportunity->id}}">
                         <div class="row">
@@ -44,7 +44,7 @@
                             @endforeach
                             <div class="col-sm-12">
                                 <label for="comments_special" style="margin-top: 20px;">Observações - PcD</label>
-                                <textarea name="comments_special" placeholder="Ex: É importante o candidato portador de deficiência auditiva conheça LIBRAS"></textarea>
+                                <textarea name="comments_special" value="{{$opportunity->comments_special}}" placeholder="Ex: É importante o candidato portador de deficiência auditiva conheça LIBRAS"></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -91,17 +91,15 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="state_id">Estado</label>
-                                <select name="state_id">
-                                    <option selected disabled>Selecione</option>
+                                <select name="state_id[]" class="state" multiple="multiple">
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}" <?php if ($state->id == $opportunity->state_id) {echo "selected";}?>>{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="city">Cidade</label>
-                                <select name="city">
-                                    <option selected disabled>Selecione</option>
+                                <label for="city_id">Cidade</label>
+                                <select name="city_id[]" class="city" multiple="multiple">
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}" >{{$state->name}}</option>
                                     @endforeach
@@ -117,7 +115,7 @@
                                 <button class="btn-orange">Salvar meus dados</button>
                             </div>
                             <div class="col-sm-4"> 
-                                <a href="{{route('company.opportunities', ['id' => 1])}}" >
+                                <a href="{{route('opportunity.index', ['id' => 1])}}" >
                                     <!-- <button class="btn-orange"> -->
                                     Voltar
                                     <!-- </button> -->

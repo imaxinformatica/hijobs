@@ -64,6 +64,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script type="text/javascript">
     $('#top-candidate').click( function(){
         $(this).addClass('active');
@@ -114,22 +116,27 @@
 $('.act-formation').on('click', function (e) {
     e.preventDefault();
     $('#candidateFormation').modal('show');
-  });
+});
     //Experiencia
 $('.act-experience').on('click', function (e) {
     e.preventDefault();
     $('#candidateExperience').modal('show');
-  });
+});
     //Idioma
 $('.act-language').on('click', function (e) {
     e.preventDefault();
     $('#candidateLanguage').modal('show');
-  });
+});
     //Conhecimento de Informatica
 $('.act-knowledge').on('click', function (e) {
     e.preventDefault();
     $('#candidateKnowledge').modal('show');
-  });
+});
+
+$('.act-password').on('click', function (e) {
+    e.preventDefault();
+    $('#companyPassword').modal('show');
+});
 
 $(document).ready(function(){
     $("#situation").change(function(){
@@ -148,6 +155,15 @@ $(document).ready(function(){
             $('#state_id').show();
         }
     });
+
+    $('.isCombining').change(function() {
+        if($(this).is(":checked")) {
+            $('.salary').attr('disabled', '');
+            $('.salary').attr('value', '');
+        } else{
+            $('.salary').removeAttr('disabled');
+        }   
+    });
 });
 
 $(document).ready( function(){
@@ -159,6 +175,12 @@ $(document).ready( function(){
             $('#special').slideUp();
         }   
     });
+});
+
+//Select2
+$(document).ready(function() {
+    $('.state').select2();
+    $('.city').select2();
 });
 </script> 
 

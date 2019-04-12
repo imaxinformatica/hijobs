@@ -75,9 +75,11 @@
         </div>
         <div class="row">
             <div class="col-sm-2 col-sm-offset-5">
-                <button class="btn-orange">
-                    Cadastrar currículo
-                </button> 
+                <a href="{{route('candidate.create')}}">
+                    <button class="btn-orange">
+                        Cadastrar currículo
+                    </button> 
+                </a>
             </div>
         </div>
     </div>

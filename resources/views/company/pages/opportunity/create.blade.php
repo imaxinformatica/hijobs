@@ -9,41 +9,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Passo a passo para concluir seu currículo</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="etapas box-result-search">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="number">
-                                <div class="evolucao">
-                                    <p>1</p>
-                                </div>
-                                <h3>Dados de acesso</h3>
-                            </div>
-                            <img src="{{asset('images/barra.png')}}">
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="number">
-                                <div class="evolucao">
-                                    <p>2</p>
-                                </div>
-                                <h3>Dados da empresa</h3>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
+                <h1>Cadastrar vaga</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('company.opportunity.store')}}" method="POST">
+                    <form action="{{route('opportunity.store')}}" method="POST">
                         {{ csrf_field() }}
-                        <input type="hidden" name="company_id" value="{{$company->id}}">
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Detalhes da Vaga</h4>
@@ -52,7 +26,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="name">Cargo</label>
-                                <input type="text" name="name" placeholder="Ex.: Auxiliar Administrativo, Vendedor, Mecânico...">
+                                <input type="text" name="name"  placeholder="Ex.: Auxiliar Administrativo, Vendedor, Mecânico...">
                             </div>
                         </div>
                         <div class="row">
@@ -81,61 +55,70 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="requiriments" style="margin-top: 20px;">Requisitos necessários</label>
-                                <textarea name="requiriments" placeholder="Requisitos necessários"></textarea>
+                                <textarea name="requiriments" class="requiriments" placeholder="Requisitos necessários"></textarea>
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="salary">Salário</label>
-                                <input type="text" name="salary" class="input-money" placeholder="Salário">
-                                <label class="lbl-caracteristicas"><input type="checkbox" name="isCombining"><span class="checkmark"></span>A combinar</label>
+                                <input type="text" name="salary" class="input-money salary" placeholder="Salário">
+                                <label class="lbl-caracteristicas"><input class="isCombining" type="checkbox" name="isCombining"><span class="checkmark"></span>A combinar</label>
                             </div>
                             <div class="col-sm-6">
                                 <label for="contract_type_id">Regime de Contratação</label>
                                 <select name="contract_type_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($contract_types as $contract)
-                                    <option value="{{$contract->id}}">{{$contract->name}}</option>
+                                    <option value="{{$contract->id}}" >{{$contract->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="activity" style="margin-top: 20px;">Horário de trabalho</label>
-                                <input type="text" name="activity" placeholder="Ex.: De segunda a sexta, das 9h às 18h.">
+                                <label for="time" style="margin-top: 20px;">Horário de trabalho</label>
+                                <input type="text" name="time"  placeholder="Ex.: De segunda a sexta, das 9h às 18h.">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="activity" style="margin-top: 20px;">Informações adicionais sobre a vaga</label>
-                                <textarea name="activity" placeholder="Ex.: Disponibilidade para viagens, possuir veículo próprio, carteira própria de clientes..."></textarea>
+                                <label for="additionally" style="margin-top: 20px;">Informações adicionais sobre a vaga</label>
+                                <textarea name="additionally"  placeholder="Ex.: Disponibilidade para viagens, possuir veículo próprio, carteira própria de clientes..."></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="state_id">Estado</label>
-                                <select name="state_id">
-                                    <option selected disabled>Selecione</option>
+                                <select name="state_id[]" class="state" multiple="multiple">
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option value="{{$state->id}}" >{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <label for="city">Cidade</label>
-                                <select name="city">
-                                    <option selected disabled>Selecione</option>
+                                <label for="city_id">Cidade</label>
+                                <select name="city_id[]" class="city" multiple="multiple">
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option value="{{$state->id}}" >{{$state->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="city">Vagas</label>
+                                <input type="text" placeholder="Ex: 5" name="num">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <button class="btn-orange">Salvar meus dados</button>
+                            </div>
+                            <div class="col-sm-4"> 
+                                <a href="{{route('opportunity.index')}}" >
+                                    <!-- <button class="btn-orange"> -->
+                                    Voltar
+                                    <!-- </button> -->
+                                </a>
                             </div>
                         </div>
                     </form>

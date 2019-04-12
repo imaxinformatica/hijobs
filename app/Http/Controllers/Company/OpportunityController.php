@@ -22,8 +22,33 @@ use App\OpportunityState;
 use Auth;
 class OpportunityController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $opportunities = new Opportunity;
+        if($request->has('name')){
+            if(request('name') != ''){
+                $opportunities = $opportunities->where('name', 'like', '%' . request('name') . '%');
+            }
+        }
+        // if($request->has('bar_code')){
+        //     if(request('bar_code') != ''){
+        //         $opportunities = $opportunities->where('state_id', 'like', '%' . request('bar_code') . '%');
+        //     }
+        // }
+        if($request->has('salary')){
+            if(request('salary') != ''){
+                $opportunities = $opportunities->where('salary', '>',  request('salary') );
+            }
+        }
+
+        if($request->has('contract_type_id')){
+            if(request('contract_type_id') != ''){
+                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id') );
+            }
+        }
+
+        $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
+
         $company = Auth::guard('company')->user();
         return view('company.pages.opportunity.index')
         ->with('states', State::all())
@@ -31,6 +56,7 @@ class OpportunityController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
+        ->with('opportunities', $opportunities)
         ->with('company', $company);
     }
 
@@ -223,4 +249,5 @@ class OpportunityController extends Controller
 
     	return redirect()->back()->with('success', 'Vaga removida com sucesso!');
     }
+
 }

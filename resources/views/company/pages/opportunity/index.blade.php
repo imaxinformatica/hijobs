@@ -18,52 +18,38 @@
                             <p>Criar vaga</p>
                         </button>
                     </a>
-                    <form method="POST" action="#">
+                    <form method="GET">
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="cargo">Cargo ou área profissional</label>
-                                <select name="cargo">
-                                    <option selected disabled>Selecione</option>
-                                    <option>Analista de Sistemas</option>
-                                    <option>Analista de Sistemas</option>
-                                    <option>Analista de Sistemas</option>
-                                    <option>Analista de Sistemas</option>
+                                <label for="name">Nome da vaga</label>
+                                <input type="text" name="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="state">Estado</label>
+                                <select name="state">
+                                    <option selected value="">Selecione</option>
+                                    @foreach($states as $state)
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="cidade">Cidade, estado ou região</label>
-                                <select name="cidade">
-                                    <option selected disabled>Selecione</option>
-                                    <option>São Paulo</option>
-                                    <option>São Paulo</option>
-                                    <option>São Paulo</option>
-                                    <option>São Paulo</option>
-                                </select>
+                                <label for="salary">Salário à partir de</label>
+                                <input type="text" name="salary">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="salario">Salário desejado</label>
-                                <select name="salario">
-                                    <option selected disabled>Selecione</option>
-                                    <option>R$1.000,00 a 2.500,00</option>
-                                    <option>R$1.000,00 a 2.500,00</option>
-                                    <option>R$1.000,00 a 2.500,00</option>
-                                    <option>R$1.000,00 a 2.500,00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label for="contrato">Tipo de contrato</label>
-                                <select name="contrato">
-                                    <option selected disabled>Selecione</option>
-                                    <option>Estágio</option>
-                                    <option>Estágio</option>
-                                    <option>Estágio</option>
-                                    <option>Estágio</option>
+                                <label for="contract_type_id">Tipo de contrato</label>
+                                <select name="contract_type_id">
+                                    <option selected value="">Selecione</option>
+                                    @foreach($contract_types as $contract)
+                                    <option value="{{$contract->id}}">{{$contract->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -84,7 +70,8 @@
                         <p class="total-vagas">{{$company->opportunities()->count()}} vaga(s) de emprego</p>
                     </div>
                 </div>
-                @foreach($company->opportunities as $opportunity)
+
+                @foreach($opportunities as $opportunity)
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">

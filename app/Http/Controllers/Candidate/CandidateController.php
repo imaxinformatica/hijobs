@@ -14,6 +14,7 @@ use App\Language;
 use App\Candidate;
 use App\Hierarchy;
 use App\Knowledge;
+use App\Opportunity;
 use App\ContractType;
 use App\Subknowledge;
 use App\CandidateState;
@@ -327,8 +328,41 @@ class CandidateController extends Controller
         ->with('candidate', $candidate);
     }
 
-    public function search()
+    public function opportunity()
     {
         return view('candidate.pages.buscar-vagas');
+    }
+
+    public function search(Request $request)
+    {
+        $opportunities = new Opportunity;
+
+        if($request->has('name')){
+            if(request('name') != ''){
+                $opportunities = $opportunities->where('name', 'like', '%' . request('name') . '%');
+            }
+        }
+        if($request->has('salary')){
+            if(request('salary') != ''){
+                $opportunities = $opportunities->where('salary', '>', request('salary'));
+            }
+        }
+
+
+        if($request->has('contract_type_id')){
+            if(request('contract_type_id') != ''){
+                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id') );
+            }
+        }
+
+        $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
+
+        return view('candidate.pages.resultado-busca')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('opportunities', $opportunities);
     }
 }

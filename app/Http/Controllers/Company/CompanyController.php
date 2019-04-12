@@ -5,20 +5,21 @@ namespace App\Http\Controllers\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-use App\Company;
-use App\Country;
 use App\State;
 use App\Driver;
+use App\Company;
+use App\Country;
 use App\Vehicle;
 use App\Journey;
 use App\Special;
 use App\Language;
-use App\Knowledge;
-use App\Subknowledge;
 use App\Hierarchy;
+use App\Candidate;
+use App\Knowledge;
+use App\Opportunity;
+use App\Subknowledge;
 use App\ContractType;
 use App\OccupationArea;
-use App\Opportunity;
 use Auth;
 
 class CompanyController extends Controller
@@ -150,9 +151,61 @@ class CompanyController extends Controller
         return redirect(route('opportunity.index'))->with('Empresa Salva com sucesso!');
     }
 
-    public function candidate()
+    public function candidate(Request $request)
     {
+        $candidates = new Candidate;
+        if($request->has('state_id')){
+            if(request('state_id') != ''){
+                $candidates = $candidates->where('state_id', request('state_id'));
+            }
+        }
+        if($request->has('sex')){
+            if(request('sex') != ''){
+                $candidates = $candidates->where('sex', request('sex'));
+            }
+        }
 
+        if($request->has('travel')){
+            if(request('travel') != ''){
+                $candidates = $candidates->where('travel', request('travel'));
+            }
+        }
+
+        if($request->has('change')){
+            if(request('change') != ''){
+                $candidates = $candidates->where('change', request('change'));
+            }
+        }
+
+        if($request->has('journey_id')){
+            if(request('journey_id') != ''){
+                $candidates = $candidates->where('journey_id', request('journey_id') );
+            }
+        }
+
+        if($request->has('contract_type_id')){
+            if(request('contract_type_id') != ''){
+                $candidates = $candidates->where('contract_type_id', request('contract_type_id') );
+            }
+        }
+
+        $candidates = $candidates->orderBy('name', 'asc')->paginate(10);
+
+        $company = Auth::guard('company')->user();
+        return view('company.pages.candidate')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('subknowledges', Subknowledge::all())
+        ->with('candidates', $candidates)
+        ->with('company', $company);
     }
 
 }

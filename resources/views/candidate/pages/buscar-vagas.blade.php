@@ -11,10 +11,10 @@
         <div class="row">
             <div class="col-sm-4 search-job col-sm-offset-4">
                 <h1>Buscar vagas</h1>
-                <form>
+                <form method="GET" action="{{route('candidate.search')}}">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="office" type="text" name="office" placeholder="Cargo ou Área Profissional">
+                            <input id="office" type="text" name="name" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>

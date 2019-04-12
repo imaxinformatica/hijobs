@@ -15,24 +15,28 @@ Route::get('/', function () {
     return view('index.index');
 })->name('index');
 //Candidato
-Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
+Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
   Route::get('/candidato', function (){return view('candidate.pages.index');})->name('index');
-  Route::get('/novo-candidato', 'Candidate\CandidateController@create')->name('create');
-  Route::post('/novo-candidato/store', 'Candidate\CandidateController@store')->name('store');
-  Route::get('/novo-candidato/dados/{id}', 'Candidate\CandidateController@data')->name('data');
-  Route::post('/novo-candidato/update', 'Candidate\CandidateController@update')->name('update');
-  Route::get('/novo-candidato/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
-  Route::get('/candidato/editar', 'Candidate\CandidateController@edit')->name('edit');
-  Route::get('/candidato/visualizar', 'Candidate\CandidateController@show')->name('show');
-  Route::post('candidato/formacao', 'Candidate\CandidateController@formation')->name('formation');
-  Route::post('candidato/experiencia', 'Candidate\CandidateController@experience')->name('experience');
-  Route::post('candidato/idiomas', 'Candidate\CandidateController@language')->name('language');
-  Route::post('candidato/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
-  Route::get('candidato/formacao/{id}', 'Candidate\CandidateController@formationDestroy')->name('formation.destroy');
-  Route::get('candidato/experiencia/{id}', 'Candidate\CandidateController@experienceDestroy')->name('experience.destroy');
-  Route::get('candidato/idiomas/{id}', 'Candidate\CandidateController@languageDestroy')->name('language.destroy');
-  Route::get('candidato/conhecimento/{id}', 'Candidate\CandidateController@knowledgeDestroy')->name('knowledge.destroy');
-  Route::get('candidato/pesquisar', 'Candidate\CandidateController@search')->name('search');
+  Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
+  Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
+  Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
+  Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
+  Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
+  Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
+  Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
+  Route::post('/formacao', 'Candidate\CandidateController@formation')->name('formation');
+  Route::post('/experiencia', 'Candidate\CandidateController@experience')->name('experience');
+  Route::post('/idiomas', 'Candidate\CandidateController@language')->name('language');
+  Route::post('/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
+  Route::get('/formacao/{id}', 'Candidate\CandidateController@formationDestroy')->name('formation.destroy');
+  Route::get('/experiencia/{id}', 'Candidate\CandidateController@experienceDestroy')->name('experience.destroy');
+  Route::get('/idiomas/{id}', 'Candidate\CandidateController@languageDestroy')->name('language.destroy');
+  Route::get('/conhecimento/{id}', 'Candidate\CandidateController@knowledgeDestroy')->name('knowledge.destroy');
+  Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
+  Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
+});
+
+Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
   //Controle de Registro e Login
   Route::get('/login', 'CandidateAuth\LoginController@showLoginForm')->name('login');
@@ -49,7 +53,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 });
 
 //Empresa
-Route::group(['prefix' => 'company', 'as'=>'company.',], function () {
+Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company']], function () {
   Route::get('/', function (){return view('company.pages.index-empresa');})->name('index');
   Route::post('session', 'Company\CompanyController@session')->name('session');
   Route::get('/perfil', 'Company\CompanyController@show')->name('show');
@@ -75,8 +79,8 @@ Route::group(['prefix' => 'company', 'as'=>'company.',], function () {
   Route::get('/password/reset/{token}', 'CompanyAuth\ResetPasswordController@showResetForm');
 });
 //Vagas
-Route::group(['prefix' => 'vaga', 'as'=>'opportunity.',], function () {
-  Route::get('/', 'Company\OpportunityController@index')->name('index');
+Route::group(['prefix' => 'vaga', 'as'=>'opportunity.', 'middleware' => ['company']], function () {
+  Route::get('/empresa/', 'Company\OpportunityController@index')->name('index');
   Route::get('/criar', 'Company\OpportunityController@create')->name('create');
   Route::post('/store', 'Company\OpportunityController@store')->name('store');
   Route::get('/editar/{id}', 'Company\OpportunityController@edit')->name('edit');

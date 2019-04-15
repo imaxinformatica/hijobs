@@ -10,8 +10,8 @@ class Special extends Model
         'name',
     ];
 
-    public function candidates()
+    public function candidate()
     {
-        return $this->belongsToMany('App\Special', 'candidate_special');
+        return $this->belongsToMany('App\Special', 'candidate_special', 'candidate_id', 'special_id');
     }
 }

@@ -12,4 +12,14 @@ class Formation extends Model
             
     ];
 
+    public function level()
+    {
+    	return $this->belongsTo('App\Level');
+    }
+
+    public function course()
+    {
+    	return $this->belongsTo('App\Course');
+    }
+
 }

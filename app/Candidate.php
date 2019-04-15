@@ -45,7 +45,7 @@ class Candidate extends Authenticatable
 
     public function special()
     {
-        return $this->belongsToMany('App\Special');
+        return $this->belongsToMany('App\Special', 'candidate_special');
     }
 
     public function driver()
@@ -95,17 +95,18 @@ class Candidate extends Authenticatable
 
     public function experiences()
     {
-        return $this->hasMany('App\CandidateExperience');
+        return $this->hasMany('App\Experience');
     }
 
     public function languages()
     {
-        return $this->belongsToMany('App\Language', 'candidate_language')->withPivot('level');;
+        return $this->belongsToMany('App\Language', 'candidate_language')->withPivot('level');
     }
 
     public function knowledges()
     {
-        return $this->belongsToMany('App\Knowledge');
+        return $this->belongsToMany('App\Knowledge')->withPivot('subknowledge_id');
     }
+
     
 }

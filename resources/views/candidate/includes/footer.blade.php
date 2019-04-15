@@ -76,6 +76,7 @@
         $(this).addClass('active');
         $('#top-candidate').removeClass('active');
     }); 
+
 //Mascaras
     $( document ).ready(function() {
         $('.input-cep').inputmask({"mask": "99999-999", "placeholder":"_"});
@@ -145,8 +146,10 @@ $(document).ready(function(){
         var country = $(this).val();
         if (country != '1') {
             $('.state_id').hide();
+            $('.city_id').hide();
         }else{
             $('.state_id').show();
+            $('.city_id').show();
         }
     });
 });
@@ -165,10 +168,73 @@ $(document).ready( function(){
 $(document).ready(function() {
     $('#knowledge_id').change(function(){
         var knowledge_id = $(this).val();
-        alert(knowledge_id);
     });
     $('.state-work').select2();
     $('.subknowledge').select2();
+});
+
+$(document).ready(function(){
+    $('#actually' ).change(function() {
+        var actually = $('#actually:checked').val();
+        if (actually == 'on') {
+            $('#finished').hide();
+        }else{
+            $('#finished').show();
+        }
+    });
+});
+
+$(document).ready(function(){
+    $('#level' ).change(function() {
+        var url = "{{route('candidate.course')}}";
+        var level_id = $('#level option:selected').val();
+        courseAjax(url, level_id);
+    });
+    function courseAjax(url, level_id){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data:{
+                level_id: level_id,
+            },
+            beforeSend: function(){
+            },
+            success: function(data){
+                var result = $.parseJSON(data);
+                console.log(result[1].name);
+                $('#course').html('');
+                for (var i = 0; i < result.length; ++i){
+                    $('#course').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
+                }
+            }
+        });
+    }
+});
+
+$(document).ready(function(){
+    $('#knowledge_id' ).change(function() {
+        var url = "{{route('candidate.subknowledge')}}";
+        var knowledge_id = $('#knowledge_id option:selected').val();
+        knowledgeAjax(url, knowledge_id);
+    });
+    function knowledgeAjax(url, knowledge_id){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data:{
+                knowledge_id: knowledge_id,
+            },
+            beforeSend: function(){
+            },
+            success: function(data){
+                var result = $.parseJSON(data);
+                $('#subknowledge_id').html('');
+                for (var i = 0; i < result.length; ++i){
+                    $('#subknowledge_id').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
+                }
+            }
+        });
+    }
 });
 </script> 
 

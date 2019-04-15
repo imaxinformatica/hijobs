@@ -57,15 +57,26 @@
                     <table class="table">
                         <thead>
                             <tr>
-                              <th scope="col">Instuição</th>
-                              <th scope="col">Formação</th>
+                                <th scope="col">Instuição</th>
+                                <th scope="col">Formação</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($candidate->formations as $formation)
-                            <tr>
-                              <td>{{$formation->name}}</td>
-                              <td>{{$formation->name}}</td>
+                                <tr>
+                                <td>{{$formation->name}}</td>
+                                <td>{{$formation->level->name}}</td>
+                                <td>
+                                    <a href="{{route('candidate.formation.show', ['id' => $formation->id])}}">
+                                        <button class="btn btn-info" type="button">
+                                        <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </a>
+                                    <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
+                                        <button class="btn btn-danger" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             @endforelse
@@ -94,15 +105,26 @@
                     <table class="table">
                         <thead>
                             <tr>
-                              <th scope="col">Cargo</th>
-                              <th scope="col">Empresa</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($candidate->experiences as $experience)
                             <tr>
-                              <td>{{$experience->occupation}}</td>
-                              <td>{{$experience->name}}</td>
+                                <td>{{$experience->occupation}}</td>
+                                <td>{{$experience->name}}</td>
+                                <td>
+                                    <a href="{{route('candidate.experience.show', ['id' => $experience->id])}}">
+                                        <button class="btn btn-info" type="button">
+                                        <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </a>
+                                    <a href="{{route('candidate.experience.destroy', ['id' => $experience->id])}}">
+                                        <button class="btn btn-danger" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             @endforelse
@@ -130,15 +152,22 @@
                     <table class="table">
                         <thead>
                             <tr>
-                              <th scope="col">Idioma</th>
-                              <th scope="col">Nível</th>
+                                <th scope="col">Idioma</th>
+                                <th scope="col">Nível</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($candidate->languages as $language)
                             <tr>
-                              <td>{{$language->name}}</td>
-                              <td>{{$language->level}}</td>
+                                <td>{{$language->name}}</td>
+                                <td>{{$language->level}}</td>
+                                <td>
+                                    <a href="{{route('candidate.language.destroy', ['id' => $language->id])}}">
+                                        <button class="btn btn-danger" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             @endforelse
@@ -166,15 +195,22 @@
                     <table class="table">
                         <thead>
                             <tr>
-                              <th scope="col">Idioma</th>
-                              <th scope="col">Nível</th>
+                              <th scope="col">Categoria</th>
+                              <th scope="col">Conhecimento</th>
+                              <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($candidate->knowledges as $knowledge)
+                            @forelse($candidate->knowledges as $know)
                             <tr>
-                              <td>{{$knowledge->name}}</td>
-                              <td>{{$knowledge->name}}</td>
+                                <td>{{$know->name}}</td>
+                                <td>{{$know->subknowledges->where('id', $know->pivot->subknowledge_id)->first()->name}}</td>
+                                <td>
+                                    <a href="{{route('candidate.knowledge.destroy', ['id' => $language->id])}}">
+                                        <button class="btn btn-danger" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             @endforelse

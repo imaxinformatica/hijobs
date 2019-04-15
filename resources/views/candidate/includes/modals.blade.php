@@ -60,12 +60,7 @@
             <div class="col-sm-6">
               <label for="course">Curso..</label>
               <select id="course" name="course" class="form-control">
-                <option selected disabled>Curso..</option>
-                @isset($courses)
-                @foreach($courses as $course)
-                <option value="{{$course->id}}">{{$course->name}}</option>
-                @endforeach
-                @endisset
+                
               </select>
             </div>
           </div>
@@ -177,7 +172,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-6">
+            <div class="col-sm-6 city_id">
               <label for="city_id">Cidade</label>
               <select id="city_id" name="city_id" class="form-control">
                 <option selected disabled>Cidade..</option>
@@ -187,16 +182,16 @@
                 <option value="4">ABC</option>
               </select>
             </div>
-            <div class="col-sm-2">
-              <label for="start">Início</label>
+            <div class="col-sm-2" id="started">
+              <label for="start">Entrada</label>
               <input type="text" name="start" placeholder="MM/AAAA" class="form-control input-month" id="start">
             </div>
-            <div class="col-sm-2">
-              <label for="finish">Conclusão</label>
+            <div class="col-sm-2" id="finished">
+              <label for="finish">Saída</label>
               <input type="text" name="finish" placeholder="MM/AAAA" class="form-control input-month" id="finish">
             </div>
             <div class="col-sm-2">
-              <label class="lbl-caracteristicas actually"><input type="checkbox" name="actually"><span class="checkmark"></span>Atual</label>
+              <label class="lbl-caracteristicas actually"><input type="checkbox" id="actually" name="actually"><span class="checkmark"></span>Atual</label>
             </div>
           </div>
         </div>
@@ -305,11 +300,7 @@
             <div class="col-sm-6">
               <label for="subknowledge_id">Habilidades</label>
               <select id="subknowledge_id" name="subknowledge_id[]" class="form-control subknowledge" multiple="multiple">
-                @isset($subknowledges)
-                @foreach($subknowledges as $subknowledge)
-                <option value="{{$subknowledge->id}}">{{$subknowledge->name}}</option>
-                @endforeach
-                @endisset
+                
               </select>
             </div>
           </div>

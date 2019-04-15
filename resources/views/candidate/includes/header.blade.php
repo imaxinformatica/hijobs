@@ -5,7 +5,7 @@
         <div class="col-sm-12">
           <ul id="top-type">
             <li id="top-candidate" class="active"><a href="{{url('/')}}">CANDIDATOS</a></li>
-            <li id="top-company" ><a href="index-empresa">EMPRESAS</a></li>
+            <li id="top-company" ><a href="{{route('company.index')}}">EMPRESAS</a></li>
           </ul>
         </div>
       </div>

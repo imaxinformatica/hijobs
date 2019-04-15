@@ -23,19 +23,21 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
   Route::post('/formacao', 'Candidate\CandidateController@formation')->name('formation');
+  Route::get('/formacao/curso', 'Candidate\CandidateController@courseFormation')->name('course');
   Route::post('/experiencia', 'Candidate\CandidateController@experience')->name('experience');
   Route::post('/idiomas', 'Candidate\CandidateController@language')->name('language');
   Route::post('/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
   Route::get('/formacao/{id}', 'Candidate\CandidateController@formationDestroy')->name('formation.destroy');
   Route::get('/experiencia/{id}', 'Candidate\CandidateController@experienceDestroy')->name('experience.destroy');
   Route::get('/idiomas/{id}', 'Candidate\CandidateController@languageDestroy')->name('language.destroy');
+  Route::get('/conhecimento/subconhecimento', 'Candidate\CandidateController@subknowledge')->name('subknowledge');
   Route::get('/conhecimento/{id}', 'Candidate\CandidateController@knowledgeDestroy')->name('knowledge.destroy');
-  Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
-  Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
 });
 
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
+  Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
+  Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
   //Controle de Registro e Login
   Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
   Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
@@ -53,10 +55,27 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 });
 
 //Empresa
-Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company']], function () {
+Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
   Route::get('/', function (){return view('company.pages.index-empresa');})->name('index');
   Route::post('session', 'Company\CompanyController@session')->name('session');
   Route::get('/perfil', 'Company\CompanyController@show')->name('show');
+  
+
+  Route::get('/login', 'CompanyAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'CompanyAuth\LoginController@login');
+  Route::post('/logout', 'CompanyAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'CompanyAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'CompanyAuth\RegisterController@register');
+
+  Route::post('/password/email', 'CompanyAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'CompanyAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'CompanyAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'CompanyAuth\ResetPasswordController@showResetForm');
+});
+
+//Empresa
+Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company']], function () {
   Route::get('/nova/criar', 'Company\CompanyController@create')->name('create');
   Route::post('/nova/store', 'Company\CompanyController@store')->name('store');
   Route::get('/nova/editar', 'Company\CompanyController@edit')->name('edit');
@@ -78,6 +97,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company
   Route::get('/password/reset', 'CompanyAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'CompanyAuth\ResetPasswordController@showResetForm');
 });
+
 //Vagas
 Route::group(['prefix' => 'vaga', 'as'=>'opportunity.', 'middleware' => ['company']], function () {
   Route::get('/empresa/', 'Company\OpportunityController@index')->name('index');

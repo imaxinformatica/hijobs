@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Editando seu currículo</h1>
+                <h1>Visualizando seu currículo</h1>
                 
             </div>
         </div>
@@ -21,215 +21,37 @@
                         <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h2>Dados </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 for="name">Nome</h4>
-                                <h5>{{$candidate->name}}</h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4 for="email">E-mail</h4>
-                                <h5>{{$candidate->email}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4 for="cep">CEP</h4>
-                                <h5>{{$candidate->cep}}</h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4 for="street">Logradouro</h4>
-                                <h5>Rua Sestilio Melani</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4 for="nehighbor">Bairro</h4>
-                                <h5>A E Carvalho</h5>
-                            </div>
-                            <div class="col-sm-4">
-                                <h4 for="city">Cidade</h4>
-                                <h5>São Paulo</h5>
-                            </div>
-                            <div class="col-sm-2">
-                                <h4 for="number">Número</h4>
-                                <h5>620</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="state_id">Estado</h4>
-                                <h5> {{$candidate->state->name}}</h5>
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="cpf">CPF</h4>
-                                <h5>{{$candidate->cpf}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="phone">Telefone</h4>
-                                <h5>{{$candidate->phone}}</h5>
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="birthdate">Data de nascimento</h4>
-                                <h5>{{$candidate->birthdate}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="marital_status">Estado civil</h4>
-                                <h5>{{$candidate->marital_status}}</h5>
-                          
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="sex">Sexo</h4>
-                                <h5>
-                                    @if($candidate->sex == "M")
-                                    Masculino
-                                    @else
-                                    Feminino
-                                    @endif
-                                </h5>
+                                <h2>Dados Pessoais </h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="lbl-caracteristicas"><input type="checkbox" class="isSpecial" name="isSpecial"><span class="checkmark"></span>Pessoa com deficiência física</h4>
+                                <p for="name"><b>Nome: </b>{{$candidate->name}}</p>
+                                <p for="name"><b>E-mail: </b>{{$candidate->email}}</p>
+                                <p for="name"><b>Telefone: </b>{{$candidate->phone}}</p>
+                                <p for="name"><b>Estado Civil: </b>{{$candidate->marital_status}}</p>
+                                <p for="name"><b>Data de Nascimento: </b>{{$candidate->birthdate}}</p>
+                                <p for="name"><b>Endereço: </b>Rua Sestilio Melani, 620, A E Carvalho, São Paulo</p>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><b>Pessoa com deficiência física?</b> @if($candidate->special == 1) Sim
+                                    @foreach($candidate->special()->get() as $special)
+                                    <p>
+                                    {{$special->name}}
+                                    </p>
+                                    @endforeach
+                                    {{$candidate->special_description}}
+                                    @else Não @endif
+                                </p>
                             </div>
                         </div>
-                        <div class="row" id="special">
+
                         <hr>
-                            @foreach($specials as $special)
-                            <div class="col-sm-2">
-                                <h4 class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark" ></span>{{$special->name}}</h4>
-                            </div>
-                            @endforeach
-                            <div class="col-sm-12">
-                                <h4 for="special_description" style="margin-top: 20px;">Condições especiais</h4>
-                                <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Redes sociais</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 for="linkedin">Linkedin</h4>
-                                <h5>{{$candidate->linkedin}}</h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4 for="facebook">Facebook</h4>
-                                <h5>{{$candidate->facebook}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 for="twitter">Twitter</h4>
-                                <h5>{{$candidate->twitter}}</h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4 for="blog">Blog</h4>
-                                <h5>{{$candidate->blog}}</h5>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Informações complementares</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 class="info-adc">Tipo de habilitação para dirigir</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach($drivers as $driver)
-                            <div class="col-sm-1">
-                                <h4 class="lbl-caracteristicas"><input type="checkbox" value="{{$driver->id}}" name="drivers[]"><span class="checkmark"></span>{{$driver->name}}</h4>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 class="info-adc" style="margin-top: 20px;">Possui veículo próprio? Qual?</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach($vehicles as $vehicle)
-                            <div class="col-sm-2">
-                                <h4 class="lbl-caracteristicas"><input type="checkbox" value="{{$vehicle->id}}" name="vehicles[]"><span class="checkmark"></span>{{$vehicle->name}}</h4>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 class="info-adc" style="margin-top: 20px;">Tem disponibilidade para viajar?</h4>
-                                <h5>
-                                @if($candidate->travel == 1)
-                                Sim
-                                @else
-                                Não
-                                @endif
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h4 class="info-adc" style="margin-top: 20px;">Tem disponibilidade para mudar de residência?</h4>
-                                <h5>
-                                @if($candidate->change == 1)
-                                Sim
-                                @else
-                                Não
-                                @endif
-                                </h5>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Objetivos profissionais</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="journey_id">Jornada</h4>
-                                <h5>{{$candidate->journey->name}}</h5>
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="contract_type_id">Tipo de contrato</h4>
-                                <h5>{{$candidate->contract_type->name}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="min_hierarchy_id">Nível hierárquico mínimo</h4>
-                                <h5>{{$candidate->min_hierarchy->name}}</h5>
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="max_hierarchy_id">Nível hierárquico máximo</h4>
-                                <h5>{{$candidate->max_hierarchy->name}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <h4 for="salary">Pretenção salarial mínima</h4>
-                                <h5>R$ {{number_format($candidate->salary, 2, ',', '.')}}</h5>
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 for="estadotrab">Estado onde deseja trabalhar</h4>
-                                <select name="estadotrab">
-                                    <option selected disabled>Selecione</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Formação acadêmica</h4>
@@ -240,15 +62,17 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                          <th scope="col">Instuição</th>
+                                          <th scope="col">Instituição</th>
                                           <th scope="col">Formação</th>
+                                          <th scope="col">Curso</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse($candidate->formations as $formation)
                                         <tr>
-                                          <td>{{$formation->name}}</td>
-                                          <td>{{$formation->name}}</td>
+                                            <td>{{$formation->name}}</td>
+                                            <td>{{$formation->level->name}}</td>
+                                            <td>{{$formation->course->name}}</td>
                                         </tr>
                                         @empty
                                         @endforelse
@@ -269,6 +93,8 @@
                                         <tr>
                                           <th scope="col">Cargo</th>
                                           <th scope="col">Empresa</th>
+                                          <th scope="col">Hierarquia</th>
+                                          <th scope="col">Atividades</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -276,6 +102,8 @@
                                         <tr>
                                           <td>{{$experience->occupation}}</td>
                                           <td>{{$experience->name}}</td>
+                                          <td>{{$experience->hierarchy->name}}</td>
+                                          <td>{{$experience->description}}</td>
                                         </tr>
                                         @empty
                                         @endforelse
@@ -300,8 +128,9 @@
                                     <tbody>
                                         @forelse($candidate->languages as $language)
                                         <tr>
-                                          <td>{{$language->name}}</td>
-                                          <td>{{$language->level}}</td>
+                                            <td>{{$language->name}}</td>
+                                            <td>{{$language->pivot->level}}</td>
+                                            
                                         </tr>
                                         @empty
                                         @endforelse
@@ -319,15 +148,15 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                          <th scope="col">Idioma</th>
-                                          <th scope="col">Nível</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Conhecimento</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($candidate->knowledges as $knowledge)
+                                        @forelse($candidate->knowledges as $know)
                                         <tr>
-                                          <td>{{$knowledge->name}}</td>
-                                          <td>{{$knowledge->name}}</td>
+                                            <td>{{$know->name}}</td>
+                                            <td>{{$know->subknowledges->where('id', $know->pivot->subknowledge_id)->first()->name}}</td>
                                         </tr>
                                         @empty
                                         @endforelse
@@ -335,6 +164,95 @@
                                 </table>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Objetivos profissionais</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p for="name"><b>Jornada: </b>{{$candidate->journey->name}}</p>
+                                <p for="name"><b>Tipo de contrato: </b>{{$candidate->contract_type->name}}</p>
+                                <p for="name"><b>Nível hierárquico mínimo: </b>{{$candidate->min_hierarchy->name}}</p>
+                                <p for="name"><b>Nível hierárquico máximo: </b>{{$candidate->max_hierarchy->name}}</p>
+                                <p for="name"><b>Pretenção salarial mínima: </b>R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Redes sociais</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @if($candidate->linkedin != '')
+                                <p for="name"><b>Linkedin: </b>{{$candidate->linkedin}}</p>
+                                @endif
+                                @if($candidate->facebook != '')
+                                <p for="name"><b>Facebook: </b>{{$candidate->facebook}}</p>
+                                @endif
+                                @if($candidate->twitter != '')
+                                <p for="name"><b>Twitter: </b>{{$candidate->twitter}}</p>
+                                @endif
+                                @if($candidate->blog != '')
+                                <p for="name"><b>Blog: </b>{{$candidate->blog}}</p>
+                                @endif                      
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Informações complementares</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><b>Tipo de habilitação para dirigir: </b>@if($candidate->driver()->count()!= 0)
+                                    @foreach($candidate->driver as $driver)
+                                    {{$driver->name}}
+                                    @endforeach
+                                    @else Não Possui Habilitação @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><b>Possui veículo próprio?</b>@if($candidate->vehicle()->count()!= 0)
+                                    Sim
+                                    <p><b>Qual? </b></p>
+                                    @foreach($candidate->vehicle as $vehicle)
+                                    <p>
+                                    {{$vehicle->name}}
+                                    </p>
+                                    @endforeach
+                                    @else Não Possui Veículo @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><b>Tem disponibilidade para viajar? </b> @if($candidate->travel ==1)
+                                    Sim
+                                    @else
+                                    Não
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p><b>Tem disponibilidade para mudar de residência? </b> @if($candidate->change ==1)
+                                    Sim
+                                    @else
+                                    Não
+                                    @endif
+                                </p>
+                            </div>
+                            
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-sm-4">
                                 <a href="{{route('candidate.edit')}}">

@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Experience extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'occupation', 'hierarchy_id', 'description', 'country_id', 'state_id', 'start', 'finish', 'candidate_id'
     ];
 
-    public function candidates()
+
+    public function hierarchy()
     {
-        return $this->belongsToMany('App\Candidate', 'candidate_experience');
+    	return $this->belongsTo('App\Hierarchy');
     }
 }

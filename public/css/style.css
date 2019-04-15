@@ -2,6 +2,14 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align: middle;
+}
+
+span.select2.select2-container {
+    width: 100% !important;
+}
+
 div#barra-top {
     background: #ccc;
     height: 30px;

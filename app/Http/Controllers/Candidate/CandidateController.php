@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Candidate;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\State;
+use App\Level;
 use App\Driver;
+use App\Course;
 use App\Special;
 use App\Country;
 use App\Journey;
-use App\Level;
-use App\Course;
 use App\Vehicle;
 use App\Language;
 use App\Candidate;
 use App\Hierarchy;
 use App\Knowledge;
+use App\Formation;
+use App\Experience;
 use App\Opportunity;
 use App\ContractType;
 use App\Subknowledge;
@@ -25,7 +28,6 @@ use App\CandidateVehicle;
 use App\CandidateSpecial;
 use App\CandidateLanguage;
 use App\CandidateKnowledge;
-use App\CandidateExperience;
 use Auth;
 
 class CandidateController extends Controller
@@ -82,6 +84,7 @@ class CandidateController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
 
+        
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
         return view('candidate.pages.curriculum.edit')
         ->with('states', State::all())
@@ -102,7 +105,10 @@ class CandidateController extends Controller
     {
         $this->validate($request, [
             'state_id'          => 'required',
-            'cpf'               => 'required|max:50|unique:candidates',
+            'cpf'               => [
+                'required',
+                Rule::unique('candidates')->ignore($request->candidate_id)
+            ],
             'marital_status'    => 'required',
             'birthdate'         => 'required',
             'sex'               => 'required',
@@ -113,10 +119,14 @@ class CandidateController extends Controller
             'min_hierarchy_id'  => 'required',
             'max_hierarchy_id'  => 'required',
             'salary'            => 'required',
-            'password'          =>  'min:6|confirmed'
         ]);
 
         $candidate                   = Candidate::find($request->candidate_id);
+        $finish = 0;
+        if ($candidate->cpf == NULL) {
+            $finish = 1;
+        }
+
         $candidate->state_id         = $request->state_id;
         $candidate->cpf              = $request->cpf;
         $candidate->phone            = $request->phone;
@@ -130,10 +140,6 @@ class CandidateController extends Controller
         $candidate->max_hierarchy_id = $request->max_hierarchy_id;
         $candidate->salary           = str_replace(',','.', str_replace('.','', $request->salary));
         $candidate->birthdate        = implode("-", array_reverse(explode("/", $request->birthdate)));
-
-        if ($request->password != NULL) {
-            $candidate->password     = bcrypt($request->password); 
-        }
 
         // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
         //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
@@ -151,7 +157,9 @@ class CandidateController extends Controller
         $candidate->facebook            = $request->facebook;
         $candidate->twitter             = $request->twitter;
         $candidate->blog                = $request->blog;
-            // return dd($request);
+        foreach ($candidate->special()->get() as $special) {
+            $special->pivot->delete();
+        }
         if (isset($request->isSpecial)) {
             foreach ($request->specials as $specials) {
                 $special               = new CandidateSpecial;
@@ -160,8 +168,12 @@ class CandidateController extends Controller
                 $special->save();
             }
             $candidate->special_description = $request->special_description;
+            $candidate->special             = 1;
         }
 
+        foreach ($candidate->driver as $driver) {
+            $driver->pivot->delete();
+        }
         if (isset($request->drivers)) {
             foreach ($request->drivers as $drivers) {
                 $driver               = new CandidateDriver;
@@ -171,6 +183,9 @@ class CandidateController extends Controller
             }
         }
 
+        foreach ($candidate->vehicle as $vehicles) {
+            $vehicles->pivot->delete();
+        }
         if (isset($request->vehicles)) {
             foreach ($request->vehicles as $vehicles) {
                 $vehicle               = new CandidateVehicle;
@@ -180,6 +195,9 @@ class CandidateController extends Controller
             }
         }
 
+        foreach ($candidate->stateWork as $state_work) {
+            $state_work->pivot->delete();
+        }
         if (isset($request->state_work)) {
             foreach ($request->state_work as $works) {
                 $work               = new CandidateState;
@@ -189,7 +207,25 @@ class CandidateController extends Controller
             }
         }
         $candidate->save();
-        return redirect(route('candidate.better', ['id' => $candidate->id]));
+
+        if ($finish ==1) {
+            return redirect(route('candidate.better', ['id' => $candidate->id]))
+            ->with('success','Cadastro Finalizado');
+        }
+        return redirect(route('candidate.show'))->with('success','Cadastro Atualizado');
+    }
+
+    public function password(Request $request)
+    {
+        $this->validate($request, [
+            'password'          => 'required|min:6|confirmed',
+        ]);
+
+        $candidate = Auth::guard('candidate')->user();
+
+        $candidate->password = bcrypt($request->password);
+        $candidate->save();
+        return redirect()->back()->with('success', 'Senha alterada!');
     }
 
     public function formation(Request $request)
@@ -198,8 +234,8 @@ class CandidateController extends Controller
         $formation->name            = $request->name;
         $formation->country_id      = $request->country_id;
         $formation->state_id        = $request->state_id;
-        $formation->level           = $request->level;
-        $formation->course          = $request->course;
+        $formation->level_id        = $request->level;
+        $formation->course_id       = $request->course;
         $formation->situation       = $request->situation;
         $formation->start           = $request->start;
         $formation->finish          = $request->finish;
@@ -209,6 +245,8 @@ class CandidateController extends Controller
 
         return redirect()->back()->with('success', 'Formação incluída com sucesso!');
     }
+
+
     public function formationDestroy($id)
     {
         $formation = Formation::find($id);
@@ -218,9 +256,16 @@ class CandidateController extends Controller
         return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
     }
 
+    public function courseFormation(Request $request)
+    {
+        $course = Course::where('level_id', $request->level_id)->get();
+
+        return json_encode($course);
+    }
+
     public function experience(Request $request)
     {
-            $experience = new CandidateExperience;
+            $experience = new Experience;
             $experience->name           = $request->name;
             $experience->occupation     = $request->occupation;
             $experience->hierarchy_id   = $request->hierarchy_id;
@@ -235,6 +280,7 @@ class CandidateController extends Controller
 
             return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
     }
+    
     public function CandidateExperience($id)
     {
         $experience = Knowledge::find($id);
@@ -267,15 +313,26 @@ class CandidateController extends Controller
 
     public function knowledge(Request $request)
     {
-        // return dd($request);
-            $knowledge = new CandidateKnowledge;
-            $knowledge->knowledge_id        = $request->knowledge_id;
-            $knowledge->subknowledge_id     = $request->subknowledge_id;
-            $knowledge->candidate_id        = $request->candidate_id;
+        foreach ($request->subknowledge_id as $subknowledge) {
+            $know = CandidateKnowledge::where('knowledge_id', $request->knowledge_id)->where('subknowledge_id', $subknowledge)->where('candidate_id', $request->candidate_id);
+            if ($know->count() == 0) {
+                $knowledge = new CandidateKnowledge;
+                $knowledge->knowledge_id        = $request->knowledge_id;
+                $knowledge->subknowledge_id     = $subknowledge;
+                $knowledge->candidate_id        = $request->candidate_id;
+                $knowledge->save();
+            }
+        }
 
-            $knowledge->save();
 
-            return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
+        return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
+    }
+
+    public function subknowledge(Request $request)
+    {
+        $subknowledge = Subknowledge::where('knowledge_id', $request->knowledge_id)->get();
+
+        return json_encode($subknowledge);
     }
 
     public function knowledgeDestroy($id)
@@ -295,7 +352,6 @@ class CandidateController extends Controller
             $lang = CandidateLanguage::where('candidate_id', $candidate->id)->where('language_id', $language->id)->first();
             $language->level = $lang->level;
         }
-
         return view('candidate.pages.curriculum.better')
         ->with('states', State::all())
         ->with('countries', Country::all())

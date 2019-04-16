@@ -13,7 +13,6 @@ use App\Special;
 use App\Language;
 use App\Knowledge;
 use App\Subknowledge;
-use App\OpportunitySpecial;
 use App\OpportunityCity;
 use App\ContractType;
 use App\Hierarchy;
@@ -107,17 +106,11 @@ class OpportunityController extends Controller
         }
         
 
-        $opportunity->save();
         if (isset($request->isSpecial)) {
-        	foreach ($request->specials as $special) {
-        		$esp = new OpportunitySpecial;
-        		$esp->opportunity_id = $opportunity->id;
-        		$esp->special_id     = $special;
-        		$esp->save();
-        	}
-             $opportunity->comments_special = $request->comments_special;
-             $opportunity->save();
+        	$opportunity->special = 1;
+            $opportunity->comments_special = $request->comments_special;
         }
+        $opportunity->save();
 
         if (isset($request->city_id)) {
             foreach ($request->city_id as $cities) {
@@ -137,13 +130,24 @@ class OpportunityController extends Controller
             }
         }
 
-        return redirect(route('opportunity.index'));      
+        return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.');      
     }
 
     public function edit($id)
     {
         $opportunity = Opportunity::find($id);
         return view('company.pages.opportunity.edit')
+        ->with('states', State::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('opportunity', $opportunity);
+    }
+
+    public function show($id)
+    {
+        $opportunity = Opportunity::find($id);
+        return view('company.pages.opportunity.show')
         ->with('states', State::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
@@ -183,15 +187,13 @@ class OpportunityController extends Controller
         
 
         if (isset($request->isSpecial)) {
-            foreach ($request->special as $special) {
-                $esp = new OpportunitySpecial;
-                $esp->opportunity_id = $opportunity->id;
-                $esp->special_id     = $special;
-                $esp->save();
-            }
+            $opportunity->special = 1;
             $opportunity->comments_special = $request->comments_special;
         }
 
+        // foreach ($opportunity->driver as $driver) {
+        //     $driver->pivot->delete();
+        // }
 
         if (isset($request->city_id)) {
             foreach ($request->city_id as $cities) {
@@ -213,7 +215,7 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Vaga editada.');
     }
 
     public function publish($id)
@@ -248,6 +250,25 @@ class OpportunityController extends Controller
     	$op->save();
 
     	return redirect()->back()->with('success', 'Vaga removida com sucesso!');
+    }
+
+    public function showCandidate($id)
+    {
+        $opportunity = Opportunity::find($id);
+
+        return view('company.pages.opportunity.candidate')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('subknowledges', Subknowledge::all())
+        ->with('opportunity', $opportunity);
     }
 
 }

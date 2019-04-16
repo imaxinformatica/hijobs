@@ -108,5 +108,10 @@ class Candidate extends Authenticatable
         return $this->belongsToMany('App\Knowledge')->withPivot('subknowledge_id');
     }
 
+
+    public function opportunity()
+    {
+        return $this->belongsToMany('App\Opportunity', 'opportunity_candidate');
+    }
     
 }

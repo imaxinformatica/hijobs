@@ -100,7 +100,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <img class="icon-vagas" src="{{asset('images/icon-result.png')}}">
-                        <p class="total-vagas">215 Candidato(s)</p>
+                        <p class="total-vagas">{{$candidates->count()}} Candidato(s)</p>
                     </div>
                 </div>
                 @foreach($candidates as $candidate)
@@ -110,12 +110,14 @@
                             <span><b>Nome: </b>{{$candidate->name}}</span>
                             <p><b>Pretensão Salarial: </b>A partir de R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
                             <p><b>Estado: </b>{{$candidate->state->name}}</p>
-                            <button class="btn-result">
-                                <div class="border">
-                                    <img src="{{asset('images/icon-plus.png')}}">
-                                </div>
-                                <p>Mais detalhes do candidato</p>
-                            </button>
+                            <a href="{{route('company.cv', ['id'=> $candidate->id])}}">
+                                <button class="btn-result" type="button">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Mais detalhes do candidato</p>
+                                </button>
+                            </a>
                         </div>   
                     </div>
                 </div>

@@ -28,6 +28,7 @@ use App\CandidateVehicle;
 use App\CandidateSpecial;
 use App\CandidateLanguage;
 use App\CandidateKnowledge;
+use App\OpportunityCandidate;
 use Auth;
 
 class CandidateController extends Controller
@@ -408,7 +409,7 @@ class CandidateController extends Controller
 
         if($request->has('contract_type_id')){
             if(request('contract_type_id') != ''){
-                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id') );
+                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id'));
             }
         }
 
@@ -421,5 +422,31 @@ class CandidateController extends Controller
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
         ->with('opportunities', $opportunities);
+    }
+
+    public function showOpportunity($id)
+    {
+        $opportunity = Opportunity::find($id);
+
+        return view('candidate.pages.opportunity.show')
+        ->with('states', State::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('contract_types', ContractType::all())
+        ->with('opportunity', $opportunity);
+    }
+
+    public function application($id)
+    {
+        $candidate = Auth::guard('candidate')->user();
+
+        $opportunity = Opportunity::find($id);
+
+        $op = new OpportunityCandidate;
+        $op->candidate_id = $candidate->id;
+        $op->opportunity_id = $opportunity->id;
+        $op->save();
+
+        return redirect()->back()->with('success','Canidatura Realizada');
     }
 }

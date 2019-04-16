@@ -36,11 +36,6 @@
                         </div>
                         <div class="row" id="special">
                         <hr>
-                            @foreach($specials as $special)
-                            <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark"></span>{{$special->name}}</label>
-                            </div>
-                            @endforeach
                             <div class="col-sm-12">
                                 <label for="comments_special" style="margin-top: 20px;">Observações - PcD</label>
                                 <textarea name="comments_special" placeholder="Ex: É importante o candidato portador de deficiência auditiva conheça LIBRAS"></textarea>

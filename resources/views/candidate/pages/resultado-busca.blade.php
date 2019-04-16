@@ -59,10 +59,11 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <img class="icon-vagas" src="{{asset('images/icon-result.png')}}">
-                        <p class="total-vagas">{{$opportunities->count()}} vaga(s) de emprego</p>
+                        <p class="total-vagas">{{$opportunities->where('publish', 2)->count()}} vaga(s) de emprego</p>
                     </div>
                 </div>
                 @foreach($opportunities as $opportunity)
+                @if($opportunity->publish == 2)
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">
@@ -74,15 +75,18 @@
                                 @endif
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p>{{$opportunity->activity}}.</p>
-                            <button class="btn-result">
-                                <div class="border">
-                                    <img src="{{asset('images/icon-plus.png')}}">
-                                </div>
-                                <p>Mais detalhes da vaga</p>
-                            </button>
+                            <a href="{{route('candidate.show.opportunity',['id' => $opportunity->id])}}">
+                                <button class="btn-result" type="button">
+                                    <div class="border">
+                                        <img src="{{asset('images/icon-plus.png')}}">
+                                    </div>
+                                    <p>Mais detalhes da vaga</p>
+                                </button>
+                            </a>
                         </div>   
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
         </div>        

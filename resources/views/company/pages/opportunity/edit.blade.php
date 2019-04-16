@@ -32,19 +32,14 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label class="lbl-caracteristicas"><input type="checkbox" class="isSpecial" name="isSpecial"><span class="checkmark"></span>Vaga exclusiva para PcD</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" class="isSpecial" name="isSpecial" <?php if($opportunity->special == 1){echo "checked";} ?> ><span class="checkmark"></span>Vaga exclusiva para PcD</label>
                             </div>
                         </div>
                         <div class="row" id="special">
                         <hr>
-                            @foreach($specials as $special)
-                            <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark"></span>{{$special->name}}</label>
-                            </div>
-                            @endforeach
                             <div class="col-sm-12">
                                 <label for="comments_special" style="margin-top: 20px;">Observações - PcD</label>
-                                <textarea name="comments_special" value="{{$opportunity->comments_special}}" placeholder="Ex: É importante o candidato portador de deficiência auditiva conheça LIBRAS"></textarea>
+                                <textarea name="comments_special" value="{{$opportunity->comments_special}}" placeholder="Ex: É importante o candidato portador de deficiência auditiva conheça LIBRAS">{{$opportunity->comments_special}}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -101,12 +96,13 @@
                                 <label for="city_id">Cidade</label>
                                 <select name="city_id[]" class="city" multiple="multiple">
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}" >{{$state->name}}</option>
+
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-2">
-                                <label for="city">Vagas</label>
+                                <label for="num">Vagas</label>
                                 <input type="text" placeholder="Ex: 5" value="{{$opportunity->num}}" name="num">
                             </div>
                         </div>
@@ -115,10 +111,10 @@
                                 <button class="btn-orange">Salvar meus dados</button>
                             </div>
                             <div class="col-sm-4"> 
-                                <a href="{{route('opportunity.index', ['id' => 1])}}" >
-                                    <!-- <button class="btn-orange"> -->
+                                <a href="{{route('opportunity.index')}}" >
+                                    <button type="button" class="btn-orange">
                                     Voltar
-                                    <!-- </button> -->
+                                    </button>
                                 </a>
                             </div>
                         </div>

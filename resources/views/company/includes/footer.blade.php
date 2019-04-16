@@ -139,13 +139,17 @@ $('.act-password').on('click', function (e) {
 });
 
 $(document).ready(function(){
-    $("#situation").change(function(){
-    var situation = $(this).val();
-    if (situation == 'trancado') {
-        $('#finish').hide();
-    }else{
-        $('#finish').show();
+    if($('.isCombining').is(":checked")){
+        $('.salary').attr('disabled', '');
+        $('.salary').attr('value', '');
     }
+    $("#situation").change(function(){
+        var situation = $(this).val();
+        if (situation == 'trancado') {
+            $('#finish').hide();
+        }else{
+            $('#finish').show();
+        }
     });
     $('#country_id').change(function(){
         var country = $(this).val();
@@ -167,7 +171,12 @@ $(document).ready(function(){
 });
 
 $(document).ready( function(){
-    $('#special').hide();
+
+    if($('.isSpecial').is(":checked")){
+        $('#special').show();
+    }else{
+        $('#special').hide();
+    }    
     $('.isSpecial').change(function() {
         if($(this).is(":checked")) {
             $('#special').slideDown();

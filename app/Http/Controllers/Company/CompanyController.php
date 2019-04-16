@@ -147,8 +147,9 @@ class CompanyController extends Controller
         $company->facebook            = $request->facebook;
         $company->twitter             = $request->twitter;
         $company->blog                = $request->blog;
+        $company->save();
 
-        return redirect(route('opportunity.index'))->with('Empresa Salva com sucesso!');
+        return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!');
     }
 
     public function candidate(Request $request)
@@ -206,6 +207,22 @@ class CompanyController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('candidates', $candidates)
         ->with('company', $company);
+    }
+
+    public function showCV($id)
+    {
+        $candidate = Candidate::find($id);
+
+        return view('company.pages.candidate-show')
+        ->with('states', State::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('contract_types', ContractType::all())
+        ->with('candidate', $candidate);
     }
 
 }

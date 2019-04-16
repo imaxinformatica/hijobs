@@ -11,10 +11,7 @@
             <div class="col-sm-4">
                 <div class="box-result-search">
                     <a href="{{route('opportunity.create')}}">
-                        <button class="btn-result">
-                            <div class="border">
-                                <img src="{{asset('images/icon-plus.png')}}">
-                            </div>
+                        <button class="btn-blue">
                             <p>Criar vaga</p>
                         </button>
                     </a>
@@ -67,7 +64,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <img class="icon-vagas" src="{{asset('images/icon-result.png')}}">
-                        <p class="total-vagas">{{$company->opportunities()->count()}} vaga(s) de emprego</p>
+                        <p class="total-vagas">{{$opportunities->count()}} vaga(s) de emprego</p>
                     </div>
                 </div>
 
@@ -76,6 +73,11 @@
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">
                             <span>{{$opportunity->name}}</span>
+                            <span style="float: right;">
+                                <a href="{{route('opportunity.show', ['id'=> $opportunity->id])}}"><button type="button" class="btn btn-info">    
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button></a>
+                            </span>
                             <p id="salario">R$ {{number_format($opportunity->salary, '2', ',', '.')}}<p>
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p>{{$opportunity->activity}}</p>

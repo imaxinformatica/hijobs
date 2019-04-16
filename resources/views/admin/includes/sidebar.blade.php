@@ -18,44 +18,19 @@
             <i class="fa fa-tachometer"></i> <span>DASHBOARD</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/customers') ? 'class=active' : '') }} {{ (Request::is('admin/customer/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.customers')}}">
-            <i class="fa fa-users"></i> <span>CLIENTES</span>
+        <li {{ (Request::is('admin/candidatos') ? 'class=active' : '') }} {{ (Request::is('admin/candidatos/*') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.candidate')}}">
+            <i class="fa fa-users"></i> <span>CANDIDATOS</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/providers') ? 'class=active' : '') }} {{ (Request::is('admin/provider/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.providers')}}">
-            <i class="fa fa-users"></i> <span>FORNECEDORES</span>
+        <li {{ (Request::is('admin/empresas') ? 'class=active' : '') }} {{ (Request::is('admin/empresas/*') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.company')}}">
+            <i class="fa fa-users"></i> <span>EMPRESAS</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/orders') ? 'class=active' : '') }} {{ (Request::is('admin/order/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.orders')}}">
-            <i class="fa fa-archive"></i> <span>PEDIDOS</span>
-          </a>
-        </li>
-        <li {{ (Request::is('admin/products') ? 'class=active' : '') }} {{ (Request::is('admin/product/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.products')}}">
-            <i class="fa fa-cube"></i> <span>PRODUTOS</span>
-          </a>
-        </li>
-        <li {{ (Request::is('admin/batches') ? 'class=active' : '') }} {{ (Request::is('admin/batch/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.batches')}}">
-            <i class="fa fa-cubes"></i> <span>LOTES DE PRODUTOS</span>
-          </a>
-        </li>
-        <!-- <li {{ (Request::is('admin/reports') ? 'class=active' : '') }} {{ (Request::is('admin/reports/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.reports')}}">
-            <i class="fa fa-bar-chart"></i> <span>RELATÓRIOS</span>
-          </a>
-        </li> -->
-        <li {{ (Request::is('admin/users') ? 'class=active' : '') }} {{ (Request::is('admin/users/*') ? 'class=active' : '') }} >
-          <a href="{{ route('admin.users')}}">
-            <i class="fa fa-user"></i> <span>USUÁRIOS</span>
-          </a>
-        </li>
-        <li {{ (Request::is('admin/user/configuration') ? 'class=active' : '') }} {{ (Request::is('admin/user/configuration/*') ? 'class=active' : '') }} >
-          <a href="{{route('admin.configuration')}}">
-            <i class="fa fa-cogs"></i> <span>CONFIGURAÇÕES</span>
+        <li {{ (Request::is('admin/user/reports') ? 'class=active' : '') }} {{ (Request::is('admin/user/reports/*') ? 'class=active' : '') }} >
+          <a href="{{route('admin.reports')}}">
+            <i class="fa fa-cogs"></i> <span>RELATÓRIOS</span>
           </a>
         </li>
       </ul>

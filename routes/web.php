@@ -101,7 +101,7 @@ Route::group(['prefix' => 'vaga', 'as'=>'opportunity.', 'middleware' => ['compan
 });
 
 //Administrador
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
@@ -113,4 +113,14 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+});
+
+Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], function(){
+  Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
+  Route::get('/empresas', 'Admin\AdminController@indexCompany')->name('company');
+  Route::get('/empresas/edit/{id}', 'Admin\AdminController@editCompany')->name('company.edit');
+  Route::get('/empresas/show/{id}', 'Admin\AdminController@showCompany')->name('company.show');
+  Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
+  Route::get('/reports', 'Admin\AdminController@reports')->name('reports');
+  Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
 });

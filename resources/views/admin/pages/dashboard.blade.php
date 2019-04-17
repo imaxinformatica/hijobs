@@ -36,116 +36,83 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{$customers->count()}}</h3>
+              <h3>{{$companies->count()}}</h3>
 
-              <p>Clientes</p>
+              <p>Empresas</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{route('admin.customers')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.company')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>{{$products->count()}}</h3>
+              <h3>{{$candidates->count()}}</h3>
 
-              <p>Produtos Cadastrados</p>
+              <p>Candidatos</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{route('admin.products')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.candidate')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>{{$batches->count()}}</h3>
+              <h3>{{$opportunities->count()}}</h3>
 
-              <p>Lotes cadastrados</p>
+              <p>Vagas cadastradas</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{route('admin.batches')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.candidate')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>{{$orders->count()}}</h3>
-
-              <p>Total de pedidos</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="{{route('admin.orders')}}" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-
+        
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
         <section class="col-lg-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Pedidos recentes</h3>
+              <h3 class="box-title">Vagas recentes</h3>
             </div>
             <div class="box-body">
               <table id="tabela-com-filtro" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Data</th>
-                    <th>Cliente</th>
-                    <th>Valor sem descontos</th>
-                    <th>Valor Final</th>
-                    <th>Status</th>
-                    <th>Ação</th>
+                    <th>Nome da Vaga</th>
+                    <th>Número de Vagas</th>
+                    <th>Salário</th>
+                    <th>Tipo de Contrato</th>
+                    <th>Empresa</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($orders as $order)
+                  @forelse($opportunities as $opportunity)
                   <tr>
-                    <td>{{$order->date}}</td>
-                    <td>{{$order->customer->company_name}}</td>
-                    <td>R$ {{number_format($order->total_order, 2, ',', '.')}}</td>
-                    <td>R$ {{number_format($order->subtotal, 2, ',', '.')}}</td>
-                    <td>{{$order->statusOrder($order->id)}}</td>
-                    <td>
-                      @if($order->statusOrder($order->id) == 'Em aberto')
-                        <a href="{{ route('admin.order.create', ['id' => $order->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @elseif($order->statusOrder($order->id) == 'Aguardando Pagamento' )
-                        <a href="{{ route('admin.order.finish', ['id' => $order->id])}}" title="Editar" >
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @else
-                        <a href="{{ route('admin.order.show', ['id' => $order->id])}}" title="Visualizar" >
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @endif
-                        @if($order->statusOrder($order->id) == 'Em aberto' || $order->statusOrder($order->id) == 'Aguardando Pagamento' )
-                         <a href="{{ route('admin.order.destroy', ['id' => $order->id])}}" title="Excluir" class="act-list act-delete">
-                          <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-                        </a>
-                        @endif
-                    </td>
+                    <td>{{$opportunity->name}}</td>
+                    <td>{{$opportunity->num}}</td>
+                    @if($opportunity->salary == 0)
+                    <td>A combinar</td>
+                    @else
+                    <td>{{$opportunity->salary}}</td>
+                    @endif
+                    <td>{{$opportunity->contract->name}}</td>
+                    <td>{{$opportunity->company->name}}</td>
                   </tr>
                   @empty
                   <tr>
@@ -155,12 +122,11 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Data</th>
-                    <th>Cliente</th>
-                    <th>Valor sem descontos</th>
-                    <th>Valor Final</th>
-                    <th>Status</th>
-                    <th>Ação</th>
+                    <th>Nome da Vaga</th>
+                    <th>Número de Vagas</th>
+                    <th>Salário</th>
+                    <th>Tipo de Contrato</th>
+                    <th>Empresa</th>
                   </tr>
                 </tfoot>   
               </table>

@@ -1,6 +1,6 @@
 @extends('admin.templates.default')
 
-@section('title', 'Candidatos')
+@section('title', 'Páginas')
 
 @section('description', 'Descrição')
 
@@ -11,7 +11,7 @@
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Candidatos</h1>
+          <h1>Páginas</h1>
         </div>
       </div>
     </section>
@@ -48,36 +48,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <section class="col-lg-12">
-          <div class="box">
-              <form id="filterForm" method="GET" autocomplete="off">
-              <div class="box-header">
-                <h3 class="box-title">Filtrar resultados</h3>
-              </div>
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <label>Razão social</label>
-                    <input type="text" name="candidate_name" value="{{request('candidate_name')}}" class="form-control">
-                  </div>
-                  <div class="col-sm-4">
-                    <label>Nome fantasia</label>
-                    <input type="text" name="trade" value="{{request('trade')}}" class="form-control">
-                  </div>
-                  <div class="col-sm-4">
-                    <label>CNPJ</label>
-                    <input type="text" name="cnpj" value="{{request('cnpj')}}" class="form-control input-cnpj">
-                  </div>
-                </div>
-              </div>
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
-                <button type="button" class="btn btn-default clear-filters">Limpar</button>
-              </div>
-            </form>
-        </section>
-      </div>
+
 
       <!-- Main row -->
       <div class="row">
@@ -85,41 +56,22 @@
         <section class="col-lg-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de Empresas</h3>
-              <div class="box-tools">
-                <?php
-
-                $paginate = $candidates;
-
-                $link_limit = 7;
-
-                $filters = '&candidate_name='.request('candidate_name');
-                $filters .= '&trade='.request('trade');
-                $filters .= '&cnpj='.request('cnpj');
-
-                ?>                
-              </div>
+              <h3 class="box-title">Lista de Páginas</h3>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
+                    <th>Página</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($candidates as $candidate)
+                  @forelse($pages as $page)
                     <tr>
-                      <td>{{$candidate->name}}</td>
-                      <td>{{$candidate->cpf}}</td>
-                      <td>{{$candidate->email}}</td>
-                      <td>{{$candidate->phone}}</td>
+                      <td>{{$page->name}}</td>
                       <td>
-                        <a href="{{ route('admin.candidate.edit', ['id' => $candidate->id])}}" title="Editar" class="act-list">
+                        <a href="{{ route('admin.pages.edit', ['id' => $page->id])}}" title="Editar" class="act-list">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                       </td>
@@ -132,10 +84,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
+                    <th>Página</th>
                     <th>Ações</th>
                   </tr>
                 </tfoot>   

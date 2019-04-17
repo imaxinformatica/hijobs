@@ -1,6 +1,6 @@
 @extends('admin.templates.default')
 
-@section('title', 'Relatórios')
+@section('title', 'Vagas')
 
 @section('description', 'Descrição')
 
@@ -11,10 +11,7 @@
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Relatórios</h1>
-        </div>
-        <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.order.search')}}'">Novo</button>
+          <h1>Vagas</h1>
         </div>
       </div>
     </section>
@@ -62,7 +59,7 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <label>Razão social</label>
-                    <input type="text" name="company_name" value="{{request('company_name')}}" class="form-control">
+                    <input type="text" name="opportunity_name" value="{{request('opportunity_name')}}" class="form-control">
                   </div>
                   <div class="col-sm-4">
                     <label>Nome fantasia</label>
@@ -70,7 +67,7 @@
                   </div>
                   <div class="col-sm-4">
                     <label>CNPJ</label>
-                    <input type="text" name="cnpj" value="{{request('cnpj')}}" class="form-control">
+                    <input type="text" name="cnpj" value="{{request('cnpj')}}" class="form-control input-cnpj">
                   </div>
                 </div>
               </div>
@@ -88,75 +85,55 @@
         <section class="col-lg-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de clientes</h3>
+              <h3 class="box-title">Lista de Vagas</h3>
               <div class="box-tools">
                 <?php
 
-                $paginate = $orders;
+                $paginate = $opportunities;
 
                 $link_limit = 7;
 
-                $filters = '&company_name='.request('company_name');
+                $filters = '&opportunity_name='.request('opportunity_name');
                 $filters .= '&trade='.request('trade');
                 $filters .= '&cnpj='.request('cnpj');
 
                 ?>
 
-                @if($paginate->lastPage() > 1)
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                      <li class="{{ ($paginate->currentPage() == 1) ? ' disabled' : '' }}">
-                        <a href="{{ $paginate->url(1) . $filters}}">«</a>
-                      </li>
-                      @for($i = 1; $i <= $paginate->lastPage(); $i++)
-                          <?php
-                          $half_total_links = floor($link_limit / 2);
-                          $from = $paginate->currentPage() - $half_total_links;
-                          $to = $paginate->currentPage() + $half_total_links;
-                          if ($paginate->currentPage() < $half_total_links) {
-                             $to += $half_total_links - $paginate->currentPage();
-                          }
-                          if ($paginate->lastPage() - $paginate->currentPage() < $half_total_links) {
-                              $from -= $half_total_links - ($paginate->lastPage() - $paginate->currentPage()) - 1;
-                          }
-                          ?>
-                          @if ($from < $i && $i < $to)
-                              <li class="{{ ($paginate->currentPage() == $i) ? ' active' : '' }}">
-                                  <a href="{{ $paginate->url($i) . $filters}}">{{ $i }}</a>
-                              </li>
-                          @endif
-                      @endfor
-                      <li class="{{ ($paginate->currentPage() == $paginate->lastPage()) ? ' disabled' : '' }}">
-                          <a href="{{ $paginate->url($paginate->lastPage()) . $filters}}">»</a>
-                      </li>
-                  </ul>
-                @endif
+                
               </div>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Número Pedido</th>
-                    <th>Nome Cliente</th>
-                    <th>Valor Frete</th>
-                    <th>Total Pedido</th>
+                    <th>Vaga</th>
+                    <th>Nº Vagas</th>
+                    <th>Salário</th>
+                    <th>Empresa</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($orders as $order)
+                  @forelse($opportunities as $opportunity)
                     <tr>
-                      <td>{{$order->id}}</td>
-                      <td>{{$order->trade}}</td>
-                      <td>{{$order->freight}}</td>
-                      <td>{{$order->total_order}}</td>
+                      <td>{{$opportunity->name}}</td>
+                      <td>{{$opportunity->num}}</td>
+                      <td>R$ {{number_format($opportunity->salary, 2, ',', '.')}}</td>
+                      <td>{{$opportunity->company->name}}</td>
                       <td>
-                        <a href="{{ route('admin.order.edit', ['id' => $order->id])}}" title="Editar" class="act-list">
+                        <a href="{{ route('admin.opportunities.edit', ['id' => $opportunity->id])}}" title="Editar" class="act-list">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ route('admin.order.destroy', ['id' => $order->id])}}" title="Excluir" class="act-list act-delete">
-                          <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                        @if($opportunity->publish == 2)
+
+                        <a href="{{ route('admin.opportunities.remove', ['id' => $opportunity->id])}}" title="Remover Vaga" class="act-list act-delete">
+                          <i class="fa fa-window-close-o" aria-hidden="true"></i>
                         </a>
+                        @else
+                        <a href="{{ route('admin.opportunities.show', ['id' => $opportunity->id])}}" title="Disponibilizar vaga" class="act-list act-delete">
+                          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        </a>
+                        @endif
                       </td>
                     </tr>
                   @empty
@@ -167,10 +144,10 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Número Pedido</th>
-                    <th>Nome Cliente</th>
-                    <th>Valor Frete</th>
-                    <th>Total Pedido</th>
+                    <th>Vaga</th>
+                    <th>Nº Vagas</th>
+                    <th>Salário</th>
+                    <th>Empresa</th>
                     <th>Ações</th>
                   </tr>
                 </tfoot>   

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Page;
 use App\State;
 use App\Country;
 use App\Driver;
@@ -19,6 +20,7 @@ use App\Hierarchy;
 use App\Opportunity;
 use App\OpportunityState;
 use Auth;
+
 class OpportunityController extends Controller
 {
     public function index(Request $request)
@@ -56,7 +58,8 @@ class OpportunityController extends Controller
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
         ->with('opportunities', $opportunities)
-        ->with('company', $company);
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function create()
@@ -70,7 +73,8 @@ class OpportunityController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('company', $company);   
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function store(Request $request)
@@ -130,7 +134,8 @@ class OpportunityController extends Controller
             }
         }
 
-        return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.');      
+        return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.')   
+        ->with('pages', Page::all());
     }
 
     public function edit($id)
@@ -141,7 +146,8 @@ class OpportunityController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity);
+        ->with('opportunity', $opportunity)
+        ->with('pages', Page::all());
     }
 
     public function show($id)
@@ -152,9 +158,9 @@ class OpportunityController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity);
+        ->with('opportunity', $opportunity)
+        ->with('pages', Page::all());
     }
-
 
     public function update(Request $request)
     {
@@ -215,7 +221,8 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return redirect()->back()->with('success', 'Vaga editada.');
+        return redirect()->back()->with('success', 'Vaga editada.')
+        ->with('pages', Page::all());
     }
 
     public function publish($id)
@@ -237,8 +244,8 @@ class OpportunityController extends Controller
 		$op->publish = 2;
 		$op->save();
 
-		return redirect()->back()->with('success', 'Vaga publicada com sucesso!');
-
+		return redirect()->back()->with('success', 'Vaga publicada com sucesso!')
+        ->with('pages', Page::all());
     }
 
     public function destroy($id)
@@ -249,7 +256,8 @@ class OpportunityController extends Controller
     	$op->publish = 1;
     	$op->save();
 
-    	return redirect()->back()->with('success', 'Vaga removida com sucesso!');
+    	return redirect()->back()->with('success', 'Vaga removida com sucesso!')
+        ->with('pages', Page::all());
     }
 
     public function showCandidate($id)
@@ -268,7 +276,8 @@ class OpportunityController extends Controller
         ->with('knowledges', Knowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('subknowledges', Subknowledge::all())
-        ->with('opportunity', $opportunity);
+        ->with('opportunity', $opportunity)
+        ->with('pages', Page::all());
     }
 
 }

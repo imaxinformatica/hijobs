@@ -26,6 +26,10 @@ class Opportunity extends Model
         return $this->belongsTo('App\ContractType', 'contract_type_id');
     }
 
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
     public function candidate()
     {
         return $this->belongsToMany('App\Candidate', 'opportunity_candidate');

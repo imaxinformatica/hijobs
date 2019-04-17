@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use App\Page;
 use App\State;
 use App\Driver;
 use App\Company;
@@ -24,16 +25,25 @@ use Auth;
 
 class CompanyController extends Controller
 {
+    public function index()
+    {
+        return view('company.pages.index-empresa')
+        ->with('pages', Page::all());
+    }
+
     public function session(Request $request)
     {
         $request->session()->put('email', $request->email);
 
-        return redirect(route('company.create'));
+        return redirect(route('company.create'))
+        ->with('pages', Page::all());
     }
+
     public function create(Request $request)
     {
         // return dd($request->session()); 
-        return view('company.pages.create')->with('email', $request->session()->pull('email'));
+        return view('company.pages.create')->with('email', $request->session()->pull('email'))
+        ->with('pages', Page::all());
     }
 
     public function store(Request $request)
@@ -52,8 +62,8 @@ class CompanyController extends Controller
 
         Auth::guard('company')->loginUsingId($company->id, true);
         
-        return redirect(route('company.data'));
-        
+        return redirect(route('company.data'))
+        ->with('pages', Page::all());
     }
 
     public function data()
@@ -64,7 +74,8 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company);
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function show()
@@ -74,7 +85,8 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company);
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function edit()
@@ -84,7 +96,8 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company);
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function password(Request $request)
@@ -97,7 +110,8 @@ class CompanyController extends Controller
 
         $company->password = bcrypt($request->password);
         $company->save();
-        return redirect()->back()->with('success', 'Senha alterada!');
+        return redirect()->back()->with('success', 'Senha alterada!')
+        ->with('pages', Page::all());
     }
 
     public function update(Request $request)
@@ -149,7 +163,8 @@ class CompanyController extends Controller
         $company->blog                = $request->blog;
         $company->save();
 
-        return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!');
+        return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!')
+        ->with('pages', Page::all());
     }
 
     public function candidate(Request $request)
@@ -206,7 +221,8 @@ class CompanyController extends Controller
         ->with('hierarchies', Hierarchy::all())
         ->with('subknowledges', Subknowledge::all())
         ->with('candidates', $candidates)
-        ->with('company', $company);
+        ->with('company', $company)
+        ->with('pages', Page::all());
     }
 
     public function showCV($id)
@@ -222,7 +238,8 @@ class CompanyController extends Controller
         ->with('languages', Language::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate);
+        ->with('candidate', $candidate)
+        ->with('pages', Page::all());
     }
 
 }

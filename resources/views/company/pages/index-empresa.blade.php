@@ -46,7 +46,6 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input id="place" type="text" name="email" placeholder="E-mail" required>
-                            <!-- <p>Exemplos: São Paulo, Rio de Janeiro etc.</p> -->
                         </div>
                     </div>
                     <div class="row">

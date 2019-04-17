@@ -18,6 +18,11 @@
             <i class="fa fa-tachometer"></i> <span>DASHBOARD</span>
           </a>
         </li>
+        <li {{ (Request::is('admin/user/pages') ? 'class=active' : '') }} {{ (Request::is('admin/user/pages/*') ? 'class=active' : '') }} >
+          <a href="{{route('admin.pages')}}">
+            <i class="fa fa-cogs"></i> <span>PÁGINAS</span>
+          </a>
+        </li>
         <li {{ (Request::is('admin/candidatos') ? 'class=active' : '') }} {{ (Request::is('admin/candidatos/*') ? 'class=active' : '') }} >
           <a href="{{ route('admin.candidate')}}">
             <i class="fa fa-users"></i> <span>CANDIDATOS</span>
@@ -28,9 +33,9 @@
             <i class="fa fa-users"></i> <span>EMPRESAS</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/user/reports') ? 'class=active' : '') }} {{ (Request::is('admin/user/reports/*') ? 'class=active' : '') }} >
-          <a href="{{route('admin.reports')}}">
-            <i class="fa fa-cogs"></i> <span>RELATÓRIOS</span>
+        <li {{ (Request::is('admin/user/vagas') ? 'class=active' : '') }} {{ (Request::is('admin/user/vagas/*') ? 'class=active' : '') }} >
+          <a href="{{route('admin.opportunities')}}">
+            <i class="fa fa-cogs"></i> <span>VAGAS</span>
           </a>
         </li>
       </ul>

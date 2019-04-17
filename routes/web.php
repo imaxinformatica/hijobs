@@ -11,12 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index.index');
-})->name('index');
+Route::get('/', 'Candidate\CandidateController@home')->name('home');
 //Candidato middleware
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
-  Route::get('/candidato', function (){return view('candidate.pages.index');})->name('index');
+  Route::get('/candidato', 'Candidate\CandidateController@index')->name('index');
   Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
@@ -58,7 +56,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
 //Empresa
 Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
-  Route::get('/', function (){return view('company.pages.index-empresa');})->name('index');
+  Route::get('/', 'Company\CompanyController@index')->name('index');
   Route::post('session', 'Company\CompanyController@session')->name('session');
   Route::get('/perfil', 'Company\CompanyController@show')->name('show');
   Route::get('/login', 'CompanyAuth\LoginController@showLoginForm')->name('login');
@@ -116,11 +114,27 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
 });
 
 Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], function(){
-  Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
+  Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard')
+  ;
+  Route::get('/pages', 'Admin\AdminController@pages')->name('pages');
+  Route::get('/pages/{id}', 'Admin\AdminController@editPages')->name('pages.edit');
+  Route::post('/pages/update', 'Admin\AdminController@updatePages')->name('pages.update');
+
+  Route::get('/vagas', 'Admin\AdminController@indexOpportunity')->name('opportunities');
+  Route::get('/vagas/edit/{id}', 'Admin\AdminController@editOpportunity')->name('opportunities.edit');
+  Route::post('/vagas/update', 'Candidate\CandidateController@update')->name('opportunities.update');
+  Route::get('/vagas/show/{id}', 'Admin\AdminController@showOpportunity')->name('opportunities.show');
+  Route::get('/vagas/remove/{id}', 'Admin\AdminController@removeOpportunity')->name('opportunities.remove');
+
   Route::get('/empresas', 'Admin\AdminController@indexCompany')->name('company');
   Route::get('/empresas/edit/{id}', 'Admin\AdminController@editCompany')->name('company.edit');
+  Route::post('/empresas/update', 'Company\CompanyController@update')->name('company.update');
   Route::get('/empresas/show/{id}', 'Admin\AdminController@showCompany')->name('company.show');
   Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
-  Route::get('/reports', 'Admin\AdminController@reports')->name('reports');
+
   Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
+  Route::get('/candidatos/edit/{id}', 'Admin\AdminController@editCandidate')->name('candidate.edit');
+  Route::post('/candidatos/update', 'Candidate\CandidateController@update')->name('candidate.update');
 });
+
+Route::get('/{urn}', 'Admin\AdminController@footer')->name('footer');

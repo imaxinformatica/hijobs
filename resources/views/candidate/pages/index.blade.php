@@ -93,40 +93,22 @@
             </div>
         </div>
         <div class="row">
+            @forelse($opportunities as $opportunity)
             <div class="col-sm-6">
                 <div class="box-result-job">
-                    <span>Gerente Bancário</span><br>
-                    <p class="pay">De R$5.000,00 a R$15.000,00</p>
-                    <p><b>5 vagas</b> em São Paulo, SP</p>
-                    <a href="#">Buscar</a>
+                    <span>{{$opportunity->name}}</span><br>
+                    @if($opportunity->salary == 0)
+                    <p>A Combinar</p>
+                    @else
+                    <p class="pay">R$ {{number_format($opportunity->salary, 2, ',', '.')}}</p>
+                    @endif
+                    <p><b>{{$opportunity->num}} vaga(s)</b> em São Paulo, SP</p>
+                    <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}">Visualizar</a>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="box-result-job">
-                    <span>Gerente Bancário</span><br>
-                    <p class="pay">De R$5.000,00 a R$15.000,00</p>
-                    <p><b>5 vagas</b> em São Paulo, SP</p>
-                    <a href="#">Buscar</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="box-result-job">
-                    <span>Gerente Bancário</span><br>
-                    <p class="pay">De R$5.000,00 a R$15.000,00</p>
-                    <p><b>5 vagas</b> em São Paulo, SP</p>
-                    <a href="#">Buscar</a>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="box-result-job">
-                    <span>Gerente Bancário</span><br>
-                    <p class="pay">De R$5.000,00 a R$15.000,00</p>
-                    <p><b>5 vagas</b> em São Paulo, SP</p>
-                    <a href="#">Buscar</a>
-                </div>
-            </div>
+            @empty
+            <p>Nao possuem vagas cadastradas</p>
+            @endforelse
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -134,36 +116,16 @@
             </div>
         </div>
         <div class="row">
+            @forelse($companies as $company)
             <div class="col-sm-5ths">
                 <div class="box-company">
                     <img src="images/empresa.jpg" alt="Empresa">
-                    <p>5 vagas</p>
+                    <p>{{$company->opportunities->count()}} vaga(s)</p>
                 </div>
             </div>
-            <div class="col-sm-5ths">
-                <div class="box-company">
-                    <img src="images/empresa.jpg" alt="Empresa">
-                    <p>5 vagas</p>
-                </div>
-            </div>
-            <div class="col-sm-5ths">
-                <div class="box-company">
-                    <img src="images/empresa.jpg" alt="Empresa">
-                    <p>5 vagas</p>
-                </div>
-            </div>
-            <div class="col-sm-5ths">
-                <div class="box-company">
-                    <img src="images/empresa.jpg" alt="Empresa">
-                    <p>5 vagas</p>
-                </div>
-            </div>
-            <div class="col-sm-5ths">
-                <div class="box-company">
-                    <img src="images/empresa.jpg" alt="Empresa">
-                    <p>5 vagas</p>
-                </div>
-            </div>
+            @empty
+            <p>Não possuimos empresas para recomendar</p>
+            @endforelse
         </div>
         <div class="row">
             <div class="col-sm-12">

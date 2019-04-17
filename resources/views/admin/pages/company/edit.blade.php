@@ -56,105 +56,113 @@
             <div class="box-header with-border">
               <h3 class="box-title">Dados</h3>
             </div>
-            <form method="POST" action="{{route('admin.customer.update')}}">
+            <form method="POST" action="{{route('admin.company.update')}}">
               {{csrf_field()}}
-              <input type="hidden" name="id" value="{{$customer->id}}">
+              <input type="hidden" name="id" value="{{$company->id}}">
               <div class="box-body">
                 <div class="form-group row box-razao-social">
                   <div class="col-xs-12">
-                    <label for="company_name">Razão Social</label>
-                    <input type="text" name="company_name" class="form-control" id="company_name" value="{{$customer->company_name}}">
+                    <label for="trade">Razão Social</label>
+                    <input type="text" name="trade" class="form-control" id="trade" value="{{$company->trade}}">
                   </div>
                 </div>
                 <div class="form-group row box-nome" >
                   <div class="col-xs-12">
-                    <label for="trade">Nome Fantasia</label>
-                    <input type="text" name="trade" class="form-control" id="trade" value="{{$customer->trade}}">
+                    <label for="name">Nome Fantasia</label>
+                    <input type="text" name="trade" class="form-control" id="name" value="{{$company->name}}">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 box-cnpj">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" name="cnpj" class="form-control input-cnpj" id="cnpj" value="{{$customer->cnpj}}">
+                    <input type="text" name="cnpj" class="form-control input-cnpj" id="cnpj" value="{{$company->cnpj}}">
                   </div>
-                  <div class="col-sm-6 box-nascimento">
-                    <label for="state_registration">Inscrição Estadual</label>
-                    <input type="text" name="state_registration" class="form-control input-creci" id="state_registration" value="{{$customer->state_registration}}">
+                  <div class="col-sm-6">
+                    <label for="phone">Telefone</label>
+                    <input type="text" name="phone" class="form-control input-telefone" id="phone" value="{{$company->phone}}" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-xs-12">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{$customer->email}}" required>
-                  </div>
-                </div>
-
-
-                <div class="form-group row">
-                  <div class="col-sm-8">
-                    <label for="zip_code">CEP</label>
-                    <input type="text" name="zip_code" class="form-control input-cep" id="zip_code" value="{{$customer->zip_code}}" required>
-                  </div>
-                  <div class="col-sm-4">
-                    <label for="state">UF</label>
-                    <select class="form-control" id="state" name="state" required>
-                      <option></option>
-                      <option value="AC" <?php if($customer->state == 'AC'){ echo 'selected'; } ?> >AC</option>
-                      <option value="AL" <?php if($customer->state == 'AL'){ echo 'selected'; } ?> >AL</option>
-                      <option value="AM" <?php if($customer->state == 'AM'){ echo 'selected'; } ?> >AM</option>
-                      <option value="AP" <?php if($customer->state == 'AP'){ echo 'selected'; } ?> >AP</option>
-                      <option value="BA" <?php if($customer->state == 'BA'){ echo 'selected'; } ?> >BA</option>
-                      <option value="CE" <?php if($customer->state == 'CE'){ echo 'selected'; } ?> >CE</option>
-                      <option value="DF" <?php if($customer->state == 'DF'){ echo 'selected'; } ?> >DF</option>
-                      <option value="ES" <?php if($customer->state == 'ES'){ echo 'selected'; } ?> >ES</option>
-                      <option value="GO" <?php if($customer->state == 'GO'){ echo 'selected'; } ?> >GO</option>
-                      <option value="MA" <?php if($customer->state == 'MA'){ echo 'selected'; } ?> >MA</option>
-                      <option value="MG" <?php if($customer->state == 'MG'){ echo 'selected'; } ?> >MG</option>
-                      <option value="MS" <?php if($customer->state == 'MS'){ echo 'selected'; } ?> >MS</option>
-                      <option value="MT" <?php if($customer->state == 'MT'){ echo 'selected'; } ?> >MT</option>
-                      <option value="PA" <?php if($customer->state == 'PA'){ echo 'selected'; } ?> >PA</option>
-                      <option value="PB" <?php if($customer->state == 'PB'){ echo 'selected'; } ?> >PB</option>
-                      <option value="PE" <?php if($customer->state == 'PE'){ echo 'selected'; } ?> >PE</option>
-                      <option value="PI" <?php if($customer->state == 'PI'){ echo 'selected'; } ?> >PI</option>
-                      <option value="PR" <?php if($customer->state == 'PR'){ echo 'selected'; } ?> >PR</option>
-                      <option value="RJ" <?php if($customer->state == 'RJ'){ echo 'selected'; } ?> >RJ</option>
-                      <option value="RN" <?php if($customer->state == 'RN'){ echo 'selected'; } ?> >RN</option>
-                      <option value="RO" <?php if($customer->state == 'RO'){ echo 'selected'; } ?> >RO</option>
-                      <option value="RR" <?php if($customer->state == 'RR'){ echo 'selected'; } ?> >RR</option>
-                      <option value="RS" <?php if($customer->state == 'RS'){ echo 'selected'; } ?> >RS</option>
-                      <option value="SC" <?php if($customer->state == 'SC'){ echo 'selected'; } ?> >SC</option>
-                      <option value="SE" <?php if($customer->state == 'SE'){ echo 'selected'; } ?> >SE</option>
-                      <option value="SP" <?php if($customer->state == 'SP'){ echo 'selected'; } ?> >SP</option>
-                      <option value="TO" <?php if($customer->state == 'TO'){ echo 'selected'; } ?> >TO</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label for="city">Cidade</label>
-                    <input type="text" name="city" class="form-control" id="city" value="{{$customer->city}}" required>
-                  </div>
-                  <div class="col-sm-6">
-                    <label for="district">Bairro</label>
-                    <input type="text" name="district" class="form-control" id="district" value="{{$customer->district}}" required>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <label for="address">Endereço</label>
-                    <input type="text" name="address" class="form-control" id="address" value="{{$customer->address}}" required>
-                  </div>
-                  <div class="col-sm-3">
-                    <label for="address_number">Número</label>
-                    <input type="text" name="address_number" class="form-control" id="address_number" value="{{$customer->address_number}}" required>
+                    <input type="email" name="email" class="form-control" id="email" value="{{$company->email}}" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <label for="phone">Telefone principal</label>
-                    <input type="text" name="phone" class="form-control input-telefone" id="phone" value="{{$customer->phone}}" required>
+                    <label for="description" style="margin-top: 20px;">Breve Descrição</label>
+                    <textarea name="description" class="form-control" rows="5" placeholder="Descrição sobre a empresa">{{$company->description}}</textarea>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <label for="occupation_area_id">Área de Atuação</label>
+                      <select name="occupation_area_id" class="form-control">
+                          <option selected disabled>Selecione</option>
+                          @foreach($occupations as $occupation)
+                          <option value="{{$occupation->id}}" <?php if ($company->occupation_area_id == $occupation->id): echo "selected"; ?>
+                          <?php endif ?>>{{$occupation->name}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label for="cep">CEP</label>
+                    <input type="text" name="cep" class="form-control input-cep" id="cep" value="{{$company->cep}}" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="street">Logradouro / Rua</label>
+                    <input type="text" class="form-control" name="street" value="{{$company->street}}" placeholder="Logradouro">
+                  </div>
+                  <div class="col-sm-2">
+                    <label for="number">Número</label>
+                    <input type="text" class="form-control" name="number" value="{{$company->number}}"  placeholder="Número / Complemento">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label for="neighborhood">Bairro</label>
+                    <input type="text" class="form-control" name="neighborhood" value="{{$company->neighborhood}}" placeholder="Bairro">
+                </div>
+                <div class="col-sm-4">
+                    <label for="state">Estado</label>
+                    <input type="text" class="form-control"  name="state" value="{{$company->state}}" placeholder="Estado">
+                </div>
+                <div class="col-sm-4">
+                    <label for="city">Cidade</label>
+                    <input type="text" class="form-control"  name="city" value="{{$company->city}}" placeholder="Cidade">
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                      <h4><b>Redes sociais</b></h4>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                      <label for="linkedin">Linkedin</label>
+                      <input type="text" name="linkedin" class="form-control" value="{{$company->linkedin}}" placeholder="Informe a url do seu perfil">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="facebook">Facebook</label>
+                      <input type="text" name="facebook" class="form-control" value="{{$company->facebook}}" placeholder="Informe a url do seu perfil">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                      <label for="twitter">Twitter</label>
+                      <input type="text" name="twitter" class="form-control" value="{{$company->twitter}}" placeholder="Informe a url do seu perfil">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="blog">Blog</label>
+                      <input type="text" name="blog" class="form-control" value="{{$company->blog}}" placeholder="Informe a url do seu perfil">
+                  </div>
+                </div>
+        
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
@@ -167,48 +175,31 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
               <div class="inner">
-                <p>Número pedidos</p>
-                <h3>{{$customer->order()->count()}}</h3>
+                <p>Número de vagas</p>
+                <h3>{{$company->opportunities()->count()}}</h3>
               </div>
             </div>
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Pedidos</h3>
+                <h3 class="box-title">Vagas</h3>
               </div>
               <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Número Pedido</th>
-                      <th>Total</th>
-                      <th>Status</th>
-                      <th>Ações</th>
+                      <th>Vagas</th>
+                      <th>Nº Vagas</th>
+                      <th>Salário</th>
                     </tr>
-                      @forelse($customer->order()->get() as $order)
+                      @forelse($company->opportunities as $opportunity)
                     <tr>
-                      <td>{{$order->id}}</td>
-                      <td>R$ {{number_format($order->total_order, 2, ',', '.')}}</td>
-                      <td>{{$order->statusOrder($order->id)}}</td>
-                      <td>
-                        @if($order->statusOrder($order->id) == 'Em aberto')
-                        <a href="{{ route('admin.order.create', ['id' => $order->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @elseif($order->statusOrder($order->id) == 'Aguardando Pagamento' )
-                        <a href="{{ route('admin.order.finish', ['id' => $order->id])}}" title="Editar" >
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @else
-                        <a href="{{ route('admin.order.show', ['id' => $order->id])}}" title="Visualizar" >
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                        @endif
-                        @if($order->statusOrder($order->id) == 'Em aberto' || $order->statusOrder($order->id) == 'Aguardando Pagamento' )
-                         <a href="{{ route('admin.order.destroy', ['id' => $order->id])}}" title="Excluir" class="act-list act-delete">
-                          <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-                        </a>
-                        @endif
-                      </td>
+                      <td>{{$opportunity->name}}</td>
+                      <td>{{$opportunity->num}}</td>
+                      @if($opportunity->salary == 0)
+                      <td>A combinar</td>
+                      @else
+                      <td>R$ {{number_format($opportunity->salary, 2, ',', '.' )}}</td>
+                      @endif
                     </tr>
                       @empty
                       <tr>

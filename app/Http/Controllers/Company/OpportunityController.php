@@ -18,7 +18,6 @@ use App\OpportunityCity;
 use App\ContractType;
 use App\Hierarchy;
 use App\Opportunity;
-use App\OpportunityState;
 use Auth;
 
 class OpportunityController extends Controller
@@ -101,6 +100,8 @@ class OpportunityController extends Controller
         $opportunity->time              = $request->time;
         $opportunity->additionally      = $request->additionally;
         $opportunity->num               = $request->num;
+        $opportunity->state_id          = $request->state_id;
+        $opportunity->city_id           = $request->city_id;
         $opportunity->company_id 		= $auth->id;
         $opportunity->publish       	= 1;
         $opportunity->salary            = str_replace(',', '.', str_replace('.', '', $request->salary));
@@ -114,25 +115,8 @@ class OpportunityController extends Controller
         	$opportunity->special = 1;
             $opportunity->comments_special = $request->comments_special;
         }
+
         $opportunity->save();
-
-        if (isset($request->city_id)) {
-            foreach ($request->city_id as $cities) {
-                $city                   = new OpportunityCity;
-                $city->opportunity_id   = $opportunity->id; 
-                $city->city_id          = $cities;
-                $city->save();
-            }
-        }
-
-        if (isset($request->state_id)) {
-            foreach ($request->state_id as $states) {
-                $state                   = new OpportunityState;
-                $state->opportunity_id   = $opportunity->id; 
-                $state->state_id          = $states;
-                $state->save();
-            }
-        }
 
         return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.')   
         ->with('pages', Page::all());
@@ -183,6 +167,8 @@ class OpportunityController extends Controller
         $opportunity->contract_type_id  = $request->contract_type_id;
         $opportunity->time              = $request->time;
         $opportunity->additionally      = $request->additionally;
+        $opportunity->state_id          = $request->state_id;
+        $opportunity->city_id           = $request->city_id;
         $opportunity->num               = $request->num;
         $opportunity->publish       	= 1;
         $opportunity->salary            = str_replace(',', '.', str_replace('.', '', $request->salary));
@@ -195,29 +181,12 @@ class OpportunityController extends Controller
         if (isset($request->isSpecial)) {
             $opportunity->special = 1;
             $opportunity->comments_special = $request->comments_special;
+        }else{
+            $opportunity->special = 0;
+            $opportunity->comments_special = '';
         }
 
-        // foreach ($opportunity->driver as $driver) {
-        //     $driver->pivot->delete();
-        // }
-
-        if (isset($request->city_id)) {
-            foreach ($request->city_id as $cities) {
-                $city                   = new OpportunityCity;
-                $city->opportunity_id   = $opportunity->id; 
-                $city->city_id          = $cities;
-                $city->save();
-            }
-        }
-
-        if (isset($request->state_id)) {
-            foreach ($request->state_id as $states) {
-                $state                   = new OpportunityCity;
-                $state->opportunity_id   = $candidate->id; 
-                $state->city_id          = $states;
-                $state->save();
-            }
-        }
+        
 
         $opportunity->save();
 

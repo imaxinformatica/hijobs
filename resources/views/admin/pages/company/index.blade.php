@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-sm-6">
           <h1>Empresas</h1>
-        </div>d
+        </div>
       </div>
     </section>
 

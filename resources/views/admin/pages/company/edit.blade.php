@@ -166,6 +166,9 @@
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{{route('admin.company')}}">
+                  <button type="button" class="btn btn-primary">Voltar</button>
+                </a>
               </div>
             </form>
           </div>

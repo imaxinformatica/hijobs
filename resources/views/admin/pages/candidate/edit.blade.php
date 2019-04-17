@@ -139,6 +139,24 @@
                       </select>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <div class="col-xs-12">
+                    <input type="checkbox" name="isSpecial">
+                    <label>Pessoa com deficiência física</label>
+                  </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                    @foreach($specials as $special)
+                      <input value="{{$special->id}}" type="checkbox" name="specials[]">
+                      <label>{{$special->name}}</label>
+                    @endforeach
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="special_description" >Condições especiais</label>
+                        <textarea name="special_description" class="form-control" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc.">{{$special->special_description}}</textarea>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -169,17 +187,131 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-sm-12">
-                      <h4>Informações complementares</h4>
-                  </div>
+              <div class="row">
+                <div class="col-sm-12">
+                    <h4>Informações complementares</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                    <label class="info-adc" style="margin-top: 20px;">Tipo de habilitação para dirigir</label>
+                </div>
+              </div>
+              <div class="row form-group">
+                @foreach($drivers as $driver)
+                <div class="col-sm-2">
+                  <input value="{{$driver->id}}" type="checkbox" name="driver[]">
+                  <label>{{$driver->name}}</label>
+                </div>
+                @endforeach
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                    <label class="info-adc" style="margin-top: 20px;">Possui veículo próprio? Qual?</label>
+                </div>
+              </div>
+              <div class="row form-group">
+                @foreach($vehicles as $vehicle)
+                <div class="col-sm-3">
+                  <input value="{{$vehicle->id}}" type="checkbox" name="vehicle[]">
+                  <label>{{$vehicle->name}}</label>
+                </div>
+                @endforeach
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                    <label class="info-adc" style="margin-top: 20px;">Tem disponibilidade para viajar?</label>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-12">
+                  <input value="1" type="radio" <?php if ($candidate->travel == "1"): echo "checked"; endif; ?> name="travel">
+                  <label>Sim</label>
+                  <input value="0" type="radio" <?php if ($candidate->travel == "1"): echo "checked"; endif; ?> name="travel">
+                  <label>Não</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                    <label class="info-adc" style="margin-top: 20px;">Tem disponibilidade para mudar de residência?</label>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-12">
+                  <input value="1" type="radio" <?php if ($candidate->change == "1"): echo "checked"; endif; ?> name="change">
+                  <label>Sim</label>
+                  <input value="0" type="radio" <?php if ($candidate->change == "1"): echo "checked"; endif; ?> name="change">
+                  <label>Não</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                    <h4>Objetivos profissionais</h4>
+                </div>
               </div>
 
-              
+              <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="journey_id">Jornada</label>
+                    <select name="journey_id" class="form-control">
+                        <option selected disabled>Selecione</option>
+                        @foreach($journeys as $journey)
+                        <option value="{{$journey->id}}" <?php if ($candidate->contract_type_id == $journey->id): echo "selected"; endif; ?>>{{$journey->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                  <div class="col-sm-6">
+                      <label for="contract_type_id">Tipo de contrato</label>
+                      <select name="contract_type_id" class="form-control">
+                          <option selected disabled>Selecione</option>
+                          @foreach($contract_types as $contract)
+                          <option value="{{$contract->id}}" <?php if ($candidate->contract_type_id == $contract->id): echo "selected"; endif; ?>>{{$contract->name}}</option>
+                          @endforeach
+                    </select>
+                  </div>
+              </div>
+              <div class="row form-group">
+                  <div class="col-sm-6">
+                      <label for="min_hierarchy_id">Nível hierárquico mínimo</label>
+                      <select name="min_hierarchy_id" class="form-control">
+                          <option selected disabled>Selecione</option>
+                          @foreach($hierarchies as $hierarchy)
+                          <option value="{{$hierarchy->id}}" <?php if ($candidate->min_hierarchy_id == $hierarchy->id): echo "selected"; endif; ?>>{{$hierarchy->name}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="max_hierarchy_id">Nível hierárquico máximo</label>
+                      <select name="max_hierarchy_id" class="form-control">
+                          <option selected disabled>Selecione</option>
+                          @foreach($hierarchies as $hierarchy)
+                          <option value="{{$hierarchy->id}}" <?php if ($candidate->max_hierarchy_id == $hierarchy->id): echo "selected"; endif; ?>>{{$hierarchy->name}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+              <div class="row form-group">
+                  <div class="col-sm-6">
+                      <label for="salary">Pretenção salarial mínima</label>
+                      <input type="text" value="{{number_format($candidate->salary, 2, ',', '.')}}" class="input-money form-control" name="salary" placeholder="Ex:. 2500">
+                  </div>
+                  <div class="col-sm-5">
+                      <label for="state_work">Estado onde deseja trabalhar</label>
+                      <select name="state_work[]" class="state-work form-control" multiple="multiple">
+                          @foreach($states as $state)
+                          <option value="{{$state->id}}">{{$state->name}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+  
                 
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{{route('admin.candidate')}}">
+                  <button type="button" class="btn btn-primary">Voltar</button>
+                </a>
               </div>
             </form>
           </div>

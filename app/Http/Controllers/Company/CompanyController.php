@@ -125,8 +125,7 @@ class CompanyController extends Controller
             'occupation_area_id'    => 'required',
             'cep'  				    => 'required',
         ]);
-
-        $company                   	   = Company::find($request->company_id);
+        $company                   	   = Company::find($request->id);
         $company->trade                = $request->trade;
         $company->phone            	   = $request->phone;
         $company->description          = $request->description;

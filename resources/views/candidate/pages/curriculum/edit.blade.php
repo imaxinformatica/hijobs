@@ -123,7 +123,7 @@
                             @endforeach
                             <div class="col-sm-12">
                                 <label for="special_description" style="margin-top: 20px;">Condições especiais</label>
-                                <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
+                                <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc.">{{$special->special_description}}</textarea>
                             </div>
                         </div>
                         <div class="row">

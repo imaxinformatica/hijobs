@@ -13,12 +13,12 @@ class Opportunity extends Model
 
     public function city()
     {
-        return $this->belongsToMany('App\City', 'opportunity_city', 'opportunity_id', 'city_id');
+        return $this->belongsTo('App\City');
     }
 
     public function state()
     {
-        return $this->belongsToMany('App\State', 'opportunity_state', 'opportunity_id', 'state_id');
+        return $this->belongsTo('App\State');
     }
 
     public function contract()

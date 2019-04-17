@@ -118,7 +118,11 @@
                     <tr>
                       <td>{{$opportunity->name}}</td>
                       <td>{{$opportunity->num}}</td>
+                      @if($opportunity->salary == 0)
+                      <td>A Combinar</td>
+                      @else
                       <td>R$ {{number_format($opportunity->salary, 2, ',', '.')}}</td>
+                      @endif
                       <td>{{$opportunity->company->name}}</td>
                       <td>
                         <a href="{{ route('admin.opportunities.edit', ['id' => $opportunity->id])}}" title="Editar" class="act-list">

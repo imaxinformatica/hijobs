@@ -110,7 +110,7 @@
                 <div class="form-group row">
                   <div class="col-xs-5">
                     <label for="state_id">Estado</label>
-                    <select name="state_id[]" class="state form-control" multiple="multiple">
+                    <select name="state_id" class="state form-control">
                         @foreach($states as $state)
                         <option value="{{$state->id}}" <?php if ($state->id == $opportunity->state_id) {echo "selected";}?>>{{$state->name}}</option>
                         @endforeach
@@ -118,9 +118,9 @@
                   </div>
                   <div class="col-xs-5">
                     <label for="city_id">Cidade</label>
-                    <select name="city_id[]" class="state form-control" multiple="multiple">
+                    <select name="city_id" class="state form-control">
                         @foreach($states as $state)
-                        <option value="{{$state->id}}" <?php if ($state->id == $opportunity->state_id) {echo "selected";}?>>{{$state->name}}</option>
+                        <option value="{{$state->id}}" <?php if ($state->id == $opportunity->city_id) {echo "selected";}?>>{{$state->name}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -131,6 +131,9 @@
                 </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{{route('admin.opportunities')}}">
+                  <button type="button" class="btn btn-primary">Atualizar</button>
+                </a>
               </div>
             </form>
           </div>

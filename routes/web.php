@@ -122,19 +122,19 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
 
   Route::get('/vagas', 'Admin\AdminController@indexOpportunity')->name('opportunities');
   Route::get('/vagas/edit/{id}', 'Admin\AdminController@editOpportunity')->name('opportunities.edit');
-  Route::post('/vagas/update', 'Candidate\CandidateController@update')->name('opportunities.update');
+  Route::post('/vagas/update', 'Admin\AdminController@updateOpportunity')->name('opportunities.update');
   Route::get('/vagas/show/{id}', 'Admin\AdminController@showOpportunity')->name('opportunities.show');
   Route::get('/vagas/remove/{id}', 'Admin\AdminController@removeOpportunity')->name('opportunities.remove');
 
   Route::get('/empresas', 'Admin\AdminController@indexCompany')->name('company');
   Route::get('/empresas/edit/{id}', 'Admin\AdminController@editCompany')->name('company.edit');
-  Route::post('/empresas/update', 'Company\CompanyController@update')->name('company.update');
+  Route::post('/empresas/update', 'Admin\AdminController@updateCompany')->name('company.update');
   Route::get('/empresas/show/{id}', 'Admin\AdminController@showCompany')->name('company.show');
   Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
 
   Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
   Route::get('/candidatos/edit/{id}', 'Admin\AdminController@editCandidate')->name('candidate.edit');
-  Route::post('/candidatos/update', 'Candidate\CandidateController@update')->name('candidate.update');
+  Route::post('/candidatos/update', 'Admin\AdminController@updateCandidate')->name('candidate.update');
 });
 
 Route::get('/{urn}', 'Admin\AdminController@footer')->name('footer');

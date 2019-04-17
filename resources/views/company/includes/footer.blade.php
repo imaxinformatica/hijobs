@@ -191,10 +191,5 @@ $(document).ready( function(){
     });
 });
 
-//Select2
-$(document).ready(function() {
-    $('.state').select2();
-    $('.city').select2();
-});
 </script> 
 

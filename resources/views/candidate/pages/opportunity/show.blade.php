@@ -91,20 +91,15 @@
                     <div class="row">
                         <div class="col-sm-5">
                             <h4>Estado(s)</h4>
-                            @foreach($opportunity->state as $state)
-                            <p>{{$state->name}}</p>
-                            @endforeach
+                            <p>{{$opportunity->state->name}}</p>
                         </div>
                         <div class="col-sm-5">
                             <h4>Cidade(s)</h4>
-                            @foreach($opportunity->city as $city)
-                            <p>{{$city->name}}</p>
-                            @endforeach
+                            <p>{{$opportunity->state->name}}</p>
                         </div>
                         <div class="col-sm-2">
                             <h4>Vagas</h4>
-                            <p>{{$opportunity->num}}</p>
-                            
+                            <p>{{$opportunity->num}}</p>                       
                         </div>
                     </div>
                     <div class="row">

@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="state_id">Estado</label>
-                                <select name="state_id[]" class="state" multiple="multiple">
+                                <select name="state_id" class="state">
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}" <?php if ($state->id == $opportunity->state_id) {echo "selected";}?>>{{$state->name}}</option>
                                     @endforeach
@@ -94,10 +94,10 @@
                             </div>
                             <div class="col-sm-5">
                                 <label for="city_id">Cidade</label>
-                                <select name="city_id[]" class="city" multiple="multiple">
+                                <select name="city_id" class="city">
                                     @foreach($states as $state)
 
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option value="{{$state->id}}"<?php if ($state->id == $opportunity->city_id) {echo "selected";}?>>{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

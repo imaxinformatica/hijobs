@@ -25,6 +25,7 @@ class CreateOpportunitiesTable extends Migration
             $table->integer('num')->nullable();
             $table->integer('contract_type_id')->nullable();
             $table->integer('state_id')->nullable();
+            $table->integer('city_id')->nullable();
             $table->integer('special')->nullable();
             $table->integer('company_id');
             $table->boolean('publish')->nullable();

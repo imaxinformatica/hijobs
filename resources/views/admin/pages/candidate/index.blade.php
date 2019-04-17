@@ -58,16 +58,16 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col-sm-4">
-                    <label>Razão social</label>
-                    <input type="text" name="candidate_name" value="{{request('candidate_name')}}" class="form-control">
+                    <label>Nome</label>
+                    <input type="text" name="name" value="{{request('name')}}" class="form-control">
                   </div>
                   <div class="col-sm-4">
-                    <label>Nome fantasia</label>
-                    <input type="text" name="trade" value="{{request('trade')}}" class="form-control">
+                    <label>E-mail</label>
+                    <input type="text" name="email" value="{{request('email')}}" class="form-control">
                   </div>
                   <div class="col-sm-4">
-                    <label>CNPJ</label>
-                    <input type="text" name="cnpj" value="{{request('cnpj')}}" class="form-control input-cnpj">
+                    <label>Telefone</label>
+                    <input type="text" name="phone" value="{{request('phone')}}" class="form-control input-phone">
                   </div>
                 </div>
               </div>

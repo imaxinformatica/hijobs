@@ -20,7 +20,7 @@
         </li>
         <li {{ (Request::is('admin/user/pages') ? 'class=active' : '') }} {{ (Request::is('admin/user/pages/*') ? 'class=active' : '') }} >
           <a href="{{route('admin.pages')}}">
-            <i class="fa fa-cogs"></i> <span>PÁGINAS</span>
+            <i class="fa fa-file" aria-hidden="true"></i> <span>PÁGINAS</span>
           </a>
         </li>
         <li {{ (Request::is('admin/candidatos') ? 'class=active' : '') }} {{ (Request::is('admin/candidatos/*') ? 'class=active' : '') }} >
@@ -30,12 +30,12 @@
         </li>
         <li {{ (Request::is('admin/empresas') ? 'class=active' : '') }} {{ (Request::is('admin/empresas/*') ? 'class=active' : '') }} >
           <a href="{{ route('admin.company')}}">
-            <i class="fa fa-users"></i> <span>EMPRESAS</span>
+            <i class="fa fa-building" aria-hidden="true"></i> <span>EMPRESAS</span>
           </a>
         </li>
         <li {{ (Request::is('admin/user/vagas') ? 'class=active' : '') }} {{ (Request::is('admin/user/vagas/*') ? 'class=active' : '') }} >
           <a href="{{route('admin.opportunities')}}">
-            <i class="fa fa-cogs"></i> <span>VAGAS</span>
+            <i class="fa fa-address-card-o" aria-hidden="true"></i> <span>VAGAS</span>
           </a>
         </li>
       </ul>

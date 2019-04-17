@@ -59,11 +59,11 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <label>Razão social</label>
-                    <input type="text" name="company_name" value="{{request('company_name')}}" class="form-control">
+                    <input type="text" name="trade" value="{{request('trade')}}" class="form-control">
                   </div>
                   <div class="col-sm-4">
                     <label>Nome fantasia</label>
-                    <input type="text" name="trade" value="{{request('trade')}}" class="form-control">
+                    <input type="text" name="name" value="{{request('name')}}" class="form-control">
                   </div>
                   <div class="col-sm-4">
                     <label>CNPJ</label>

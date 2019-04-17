@@ -11,21 +11,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ContractTypesSeeder::class);
         $this->call(PagesSeeder::class);
-        $this->call(DriversSeeder::class);
-        $this->call(HierarchiesSeeder::class);
+        $this->call(AdminsSeeder::class);
         $this->call(StatesSeeder::class);
         $this->call(LevelsSeeder::class);
-        $this->call(JourneysSeeder::class);
+        $this->call(DriversSeeder::class);
         $this->call(CoursesSeeder::class);
-        $this->call(KnowledgesSeeder::class);
-        $this->call(SubknowledgesSeeder::class);
-        $this->call(LanguagesSeeder::class);
-        $this->call(OcuppationAreasSeeder::class);
+        $this->call(JourneysSeeder::class);
         $this->call(SpecialsSeeder::class);
         $this->call(VehiclesSeeder::class);
         $this->call(CountriesSeeder::class);
+        $this->call(LanguagesSeeder::class);
+        $this->call(KnowledgesSeeder::class);
+        $this->call(HierarchiesSeeder::class);
+        $this->call(ContractTypesSeeder::class);
+        $this->call(SubknowledgesSeeder::class);
+        $this->call(OcuppationAreasSeeder::class);
         
     }
 }

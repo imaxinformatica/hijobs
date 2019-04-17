@@ -56,9 +56,28 @@ class AdminController extends Controller
         ->with('pages', Page::all());
     }
 
-    public function indexCompany()
+    public function indexCompany(Request $request)
     {
-    	$companies = Company::all();
+        $companies = new Company;
+
+        if($request->has('name')){
+            if(request('name') != ''){
+                $companies = $companies->where('name', 'like', '%' . request('name') . '%');
+            }
+        }
+        if($request->has('trade')){
+            if(request('trade') != ''){
+                $companies = $companies->where('trade', 'like', '%' . request('trade') . '%');
+            }
+        }
+        if($request->has('cnpj')){
+            if(request('cnpj') != ''){
+                $companies = $companies->where('cnpj', 'like', '%' . request('cnpj') . '%');
+            }
+        }
+
+        $companies = $companies->orderBy('name', 'asc')->paginate(10);
+
     	return view('admin.pages.company.index')
     	->with('companies', $companies)
         ->with('pages', Page::all());
@@ -146,9 +165,28 @@ class AdminController extends Controller
     }
 
 
-    public function indexCandidate()
+    public function indexCandidate(Request $request)
     {
-    	$candidates = Candidate::all();
+        $candidates = new Candidate;
+
+        if($request->has('name')){
+            if(request('name') != ''){
+                $candidates = $candidates->where('name', 'like', '%' . request('name') . '%');
+            }
+        }
+        if($request->has('email')){
+            if(request('email') != ''){
+                $candidates = $candidates->where('email', 'like', '%' . request('email') . '%');
+            }
+        }
+        if($request->has('phone')){
+            if(request('phone') != ''){
+                $candidates = $candidates->where('name', 'like', '%' . request('phone') . '%');
+            }
+        }
+
+        $candidates = $candidates->orderBy('name', 'asc')->paginate(10);
+
     	return view('admin.pages.candidate.index')
     	->with('candidates', $candidates)
         ->with('pages', Page::all());
@@ -174,7 +212,7 @@ class AdminController extends Controller
         ->with('pages', Page::all());    
     }
 
-    public function update(Request $request)
+    public function updateCandidate(Request $request)
     {
         $this->validate($request, [
             'state_id'          => 'required',
@@ -284,9 +322,18 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Candidato Editado.');
     }
 
-    public function indexOpportunity()
+    public function indexOpportunity(Request $request)
     {
-        $opportunities = Opportunity::all();
+        $opportunities = new Opportunity;
+
+        if($request->has('name')){
+            if(request('name') != ''){
+                $opportunities = $opportunities->where('name', 'like', '%' . request('name') . '%');
+            }
+        }
+
+        $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
+
         return view('admin.pages.opportunity.index')
         ->with('opportunities', $opportunities)
         ->with('pages', Page::all());

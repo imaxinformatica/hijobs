@@ -1,3 +1,6 @@
+<?php
+    $pages = DB::table('pages')->get();
+?>
 <footer>
      <div class="container">
         <div class="row">
@@ -143,6 +146,10 @@ $('.act-password').on('click', function (e) {
     $('#companyPassword').modal('show');
 });
 
+$('.act-message').on('click', function(e){
+    e.preventDefault();
+    $('#companyMessage').modal('show');
+});
 $(document).ready(function(){
     if($('.isCombining').is(":checked")){
         $('.salary').attr('disabled', '');
@@ -173,6 +180,35 @@ $(document).ready(function(){
             $('.salary').removeAttr('disabled');
         }   
     });
+});
+
+$(document).ready(function(){
+    $('#state' ).change(function() {
+        var url = "{{route('opportunity.cities')}}";
+        var state_id = $('#state option:selected').val();
+        citiesAjax(url, state_id);
+    });
+    function citiesAjax(url, state_id){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data:{
+                state_id: state_id,
+            },
+            beforeSend: function(){
+            },
+            success: function(data){
+                var result = $.parseJSON(data);
+                console.log(result);
+
+                console.log(result[1].name);
+                $('#city').html('');
+                for (var i = 0; i < result.length; ++i){
+                    $('#city').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
+                }
+            }
+        });
+    }
 });
 
 $(document).ready( function(){

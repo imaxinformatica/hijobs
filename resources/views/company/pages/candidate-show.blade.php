@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Visualizando seu currículo</h1>
+                <h1>Visualizando currículo</h1>
                 
             </div>
         </div>
@@ -254,8 +254,8 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="{{route('candidate.edit')}}">
-                                    <button class="btn-orange">Editar meu currículo</button>
+                                <a href="#" class="act-message">
+                                    <button class="btn-orange">Enviar Mensagem</button>
                                 </a>
                             </div>
                         </div>

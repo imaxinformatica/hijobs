@@ -85,7 +85,7 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="state_id">Estado</label>
-                                <select name="state_id" class="state">
+                                <select name="state_id" id="state" class="state">
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}" >{{$state->name}}</option>
                                     @endforeach
@@ -93,10 +93,9 @@
                             </div>
                             <div class="col-sm-5">
                                 <label for="city_id">Cidade</label>
-                                <select name="city_id" class="city">
-                                    @foreach($states as $state)
-                                    <option value="{{$state->id}}" >{{$state->name}}</option>
-                                    @endforeach
+                                <select name="city_id" id="city" class="city">
+                                    <option selected disabled>Selecione..</option>
+                                    
                                 </select>
                             </div>
                             <div class="col-sm-2">

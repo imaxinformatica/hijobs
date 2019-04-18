@@ -1,3 +1,7 @@
+<?php
+    $pages = DB::table('pages')->get();
+?>
+
 <footer>
      <div class="container">
         <div class="row">

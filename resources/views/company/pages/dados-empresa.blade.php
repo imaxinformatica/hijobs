@@ -52,23 +52,23 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="trade">Razão Social</label>
-                                <input type="text" name="trade" placeholder="Razão Social">
+                                <input type="text" name="trade" placeholder="Razão Social" value="{{old('trade')}}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="phone">Telefone</label>
-                                <input type="text" name="phone" class="input-phone" placeholder="Telefone">
+                                <input type="text" name="phone" class="input-phone" placeholder="Telefone" value="{{old('phone')}}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="description" style="margin-top: 20px;">Breve Descrição</label>
-                                <textarea name="description" placeholder="Descrição sobre a empresa"></textarea>
+                                <textarea name="description" placeholder="Descrição sobre a empresa">{{old('description')}}</textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="cnpj">CNPJ</label>
-                                <input type="text" name="cnpj" class="input-cnpj" placeholder="CNPJ">
+                                <input type="text" name="cnpj" class="input-cnpj" value="{{old('cnpj')}}" placeholder="CNPJ">
                             </div>
                             <div class="col-sm-6">
                                 <label for="occupation_area_id">Área de Atuação</label>
@@ -83,29 +83,29 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="cep">CEP</label>
-                                <input type="text" class="input-cep"  name="cep" placeholder="Seu CEP">
+                                <input type="text" class="input-cep" value="{{old('cep')}}" name="cep" placeholder="Seu CEP">
                             </div>
                             <div class="col-sm-6">
                                 <label for="street">Logradouro / Rua</label>
-                                <input type="text" name="street" placeholder="Logradouro">
+                                <input type="text" name="street" value="{{old('street')}}" placeholder="Logradouro">
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number"  placeholder="Número / Complemento">
+                                <input type="text" name="number" value="{{old('number')}}" placeholder="Número / Complemento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="neighborhood">Bairro</label>
-                                <input type="text" name="neighborhood" placeholder="Bairro">
+                                <input type="text" name="neighborhood" value="{{old('neighborhood')}}" placeholder="Bairro">
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <input type="text"  name="state" placeholder="Estado">
+                                <input type="text"  name="state" value="{{old('state')}}" placeholder="Estado">
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>
-                                <input type="text"  name="city" placeholder="Cidade">
+                                <input type="text"  name="city" value="{{old('city')}}" placeholder="Cidade">
                             </div>
                         </div>
                         <div class="row">
@@ -116,21 +116,21 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="linkedin">Linkedin</label>
-                                <input type="text" name="linkedin" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="linkedin" value="{{old('linkedin')}}" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="facebook">Facebook</label>
-                                <input type="text" name="facebook" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="facebook" value="{{old('facebook')}}" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="twitter">Twitter</label>
-                                <input type="text" name="twitter" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="twitter" value="{{old('twitter')}}" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="blog">Blog</label>
-                                <input type="text" name="blog" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="blog" value="{{old('blog')}}" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">

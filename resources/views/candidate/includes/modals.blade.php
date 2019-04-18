@@ -161,7 +161,7 @@
             </div>
             <div class="col-sm-6 state_id">
               <label for="state_id">Estado</label>
-              <select  name="state_id" class="form-control">
+              <select  name="state_id" class="form-control" id="state">
                 <option selected disabled>Estado..</option>
                 @isset($states)
                 @foreach($states as $state)
@@ -174,12 +174,8 @@
           <div class="form-group">
             <div class="col-sm-6 city_id">
               <label for="city_id">Cidade</label>
-              <select id="city_id" name="city_id" class="form-control">
+              <select name="city_id" id="city" class="form-control">
                 <option selected disabled>Cidade..</option>
-                <option value="1">São Paulo</option>
-                <option value="2">Guarulhos</option>
-                <option value="3">Santos</option>
-                <option value="4">ABC</option>
               </select>
             </div>
             <div class="col-sm-2" id="started">

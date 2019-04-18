@@ -95,4 +95,43 @@
 </div>
 <!--/.Senha-->
 
+<!--Senha-->
+@isset($candidate)
+<div class="modal fade" id="companyMessage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{{route('company.message')}}">
+        {{csrf_field()}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+          <h4 class="modal-title">Mensagem para {{$candidate->name}}</h4>
+        </div>
+        <div class="box-body">
+          <div class="form-group" >
+            <div class="col-sm-12">
+              <label for="message">Mensagem</label>
+              <textarea name="message" rows="5" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Voltar</button>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+@endisset
+<!--/.Senha-->
+
           

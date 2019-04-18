@@ -113,5 +113,10 @@ class Candidate extends Authenticatable
     {
         return $this->belongsToMany('App\Opportunity', 'opportunity_candidate');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
     
 }

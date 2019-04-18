@@ -1,4 +1,4 @@
-@extends('company.templates.default')
+@extends('index.templates.default-empresa')
 
 @section('title', 'Home')
 
@@ -51,7 +51,7 @@
                        <div class="row">
                             <div class="col-sm-6">
                                 <label for="name">Nome Fantasia</label>
-                                <input type="text" name="name" placeholder="Nome Fantasia">
+                                <input type="text" name="name" placeholder="Nome Fantasia" value="{{old('name')}}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="email">E-mail</label>

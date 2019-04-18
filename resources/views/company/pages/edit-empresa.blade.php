@@ -128,6 +128,16 @@
                             <div class="col-sm-4">
                                 <button class="btn-orange">Editar meu cadastro</button>
                             </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('company.index.message')}}">
+                                    <button type="button" class="btn-orange">Mensagens Enviadas</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('opportunity.index')}}">
+                                    <button type="button" class="btn-orange">Voltar</button>
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

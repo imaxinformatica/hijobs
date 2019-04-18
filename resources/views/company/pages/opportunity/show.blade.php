@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-sm-5">
                             <h4>Cidade(s)</h4>
-                            <p>{{$opportunity->state->name}}</p>
+                            <p>{{$opportunity->city->name}}</p>
                         </div>
                         <div class="col-sm-2">
                             <h4>Vagas</h4>

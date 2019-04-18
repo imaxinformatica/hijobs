@@ -43,4 +43,9 @@ class Company extends Authenticatable
     {
         return $this->hasMany('App\Opportunity');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
 }

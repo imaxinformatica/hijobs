@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use App\Page;
 use App\State;
+use App\City;
 use App\Driver;
 use App\Company;
 use App\Country;
 use App\Vehicle;
 use App\Journey;
+use App\Message;
 use App\Special;
 use App\Language;
 use App\Hierarchy;
@@ -27,23 +29,19 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return view('company.pages.index-empresa')
-        ->with('pages', Page::all());
+        return view('index.index-empresa');
     }
 
     public function session(Request $request)
     {
         $request->session()->put('email', $request->email);
 
-        return redirect(route('company.create'))
-        ->with('pages', Page::all());
+        return redirect(route('company.create'));
     }
 
     public function create(Request $request)
     {
-        // return dd($request->session()); 
-        return view('company.pages.create')->with('email', $request->session()->pull('email'))
-        ->with('pages', Page::all());
+        return view('company.pages.create')->with('email', $request->session()->pull('email'));
     }
 
     public function store(Request $request)
@@ -62,8 +60,7 @@ class CompanyController extends Controller
 
         Auth::guard('company')->loginUsingId($company->id, true);
         
-        return redirect(route('company.data'))
-        ->with('pages', Page::all());
+        return redirect(route('company.data'));
     }
 
     public function data()
@@ -74,8 +71,7 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function show()
@@ -85,8 +81,7 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function edit()
@@ -96,8 +91,7 @@ class CompanyController extends Controller
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function password(Request $request)
@@ -110,8 +104,7 @@ class CompanyController extends Controller
 
         $company->password = bcrypt($request->password);
         $company->save();
-        return redirect()->back()->with('success', 'Senha alterada!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Senha alterada!');
     }
 
     public function update(Request $request)
@@ -134,8 +127,8 @@ class CompanyController extends Controller
         $company->cep         		   = $request->cep;
         $company->street               = $request->street;
         $company->neighborhood 		   = $request->neighborhood;
-        $company->city                 = $request->city;
-        $company->state                = $request->state;
+        $company->city_id              = $request->city;
+        $company->state_id             = $request->state;
         $company->number               = $request->number;
         if ($request->name != null ||  $request->name != '') {
             $company->name             = $request->name;
@@ -162,8 +155,7 @@ class CompanyController extends Controller
         $company->blog                = $request->blog;
         $company->save();
 
-        return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!')
-        ->with('pages', Page::all());
+        return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!');
     }
 
     public function candidate(Request $request)
@@ -220,8 +212,7 @@ class CompanyController extends Controller
         ->with('hierarchies', Hierarchy::all())
         ->with('subknowledges', Subknowledge::all())
         ->with('candidates', $candidates)
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function showCV($id)
@@ -237,8 +228,26 @@ class CompanyController extends Controller
         ->with('languages', Language::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate)
-        ->with('pages', Page::all());
+        ->with('candidate', $candidate);
+    }
+
+    public function message(Request $request)
+    {
+        $company = Auth::guard('company')->user();
+        $msg = new Message();
+
+        $msg->text          = $request->message;
+        $msg->company_id    = $company->id;
+        $msg->candidate_id  = $request->candidate_id;
+        $msg->sent          = 1;
+        $msg->save();
+        return redirect()->back()->with('success', 'Mensagem Enviada.');
+    }
+
+    public function indexMessage()
+    {
+        $company = Auth::guard('company')->user();
+        return view('company.pages.messages.all-messages')->with('company', $company);
     }
 
 }

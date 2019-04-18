@@ -63,23 +63,23 @@
                                 <select name="state_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option <?php if (old('state_id') == $state->id){ echo " selected";}?> value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-5">
                                 <label for="cpf">CPF</label>
-                                <input type="text" class="input-cpf" name="cpf" placeholder="Digite seu CPF">
+                                <input type="text" class="input-cpf" value="{{old('cpf')}}" name="cpf" placeholder="Digite seu CPF">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="phone">Telefone</label>
-                                <input type="text" class="input-phone" name="phone" placeholder="Seu telefone">
+                                <input type="text" class="input-phone" name="phone" value="{{old('phone')}}" placeholder="Seu telefone">
                             </div>
                             <div class="col-sm-5">
                                 <label for="birthdate">Data de nascimento</label>
-                                <input type="text" class="input-date" name="birthdate" placeholder="Sua data de nascimento">
+                                <input type="text" class="input-date" name="birthdate" value="{{old('birthdate')}}" placeholder="Sua data de nascimento">
                             </div>
                         </div>
                         <div class="row">
@@ -87,18 +87,18 @@
                                 <label for="marital_status">Estado civil</label>
                                 <select name="marital_status">
                                     <option selected disabled>Selecione</option>
-                                    <option value="Solteiro">Solteiro</option>
-                                    <option value="Casado">Casado</option>
-                                    <option value="Divorciado">Divorciado</option>
-                                    <option value="Viúvo">Viúvo</option>
+                                    <option value="Solteiro" <?php if (old('marital_status') == 'Solteiro'){ echo "selected";}?>>Solteiro</option>
+                                    <option value="Casado" <?php if (old('marital_status') == 'Casado'){ echo "selected";}?>>Casado</option>
+                                    <option value="Divorciado" <?php if (old('marital_status') == 'Divorciado'){ echo "selected";}?>>Divorciado</option>
+                                    <option value="Viúvo" <?php if (old('marital_status') == 'Viúvo'){ echo "selected";}?>>Viúvo</option>
                                 </select>
                             </div>
                             <div class="col-sm-5">
                                 <label for="sex">Sexo</label>
                                 <select name="sex">
                                     <option selected disabled>Selecione</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Feminino</option>
+                                    <option value="M" <?php if (old('sex') == "M"){ echo "selected";}?>>Masculino</option>
+                                    <option value="F" <?php if (old('sex') == "F"){ echo "selected";}?>>Feminino</option>
                                 </select>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                             </div>
                             @endforeach
                             <div class="col-sm-12">
-                                <label for="special_description" style="margin-top: 20px;">Condições especiais</label>
+                                <label for="special_description" value="{{old('cpf')}}" style="margin-top: 20px;">Condições especiais</label>
                                 <textarea name="special_description" placeholder="Descreva condições especiais de transporte, trabalho, acompanhamento etc."></textarea>
                             </div>
                         </div>
@@ -127,21 +127,21 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="linkedin">Linkedin</label>
-                                <input type="text" name="linkedin" placeholder="Informe a url do seu perfil">
+                                <input type="text" value="{{old('linkedin')}}" name="linkedin" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="facebook">Facebook</label>
-                                <input type="text" name="facebook" placeholder="Informe a url do seu perfil">
+                                <input type="text" value="{{old('facebook')}}" name="facebook" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="twitter">Twitter</label>
-                                <input type="text" name="twitter" placeholder="Informe a url do seu perfil">
+                                <input type="text" value="{{old('twitter')}}" name="twitter" placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="blog">Blog</label>
-                                <input type="text" name="blog" placeholder="Informe a url do seu perfil">
+                                <input type="text" value="{{old('blog')}}" name="blog" placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
@@ -180,10 +180,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="travel"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas"><input <?php if (old('travel') == "1"){ echo "checked";}?> type="radio" value="1" name="travel"><span class="checkmark check-radio"></span>Sim</label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="travel"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas"><input <?php if (old('travel') == "0"){ echo "checked";}?> type="radio" value="0" name="travel"><span class="checkmark check-radio"></span>Não</label>
                             </div>
                         </div>
                         <div class="row">
@@ -193,10 +193,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="1" name="change"><span class="checkmark check-radio"></span>Sim</label>
+                                <label class="lbl-caracteristicas"><input <?php if (old('change') == "1"){ echo "checked";}?> type="radio" value="1" name="change"><span class="checkmark check-radio"></span>Sim</label>
                             </div>
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="radio" value="0" name="change"><span class="checkmark check-radio"></span>Não</label>
+                                <label class="lbl-caracteristicas"><input <?php if (old('change') == "0"){ echo "checked";}?> type="radio" value="0" name="change"><span class="checkmark check-radio"></span>Não</label>
                             </div>
                         </div>
                         <div class="row">
@@ -210,7 +210,7 @@
                                 <select name="journey_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($journeys as $journey)
-                                    <option value="{{$journey->id}}">{{$journey->name}}</option>
+                                    <option value="{{$journey->id}}" <?php if (old('journey_id') == $journey->id){ echo "selected";}?>>{{$journey->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -219,7 +219,7 @@
                                 <select name="contract_type_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($contract_types as $contract)
-                                    <option value="{{$contract->id}}">{{$contract->name}}</option>
+                                    <option value="{{$contract->id}}" <?php if (old('contract_type_id') == $contract->id){ echo "selected";}?>>{{$contract->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -230,7 +230,7 @@
                                 <select name="min_hierarchy_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($hierarchies as $hierarchy)
-                                    <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
+                                    <option value="{{$hierarchy->id}}" <?php if (old('min_hierarchy_id') == $hierarchy->id){ echo "selected";}?>>{{$hierarchy->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -239,7 +239,7 @@
                                 <select name="max_hierarchy_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($hierarchies as $hierarchy)
-                                    <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
+                                    <option value="{{$hierarchy->id}}" <?php if (old('max_hierarchy_id') == $hierarchy->id){ echo "selected";}?>>{{$hierarchy->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -247,7 +247,7 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <label for="salary">Pretenção salarial mínima</label>
-                                <input type="text" class="input-money" name="salary" placeholder="Ex:. 2500">
+                                <input type="text" class="input-money" name="salary" value="{{old('salary')}}" placeholder="Ex:. 2500">
                             </div>
                             <div class="col-sm-5">
                                 <label for="state_work">Estado onde deseja trabalhar</label>

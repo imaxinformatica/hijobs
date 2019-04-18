@@ -259,6 +259,16 @@
                                     <button class="btn-orange">Editar meu currículo</button>
                                 </a>
                             </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('candidate.edit')}}">
+                                    <button class="btn-orange">Candidaturas</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('candidate.index.message')}}">
+                                    <button class="btn-orange">Mensagens</button>
+                                </a>
+                            </div>
                         </div>
                 </div>
             </div>

@@ -1,3 +1,8 @@
+<?php
+    $pages = DB::table('pages')->get();
+    
+?>
+
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Versão</b> 1.0.0

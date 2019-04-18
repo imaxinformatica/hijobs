@@ -95,9 +95,10 @@
                             <div class="col-sm-5">
                                 <label for="city_id">Cidade</label>
                                 <select name="city_id" class="city">
-                                    @foreach($states as $state)
+                                    <option selected disabled>Selecione..</option>
+                                    @foreach($cities as $city)
 
-                                    <option value="{{$state->id}}"<?php if ($state->id == $opportunity->city_id) {echo "selected";}?>>{{$state->name}}</option>
+                                    <option value="{{$city->id}}"<?php if ($city->id == $opportunity->city_id) {echo "selected";}?>>{{$city->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

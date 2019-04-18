@@ -1,3 +1,7 @@
+<?php
+    $pages = DB::table('pages')->get();
+?>
+
 <footer>
      <div class="container">
         <div class="row">
@@ -236,6 +240,35 @@ $(document).ready(function(){
                 $('#subknowledge_id').html('');
                 for (var i = 0; i < result.length; ++i){
                     $('#subknowledge_id').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
+                }
+            }
+        });
+    }
+});
+
+$(document).ready(function(){
+    $('#state' ).change(function() {
+        var url = "{{route('candidate.cities')}}";
+        var state_id = $('#state option:selected').val();
+        citiesAjax(url, state_id);
+    });
+    function citiesAjax(url, state_id){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data:{
+                state_id: state_id,
+            },
+            beforeSend: function(){
+            },
+            success: function(data){
+                var result = $.parseJSON(data);
+                console.log(result);
+
+                console.log(result[1].name);
+                $('#city').html('');
+                for (var i = 0; i < result.length; ++i){
+                    $('#city').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
                 }
             }
         });

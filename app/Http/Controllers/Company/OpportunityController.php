@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Page;
 use App\State;
+use App\City;
 use App\Country;
 use App\Driver;
 use App\Journey;
@@ -57,8 +58,7 @@ class OpportunityController extends Controller
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
         ->with('opportunities', $opportunities)
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function create()
@@ -68,12 +68,12 @@ class OpportunityController extends Controller
         $company = Auth::guard('company')->user();
         return view('company.pages.opportunity.create')
         ->with('states', State::all())
+        ->with('cities', City::all())
         ->with('countries', Country::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('company', $company)
-        ->with('pages', Page::all());
+        ->with('company', $company);
     }
 
     public function store(Request $request)
@@ -118,8 +118,7 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.')   
-        ->with('pages', Page::all());
+        return redirect(route('opportunity.index'))->with('success', 'Vaga Criada.')   ;
     }
 
     public function edit($id)
@@ -127,11 +126,11 @@ class OpportunityController extends Controller
         $opportunity = Opportunity::find($id);
         return view('company.pages.opportunity.edit')
         ->with('states', State::all())
+        ->with('cities', City::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity)
-        ->with('pages', Page::all());
+        ->with('opportunity', $opportunity);
     }
 
     public function show($id)
@@ -142,8 +141,7 @@ class OpportunityController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity)
-        ->with('pages', Page::all());
+        ->with('opportunity', $opportunity);
     }
 
     public function update(Request $request)
@@ -190,8 +188,7 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return redirect()->back()->with('success', 'Vaga editada.')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Vaga editada.');
     }
 
     public function publish($id)
@@ -213,8 +210,7 @@ class OpportunityController extends Controller
 		$op->publish = 2;
 		$op->save();
 
-		return redirect()->back()->with('success', 'Vaga publicada com sucesso!')
-        ->with('pages', Page::all());
+		return redirect()->back()->with('success', 'Vaga publicada com sucesso!');
     }
 
     public function destroy($id)
@@ -225,14 +221,12 @@ class OpportunityController extends Controller
     	$op->publish = 1;
     	$op->save();
 
-    	return redirect()->back()->with('success', 'Vaga removida com sucesso!')
-        ->with('pages', Page::all());
+    	return redirect()->back()->with('success', 'Vaga removida com sucesso!');
     }
 
     public function showCandidate($id)
     {
         $opportunity = Opportunity::find($id);
-
         return view('company.pages.opportunity.candidate')
         ->with('states', State::all())
         ->with('countries', Country::all())
@@ -245,8 +239,13 @@ class OpportunityController extends Controller
         ->with('knowledges', Knowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('subknowledges', Subknowledge::all())
-        ->with('opportunity', $opportunity)
-        ->with('pages', Page::all());
+        ->with('opportunity', $opportunity);
+    }
+
+    public function cities(Request $request)
+    {
+        $cities = City::where('state_id', $request->state_id)->get();
+        return json_encode($cities);
     }
 
 }

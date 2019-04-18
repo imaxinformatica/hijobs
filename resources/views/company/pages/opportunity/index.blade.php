@@ -78,8 +78,15 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </button></a>
                             </span>
-                            <p id="salario">R$ {{number_format($opportunity->salary, '2', ',', '.')}}<p>
+                            <p id="salario">
+                                @if($opportunity->salary == 0)
+                                A combinar
+                            @else
+                                {{number_format($opportunity->salary, '2', ',', '.')}}
+                            @endif
+                                </p>
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
+                            <p><b>Tipo de Contrato: </b> {{$opportunity->contract->name}}</p>
                             <p>{{$opportunity->activity}}</p>
                             <a href="{{route('opportunity.edit', ['id' => $opportunity->id])}}">
                                 <button class="btn-result">

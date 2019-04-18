@@ -59,19 +59,19 @@
                             <tr>
                                 <th scope="col">Instuição</th>
                                 <th scope="col">Formação</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Situação</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($candidate->formations as $formation)
-                                <tr>
+                            <tr>
                                 <td>{{$formation->name}}</td>
                                 <td>{{$formation->level->name}}</td>
+                                 <td>{{$formation->course->name}}</td>
+                                <td>{{ucfirst($formation->situation)}}</td>
                                 <td>
-                                    <a href="{{route('candidate.formation.show', ['id' => $formation->id])}}">
-                                        <button class="btn btn-info" type="button">
-                                        <i class="fa fa-eye" aria-hidden="true"></i></button>
-                                    </a>
                                     <a href="{{route('candidate.formation.destroy', ['id' => $formation->id])}}">
                                         <button class="btn btn-danger" type="button">
                                         <i class="fa fa-times" aria-hidden="true"></i></button>
@@ -105,21 +105,21 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Cargo</th>
                                 <th scope="col">Empresa</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Hierarquia</th>
+                                <th scope="col">Atividades Exercidas</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($candidate->experiences as $experience)
                             <tr>
-                                <td>{{$experience->occupation}}</td>
                                 <td>{{$experience->name}}</td>
+                                <td>{{$experience->occupation}}</td>
+                                <td>{{$experience->hierarchy->name}}</td>
+                                <td>{{$experience->description}}</td>
                                 <td>
-                                    <a href="{{route('candidate.experience.show', ['id' => $experience->id])}}">
-                                        <button class="btn btn-info" type="button">
-                                        <i class="fa fa-eye" aria-hidden="true"></i></button>
-                                    </a>
                                     <a href="{{route('candidate.experience.destroy', ['id' => $experience->id])}}">
                                         <button class="btn btn-danger" type="button">
                                         <i class="fa fa-times" aria-hidden="true"></i></button>

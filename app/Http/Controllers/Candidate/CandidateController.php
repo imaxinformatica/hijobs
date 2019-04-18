@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\City;
 use App\Page;
 use App\State;
 use App\Level;
@@ -40,8 +41,7 @@ class CandidateController extends Controller
         $companies = Company::where('publish', 1)->get();
         $opportunities = Opportunity::all();
         return view('index.index')->with('companies', $companies)
-        ->with('opportunities', $opportunities)
-        ->with('pages', Page::all());
+        ->with('opportunities', $opportunities);
     }
 
     public function index()
@@ -49,14 +49,12 @@ class CandidateController extends Controller
         $companies = Company::where('publish', 1)->get();
         $opportunities = Opportunity::all();
         return view('candidate.pages.index')->with('companies', $companies)
-        ->with('opportunities', $opportunities)
-        ->with('pages', Page::all());
+        ->with('opportunities', $opportunities);
     }
 
     public function create()
     {
-    	return view('candidate.pages.cadastrar-curriculo')
-        ->with('pages', Page::all());
+    	return view('candidate.pages.cadastrar-curriculo');
     }
 
     public function store(Request $request)
@@ -79,8 +77,7 @@ class CandidateController extends Controller
 
         Auth::guard('candidate')->loginUsingId($candidate->id, true);
         
-        return redirect(route('candidate.data', ['id' => $candidate->id]))
-        ->with('pages', Page::all());
+        return redirect(route('candidate.data', ['id' => $candidate->id]));
     }
 
     public function data($id)
@@ -99,8 +96,7 @@ class CandidateController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate)
-        ->with('pages', Page::all());
+        ->with('candidate', $candidate);
     }
 
     public function edit()
@@ -121,8 +117,7 @@ class CandidateController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate)
-        ->with('pages', Page::all());
+        ->with('candidate', $candidate);
     }
 
     public function update(Request $request)
@@ -236,8 +231,7 @@ class CandidateController extends Controller
             return redirect(route('candidate.better', ['id' => $candidate->id]))
             ->with('success','Cadastro Finalizado');
         }
-        return redirect(route('candidate.show'))->with('success','Cadastro Atualizado')
-        ->with('pages', Page::all());
+        return redirect(route('candidate.show'))->with('success','Cadastro Atualizado');
     }
 
     public function password(Request $request)
@@ -250,8 +244,7 @@ class CandidateController extends Controller
 
         $candidate->password = bcrypt($request->password);
         $candidate->save();
-        return redirect()->back()->with('success', 'Senha alterada!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Senha alterada!');
     }
 
     public function formation(Request $request)
@@ -269,8 +262,7 @@ class CandidateController extends Controller
 
         $formation->save();
 
-        return redirect()->back()->with('success', 'Formação incluída com sucesso!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Formação incluída com sucesso!');
     }
 
     public function formationDestroy($id)
@@ -279,16 +271,14 @@ class CandidateController extends Controller
 
         $formation->delete();
 
-        return redirect()->back()->with('success', 'Conhecimento removido com sucesso')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
     }
 
     public function courseFormation(Request $request)
     {
         $course = Course::where('level_id', $request->level_id)->get();
 
-        return json_encode($course)
-        ->with('pages', Page::all());
+        return json_encode($course);
     }
 
     public function experience(Request $request)
@@ -307,7 +297,7 @@ class CandidateController extends Controller
             $experience->save();
 
             return redirect()->back()->with('success', 'Experiência incluída com sucesso!')
-            ->with('pages', Page::all());
+;
     }
     
     public function CandidateExperience($id)
@@ -316,8 +306,7 @@ class CandidateController extends Controller
 
         $experience->delete();
 
-        return redirect()->back()->with('success', 'Experiência removida com sucesso')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Experiência removida com sucesso');
     }
 
     public function language(Request $request)
@@ -330,7 +319,7 @@ class CandidateController extends Controller
 
             $language->save();
             return redirect()->back()->with('success', 'Idioma incluída com sucesso!')
-            ->with('pages', Page::all());
+;
     }
 
     public function languageDestroy($id)
@@ -339,8 +328,7 @@ class CandidateController extends Controller
 
         $language->delete();
 
-        return redirect()->back()->with('success', 'Idioma removido com sucesso')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Idioma removido com sucesso');
     }
 
     public function knowledge(Request $request)
@@ -357,16 +345,14 @@ class CandidateController extends Controller
         }
 
 
-        return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
     }
 
     public function subknowledge(Request $request)
     {
         $subknowledge = Subknowledge::where('knowledge_id', $request->knowledge_id)->get();
 
-        return json_encode($subknowledge)
-        ->with('pages', Page::all());
+        return json_encode($subknowledge);
     }
 
     public function knowledgeDestroy($id)
@@ -375,8 +361,7 @@ class CandidateController extends Controller
 
         $knowledge->delete();
 
-        return redirect()->back()->with('success', 'Conhecimento removido com sucesso')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
     }
 
     public function better($id)
@@ -400,8 +385,7 @@ class CandidateController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate)
-        ->with('pages', Page::all());
+        ->with('candidate', $candidate);
     }
 
     public function show(){
@@ -417,14 +401,12 @@ class CandidateController extends Controller
         ->with('languages', Language::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-        ->with('candidate', $candidate)
-        ->with('pages', Page::all());
+        ->with('candidate', $candidate);
     }
 
     public function opportunity()
     {
-        return view('candidate.pages.buscar-vagas')
-        ->with('pages', Page::all());
+        return view('candidate.pages.buscar-vagas');
     }
 
     public function search(Request $request)
@@ -457,8 +439,7 @@ class CandidateController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunities', $opportunities)
-        ->with('pages', Page::all());
+        ->with('opportunities', $opportunities);
     }
 
     public function showOpportunity($id)
@@ -470,8 +451,7 @@ class CandidateController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity)
-        ->with('pages', Page::all());
+        ->with('opportunity', $opportunity);
     }
 
     public function application($id)
@@ -486,7 +466,18 @@ class CandidateController extends Controller
         $op->save();
 
         return redirect()->back()
-        ->with('success','Canidatura Realizada')
-        ->with('pages', Page::all());
+        ->with('success','Canidatura Realizada');
+    }
+
+    public function cities(Request $request)
+    {
+        $cities = City::where('state_id', $request->state_id)->get();
+        return json_encode($cities);
+    }
+
+    public function indexMessage()
+    {
+        $candidate = Auth::guard('candidate')->user();
+        return view('candidate.pages.messages.all-messages')->with('candidate', $candidate);
     }
 }

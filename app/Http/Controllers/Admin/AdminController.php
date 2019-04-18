@@ -27,16 +27,14 @@ class AdminController extends Controller
     {
         $pages = Page::all();
         return view('admin.pages.pages.index')
-        ->with('pages', $pages)
-        ->with('pages', Page::all());
+        ->with('pages', $pages);
     }
 
     public function editPages($id)
     {
         $page = Page::find($id);
         return view('admin.pages.pages.edit')
-        ->with('pages', $page)
-        ->with('pages', Page::all());
+        ->with('pages', $page);
     }
 
     public function updatePages(Request $request)
@@ -45,15 +43,13 @@ class AdminController extends Controller
         $page->desc = ($request->desc);
         $page->save();
 
-        return redirect()->back()->with('success', 'Alterado com Sucesso')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Alterado com Sucesso');
     }
 
     public function footer($urn)
     {
         $page = Page::where('urn', $urn)->first();
-        return view('index.pages.pages')->with('page', $page)
-        ->with('pages', Page::all());
+        return view('index.pages.pages')->with('page', $page);
     }
 
     public function indexCompany(Request $request)
@@ -79,8 +75,7 @@ class AdminController extends Controller
         $companies = $companies->orderBy('name', 'asc')->paginate(10);
 
     	return view('admin.pages.company.index')
-    	->with('companies', $companies)
-        ->with('pages', Page::all());
+    	->with('companies', $companies);
     }
 
     public function editCompany($id)
@@ -90,8 +85,7 @@ class AdminController extends Controller
     	->with('states', State::all())
         ->with('countries', Country::all())
         ->with('occupations', OccupationArea::all())
-    	->with('company', $company)
-        ->with('pages', Page::all());
+    	->with('company', $company);
     }
 
     public function updateCompany(Request $request)
@@ -142,8 +136,7 @@ class AdminController extends Controller
         $company->blog                = $request->blog;
         $company->save();
 
-        return redirect()->back()->with('success','Empresa Salva com sucesso!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success','Empresa Salva com sucesso!');
     }
 
     public function showCompany($id)
@@ -151,8 +144,7 @@ class AdminController extends Controller
     	$company = Company::find($id);
     	$company->publish = 1;
     	$company->save();
-    	return redirect()->back()->with('success', 'Empresa Disponibilizada na Home')
-        ->with('pages', Page::all());
+    	return redirect()->back()->with('success', 'Empresa Disponibilizada na Home');
     }
 
     public function removeCompany($id)
@@ -160,8 +152,7 @@ class AdminController extends Controller
     	$company = Company::find($id);
     	$company->publish = NULL;
     	$company->save();
-    	return redirect()->back()->with('success', 'Empresa Removida da Home')
-        ->with('pages', Page::all());    
+    	return redirect()->back()->with('success', 'Empresa Removida da Home');    
     }
 
 
@@ -188,8 +179,7 @@ class AdminController extends Controller
         $candidates = $candidates->orderBy('name', 'asc')->paginate(10);
 
     	return view('admin.pages.candidate.index')
-    	->with('candidates', $candidates)
-        ->with('pages', Page::all());
+    	->with('candidates', $candidates);
     }
 
     public function editCandidate($id)
@@ -208,8 +198,7 @@ class AdminController extends Controller
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
-    	->with('candidate', $candidate)
-        ->with('pages', Page::all());    
+    	->with('candidate', $candidate);    
     }
 
     public function updateCandidate(Request $request)
@@ -335,8 +324,7 @@ class AdminController extends Controller
         $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
 
         return view('admin.pages.opportunity.index')
-        ->with('opportunities', $opportunities)
-        ->with('pages', Page::all());
+        ->with('opportunities', $opportunities);
     }
 
     public function editOpportunity($id)
@@ -347,8 +335,7 @@ class AdminController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('contract_types', ContractType::all())
-        ->with('opportunity', $opportunity)
-        ->with('pages', Page::all());   
+        ->with('opportunity', $opportunity);   
     }
 
     public function updateOpportunity(Request $request)
@@ -395,8 +382,7 @@ class AdminController extends Controller
 
         $opportunity->save();
 
-        return redirect()->back()->with('success', 'Vaga editada.')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Vaga editada.');
     }
 
     public function publish($id)
@@ -418,8 +404,7 @@ class AdminController extends Controller
         $op->publish = 2;
         $op->save();
 
-        return redirect()->back()->with('success', 'Vaga publicada com sucesso!')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Vaga publicada com sucesso!');
     }
 
     public function showOpportunity($id)
@@ -427,8 +412,7 @@ class AdminController extends Controller
         $opportunity = Opportunity::find($id);
         $opportunity->publish = 2;
         $opportunity->save();
-        return redirect()->back()->with('success', 'Vaga Disponibilizada')
-        ->with('pages', Page::all());
+        return redirect()->back()->with('success', 'Vaga Disponibilizada');
     }
 
     public function removeOpportunity($id)
@@ -436,8 +420,7 @@ class AdminController extends Controller
         $opportunity = Opportunity::find($id);
         $opportunity->publish = 1;
         $opportunity->save();
-        return redirect()->bacshowk()->with('success', 'Vaga desabilitada')
-        ->with('pages', Page::all());    
+        return redirect()->bacshowk()->with('success', 'Vaga desabilitada');    
     }
 
     public function dashboard()

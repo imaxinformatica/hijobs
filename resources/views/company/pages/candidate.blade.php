@@ -31,6 +31,8 @@
                                     <option value="1000">À partir de R$ 1.000,00</option>
                                     <option value="2000">À partir de R$ 2.000,00</option>
                                     <option value="3000">À partir de R$ 3.000,00</option>
+                                    <option value="5000">À partir de R$ 5.000,00</option>
+                                    <option value="10000">À partir de R$ 10.000,00</option>
                                 </select>
                             </div>
                         </div>
@@ -109,7 +111,9 @@
                         <div class="box-result-search result-vacancies">
                             <span><b>Nome: </b>{{$candidate->name}}</span>
                             <p><b>Pretensão Salarial: </b>A partir de R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
+                            @isset($candidate->state_id)
                             <p><b>Estado: </b>{{$candidate->state->name}}</p>
+                            @endisset
                             <a href="{{route('company.cv', ['id'=> $candidate->id])}}">
                                 <button class="btn-result" type="button">
                                     <div class="border">

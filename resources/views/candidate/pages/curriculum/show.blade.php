@@ -9,15 +9,30 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Visualizando seu currículo</h1>
-                
+                <h1>Visualizando currículo</h1>
             </div>
         </div>
         
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="{{route('candidate.edit')}}">
+                                    <button class="btn-blue">Editar meu currículo</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('candidate.app')}}">
+                                    <button class="btn-blue">Candidaturas</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{{route('candidate.index.message')}}">
+                                    <button class="btn-blue">Mensagens</button>
+                                </a>
+                            </div>
+                        </div>
                         <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                         <div class="row">
                             <div class="col-sm-12">
@@ -51,7 +66,6 @@
                             </div>
                         </div>
 
-                        <hr>
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4>Formação acadêmica</h4>
@@ -75,6 +89,9 @@
                                             <td>{{$formation->course->name}}</td>
                                         </tr>
                                         @empty
+                                        <tr>
+                                            <td>Nenhuma Cadastrada</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -106,6 +123,9 @@
                                           <td>{{$experience->description}}</td>
                                         </tr>
                                         @empty
+                                        <tr>
+                                            <td>Nenhuma Cadastrada</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -133,6 +153,9 @@
                                             
                                         </tr>
                                         @empty
+                                        <tr>
+                                            <td>Nenhuma Cadastrada</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -159,12 +182,14 @@
                                             <td>{{$know->subknowledges->where('id', $know->pivot->subknowledge_id)->first()->name}}</td>
                                         </tr>
                                         @empty
+                                        <tr>
+                                            <td>Nenhuma Cadastrada</td>
+                                        </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <hr>
                         <div class="row">
                             <div class="col-sm-12">
                                 <h2>Objetivos profissionais</h2>
@@ -172,14 +197,21 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p for="name"><b>Jornada: </b>{{$candidate->journey->name}}</p>
-                                <p for="name"><b>Tipo de contrato: </b>{{$candidate->contract_type->name}}</p>
-                                <p for="name"><b>Nível hierárquico mínimo: </b>{{$candidate->min_hierarchy->name}}</p>
-                                <p for="name"><b>Nível hierárquico máximo: </b>{{$candidate->max_hierarchy->name}}</p>
-                                <p for="name"><b>Pretenção salarial mínima: </b>R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
+                                @isset($candidate->journey)
+                                    <p for="name"><b>Jornada: </b>{{$candidate->journey->name}}</p>
+                                @endisset
+                                @isset($candidate->contract_type)
+                                    <p for="name"><b>Tipo de contrato: </b>{{$candidate->contract_type->name}}</p>
+                                @endisset
+                                @isset($candidate->min_hierarchy)
+                                    <p for="name"><b>Nível hierárquico mínimo: </b>{{$candidate->min_hierarchy->name}}</p>
+                                @endisset
+                                @isset($candidate->max_hierarchy)
+                                    <p for="name"><b>Nível hierárquico máximo: </b>{{$candidate->max_hierarchy->name}}</p>
+                                @endisset
+                                    <p for="name"><b>Pretenção salarial mínima: </b>R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
                             </div>
                         </div>
-                        <hr>
                         <div class="row">
                             <div class="col-sm-12">
                                 <h2>Redes sociais</h2>
@@ -201,7 +233,6 @@
                                 @endif                      
                             </div>
                         </div>
-                        <hr>
                         <div class="row">
                             <div class="col-sm-12">
                                 <h2>Informações complementares</h2>
@@ -252,24 +283,7 @@
                             </div>
                             
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <a href="{{route('candidate.edit')}}">
-                                    <button class="btn-orange">Editar meu currículo</button>
-                                </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('candidate.edit')}}">
-                                    <button class="btn-orange">Candidaturas</button>
-                                </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('candidate.index.message')}}">
-                                    <button class="btn-orange">Mensagens</button>
-                                </a>
-                            </div>
-                        </div>
+                        
                 </div>
             </div>
         </div>        

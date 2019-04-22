@@ -171,10 +171,18 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p for="name"><b>Jornada: </b>{{$candidate->journey->name}}</p>
-                                <p for="name"><b>Tipo de contrato: </b>{{$candidate->contract_type->name}}</p>
-                                <p for="name"><b>Nível hierárquico mínimo: </b>{{$candidate->min_hierarchy->name}}</p>
-                                <p for="name"><b>Nível hierárquico máximo: </b>{{$candidate->max_hierarchy->name}}</p>
+                                @isset($candidate->journey)
+                                    <p for="name"><b>Jornada: </b>{{$candidate->journey->name}}</p>
+                                @endisset
+                                @isset($candidate->contract_type)
+                                    <p for="name"><b>Tipo de contrato: </b>{{$candidate->contract_type->name}}</p>
+                                @endisset
+                                @isset($candidate->min_hierarchy)
+                                    <p for="name"><b>Nível hierárquico mínimo: </b>{{$candidate->min_hierarchy->name}}</p>
+                                @endisset
+                                @isset($candidate->max_hierarchy)
+                                    <p for="name"><b>Nível hierárquico máximo: </b>{{$candidate->max_hierarchy->name}}</p>
+                                @endisset
                                 <p for="name"><b>Pretenção salarial mínima: </b>R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
                             </div>
                         </div>

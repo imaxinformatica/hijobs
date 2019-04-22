@@ -52,7 +52,7 @@
                                         </button>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p>Ao criar uma conta, você aceita nossa <a href="#">Política de Privacidade</a></p>
+                                        <p>Ao criar uma conta, você aceita nossa <a href="{{route('footer', ['urn' => 'politica-de-privacidade'])}}">Política de Privacidade</a></p>
                                     </div>
                                 </div>
                             </form>

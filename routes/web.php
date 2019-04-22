@@ -17,11 +17,11 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/candidato', 'Candidate\CandidateController@index')->name('index');
   Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
-  Route::get('/nova/cidade', 'Company\OpportunityController@cities')->name('cities');
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
   Route::get('/mensagem', 'Candidate\CandidateController@indexMessage')->name('index.message');
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
+  Route::get('/candidaturas', 'Candidate\CandidateController@app')->name('app');
   Route::get('/candidatura/{id}', 'Candidate\CandidateController@application')->name('application');
   Route::post('/formacao', 'Candidate\CandidateController@formation')->name('formation');
   Route::get('/formacao/curso', 'Candidate\CandidateController@courseFormation')->name('course');
@@ -36,6 +36,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
 });
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
+  Route::get('/nova/cidade', 'Company\OpportunityController@cities')->name('cities');
 
   Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
   Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
@@ -124,6 +125,11 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/pages', 'Admin\AdminController@pages')->name('pages');
   Route::get('/pages/edit/{id}', 'Admin\AdminController@editPages')->name('pages.edit');
   Route::post('/pages/update', 'Admin\AdminController@updatePages')->name('pages.update');
+  Route::get('frequentes/', 'Admin\AdminController@frequently')->name('frequentlys');
+  Route::get('/frequentes/create/', 'Admin\AdminController@createFrequently')->name('frequently.create');
+  Route::post('/frequentes/store', 'Admin\AdminController@storeFrequently')->name('frequently.store');
+  Route::get('/frequentes/edit/{id}', 'Admin\AdminController@editFrequently')->name('frequently.edit');
+  Route::post('/frequentes/update', 'Admin\AdminController@updateFrequently')->name('frequently.update');
 
   Route::get('/vagas', 'Admin\AdminController@indexOpportunity')->name('opportunities');
   Route::post('/vagas/update', 'Admin\AdminController@updateOpportunity')->name('opportunities.update');
@@ -142,4 +148,5 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::post('/candidatos/update', 'Admin\AdminController@updateCandidate')->name('candidate.update');
 });
 
+Route::get('perguntas-frequentes', 'Admin\AdminController@showFrequently')->name('frequentlys');
 Route::get('/{urn}', 'Admin\AdminController@footer')->name('footer');

@@ -15,8 +15,8 @@ use App\Special;
 use App\Country;
 use App\Journey;
 use App\Vehicle;
-use App\Language;
 use App\Candidate;
+use App\Language;
 use App\Hierarchy;
 use App\Knowledge;
 use App\Formation;
@@ -296,18 +296,9 @@ class CandidateController extends Controller
 
             $experience->save();
 
-            return redirect()->back()->with('success', 'Experiência incluída com sucesso!')
-;
+            return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
     }
     
-    public function CandidateExperience($id)
-    {
-        $experience = Knowledge::find($id);
-
-        $experience->delete();
-
-        return redirect()->back()->with('success', 'Experiência removida com sucesso');
-    }
 
     public function language(Request $request)
     {
@@ -318,8 +309,7 @@ class CandidateController extends Controller
             $language->candidate_id    = $request->candidate_id;
 
             $language->save();
-            return redirect()->back()->with('success', 'Idioma incluída com sucesso!')
-;
+            return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
     }
 
     public function languageDestroy($id)
@@ -424,6 +414,17 @@ class CandidateController extends Controller
             }
         }
 
+        if($request->has('state_id')){
+            if(request('state_id') != ''){
+                $opportunities = $opportunities->where('state_id', request('state_id'));
+            }
+        }
+
+        if($request->has('city_id')){
+            if(request('city_id') != ''){
+                $opportunities = $opportunities->where('city_id', request('city_id'));
+            }
+        }
 
         if($request->has('contract_type_id')){
             if(request('contract_type_id') != ''){
@@ -459,7 +460,6 @@ class CandidateController extends Controller
         $candidate = Auth::guard('candidate')->user();
 
         $opportunity = Opportunity::find($id);
-
         $op = new OpportunityCandidate;
         $op->candidate_id = $candidate->id;
         $op->opportunity_id = $opportunity->id;
@@ -467,6 +467,11 @@ class CandidateController extends Controller
 
         return redirect()->back()
         ->with('success','Canidatura Realizada');
+    }
+    public function app()
+    {
+        $candidate = Auth::guard('candidate')->user();
+        return view('candidate.pages.application.all-application')->with('candidate', $candidate);
     }
 
     public function cities(Request $request)

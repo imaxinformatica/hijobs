@@ -6,7 +6,7 @@
 
     <body class="hold-transition skin-blue sidebar-mini">
         
-        @include('candidate.includes.header')
+        @include('index.includes.header')
 
 
         @yield('content')

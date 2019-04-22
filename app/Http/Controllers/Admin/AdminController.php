@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Page;
 use App\Company;
 use App\Candidate;
-use App\State;use App\Country;
+use App\State;
+use App\Frequently;
+use App\Country;
 use App\Driver;
 use App\Journey;
 use App\Vehicle;
@@ -34,7 +36,7 @@ class AdminController extends Controller
     {
         $page = Page::find($id);
         return view('admin.pages.pages.edit')
-        ->with('pages', $page);
+        ->with('page', $page);
     }
 
     public function updatePages(Request $request)
@@ -430,5 +432,49 @@ class AdminController extends Controller
     	->with('candidates', Candidate::all())
     	->with('companies', Company::all())
     	->with('opportunities', $opportunities);
+    }
+
+    public function frequently()
+    {
+        return view('admin.pages.frequently.index')->with('frequentlys', Frequently::all());
+    }
+
+    public function createFrequently()
+    {
+       return view('admin.pages.frequently.create');
+    }
+
+
+    public function storeFrequently(Request $request)
+    {
+
+        $frequently = new Frequently;
+        $frequently->answer = $request->answer;
+        $frequently->question = $request->question;
+        $frequently->save();
+
+        return redirect()->back()->with('success', 'Criado com Sucesso'); 
+    }
+
+    public function editFrequently($id)
+    {
+       $frequently = Frequently::find($id);
+       return view('admin.pages.frequently.edit')->with('frequently', $frequently);
+    }
+
+
+    public function updateFrequently(Request $request)
+    {
+        $frequently = Frequently::find($request->id);
+        $frequently->answer = $request->answer;
+        $frequently->question = $request->question;
+        $frequently->save();
+
+        return redirect()->back()->with('success', 'Alterado com Sucesso'); 
+    }
+
+    public function showFrequently()
+    {
+        return view('admin.pages.frequently.show')->with('frequentlys', Frequently::all());
     }
 }

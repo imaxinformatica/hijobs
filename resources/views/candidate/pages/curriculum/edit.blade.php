@@ -219,7 +219,7 @@
                                 <select name="journey_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($journeys as $journey)
-                                    <option value="{{$journey->id}}" <?php if ($candidate->contract_type_id == $journey->id): echo "selected"; endif; ?>>{{$journey->name}}</option>
+                                    <option value="{{$journey->id}}" <?php if ($candidate->journey_id == $journey->id): echo "selected"; endif; ?>>{{$journey->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -26,8 +26,17 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{route('company.candidate')}}">BUSCAR CANDIDATOS</a></li>
-          <li id="login"><a href="{{url('company/login')}}">LOGIN</a></li>
+          @auth
+            @if(Auth::guard('candidate'))
+            <li><a href="{{route('candidate.opportunity')}}">BUSCAR VAGAS</a></li>
+          <li><a href="{{route('candidate.show')}}">DADOS PESSOAIS</a></li>
+          <li id="login"><a href="{{url('candidate/logout')}}">SAIR</a></li>
+            @endif
+          @else
+              <li><a href="{{route('company.candidate')}}">BUSCAR CANDIDATOS</a></li>
+              <li id="login"><a href="{{url('company/login')}}">LOGIN</a></li>
+
+          @endauth
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>

@@ -14,4 +14,8 @@ class Message extends Model
     {
         return $this->belongsTo('App\Candidate');
     }
+    public function company()
+    {
+    	return $this->belongsTo('App\Company');
+    }
 }

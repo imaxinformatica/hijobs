@@ -26,9 +26,11 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          @auth
           <li><a href="{{route('candidate.opportunity')}}">BUSCAR VAGAS</a></li>
           <li><a href="{{route('candidate.show')}}">DADOS PESSOAIS</a></li>
           <li id="login"><a href="{{url('candidate/logout')}}">SAIR</a></li>
+          @endauth
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>

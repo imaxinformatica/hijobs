@@ -161,6 +161,14 @@ class CompanyController extends Controller
     public function candidate(Request $request)
     {
         $candidates = new Candidate;
+        if($request->has('occupation')){
+            if(request('occupation') != ''){
+                $candidates = $candidates->where('occupation', 'like', '%' . request('occupation') . '%');
+            }
+        }
+
+
+
         if($request->has('state_id')){
             if(request('state_id') != ''){
                 $candidates = $candidates->where('state_id', request('state_id'));

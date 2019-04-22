@@ -5,13 +5,16 @@
 @section('description', 'Descrição')
 
 @section('content')
+<?php
+ $states = DB::table('states')->get();
+?>
 
 <section class="search">
     <div class="container">
         <div class="row">
             <div class="col-sm-4 search-job col-sm-offset-4">
                 <h1>Buscar vagas</h1>
-                <form>
+                <form method="GET" action="{{route('candidate.search')}}">
                     <div class="row">
                         <div class="col-sm-12">
                             <input id="office" type="text" name="office" placeholder="Cargo ou Área Profissional">
@@ -20,8 +23,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="place" type="text" name="place" placeholder="Cidade, estado ou região">
-                            <p>Exemplos: São Paulo, Rio de Janeiro etc.</p>
+                            <select name="state_id" class="form-control">
+                                <option selected value="">Selecione</option>
+                                @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row">

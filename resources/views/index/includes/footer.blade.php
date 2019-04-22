@@ -21,11 +21,9 @@
                 <div class="box-footer">
                     <p><b>Empresas</b></p>
                     <ul>
-                         @foreach($pages as $page)
-                            @if($page->type == 'Empresas')
-                            <li><a href="{{route('footer', ['urn' => $page->urn])}}">{{$page->name}}</a></li>
-                            @endif
-                        @endforeach
+                        <li><a href="{{route('company.create')}}">Cadastre sua Empresa</a></li>
+                        <li><a href="{{route('company.create')}}">Anuncie vagas</a></li>
+                        <li><a href="{{route('opportunity.create')}}">Busque Candidatos</a></li>
                     </ul>
                 </div>
             </div>
@@ -33,11 +31,9 @@
                 <div class="box-footer">
                     <p><b>Candidato</b></p>
                     <ul>
-                         @foreach($pages as $page)
-                            @if($page->type == 'Candidato')
-                            <li><a href="{{route('footer', ['urn' => $page->urn])}}">{{$page->name}}</a></li>
-                            @endif
-                        @endforeach
+                        <li><a href="{{route('candidate.create')}}">Cadastre sua Empresa</a></li>
+                        <li><a href="{{route('candidate.opportunity')}}">Busque vagas</a></li>
+                        <li><a href="{{route('opportunity.create')}}">Acompanhe suas Candidaturas</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,11 +41,8 @@
                 <div class="box-footer">
                     <p><b>Suporte</b></p>
                     <ul>
-                         @foreach($pages as $page)
-                            @if($page->type == 'Suporte')
-                            <li><a href="{{route('footer', ['urn' => $page->urn])}}">{{$page->name}}</a></li>
-                            @endif
-                        @endforeach
+                        <li><a href="{{route('frequentlys')}}">Perguntas Frequentes</a></li>
+                        <li><a href="#">Contato</a></li>
                     </ul>
                 </div>
             </div>

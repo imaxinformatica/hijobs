@@ -8,10 +8,13 @@
 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <<section class="content-header">
       <div class="row">
         <div class="col-sm-6">
           <h1>Páginas</h1>
+        </div>
+        <div class="col-sm-6">
+          <button class="btn-header" onclick="window.location.href='{{ route('admin.frequently.create')}}'">Novo</button>
         </div>
       </div>
     </section>
@@ -67,19 +70,11 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($frequentlys as $frequently)
                     <tr>
-                      <td>Perguntas Frequentes</td>
+                      <td>{{$frequently->question}}</td>
                       <td>
-                        <a href="{{ route('admin.frequentlys')}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  @forelse($pages as $page)
-                    <tr>
-                      <td>{{$page->name}}</td>
-                      <td>
-                        <a href="{{ route('admin.pages.edit', ['id' => $page->id])}}" title="Editar" class="act-list">
+                        <a href="{{ route('admin.frequently.edit', ['id' => $frequently->id])}}" title="Editar" class="act-list">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                       </td>

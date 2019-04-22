@@ -22,8 +22,8 @@
                     <p><b>Empresas</b></p>
                     <ul>
                         <li><a href="{{route('company.create')}}">Cadastre sua Empresa</a></li>
-                        <li><a href="{{route('company.create')}}">Anuncie vagas</a></li>
-                        <li><a href="{{route('opportunity.create')}}">Busque Candidatos</a></li>
+                        <li><a href="{{route('opportunity.create')}}">Anuncie vagas</a></li>
+                        <li><a href="{{route('company.candidate')}}">Busque Candidatos</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="box-footer">
                     <p><b>Candidato</b></p>
                     <ul>
-                        <li><a href="{{route('candidate.create')}}">Cadastre sua Empresa</a></li>
+                        <li><a href="{{route('candidate.create')}}">Cadastre seu Currículo</a></li>
                         <li><a href="{{route('candidate.opportunity')}}">Busque vagas</a></li>
                         <li><a href="{{route('opportunity.create')}}">Acompanhe suas Candidaturas</a></li>
                     </ul>

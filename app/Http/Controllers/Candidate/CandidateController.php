@@ -14,9 +14,10 @@ use App\Course;
 use App\Special;
 use App\Country;
 use App\Journey;
+use App\Company;
 use App\Vehicle;
-use App\Candidate;
 use App\Language;
+use App\Candidate;
 use App\Hierarchy;
 use App\Knowledge;
 use App\Formation;
@@ -28,10 +29,10 @@ use App\CandidateState;
 use App\CandidateDriver;
 use App\CandidateVehicle;
 use App\CandidateSpecial;
+use App\OpportunitySearch;
 use App\CandidateLanguage;
 use App\CandidateKnowledge;
 use App\OpportunityCandidate;
-use App\Company;
 use Auth;
 
 class CandidateController extends Controller
@@ -39,7 +40,7 @@ class CandidateController extends Controller
     public function home()
     {
         $companies = Company::where('publish', 1)->get();
-        $opportunities = Opportunity::all();
+        $opportunities = Opportunity::take(4)->get();
         return view('index.index')->with('companies', $companies)
         ->with('opportunities', $opportunities);
     }
@@ -66,10 +67,28 @@ class CandidateController extends Controller
             'occupation'        => 'required',
             'password'          => 'required|min:6|confirmed',
         ]);
+        $cep = implode("",(explode("-", $request->cep)));
+        // Get cURL resource
+        $curl = curl_init();
+        // Set some options - we are passing in a useragent too here
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://viacep.com.br/ws/' . $cep . '/json/',
+            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+        ]);
+        // Send the request & save response to $resp
+        $resp = curl_exec($curl);
+        // Close request to clear up some resources
+        curl_close($curl);
+        $dadosCep = json_decode($resp);
         $candidate = new Candidate;
         $candidate->name        = $request->name;
         $candidate->email       = $request->email;
         $candidate->cep         = $request->cep;
+        $candidate->street      = $dadosCep->logradouro;
+        $candidate->state       = $dadosCep->uf;
+        $candidate->nehighbor   = $dadosCep->bairro;
+        $candidate->city        = $dadosCep->localidade;
         $candidate->occupation  = $request->occupation;
         $candidate->password    = bcrypt($request->password);
 
@@ -123,7 +142,6 @@ class CandidateController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'state_id'          => 'required',
             'cpf'               => [
                 'required',
                 Rule::unique('candidates')->ignore($request->candidate_id)
@@ -146,8 +164,15 @@ class CandidateController extends Controller
             $finish = 1;
         }
 
-        $candidate->state_id         = $request->state_id;
+        $candidate->state            = $request->state;
         $candidate->cpf              = $request->cpf;
+        if ($request->cep != NULL) {
+            $candidate->cep              = $request->cep;
+            $candidate->street           = $request->street;
+            $candidate->state            = $request->state;
+            $candidate->nehighbor        = $request->nehighbor;
+            $candidate->city             = $request->city;
+        }
         $candidate->phone            = $request->phone;
         $candidate->marital_status   = $request->marital_status;
         $candidate->sex              = $request->sex;
@@ -228,6 +253,7 @@ class CandidateController extends Controller
         $candidate->save();
 
         if ($finish ==1) {
+            $request->session()->put('occupation', $candidate->occupation);
             return redirect(route('candidate.better', ['id' => $candidate->id]))
             ->with('success','Cadastro Finalizado');
         }
@@ -249,6 +275,15 @@ class CandidateController extends Controller
 
     public function formation(Request $request)
     {
+        $this->validate($request, [
+            'name'              => 'required',
+            'country_id'        => 'required',
+            'level_id'          => 'required',
+            'course_id'         => 'required',
+            'start'             => 'required',
+            'situation'         => 'required',
+        ]);
+
         $formation = new Formation;
         $formation->name            = $request->name;
         $formation->country_id      = $request->country_id;
@@ -283,33 +318,45 @@ class CandidateController extends Controller
 
     public function experience(Request $request)
     {
-            $experience = new Experience;
-            $experience->name           = $request->name;
-            $experience->occupation     = $request->occupation;
-            $experience->hierarchy_id   = $request->hierarchy_id;
-            $experience->description    = $request->description;
-            $experience->country_id     = $request->country_id;
-            $experience->state_id       = $request->state_id;
-            $experience->start          = $request->start;
-            $experience->finish         = $request->finish;
-            $experience->candidate_id   = $request->candidate_id;
+        $this->validate($request, [
+            'name'              => 'required',
+            'occupation'        => 'required',
+            'hierarchy_id'      => 'required',
+            'description'       => 'required',
+            'country_id'        => 'required',
+            'start'             => 'required',
+        ]);
+        $experience = new Experience;
+        $experience->name           = $request->name;
+        $experience->occupation     = $request->occupation;
+        $experience->hierarchy_id   = $request->hierarchy_id;
+        $experience->description    = $request->description;
+        $experience->country_id     = $request->country_id;
+        $experience->state_id       = $request->state_id;
+        $experience->start          = $request->start;
+        $experience->finish         = $request->finish;
+        $experience->candidate_id   = $request->candidate_id;
 
-            $experience->save();
+        $experience->save();
 
-            return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
+        return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
     }
     
 
     public function language(Request $request)
     {
+        $this->validate($request, [
+            'language_id'   => 'required',
+            'level'         => 'required',
+        ]);
 
-            $language = new CandidateLanguage;
-            $language->language_id      = $request->language_id;
-            $language->level            = $request->level;
-            $language->candidate_id    = $request->candidate_id;
+        $language = new CandidateLanguage;
+        $language->language_id      = $request->language_id;
+        $language->level            = $request->level;
+        $language->candidate_id    = $request->candidate_id;
 
-            $language->save();
-            return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
+        $language->save();
+        return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
     }
 
     public function languageDestroy($id)
@@ -333,7 +380,6 @@ class CandidateController extends Controller
                 $knowledge->save();
             }
         }
-
 
         return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
     }
@@ -433,6 +479,12 @@ class CandidateController extends Controller
         }
 
         $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
+
+        foreach ($opportunities as $opportunity) {
+            $search = new OpportunitySearch;
+            $search->opportunity_id = $opportunity->id;
+            $search->save();
+        }
 
         return view('candidate.pages.resultado-busca')
         ->with('states', State::all())

@@ -167,8 +167,6 @@ class CompanyController extends Controller
             }
         }
 
-
-
         if($request->has('state_id')){
             if(request('state_id') != ''){
                 $candidates = $candidates->where('state_id', request('state_id'));

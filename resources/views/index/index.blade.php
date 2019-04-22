@@ -17,7 +17,7 @@
                 <form method="GET" action="{{route('candidate.search')}}">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="office" type="text" name="office" placeholder="Cargo ou Área Profissional">
+                            <input id="name" type="text" name="name" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>
@@ -80,6 +80,8 @@
                 </div>
             </div>
         </div>
+        @if(Auth::guard('candidate')->check())
+        @else
         <div class="row">
             <div class="col-sm-2 col-sm-offset-5">
                 <a href="{{route('candidate.create')}}">
@@ -89,6 +91,7 @@
                 </a>
             </div>
         </div>
+        @endif
     </div>
 </section>
 
@@ -101,6 +104,7 @@
         </div>
         <div class="row">
             @forelse($opportunities as $opportunity)
+            @if($opportunity->publish == 2)
             <div class="col-sm-6">
                 <div class="box-result-job">
                     <span>{{$opportunity->name}}</span><br>
@@ -113,6 +117,7 @@
                     <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}">Visualizar</a>
                 </div>
             </div>
+            @endif
             @empty
             <p>Nao possuem vagas cadastradas</p>
             @endforelse
@@ -143,40 +148,40 @@
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="#">São Paulo</a></li>
-                        <li><a href="#">Rio de Janeiro</a></li>
-                        <li><a href="#">Curitiba</a></li>
-                        <li><a href="#">Belo Horizonte</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=35">São Paulo</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=33">Rio de Janeiro</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Curitiba</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Belo Horizonte</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="#">Porto Alegre</a></li>
-                        <li><a href="#">Campinas</a></li>
-                        <li><a href="#">Goiânia</a></li>
-                        <li><a href="#">Salvador</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Porto Alegre</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Campinas</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Goiânia</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Salvador</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="#">Fortaleza</a></li>
-                        <li><a href="#">Sorocaba</a></li>
-                        <li><a href="#">Manaus</a></li>
-                        <li><a href="#">Campo Grande</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Fortaleza</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Sorocaba</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Manaus</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Campo Grande</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="#">Uberlândia</a></li>
-                        <li><a href="#">Maringá</a></li>
-                        <li><a href="#">Cuiabá</a></li>
-                        <li><a href="#">Barueri</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Uberlândia</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Maringá</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Cuiabá</a></li>
+                        <li><a href="{{route('candidate.search')}}?state_id=">Barueri</a></li>
                     </ul>
                 </div>
             </div>

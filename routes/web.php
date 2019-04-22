@@ -15,6 +15,7 @@ Route::get('/', 'Candidate\CandidateController@home')->name('home');
 //Candidato middleware
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
   Route::get('/candidato', 'Candidate\CandidateController@index')->name('index');
+  Route::post('/password', 'Candidate\CandidateController@password')->name('password');
   Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');

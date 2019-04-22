@@ -122,10 +122,12 @@ div.search-job h1{
 }
 
 label {
-    /*corrigir cor #fff*/
     color: #808080;
     font-weight: 400;
     margin-top: 5px;
+}
+.label-create{
+    color: #fff;
 }
 
 div.search-job input {

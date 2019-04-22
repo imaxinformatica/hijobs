@@ -18,6 +18,18 @@
                 <div class="box-result-search result-vacancies dados-pessoais">
                     <form action="{{route('company.update')}}" method="POST">
                         {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="{{route('company.index.message')}}">
+                                    <button type="button" class="btn-blue">Mensagens Enviadas</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="{{route('opportunity.index')}}">
+                                    <button type="button" class="btn-blue">Voltar</button>
+                                </a>
+                            </div>
+                        </div>
                         <input type="hidden" name="company_id" value="{{$company->id}}">
                         <div class="row">
                             <div class="col-sm-12">
@@ -45,7 +57,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <a class="act-password">
-                                    <button class="btn-orange" type="button" class="act-password">Alterar a Senha</button>
+                                    <button class="btn-blue" type="button" class="act-password">Alterar a Senha</button>
                                 </a>
                             </div>
                         </div>
@@ -126,19 +138,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <button class="btn-orange">Editar meu cadastro</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('company.index.message')}}">
-                                    <button type="button" class="btn-orange">Mensagens Enviadas</button>
-                                </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="{{route('opportunity.index')}}">
-                                    <button type="button" class="btn-orange">Voltar</button>
-                                </a>
+                                <button class="btn-blue">Atualizar cadastro</button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

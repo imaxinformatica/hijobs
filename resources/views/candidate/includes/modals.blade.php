@@ -101,7 +101,45 @@
 </div>
 <!--/.Formação-->
 
-
+<!--Senha-->
+<div class="modal fade" id="candidatePassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{{route('candidate.password')}}">
+        {{csrf_field()}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Alterar Senha</h4>
+        </div>
+        <div class="box-body">
+          <div class="form-group" >
+            <div class="col-sm-6">
+              <label for="password">Senha</label>
+              <input type="password" name="password" placeholder="Senha" class="form-control">
+          </div>
+          <div class="col-sm-6">
+              <label for="password_confirmation">Confirmação da Senha</label>
+              <input type="password" name="password_confirmation" placeholder="Confirmação" class="form-control">
+          </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Alterar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--/.Senha-->
 <!--Experiencia Profissional-->
 <div class="modal fade" id="candidateExperience">
   <div class="modal-dialog">

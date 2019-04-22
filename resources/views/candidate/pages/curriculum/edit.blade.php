@@ -45,34 +45,29 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="cep">CEP</label>
-                                <input type="text" class="input-cep" value="{{$candidate->cep}}" name="cep" placeholder="Seu CEP">
+                                <input type="text" class="input-cep" value="{{$candidate->cep}}" name="cep" placeholder="Seu CEP" id="cep">
                             </div>
                             <div class="col-sm-6">
                                 <label for="street">Logradouro</label>
-                                <input type="text" name="street" placeholder="Logradouro">
+                                <input type="text" name="street" id="street" value="{{$candidate->street}}" placeholder="Logradouro">
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number"  placeholder="Número e Complemento">
+                                <input type="text" name="number" value="{{$candidate->state}}" id="number" placeholder="Número e Complemento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="nehighbor">Bairro</label>
-                                <input type="text" name="nehighbor" placeholder="Bairro">
+                                <input type="text" id="nehighbor" value="{{$candidate->nehighbor}}" name="nehighbor" placeholder="Bairro">
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>
-                                <input type="text"  name="city" placeholder="Cidade">
+                                <input type="text" id="city" value="{{$candidate->city}}" name="city" placeholder="Cidade">
                             </div>
                             <div class="col-sm-4">
-                                <label for="state_id">Estado</label>
-                                <select name="state_id">
-                                    <option selected disabled>Selecione</option>
-                                    @foreach($states as $state)
-                                    <option value="{{$state->id}}" <?php if ($state->id == $candidate->state_id): echo "selected"; endif; ?>>{{$state->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="state">Estado</label>
+                                <input type="text" value="{{$candidate->state}}" name="state" id="state" placeholder="Estado">
                             </div>
                         </div>
                         <div class="row">

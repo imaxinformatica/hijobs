@@ -58,32 +58,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5">
-                                <label for="state_id">Estado</label>
-                                <select name="state_id">
-                                    <option selected disabled>Selecione</option>
-                                    @foreach($states as $state)
-                                    <option <?php if (old('state_id') == $state->id){ echo " selected";}?> value="{{$state->id}}">{{$state->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-4">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="input-cpf" value="{{old('cpf')}}" name="cpf" placeholder="Digite seu CPF">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-4">
                                 <label for="phone">Telefone</label>
                                 <input type="text" class="input-phone" name="phone" value="{{old('phone')}}" placeholder="Seu telefone">
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-4">
                                 <label for="birthdate">Data de nascimento</label>
                                 <input type="text" class="input-date" name="birthdate" value="{{old('birthdate')}}" placeholder="Sua data de nascimento">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-6">
                                 <label for="marital_status">Estado civil</label>
                                 <select name="marital_status">
                                     <option selected disabled>Selecione</option>
@@ -93,7 +82,7 @@
                                     <option value="Viúvo" <?php if (old('marital_status') == 'Viúvo'){ echo "selected";}?>>Viúvo</option>
                                 </select>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-6">
                                 <label for="sex">Sexo</label>
                                 <select name="sex">
                                     <option selected disabled>Selecione</option>

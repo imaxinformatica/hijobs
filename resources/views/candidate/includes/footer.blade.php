@@ -22,8 +22,8 @@
                     <p><b>Empresas</b></p>
                     <ul>
                         <li><a href="{{route('company.create')}}">Cadastre sua Empresa</a></li>
-                        <li><a href="{{route('company.create')}}">Anuncie vagas</a></li>
-                        <li><a href="{{route('opportunity.create')}}">Busque Candidatos</a></li>
+                        <li><a href="{{route('opportunity.create')}}">Anuncie vagas</a></li>
+                        <li><a href="{{route('company.candidate')}}">Busque Candidatos</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="box-footer">
                     <p><b>Candidato</b></p>
                     <ul>
-                        <li><a href="{{route('candidate.create')}}">Cadastre sua Empresa</a></li>
+                        <li><a href="{{route('candidate.create')}}">Cadastre seu Currículo</a></li>
                         <li><a href="{{route('candidate.opportunity')}}">Busque vagas</a></li>
                         <li><a href="{{route('opportunity.create')}}">Acompanhe suas Candidaturas</a></li>
                     </ul>
@@ -104,16 +104,22 @@
     $('.input-date').datepicker({
       language: 'pt-BR',
       format: 'dd/mm/yyyy',
-      autoclose: true
+      autoclose: true,
+      defaultViewDate:{year: '1930', month: '0', day: '1'},
     });
 
     $('.input-month').datepicker({
       language: 'pt-BR',
       format: 'mm/yyyy',
-      autoclose: true
+      autoclose: true,
     });
 
 //Modals
+//Senha
+$('.act-password').on('click', function (e) {
+    e.preventDefault();
+    $('#candidatePassword').modal('show');
+});
     //Formação
 $('.act-formation').on('click', function (e) {
     e.preventDefault();
@@ -266,6 +272,56 @@ $(document).ready(function(){
             }
         });
     }
+});
+
+// Consulta por CEP
+$(document).ready(function() {
+
+ 
+            
+    //Quando o campo cep perde o foco.
+    $("#cep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                $("#street").val("...");
+                $("#nehighbor").val("...");
+                $("#city").val("...");
+                $("#state").val("...");
+
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#street").val(dados.logradouro);
+                        $("#nehighbor").val(dados.bairro);
+                        $("#city").val(dados.localidade);
+                        $("#state").val(dados.uf);
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+    });
 });
 </script> 
 

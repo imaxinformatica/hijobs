@@ -17,31 +17,31 @@
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="name">Nome</label>
+                                        <label for="name" class="label-create">Nome</label>
                                         <input type="text" name="name" placeholder="Seu nome completo">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="email">E-mail</label>
+                                        <label for="email" class="label-create">E-mail</label>
                                         <input type="email" name="email" placeholder="Seu e-mail">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="cep">CEP</label>
+                                        <label for="cep" class="label-create">CEP</label>
                                         <input type="text" class="input-cep" name="cep" placeholder="Seu CEP">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="occupation">Cargo desejado</label>
+                                        <label for="occupation" class="label-create">Cargo desejado</label>
                                         <input type="text" name="occupation" placeholder="Cargo desejado">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="password">Senha</label>
+                                        <label for="password" class="label-create">Senha</label>
                                         <input type="password" name="password" placeholder="Digite uma senha">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="password_confirmation">Confirmação de senha</label>
+                                        <label for="password_confirmation" class="label-create">Confirmação de senha</label>
                                         <input type="password" name="password_confirmation" placeholder="Confirme sua senha">
                                     </div>
                                 </div>

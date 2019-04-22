@@ -19,7 +19,11 @@ class CreateCandidatesTable extends Migration
             $table->string('email', 191)->unique();
             $table->string('occupation',191)->nullable();
             $table->string('cpf', 191)->nullable();
-            $table->integer('state_id')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('number')->nullable();
+            $table->string('nehighbor')->nullable();
+            $table->string('street')->nullable();
             $table->string('phone', 191)->nullable();
             $table->date('birthdate', 191)->nullable();
             $table->string('marital_status', 191)->nullable();

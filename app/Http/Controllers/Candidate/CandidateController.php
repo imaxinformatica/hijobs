@@ -121,8 +121,6 @@ class CandidateController extends Controller
     public function edit()
     {
         $candidate = Auth::guard('candidate')->user();
-
-        
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
         return view('candidate.pages.curriculum.edit')
         ->with('states', State::all())

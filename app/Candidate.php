@@ -83,10 +83,6 @@ class Candidate extends Authenticatable
         return $this->belongsToMany('App\State');
     }
 
-    public function state()
-    {
-        return $this->belongsTo('App\State');
-    }
 
     public function formations()
     {

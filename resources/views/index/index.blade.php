@@ -131,7 +131,7 @@
             @forelse($companies as $company)
             <div class="col-sm-5ths">
                 <div class="box-company">
-                    <img src="images/empresa.jpg" alt="Empresa">
+                    <img src="{{asset('images/company/')}}/{{$company->thumbnail}}" alt="Empresa">
                     <p>{{$company->opportunities->count()}} vaga(s)</p>
                 </div>
             </div>

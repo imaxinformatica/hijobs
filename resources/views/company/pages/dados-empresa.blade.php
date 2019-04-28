@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('company.update')}}" method="POST">
+                    <form action="{{route('company.update')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" name="company_id" value="{{$company->id}}">
                         <div class="row">
@@ -50,13 +50,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="trade">Razão Social</label>
                                 <input type="text" name="trade" placeholder="Razão Social" value="{{old('trade')}}">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="phone">Telefone</label>
                                 <input type="text" name="phone" class="input-phone" placeholder="Telefone" value="{{old('phone')}}">
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="thumbnail">Logo Empresa</label>
+                                <input class="form-control-file" type="file" name="thumbnail">
                             </div>
                         </div>
                         <div class="row">

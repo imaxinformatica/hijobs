@@ -131,6 +131,7 @@ class CandidateController extends Controller
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('knowledges', Knowledge::all())
+        ->with('levels', Level::all())
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())

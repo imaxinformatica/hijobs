@@ -27,6 +27,7 @@ class CreateCompaniesTable extends Migration
             $table->string('city_id', 191)->nullable();
             $table->string('neighborhood', 191)->nullable();
             $table->string('number', 191)->nullable();
+            $table->string('thumbnail', 191)->nullable();
             $table->string('linkedin', 191)->nullable();
             $table->string('facebook', 191)->nullable();
             $table->string('twitter', 191)->nullable();

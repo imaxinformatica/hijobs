@@ -230,7 +230,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="{{route('candidate.search')}}">
+                    <a href="{{route('candidate.search')}}?name={{$candidate->occupation}}">
                         <button class="btn-orange">
                         Finalizar meu Currículo
                         </button>

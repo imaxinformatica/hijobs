@@ -117,9 +117,9 @@ class CompanyController extends Controller
             'cnpj'          	    => 'required',
             'occupation_area_id'    => 'required',
             'cep'  				    => 'required',
-            'thumbnail'             => 'mimes:png'
+            'thumbnail'             => 'mimes:png,jpg,jpeg,svg|max:200'
         ]);
-
+        return dd($request);
         $company                   	   = Company::find($request->company_id);
         $company->trade                = $request->trade;
         $company->phone            	   = $request->phone;
@@ -155,15 +155,12 @@ class CompanyController extends Controller
         $company->facebook            = $request->facebook;
         $company->twitter             = $request->twitter;
         $company->blog                = $request->blog;
-
         //valida a foto de capa
         if($request->thumbnail != '')
         {
-            $arq_img = $request->file('thumbnail');
-            $name    = basename($arq_img->getClientOriginalName());
-            $type    = strtolower(pathinfo($name,PATHINFO_EXTENSION));
-            $count = 1;
+            $attach_thumbnail = $request->thumbnail;
             //Gera string aleatória
+            $count = 1;
             while($count != 0){
                 $str            = "";
                 $characters     = array_merge(range('A','Z'), range('a','z'), range('0','9'));
@@ -175,13 +172,14 @@ class CompanyController extends Controller
                     $count  = Company::where('thumbnail', $str)->count();
                 }
             }
-            $arq_img_name = $str.'.'.$type;
-            $arq_img->move('images/company', $arq_img); 
+            $attach_thumbnail_name = $str;
+            $attach_thumbnail_name =  $attach_thumbnail_name.".".pathinfo($attach_thumbnail->getClientOriginalName(),PATHINFO_EXTENSION);
+            $attach_thumbnail->move('images/company', $attach_thumbnail_name); 
 
-            $company->thumbnail      = $arq_img_name;  
+            $company->thumbnail    = $attach_thumbnail_name;
         }
         else
-            $company->thumbnail      = 'e-company.png';
+            $company->thumbnail    = 'e-company.png';
         $company->save();
 
         return redirect(route('opportunity.index'))->with('success','Empresa Salva com sucesso!');

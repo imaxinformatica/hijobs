@@ -33,6 +33,7 @@
             <li id="login"><a href="{{route('company.logout')}}">SAIR</a></li>
             @else
             <li><a href="{{route('company.candidate')}}">BUSCAR CANDIDATOS</a></li>
+            <li><a href="{{route('company.create')}}">CADASTRAR EMPRESA</a></li>
             <li id="login"><a href="{{url('company/login')}}">LOGIN</a></li>
             @endif  
         </ul>

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <form action="{{route('company.update')}}" method="POST">
+                    <form action="{{route('company.update')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-sm-6">
@@ -51,11 +51,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="email">E-mail</label>
                                 <input type="email" name="email" value="{{$company->email}}" placeholder="E-mail">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <label for="thumbnail">Logo Empresa</label>
+                                <input class="form-control-file" type="file"  name="thumbnail">
+                            </div>
+                            <div class="col-sm-4">
                                 <a class="act-password">
                                     <button class="btn-blue" type="button" class="act-password">Alterar a Senha</button>
                                 </a>

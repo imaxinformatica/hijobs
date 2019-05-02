@@ -121,6 +121,11 @@ class CandidateController extends Controller
     public function edit()
     {
         $candidate = Auth::guard('candidate')->user();
+        $candidate->idSpecial = $candidate->specials->pluck('id'); 
+        $candidate->idDriver = $candidate->driver->pluck('id');
+        $candidate->idVehicle = $candidate->vehicle->pluck('id'); 
+        $candidate->idState = $candidate->stateWork->pluck('id'); 
+
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
         return view('candidate.pages.curriculum.edit')
         ->with('states', State::all())

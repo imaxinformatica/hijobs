@@ -161,13 +161,18 @@ $(document).ready(function(){
 });
 
 $(document).ready( function(){
-    $('#special').hide();
-    $('.isSpecial').change(function() {
-        if($(this).is(":checked")) {
+    function isSpecial()
+    {
+        if($('.isSpecial').is(":checked")) {
             $('#special').slideDown();
         } else{
             $('#special').slideUp();
-        }   
+        } 
+    }
+    $('#special').hide();
+    isSpecial(); 
+    $('.isSpecial').change(function() {
+        isSpecial(); 
     });
 });
 

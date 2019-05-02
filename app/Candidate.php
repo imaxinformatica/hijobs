@@ -43,7 +43,7 @@ class Candidate extends Authenticatable
         $this->notify(new CandidateResetPassword($token));
     }
 
-    public function special()
+    public function specials()
     {
         return $this->belongsToMany('App\Special', 'candidate_special');
     }

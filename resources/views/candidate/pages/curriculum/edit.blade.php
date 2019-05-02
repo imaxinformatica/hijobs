@@ -106,15 +106,20 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label class="lbl-caracteristicas"><input type="checkbox" class="isSpecial" name="isSpecial"><span class="checkmark"></span>Pessoa com deficiência física</label>
+                                <label class="lbl-caracteristicas"><input type="checkbox" @if($candidate->special == 1) checked @endif class="isSpecial" name="isSpecial"><span class="checkmark"></span>Pessoa com deficiência física</label>
                             </div>
                         </div>
                         <div class="row" id="special">
                         <hr>
                             @foreach($specials as $special)
-                            <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$special->id}}" name="specials[]"><span class="checkmark" ></span>{{$special->name}}</label>
-                            </div>
+                                <div class="col-sm-2">
+                                    <label class="lbl-caracteristicas">
+                                        <input type="checkbox" @if(in_array($special->id, $candidate->idSpecial->toArray())) checked @endif value="{{$special->id}}" name="specials[]">
+                                        <span class="checkmark" >
+                                            
+                                        </span>{{$special->name}}
+                                    </label>
+                                </div>
                             @endforeach
                             <div class="col-sm-12">
                                 <label for="special_description" style="margin-top: 20px;">Condições especiais</label>
@@ -160,7 +165,7 @@
                             @foreach($drivers as $driver)
                             <div class="col-sm-1">
                                 <label class="lbl-caracteristicas">
-                                    <input type="checkbox" value="{{$driver->id}}" name="drivers[]"><span class="checkmark"></span>{{$driver->name}}
+                                    <input type="checkbox" value="{{$driver->id}}" @if(in_array($driver->id, $candidate->idDriver->toArray())) checked @endif name="drivers[]"><span class="checkmark"></span>{{$driver->name}}
                                 </label>
                             </div>
                             @endforeach
@@ -173,7 +178,7 @@
                         <div class="row">
                             @foreach($vehicles as $vehicle)
                             <div class="col-sm-2">
-                                <label class="lbl-caracteristicas"><input type="checkbox" value="{{$vehicle->id}}" name="vehicles[]"><span class="checkmark"></span>{{$vehicle->name}}</label>
+                                <label class="lbl-caracteristicas"><input @if(in_array($vehicle->id, $candidate->idVehicle->toArray())) checked @endif type="checkbox" value="{{$vehicle->id}}" name="vehicles[]"><span class="checkmark"></span>{{$vehicle->name}}</label>
                             </div>
                             @endforeach
                         </div>
@@ -257,7 +262,7 @@
                                 <label for="state_work">Estado onde deseja trabalhar</label>
                                 <select name="state_work[]" class="state-work" multiple="multiple">
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option @if(in_array($state->id, $candidate->idState->toArray())) selected @endif value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

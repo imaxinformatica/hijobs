@@ -83,6 +83,8 @@
     $( document ).ready(function() {
         $('.input-cep').inputmask({"mask": "99999-999", "placeholder":"_"});
         $('.input-cpf').inputmask({"mask": "999.999.999-99", "placeholder":"_"});
+        $('.input-month').inputmask({"mask": "99", "placeholder":"__"});
+        $('.input-year').inputmask({"mask": "9999", "placeholder":"____"});
     });
 
     $('.input-phone').focusout( function(){
@@ -106,12 +108,6 @@
       format: 'dd/mm/yyyy',
       autoclose: true,
       defaultViewDate:{year: '1930', month: '0', day: '1'},
-    });
-
-    $('.input-month').datepicker({
-      language: 'pt-BR',
-      format: 'mm/yyyy',
-      autoclose: true,
     });
 
 //Modals
@@ -145,9 +141,11 @@ $(document).ready(function(){
     $("#situation").change(function(){
     var situation = $(this).val();
     if (situation == 'trancado') {
-        $('#finish').hide();
+        $('.finishYear').hide();
+        $('.finishMonth').hide();
     }else{
-        $('#finish').show();
+        $('.finishYear').show();
+        $('.finishMonth').show();
     }
     });
     $('.country_id').change(function(){
@@ -209,7 +207,7 @@ $(document).ready(function(){
             },
             success: function(data){
                 var result = $.parseJSON(data);
-                console.log(result[1].name);
+                console.log(result);
                 $('#course').html('');
                 for (var i = 0; i < result.length; ++i){
                     $('#course').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
@@ -266,6 +264,7 @@ $(document).ready(function(){
 
                 console.log(result[1].name);
                 $('#city').html('');
+                $('#city').append('<option selected disabled>SELECIONE...</option>');
                 for (var i = 0; i < result.length; ++i){
                     $('#city').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
                 }

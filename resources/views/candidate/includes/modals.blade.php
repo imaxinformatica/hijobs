@@ -1,26 +1,24 @@
 <!--Formação-->
-<div class="modal fade" id="candidateFormation">
-  <div class="modal-dialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="candidateFormation">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form method="POST" action="{{route('candidate.formation')}}">
-        {{csrf_field()}}
-        @isset($candidate)
-        <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
-        @endisset
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Incluir Formação</h4>
-        </div>
-        <div class="box-body">
-          <div class="form-group" >
-            <div class="col-sm-12">
-              <label for="name">Nome da Instituição</label>
-              <input type="text" name="name" placeholder="Nome da Instituição" class="form-control" id="name">
-            </div>
-          </div>
+      <div class="modal-header">
+        <h5 class="modal-title">Incluir Formação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="{{route('candidate.formation')}}" method="POST">
+      <div class="modal-body">
+          {{csrf_field()}}
+          @isset($candidate)
+            <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
+          @endisset
           <div class="form-group">
+            <label for="name">Nome da Instituição</label>
+            <input type="text" name="name" placeholder="Nome da Instituição" class="form-control" id="name">
+          </div>
+          <div class="form-group row">
             <div class="col-sm-6">
               <label for="country_id">País</label>
               <select name="country_id" class="form-control country_id">
@@ -32,7 +30,7 @@
                 @endisset
               </select>
             </div>
-            <div class="col-sm-6 state_id" >
+            <div class="col-sm-6 state_id">
               <label for="state_id">Estado</label>
               <select name="state_id" class="form-control">
                 <option selected disabled>Estado..</option>
@@ -44,7 +42,7 @@
               </select>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group row">
             <div class="col-sm-6">
               <label for="level">Nível</label>
               <select id="level" name="level" class="form-control">
@@ -54,19 +52,15 @@
                 <option value="{{$level->id}}">{{$level->name}}</option>
                 @endforeach
                 @endisset
-                
               </select>
             </div>
             <div class="col-sm-6">
               <label for="course">Curso..</label>
               <select id="course" name="course" class="form-control">
-                
               </select>
             </div>
-          </div>
-          <hr>
+          </div>   
           <div class="form-group">
-            <div class="col-sm-6">
               <label for="situation">Situação</label>
               <select id="situation" name="situation" class="form-control">
                 <option selected disabled>Situação..</option>
@@ -74,32 +68,35 @@
                 <option value="cursando">Cursando</option>
                 <option value="trancado">Trancado</option>
               </select>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label for="startMonth">Mês Início</label>
+              <input type="text"  name="startMonth" placeholder="MM" class="form-control input-month">
             </div>
-            <div class="col-sm-3" id="start">
-              <label for="start">Início</label>
-              <input type="text"  name="start" placeholder="MM/AAAA" class="form-control input-month" id="start">
+            <div class="col-sm-3">
+              <label for="startYear">Ano Início</label>
+              <input type="text"  name="startYear" placeholder="YYYY" class="form-control input-year" >
             </div>
-            <div class="col-sm-3" id="finish">
-              <label for="finish">Conclusão</label>
-              <input type="text"  name="finish" placeholder="MM/AAAA" class="form-control input-month" id="finish">
+            <div class="col-sm-3 finishMonth">
+              <label for="finishMonth">Mês Conclusão</label>
+              <input type="text"  name="finishMonth" placeholder="MM" class="form-control input-month" >
+            </div>
+            <div class="col-sm-3 finishYear">
+              <label for="finishYear">Ano Conclusão</label>
+              <input type="text"  name="finishYear" placeholder="YYYY" class="form-control input-year">
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-sm-12">
-              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Incluir</button>
-            </div>
-          </div>
-        </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+        </form>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!--/.Formação-->
+
 
 <!--Senha-->
 <div class="modal fade" id="candidatePassword">

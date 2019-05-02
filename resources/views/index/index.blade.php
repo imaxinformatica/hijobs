@@ -148,40 +148,40 @@
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="{{route('candidate.search')}}?state_id=35">São Paulo</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=33">Rio de Janeiro</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Curitiba</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Belo Horizonte</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3830">São Paulo</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3243">Rio de Janeiro</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=4006">Curitiba</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=2310">Belo Horizonte</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Porto Alegre</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Campinas</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Goiânia</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Salvador</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=4932">Porto Alegre</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3376">Campinas</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=5418">Goiânia</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=2163">Salvador</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Fortaleza</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Sorocaba</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Manaus</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Campo Grande</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=950">Fortaleza</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3849">Sorocaba</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=112">Manaus</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=1666">Campo Grande</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="box-cities">
                     <ul>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Uberlândia</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Maringá</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Cuiabá</a></li>
-                        <li><a href="{{route('candidate.search')}}?state_id=">Barueri</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3068">Uberlândia</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=4121">Maringá</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=5220">Cuiabá</a></li>
+                        <li><a href="{{route('candidate.search')}}?city_id=3332">Barueri</a></li>
                     </ul>
                 </div>
             </div>

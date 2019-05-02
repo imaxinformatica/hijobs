@@ -21,8 +21,10 @@ class CreateFormationsTable extends Migration
             $table->string('level_id');
             $table->integer('course_id');
             $table->string('situation');
-            $table->string('start');
-            $table->string('finish')->nullable();
+            $table->string('start_month');
+            $table->string('start_year');
+            $table->string('finish_month')->nullable();
+            $table->string('finish_year')->nullable();
             $table->integer('candidate_id');
             $table->timestamps();
         });

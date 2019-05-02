@@ -279,10 +279,12 @@ class CandidateController extends Controller
             'country_id'        => 'required',
             'level_id'          => 'required',
             'course_id'         => 'required',
-            'start'             => 'required',
+            'startMonth'        => 'required|min:2',
+            'startYear'         => 'required|min:4',
+            'finishMonth'       => 'min:2',
+            'finishYear'        => 'min:4',
             'situation'         => 'required',
         ]);
-
         $formation = new Formation;
         $formation->name            = $request->name;
         $formation->country_id      = $request->country_id;
@@ -290,8 +292,10 @@ class CandidateController extends Controller
         $formation->level_id        = $request->level;
         $formation->course_id       = $request->course;
         $formation->situation       = $request->situation;
-        $formation->start           = $request->start;
-        $formation->finish          = $request->finish;
+        $formation->start_month     = $request->startMonth;
+        $formation->start_year      = $request->startYear;
+        $formation->finish_month    = $request->finishMonth;
+        $formation->finish_year     = $request->finishYear;
         $formation->candidate_id    = $request->candidate_id;
 
         $formation->save();

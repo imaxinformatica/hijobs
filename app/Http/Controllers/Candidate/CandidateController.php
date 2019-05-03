@@ -68,19 +68,23 @@ class CandidateController extends Controller
             'password'          => 'required|min:6|confirmed',
         ]);
         $cep = implode("",(explode("-", $request->cep)));
-        // Get cURL resource
-        $curl = curl_init();
-        // Set some options - we are passing in a useragent too here
-        curl_setopt_array($curl, [
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => 'https://viacep.com.br/ws/' . $cep . '/json/',
-            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-        ]);
-        // Send the request & save response to $resp
-        $resp = curl_exec($curl);
-        // Close request to clear up some resources
-        curl_close($curl);
-        $dadosCep = json_decode($resp);
+
+        $url = "http://viacep.com.br/ws/{$cep}/json/";
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        $dadosCep = json_decode($result);
+
         $candidate = new Candidate;
         $candidate->name        = $request->name;
         $candidate->email       = $request->email;
@@ -205,9 +209,11 @@ class CandidateController extends Controller
         $candidate->facebook            = $request->facebook;
         $candidate->twitter             = $request->twitter;
         $candidate->blog                = $request->blog;
-        foreach ($candidate->special()->get() as $special) {
+
+        foreach ($candidate->specials()->get() as $special) {
             $special->pivot->delete();
         }
+
         if (isset($request->isSpecial)) {
             foreach ($request->specials as $specials) {
                 $special               = new CandidateSpecial;

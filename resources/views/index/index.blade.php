@@ -119,7 +119,9 @@
             </div>
             @endif
             @empty
-            <p>Nao possuem vagas cadastradas</p>
+            <div class="col-sm-6">
+                <p>Não possuem vagas cadastradas</p>
+            </div>
             @endforelse
         </div>
         <div class="row">
@@ -136,7 +138,9 @@
                 </div>
             </div>
             @empty
-            <p>Não possuimos empresas para recomendar</p>
+            <div class="col-sm-6">
+                <p>Não possuimos empresas para recomendar</p>
+            </div>
             @endforelse
         </div>
         <div class="row">

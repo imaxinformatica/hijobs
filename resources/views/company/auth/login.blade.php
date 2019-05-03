@@ -15,12 +15,12 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="email" type="text" name="email" placeholder="E-mail" value="{{old('email')}}">
+                            <input id="email" class="n-icon" type="text" name="email" placeholder="E-mail" value="{{old('email')}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="password" type="password" name="password" placeholder="Senha">
+                            <input id="password" class="n-icon" type="password" name="password" placeholder="Senha">
                         </div>
                     </div>
                     <div class="row">

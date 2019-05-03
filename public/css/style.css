@@ -134,6 +134,13 @@ label {
     color: #fff;
 }
 
+.search-job select {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 15px;
+    height: 50px;
+}
+
 div.search-job input {
     width: 100%;
     padding: 15px 15px 15px 45px;
@@ -141,6 +148,10 @@ div.search-job input {
     outline: none;
     margin-top: 15px;
     margin-bottom: 5px;
+}
+
+div.search-job input.n-icon {
+    padding: 15px;
 }
 
 form#register-curriculum input{

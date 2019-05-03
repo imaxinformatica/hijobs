@@ -17,14 +17,14 @@
                 <form method="GET" action="{{route('candidate.search')}}">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="name" type="text" name="name" placeholder="Cargo ou Área Profissional">
+                            <input class="n-icon" id="name" type="text" name="name" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <select name="state_id" class="form-control">
-                                <option selected value="">Selecione</option>
+                                <option selected value="" disabled hidden>Estado</option>
                                 @foreach($states as $state)
                                 <option value="{{$state->id}}">{{$state->name}}</option>
                                 @endforeach

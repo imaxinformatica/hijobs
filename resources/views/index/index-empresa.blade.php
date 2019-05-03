@@ -16,18 +16,19 @@
                 <form method="GET" action="{{route('company.candidate')}}">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="occupation" type="text" name="occupation" placeholder="Cargo ou Área Profissional">
+                            <input id="occupation" class="n-icon" type="text" name="occupation" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <select name="state_id" class="form-control">
-                            <option selected value="">Selecione</option>
-                            @foreach($states as $state)
-                            <option value="{{$state->id}}">{{$state->name}}</option>
-                            @endforeach
-                        </select>
-                        <p>Estados</p>
+                        <div class="col-sm-12">
+                            <select name="state_id" class="form-control">
+                                <option selected value="" disabled hidden>Estado</option>
+                                @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">

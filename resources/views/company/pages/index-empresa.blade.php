@@ -13,7 +13,7 @@
                 <form>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="occupation" type="text" name="occupation" placeholder="Cargo ou Área Profissional">
+                            <input id="occupation" class="n-icon" type="text" name="occupation" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>

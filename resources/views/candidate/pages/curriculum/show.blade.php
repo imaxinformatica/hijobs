@@ -17,19 +17,24 @@
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <a href="{{route('candidate.edit')}}">
                                     <button class="btn-blue">Editar meu currículo</button>
                                 </a>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <a href="{{route('candidate.app')}}">
                                     <button class="btn-blue">Candidaturas</button>
                                 </a>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <a href="{{route('candidate.index.message')}}">
                                     <button class="btn-blue">Mensagens</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{{route('candidate.subscriptions')}}">
+                                    <button class="btn-blue">Assinaturas</button>
                                 </a>
                             </div>
                         </div>
@@ -46,7 +51,7 @@
                                 <p for="name"><b>Telefone: </b>{{$candidate->phone}}</p>
                                 <p for="name"><b>Estado Civil: </b>{{$candidate->marital_status}}</p>
                                 <p for="name"><b>Data de Nascimento: </b>{{$candidate->birthdate}}</p>
-                                <p for="name"><b>Endereço: </b>Rua Sestilio Melani, 620, A E Carvalho, São Paulo</p>
+                                <p for="name"><b>Endereço: </b>{{$candidate->street}},@if($candidate->number) {{$candidate->number}}, @endif {{$candidate->nehighbor}}, {{$candidate->city}}</p>
                             </div>
                             
                         </div>

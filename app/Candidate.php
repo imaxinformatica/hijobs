@@ -19,7 +19,7 @@ class Candidate extends Authenticatable
         'name', 'email', 'cpf', 'state_id','phone', 'birthdate',
         'marital_status', 'sex', 'special','special_description',
         'linkedin', 'facebook','twitter', 'blog', 'travel', 'change',
-        'journey_id','contract_type_id', 'max_hierarchy_id', 'salary',
+        'journey_id','contract_type_id', 'max_hierarchy_id', 'salary', 'complement'
     ];
             
            
@@ -113,6 +113,16 @@ class Candidate extends Authenticatable
     public function messages()
     {
         return $this->hasMany('App\Message');
+    }
+
+    public function card()
+    {
+        return $this->hasOne('App\Card');
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne('App\TransactionUser', 'user_id');
     }
     
 }

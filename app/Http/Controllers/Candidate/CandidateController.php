@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\City;
 use App\Page;
 use App\State;
+use App\Video;
 use App\Level;
 use App\Driver;
 use App\Course;
@@ -41,15 +42,18 @@ class CandidateController extends Controller
     {
         $companies = Company::where('publish', 1)->get();
         $opportunities = Opportunity::take(4)->get();
-        return view('index.index')->with('companies', $companies)
+        return view('index.index')
+        ->with('videos', Video::all())
+        ->with('companies', $companies)
         ->with('opportunities', $opportunities);
     }
 
     public function index()
     {
         $companies = Company::where('publish', 1)->get();
-        $opportunities = Opportunity::all();
-        return view('candidate.pages.index')->with('companies', $companies)
+        $opportunities = Opportunity::take(4)->get();
+        return view('candidate.pages.index')
+        ->with('companies', $companies)
         ->with('opportunities', $opportunities);
     }
 
@@ -384,6 +388,10 @@ class CandidateController extends Controller
 
     public function knowledge(Request $request)
     {
+        $this->validate($request, [
+            'knowledge_id'      => 'required',
+            'subknowledge_id'   => 'required',
+        ]);
         foreach ($request->subknowledge_id as $subknowledge) {
             $know = CandidateKnowledge::where('knowledge_id', $request->knowledge_id)->where('subknowledge_id', $subknowledge)->where('candidate_id', $request->candidate_id);
             if ($know->count() == 0) {

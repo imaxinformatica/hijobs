@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use App\Page;
-use App\State;
 use App\City;
+use App\State;
+use App\Video;
 use App\Driver;
 use App\Company;
 use App\Country;
@@ -29,7 +30,8 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return view('index.index-empresa');
+        return view('index.index-empresa')
+        ->with('videos', Video::all());
     }
 
     public function session(Request $request)
@@ -119,7 +121,6 @@ class CompanyController extends Controller
             'cep'  				    => 'required',
             'thumbnail'             => 'mimes:png,jpg,jpeg,svg|max:200'
         ]);
-        return dd($request);
         $company                   	   = Company::find($request->company_id);
         $company->trade                = $request->trade;
         $company->phone            	   = $request->phone;
@@ -266,6 +267,9 @@ class CompanyController extends Controller
 
     public function message(Request $request)
     {
+        $this->validate($request, [
+            'message'  => 'required',
+        ]);
         $company = Auth::guard('company')->user();
         $msg = new Message();
 

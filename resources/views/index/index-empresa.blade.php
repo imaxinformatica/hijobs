@@ -103,4 +103,31 @@
         </div>
     </div>
 </section>
+    <div class="box-new-job">
+        <?php
+        //Columns must be a factor of 12 (1,2,3,4,6,12)
+        $numOfCols = 3;
+        $rowCount = 0;
+        $bootstrapColWidth = 12 / $numOfCols;
+        ?>
+        <div class="row">
+        @forelse ($videos as $row)
+        <div class="col-sm-<?php echo $bootstrapColWidth; ?>">
+          
+            <video controlsList="nodownload" oncontextmenu="return false;" class="afterglow" id="{{$row->id}}" style="width:100%; height: 350px; object-fit: cover;">
+                <source src="{{asset('/images/video/')}}/{{$row->video}}" type="video/mp4">
+            </video>
+        </div>
+        <?php
+            $rowCount++;
+            if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+        ?>
+        @empty
+        <div class="col-sm-12">
+            Não existem videos cadastrados.
+        </div>
+        @endforelse
+    </div>
+        
+</div>
 @stop

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatesTable extends Migration
+class CreateCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 45);
-            $table->string('sigla', 5);
-            $table->integer('country_id');
+            $table->string('card_number'); 
+            $table->string('brand');       
+            $table->integer('exp_month');   
+            $table->integer('exp_year');        
+            $table->string('hash');            
+            $table->integer('candidate_id'); 
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('cards');
     }
 }

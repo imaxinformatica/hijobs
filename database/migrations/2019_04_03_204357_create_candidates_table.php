@@ -35,6 +35,7 @@ class CreateCandidatesTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('blog')->nullable();
             $table->boolean('travel')->nullable();
+            $table->string('complement')->nullable();
             $table->boolean('change')->nullable();
             $table->integer('journey_id')->nullable();
             $table->integer('contract_type_id')->nullable();

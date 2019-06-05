@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'pagseguro' => [
+        'pagseguro_sandbox' => 'true',
+        'pagseguro_email' => 'informaticaimax@gmail.com',
+        'pagseguro_token' => 'CA316749D1E146FDB42D57726424D2C9',
+    ],
+
 ];

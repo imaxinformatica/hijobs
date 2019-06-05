@@ -38,6 +38,16 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i> <span>VAGAS</span>
           </a>
         </li>
+        <li {{ (Request::is('admin/planos') ? 'class=active' : '') }} {{ (Request::is('admin/planos/*') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.plan')}}">
+            <i class="fa fa-users"></i> <span>PLANOS</span>
+          </a>
+        </li>
+        <li {{ (Request::is('admin/videos') ? 'class=active' : '') }} {{ (Request::is('admin/videos/*') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.video')}}">
+            <i class="fa fa-play-circle-o" aria-hidden="true"></i> <span>VIDEOS</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

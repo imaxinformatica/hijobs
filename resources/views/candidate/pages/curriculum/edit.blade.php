@@ -427,7 +427,7 @@
                                 <td>{{$know->name}}</td>
                                 <td>{{$know->subknowledges->where('id', $know->pivot->subknowledge_id)->first()->name}}</td>
                                 <td>
-                                    <a href="{{route('candidate.knowledge.destroy', ['id' => $language->id])}}">
+                                    <a href="{{route('candidate.knowledge.destroy', ['id' => $know->id])}}">
                                         <button class="btn btn-danger" type="button">
                                         <i class="fa fa-times" aria-hidden="true"></i></button>
                                     </a>

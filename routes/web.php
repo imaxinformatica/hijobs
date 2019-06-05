@@ -22,6 +22,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/mensagem', 'Candidate\CandidateController@indexMessage')->name('index.message');
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
+  Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
   Route::get('/candidaturas', 'Candidate\CandidateController@app')->name('app');
   Route::get('/candidatura/{id}', 'Candidate\CandidateController@application')->name('application');
   Route::post('/formacao', 'Candidate\CandidateController@formation')->name('formation');
@@ -34,6 +35,14 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/idiomas/{id}', 'Candidate\CandidateController@languageDestroy')->name('language.destroy');
   Route::get('/conhecimento/subconhecimento', 'Candidate\CandidateController@subknowledge')->name('subknowledge');
   Route::get('/conhecimento/{id}', 'Candidate\CandidateController@knowledgeDestroy')->name('knowledge.destroy');
+
+  Route::group(['prefix' => 'transacao', 'as' => 'transaction.'], function (){
+    Route::get('/generate', 'Admin\PagSeguroController@getSession')->name('generate');
+    Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
+    Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
+    Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
+
+  });
 });
 //Candidato
 Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
@@ -121,8 +130,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
 });
 
 Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], function(){
-  Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard')
-  ;
+  Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
   Route::get('/pages', 'Admin\AdminController@pages')->name('pages');
   Route::get('/pages/edit/{id}', 'Admin\AdminController@editPages')->name('pages.edit');
   Route::post('/pages/update', 'Admin\AdminController@updatePages')->name('pages.update');
@@ -147,6 +155,21 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
   Route::get('/candidatos/edit/{id}', 'Admin\AdminController@editCandidate')->name('candidate.edit');
   Route::post('/candidatos/update', 'Admin\AdminController@updateCandidate')->name('candidate.update');
+  Route::get('/planos', 'Admin\PagSeguroController@index')->name('plan');
+  Route::group(['prefix' => 'planos', 'as' => 'plan.'], function(){
+    Route::get('/criar', 'Admin\PagSeguroController@create')->name('create');
+    Route::post('/criar', 'Admin\PagSeguroController@store')->name('store');
+
+  });
+  Route::get('/videos', 'Admin\VideoController@index')->name('video');
+  Route::group(['prefix' => 'videos', 'as' => 'video.'], function(){
+    Route::get('/criar', 'Admin\VideoController@create')->name('create');
+    Route::post('/criar', 'Admin\VideoController@store')->name('store');
+    Route::get('/editar/{id}', 'Admin\VideoController@edit')->name('edit');
+    Route::post('/editar', 'Admin\VideoController@update')->name('update');
+    Route::get('/remover/{id}', 'Admin\VideoController@delete')->name('delete');
+
+  });
 });
 
 Route::get('perguntas-frequentes', 'Admin\AdminController@showFrequently')->name('frequentlys');

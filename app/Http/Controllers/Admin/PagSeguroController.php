@@ -131,7 +131,7 @@ class PagSeguroController extends Controller
     public function checkout()
     {
     	$candidate = Auth::guard('candidate')->user();
-        if ($candidate) {
+        if (!$candidate) {
             $company = Auth::guard('company')->user();
         	return view('company.pages.checkout')
         	->with('states', State::all())
@@ -152,6 +152,11 @@ class PagSeguroController extends Controller
             'phone'        		=> 'required|min:15',
         ]);
     	$auth = Auth::guard('candidate')->user();
+        $type = 'candidate';
+        if (!$auth) {
+            $auth = Auth::guard('company')->user();
+            $type = 'company';
+        }
     	$payload['plan'] = $auth->transaction->plan_id;	
     	$payload['sender'] = ([
     		'name' 	=> $request->name,
@@ -222,12 +227,13 @@ class PagSeguroController extends Controller
 		 
 		$resp = curl_exec($curl);
 		$resp = json_decode($resp);
-
 		$auth->transaction->code = $resp->code;
 		$auth->transaction->save();
 		curl_close($curl);
-
-		return redirect()->route('candidate.subscriptions')->with('success', 'Plano registrado com sucesso');
+        if ($type == 'candidate') {
+            return redirect()->route('candidate.subscriptions')->with('success', 'Plano registrado com sucesso');
+        }
+		return redirect()->route('company.subscriptions')->with('success', 'Plano registrado com sucesso');
     }
 
     public function allUsers()

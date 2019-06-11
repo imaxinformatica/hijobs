@@ -48,4 +48,14 @@ class Company extends Authenticatable
     {
         return $this->hasMany('App\Message');
     }
+    
+     public function card()
+    {
+        return $this->hasOne('App\Card', 'candidate_id');
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne('App\TransactionUser', 'user_id');
+    }
 }

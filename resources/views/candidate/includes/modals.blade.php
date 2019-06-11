@@ -412,7 +412,7 @@
                   <option value="09">09</option>
                   <option value="10">10</option>
                   <option value="11">11</option>
-                  <option value="11">012</option>
+                  <option value="12">12</option>
                 </select>
               </div>
               <?php $year =  date('Y') ?> 

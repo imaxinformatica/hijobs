@@ -19,12 +19,17 @@
                     <form action="{{route('company.update')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <a href="{{route('company.index.message')}}">
                                     <button type="button" class="btn-blue">Mensagens Enviadas</button>
                                 </a>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <a href="{{route('company.subscriptions')}}">
+                                    <button type="button" class="btn-blue">Assinaturas</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
                                 <a href="{{route('opportunity.index')}}">
                                     <button type="button" class="btn-blue">Voltar</button>
                                 </a>

@@ -21,6 +21,10 @@ class VideoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'video' => 'required',
+            'name' => 'required'
+        ]);
     	$video = new Video;
     	$video->name = $request->name;
     	$video->video = $this->videoGenerate($request);
@@ -37,6 +41,9 @@ class VideoController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => 'required'
+        ]);
     	$video = Video::find($request->id);
     	$video->name = $request->name;
     	if ($request->video != NULL) {

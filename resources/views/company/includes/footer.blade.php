@@ -59,6 +59,10 @@
     </div>
 </footer> 
 <!-- Scripts -->
+<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js">
+</script>
+<!-- <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
@@ -68,6 +72,61 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script type="text/javascript">
+
+     //Evento de Clique botão assinar plano
+    $('.act-payment').on('click', function (e) {
+        e.preventDefault(); //Impede de confirmar a ação
+        var url = $(this).data('url'); //seta a url a acessar 
+        var plan = $(this).data('plan');
+        $('#paymentModal form input[name="plan"]').val(plan);   
+        getSessionId(url); //Chama a função via ajax
+        $('#paymentModal').modal('show');//Mostra o Modal
+    });
+
+    $('#checkout').on('submit', function(e){
+        e.preventDefault();
+        var token = PagSeguroDirectPayment.getSenderHash();
+        $('#checkout input[name="hash_comprador"]').val(token);
+
+        document.getElementById("checkout").submit();
+    });
+//Gera sessão de pagamento
+    function getSessionId(url){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            beforeSend: function(){
+            },
+            success: function(data){
+                PagSeguroDirectPayment.setSessionId(data);//seta a sessão
+                $('#paymentModal form input[name="session_id"]').val(data);//seta a sessao no formulario
+            }
+        });
+    }
+    $('#key-generate').submit(function(e){
+        e.preventDefault();
+        //Pega os dados para gerar o hash
+        var param = {
+            cardNumber: $("input[name='cardNumber']").val(),
+            brand: $("select[name='brand']").val(),
+            cvv: $("input[name='cvv']").val(),
+            expirationMonth: $("select[name='expirationMonth']").val(),
+            expirationYear: $("select[name='expirationYear']").val(),
+            success: function(response) {
+            },
+            error: function(response) {
+            },
+            complete: function(response) {
+                console.log(response);
+                $('#paymentModal form input[name="hash"]').val(response['card']['token']);    
+                document.getElementById("key-generate").submit();
+            }
+        }
+        //cria o token hash
+        var hash = PagSeguroDirectPayment.createCardToken(param);
+    });
+
+
     $('#top-candidate').click( function(){
         $(this).addClass('active');
         $('#top-company').removeClass('active');

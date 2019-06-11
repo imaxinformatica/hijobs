@@ -77,6 +77,16 @@ Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
   Route::post('/nova/store', 'Company\CompanyController@store')->name('store');
   Route::get('/candidatos', 'Company\CompanyController@candidate')->name('candidate');
   Route::get('/candidato/{id}', 'Company\CompanyController@showCV')->name('cv');
+  Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
+
+  Route::group(['prefix' => 'transacao', 'as' => 'transaction.'], function (){
+    Route::get('/generate', 'Admin\PagSeguroController@getSession')->name('generate');
+    Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
+    Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
+    Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
+
+  });
+
   
   Route::post('/login', 'CompanyAuth\LoginController@login');
 
@@ -159,6 +169,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::group(['prefix' => 'planos', 'as' => 'plan.'], function(){
     Route::get('/criar', 'Admin\PagSeguroController@create')->name('create');
     Route::post('/criar', 'Admin\PagSeguroController@store')->name('store');
+    Route::get('/usuarios', 'Admin\PagSeguroController@allUsers')->name('all-users');
 
   });
   Route::get('/videos', 'Admin\VideoController@index')->name('video');

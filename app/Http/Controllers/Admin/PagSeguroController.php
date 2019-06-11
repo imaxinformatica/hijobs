@@ -63,10 +63,17 @@ class PagSeguroController extends Controller
     public function subscriptions()
     {
         $candidate = Auth::guard('candidate')->user();
-        $plans = Plan::where('type', 'candidato')->get();
-        return view('candidate.pages.subscriptions.show')
-        ->with('plans', $plans)
-        ->with('candidate', $candidate);
+        if ($candidate) {
+            $plans = Plan::where('type', 'candidato')->get();
+            return view('candidate.pages.subscriptions.show')
+            ->with('plans', $plans)
+            ->with('candidate', $candidate);
+        }
+        $company = Auth::guard('company')->user();
+        $plans = Plan::where('type', 'empresa')->get();
+        return view('company.pages.subscriptions.show')
+            ->with('plans', $plans)
+            ->with('company', $company);
     }
     //Pega a sessão de pagamento
     public function getSession(Request $request)
@@ -97,6 +104,11 @@ class PagSeguroController extends Controller
     public function hash(Request $request)
     {	
     	$auth = Auth::guard('candidate')->user();
+        $user = 'candidate';
+        if (!$auth) {
+            $auth = Auth::guard('company')->user();
+            $user = 'company';
+        }
     	$card = new Card;
     	$card->card_number	= $request->cardNumber;
     	$card->brand		= $request->brand;
@@ -110,17 +122,26 @@ class PagSeguroController extends Controller
     	$transaction->user_id = $auth->id;
     	$transaction->plan_id    = $request->plan;
     	$transaction->save();
+        if ($user == 'company') {
+            return redirect()->route('company.transaction.checkout')->with('success','Finalize sua compra');
+        }
     	return redirect()->route('candidate.transaction.checkout')->with('success','Finalize sua compra');
     }
     //direciona para a tela de checkout
     public function checkout()
     {
     	$candidate = Auth::guard('candidate')->user();
+        if ($candidate) {
+            $company = Auth::guard('company')->user();
+        	return view('company.pages.checkout')
+        	->with('states', State::all())
+        	->with('company', $company);
+        }
     	$candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
-    	return view('candidate.pages.checkout')
-    	->with('states', State::all())
-    	->with('candidate', $candidate);
-    }
+        return view('candidate.pages.checkout')
+        ->with('states', State::all())
+        ->with('candidate', $candidate);
+}
 
     public function finishCheckout(Request $request)
     {
@@ -207,6 +228,12 @@ class PagSeguroController extends Controller
 		curl_close($curl);
 
 		return redirect()->route('candidate.subscriptions')->with('success', 'Plano registrado com sucesso');
+    }
+
+    public function allUsers()
+    {
+        $plans = TransactionUser::all();
+        return view('admin.pages.plans.all-users')->with('plans', $plans);
     }
 
     private function limpaCPF_CNPJ($valor){

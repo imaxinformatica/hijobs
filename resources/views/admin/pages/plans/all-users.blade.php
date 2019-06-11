@@ -65,21 +65,17 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th>Nome</th>
                     <th>Plano</th>
                     <th>Valor</th>
-                    <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   @forelse($plans as $plan)
                     <tr>
-                      <td>{{$plan->name}}</td>
-                      <td>R$ {{number_format($plan->value,2, ',','.')}}</td>
-                      <td>
-                        <a href="{{route('admin.plan.all-users')}}" title="Pessoas" class="act-list">
-                          <i class="fa fa-users" aria-hidden="true"></i>
-                        </a>
-                      </td>
+                      <td>{{$plan->user->name}}</td>
+                      <td>{{$plan->plan->name}}</td>
+                      <td>R$ {{number_format($plan->plan->value,2, ',','.')}}</td>
                     </tr>
                   @empty
                   <tr><td>Não possuem planos Criados</td></tr>
@@ -87,9 +83,9 @@
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th>Nome</th>
                     <th>Plano</th>
                     <th>Valor</th>
-                    <th>Ações</th>
                   </tr>
                 </tfoot>   
               </table>

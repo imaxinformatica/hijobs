@@ -1,6 +1,6 @@
 @extends('admin.templates.default')
 
-@section('title', 'Planos')
+@section('title', 'Incluir Parceiro')
 
 @section('description', 'Descrição')
 
@@ -11,10 +11,7 @@
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Planos</h1>
-        </div>
-        <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan')}}'">VOLTAR</button>
+          <h1>Incluir Parceiro</h1>
         </div>
       </div>
     </section>
@@ -51,53 +48,54 @@
 
     <!-- Main content -->
     <section class="content">
-
-
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        <section class="col-lg-12">
+        <section class="col-lg-6">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de Páginas</h3>
+              <h3 class="box-title">Dados</h3>
             </div>
-            <div class="box-body table-responsive">
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Plano</th>
-                    <th>Valor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @forelse($plans->transactions as $plan)
-                    <tr>
-                      <td>{{$plan->user->name}}</td>
-                      <td>{{$plan->plan->name}}</td>
-                      <td>R$ {{number_format($plan->plan->value,2, ',','.')}}</td>
-                    </tr>
-                  @empty
-                  <tr><td>Não possuem planos Criados</td></tr>
-                  @endforelse
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Plano</th>
-                    <th>Valor</th>
-                  </tr>
-                </tfoot>   
-              </table>
-            </div>
-            <!-- /.box-body -->
+            <form method="POST" action="{{route('admin.partner.create')}}" enctype="multipart/form-data">
+              {{csrf_field()}}
+              <div class="box-body">
+                <div class="form-group  row">
+                  <div class="col-xs-12">
+                    <label for="name">Nome Parceiro</label>
+                    <input class="form-control" type="text" name="name">
+                  </div>
+                </div>
+                <div class="form-group  row">
+                  <div class="col-xs-12">
+                    <label for="logo">Logo Parceiro</label>
+                    <input class="form-control" type="file" name="logo">
+                  </div>
+                </div>
+                <div class="form-group  row">
+                  <div class="col-xs-12">
+                    <label for="link">Link</label>
+                    <input class="form-control" type="text" name="link">
+                  </div>
+                </div>
+              </div>
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{{route('admin.partner')}}">
+                  <button type="button" class="btn btn-primary">Voltar</button>
+                </a>
+              </div>
+            </form>
           </div>
         </section>
       </div>
-      <!-- /.row (main row) -->
-
     </section>
-    <!-- /.content -->
+  </div>
+
+  </section>
+  <!-- /.content -->
+  </div>
+  <!-- /.row (main row) -->
+
   </div>
 
 @stop

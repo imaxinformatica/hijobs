@@ -25,32 +25,28 @@ class OpportunityController extends Controller
 {
     public function index(Request $request)
     {
+        $company = Auth::guard('company')->user();
         $opportunities = new Opportunity;
+        $opportunities = $opportunities->where('company_id', $company->id);
         if($request->has('name')){
             if(request('name') != ''){
-                $opportunities = $opportunities->where('name', 'like', '%' . request('name') . '%');
+                $opportunities = $opportunities->where('name', 'like', '%' . request('name') . '%')->where('company_id', $company->id);
             }
         }
-        // if($request->has('bar_code')){
-        //     if(request('bar_code') != ''){
-        //         $opportunities = $opportunities->where('state_id', 'like', '%' . request('bar_code') . '%');
-        //     }
-        // }
         if($request->has('salary')){
             if(request('salary') != ''){
-                $opportunities = $opportunities->where('salary', '>',  request('salary') );
+                $opportunities = $opportunities->where('salary', '>',  request('salary'))->where('company_id', $company->id);
             }
         }
 
         if($request->has('contract_type_id')){
             if(request('contract_type_id') != ''){
-                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id') );
+                $opportunities = $opportunities->where('contract_type_id', request('contract_type_id') )->where('company_id', $company->id);
             }
         }
 
         $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
 
-        $company = Auth::guard('company')->user();
         return view('company.pages.opportunity.index')
         ->with('states', State::all())
         ->with('countries', Country::all())

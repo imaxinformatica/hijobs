@@ -1,20 +1,20 @@
 @extends('admin.templates.default')
 
-@section('title', 'Planos')
+@section('title', 'Vídeos')
 
 @section('description', 'Descrição')
 
 @section('content')
 
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (partner header) -->
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Planos</h1>
+          <h1>Vídeos</h1>
         </div>
         <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan')}}'">VOLTAR</button>
+          <button class="btn-header" onclick="window.location.href='{{ route('admin.partner.create')}}'">Novo</button>
         </div>
       </div>
     </section>
@@ -59,33 +59,39 @@
         <section class="col-lg-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de Páginas</h3>
+              <h3 class="box-title">Lista de Parceiros</h3>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>Plano</th>
-                    <th>Valor</th>
+                    <th>Nome Parceiro</th>
+                    <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($plans->transactions as $plan)
+                  @forelse($partners as $partner)
                     <tr>
-                      <td>{{$plan->user->name}}</td>
-                      <td>{{$plan->plan->name}}</td>
-                      <td>R$ {{number_format($plan->plan->value,2, ',','.')}}</td>
+                      <td>{{$partner->name}}</td>
+                      <td>
+                        <a href="{{ route('admin.partner.edit', ['id' => $partner->id])}}" title="Editar" class="act-list">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ route('admin.partner.delete', ['id' => $partner->id])}}" title="Editar" class="act-list act-delete">
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        </a>
+                      </td>
                     </tr>
                   @empty
-                  <tr><td>Não possuem planos Criados</td></tr>
+                  <tr>
+                    <td>Não existes parceiros criados até o momento</td>
+                  </tr>
                   @endforelse
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Nome</th>
-                    <th>Plano</th>
-                    <th>Valor</th>
+                    <th>Nome Parceiro</th>
+                    <th>Ações</th>
                   </tr>
                 </tfoot>   
               </table>

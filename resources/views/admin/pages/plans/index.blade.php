@@ -14,7 +14,6 @@
           <h1>Planos</h1>
         </div>
         <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan.create')}}'">Novo</button>
         </div>
       </div>
     </section>
@@ -76,7 +75,10 @@
                       <td>{{$plan->name}}</td>
                       <td>R$ {{number_format($plan->value,2, ',','.')}}</td>
                       <td>
-                        <a href="{{route('admin.plan.all-users')}}" title="Pessoas" class="act-list">
+                        <a href="{{route('admin.plan.edit', ['id' => $plan->id])}}" title="Editar" class="act-list">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{route('admin.plan.all-users', ['id' => $plan->id])}}" title="Pessoas" class="act-list">
                           <i class="fa fa-users" aria-hidden="true"></i>
                         </a>
                       </td>

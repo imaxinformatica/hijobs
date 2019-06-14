@@ -13,14 +13,17 @@
 
 Route::get('/', 'Candidate\CandidateController@home')->name('home');
 //Candidato middleware
-Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
-  Route::get('/candidato', 'Candidate\CandidateController@index')->name('index');
+Route::group(['prefix' => 'candidato', 'as'=>'candidate.', 'middleware' => ['candidate']], function () {
+  Route::get('/', 'Candidate\CandidateController@index')->name('index');
   Route::post('/password', 'Candidate\CandidateController@password')->name('password');
   Route::get('/novo/dados/{id}', 'Candidate\CandidateController@data')->name('data');
   Route::post('/novo/update', 'Candidate\CandidateController@update')->name('update');
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
   Route::get('/mensagem', 'Candidate\CandidateController@indexMessage')->name('index.message');
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
+  Route::get('/oportunidade/{id}', 'Candidate\CandidateController@showOpportunity')
+    ->name('show.opportunity')->middleware('check.plan');
+
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
   Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
   Route::get('/candidaturas', 'Candidate\CandidateController@app')->name('app');
@@ -50,7 +53,6 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
   Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
   Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
-  Route::get('/oportunidade/{id}', 'Candidate\CandidateController@showOpportunity')->name('show.opportunity');
   //Controle de Registro e Login
   Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
   Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
@@ -68,7 +70,7 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 });
 
 //Empresa
-Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
+Route::group(['prefix' => 'empresa', 'as'=>'company.'], function () {
   Route::get('/', 'Company\CompanyController@index')->name('index');
   Route::post('session', 'Company\CompanyController@session')->name('session');
   Route::get('/perfil', 'Company\CompanyController@show')->name('show');
@@ -76,7 +78,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
   Route::get('/nova/criar', 'Company\CompanyController@create')->name('create');
   Route::post('/nova/store', 'Company\CompanyController@store')->name('store');
   Route::get('/candidatos', 'Company\CompanyController@candidate')->name('candidate');
-  Route::get('/candidato/{id}', 'Company\CompanyController@showCV')->name('cv');
+  Route::get('/candidato/{id}', 'Company\CompanyController@showCV')->name('cv')->middleware('check.plan');;
   Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
 
   Route::group(['prefix' => 'transacao', 'as' => 'transaction.'], function (){
@@ -84,7 +86,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
     Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
     Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
     Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
-
+    Route::get('/cancelar/', 'Admin\PagSeguroController@cancelPlan')->name('cancel');
   });
 
   
@@ -101,7 +103,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
 });
 
 //Empresa middleware
-Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company']], function () {
+Route::group(['prefix' => 'empresa', 'as'=>'company.', 'middleware' => ['company']], function () {
   Route::post('/candidato', 'Company\CompanyController@message')->name('message');
   Route::get('/mensagem', 'Company\CompanyController@indexMessage')->name('index.message');
   Route::get('/nova/editar', 'Company\CompanyController@edit')->name('edit');
@@ -113,7 +115,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.', 'middleware' => ['company
 //Vagas
 Route::group(['prefix' => 'vaga', 'as'=>'opportunity.', 'middleware' => ['company']], function () {
   Route::get('/empresa/', 'Company\OpportunityController@index')->name('index');
-  Route::get('/criar', 'Company\OpportunityController@create')->name('create');
+  Route::get('/criar', 'Company\OpportunityController@create')->name('create')->middleware('check.plan');
   Route::post('/store', 'Company\OpportunityController@store')->name('store');
   Route::get('/nova/cidade', 'Company\OpportunityController@cities')->name('cities');
   Route::get('/editar/{id}', 'Company\OpportunityController@edit')->name('edit');
@@ -166,12 +168,26 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/candidatos/edit/{id}', 'Admin\AdminController@editCandidate')->name('candidate.edit');
   Route::post('/candidatos/update', 'Admin\AdminController@updateCandidate')->name('candidate.update');
   Route::get('/planos', 'Admin\PagSeguroController@index')->name('plan');
+  
   Route::group(['prefix' => 'planos', 'as' => 'plan.'], function(){
     Route::get('/criar', 'Admin\PagSeguroController@create')->name('create');
     Route::post('/criar', 'Admin\PagSeguroController@store')->name('store');
-    Route::get('/usuarios', 'Admin\PagSeguroController@allUsers')->name('all-users');
+    Route::get('/edit/{id}', 'Admin\PagSeguroController@edit')->name('edit');
+    Route::post('/update', 'Admin\PagSeguroController@update')->name('update');
+    Route::get('/usuarios/{id}', 'Admin\PagSeguroController@allUsers')->name('all-users');
 
   });
+
+  Route::get('/parceiros', 'Admin\PartnerController@index')->name('partner');
+  Route::group(['prefix' => 'parceiros', 'as' => 'partner.'], function(){
+    Route::get('/criar', 'Admin\PartnerController@create')->name('create');
+    Route::post('/criar', 'Admin\PartnerController@store')->name('store');
+    Route::get('/editar/{id}', 'Admin\PartnerController@edit')->name('edit');
+    Route::post('/editar', 'Admin\PartnerController@update')->name('update');
+    Route::get('/remover/{id}', 'Admin\PartnerController@delete')->name('delete');
+
+  });
+
   Route::get('/videos', 'Admin\VideoController@index')->name('video');
   Route::group(['prefix' => 'videos', 'as' => 'video.'], function(){
     Route::get('/criar', 'Admin\VideoController@create')->name('create');

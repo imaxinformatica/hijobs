@@ -1,3 +1,24 @@
+<div class="modal fade" id="confirmationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Confirmação</h4>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja realizar esta exclusão?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirm">Confirmar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!--Formação-->
 <div class="modal fade" tabindex="-1" role="dialog" id="candidateFormation">
   <div class="modal-dialog" role="document">
@@ -164,13 +185,13 @@
             <div class="form-group row" >
               <div class="col-sm-12">
                 <label for="name">Nome da Empresa</label>
-                <input type="text" name="name" placeholder="Nome da Empresa" class="form-control" id="name">
+                <input type="text" name="name" placeholder="Nome da Empresa" class="form-control" >
               </div>
             </div>
             <div class="form-group row" >
               <div class="col-sm-6">
                 <label for="occupation">Cargo</label>
-                <input type="text" name="occupation" placeholder="Indique seu Cargo.." class="form-control" id="name">
+                <input type="text" name="occupation" placeholder="Indique seu Cargo.." class="form-control">
               </div>
               <div class="col-sm-6">
                 <label for="hierarchy_id">Nível Hierárquico</label>
@@ -281,7 +302,7 @@
               </div>
               <div class="col-sm-6">
                 <label for="level">Nível</label>
-                <select id="level" name="level" class="form-control">
+                <select name="level" class="form-control">
                   <option selected disabled>Selecione..</option>
                   <option value="Básico">Básico</option>
                   <option value="Intermediário">Intermediário</option>
@@ -348,7 +369,7 @@
           <div class="row">
             <div class="col-sm-12">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
+              <button type="submit" class="btn btn-primary" >Salvar</button>
             </div>
           </div>
         </div>
@@ -372,6 +393,9 @@
           <h4 class="modal-title">Incluir Conhecimentos em Informática</h4>
         </div>
         <div class="modal-body">
+          <div class="col-sm-12" id="error">
+            
+          </div>
           <form id="key-generate" action="{{route('candidate.transaction.hash')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="session_id" value="">
@@ -380,11 +404,11 @@
             <div class="form-group row" >
               <div class="col-sm-6">
                 <label for="cardNumber">Numero do cartão</label>
-                <input type="text" name="cardNumber" class="form-control">
+                <input type="text" name="cardNumber" class="form-control" required>
               </div>
               <div class="col-sm-6">
                 <label for="brand">Bandeira</label>
-                <select name="brand" class="form-control">
+                <select name="brand" class="form-control" required>
                   <option>SELECIONE..</option>
                   <option value="visa">VISA</option>
                   <option value="mastercard">MASTERCARD</option>
@@ -395,11 +419,11 @@
             <div class="form-group row" >
               <div class="col-sm-6">
                 <label for="cvv">CVV</label>
-                <input type="text" name="cvv" class="form-control">
+                <input type="text" name="cvv" class="form-control" required>
               </div>
               <div class="col-sm-3">
                 <label for="expirationMonth">Mês Venc.</label>
-                <select name="expirationMonth" class="form-control">
+                <select name="expirationMonth" class="form-control" required>
                   <option>SELECIONE..</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -418,7 +442,7 @@
               <?php $year =  date('Y') ?> 
               <div class="col-sm-3">
                 <label for="expirationYear">Ano Venc.</label>
-                <select name="expirationYear" class="form-control">
+                <select name="expirationYear" class="form-control" required>
                   <option>SELECIONE..</option>
                   @for($i =0; $i < 15; $i++)
                   <option value="{{$year+1}}">{{$year+$i}}</option>
@@ -443,6 +467,24 @@
 </div>
 <!--/.Área de Conhecimento-->
 
-
-
-          
+<div class="modal fade" id="planModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirm" data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

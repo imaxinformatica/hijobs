@@ -13,6 +13,7 @@ use App\Level;
 use App\Driver;
 use App\Course;
 use App\Special;
+use App\Partner;
 use App\Country;
 use App\Journey;
 use App\Company;
@@ -45,6 +46,7 @@ class CandidateController extends Controller
         return view('index.index')
         ->with('videos', Video::all())
         ->with('companies', $companies)
+        ->with('partners', Partner::all())
         ->with('opportunities', $opportunities);
     }
 
@@ -54,6 +56,7 @@ class CandidateController extends Controller
         $opportunities = Opportunity::take(4)->get();
         return view('candidate.pages.index')
         ->with('companies', $companies)
+        ->with('partners', Partner::all())
         ->with('opportunities', $opportunities);
     }
 
@@ -499,9 +502,8 @@ class CandidateController extends Controller
                 $opportunities = $opportunities->where('contract_type_id', request('contract_type_id'));
             }
         }
-
+        
         $opportunities = $opportunities->orderBy('name', 'asc')->paginate(10);
-
         foreach ($opportunities as $opportunity) {
             $search = new OpportunitySearch;
             $search->opportunity_id = $opportunity->id;

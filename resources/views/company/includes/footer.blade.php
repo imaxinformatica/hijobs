@@ -74,6 +74,18 @@
 <script type="text/javascript">
 
      //Evento de Clique botão assinar plano
+    $('.act-plan').on('click', function (e) {
+    e.preventDefault();
+    var status = $(this).data('plan');
+    if (status == 'ACTIVE') {
+        var href = $(this).attr('href');
+        window.location.href=href;
+    }else{
+        $('#planModal .modal-title').html('Assine um de nossos planos');
+        $('#planModal .modal-body p').html('Para ter acesso a esta tela, assine um de nossos planos');
+        $('#planModal').modal('show')
+    }
+});
     $('.act-payment').on('click', function (e) {
         e.preventDefault(); //Impede de confirmar a ação
         var url = $(this).data('url'); //seta a url a acessar 
@@ -172,6 +184,15 @@
     });
 
 //Modals
+  $('.act-delete').on('click', function (e) {
+    e.preventDefault();
+    $('#confirmationModal .modal-title').html('Confirmação');
+    $('#confirmationModal .modal-body p').html('Tem certeza que deseja realizar esta ação?');
+    var href = $(this).attr('href');
+    $('#confirmationModal').modal('show').on('click', '#confirm', function() {
+      window.location.href=href;
+    });
+  });
     //Formação
 $('.act-formation').on('click', function (e) {
     e.preventDefault();

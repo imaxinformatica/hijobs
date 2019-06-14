@@ -16,7 +16,7 @@
         
         <div class="row">
             <div class="col-sm-12">
-                <div class="box-result-search result-vacancies dados-pessoais">
+                <div class="box-result-search result-edit dados-pessoais">
                     <form action="{{route('candidate.update')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <a class="act-password">
-                                    <button class="btn-orange" type="button" class="act-password">Alterar a Senha</button>
+                                    <button class="btn-blue-dark" type="button" class="act-password">Alterar a Senha</button>
                                 </a>
                             </div>
                         </div>
@@ -67,7 +67,11 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <input type="text" value="{{$candidate->state}}" name="state" id="state" placeholder="Estado">
+                                <select name="state" id="state" >
+                                @foreach($states as $state)
+                                    <option value="{{$state->sigla}}" <?php echo $state->value == $candidate->state ? 'selected' : "" ?>>{{$state->sigla}}</option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="row">

@@ -20,7 +20,8 @@ class CreateCardsTable extends Migration
             $table->integer('exp_month');   
             $table->integer('exp_year');        
             $table->string('hash');            
-            $table->integer('candidate_id'); 
+            $table->integer('user_id'); 
+            $table->integer('type'); 
             $table->timestamps();
         });
     }

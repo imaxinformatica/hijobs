@@ -22,6 +22,7 @@ use App\Candidate;
 use App\Knowledge;
 use App\Opportunity;
 use App\Subknowledge;
+use App\Partner;
 use App\ContractType;
 use App\OccupationArea;
 use Auth;
@@ -31,6 +32,7 @@ class CompanyController extends Controller
     public function index()
     {
         return view('index.index-empresa')
+        ->with('partners', Partner::all())
         ->with('videos', Video::all());
     }
 

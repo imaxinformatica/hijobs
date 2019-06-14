@@ -113,8 +113,21 @@
                     @else
                     <p class="pay">R$ {{number_format($opportunity->salary, 2, ',', '.')}}</p>
                     @endif
-                    <p><b>{{$opportunity->num}} vaga(s)</b> em São Paulo, SP</p>
-                    <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}">Visualizar</a>
+                    <p><b>{{$opportunity->num}} vaga(s)</b> em {{$opportunity->city->name}}, {{$opportunity->state->sigla}}</p>
+
+                    @if(Auth::guard('candidate')->check())
+                    <?php 
+
+                    $auth = Auth::guard('candidate')->user();
+                    $status = ' SUSPENDED'; 
+                    if ($auth) {
+                        if ($auth->transaction) {
+                            $status = $auth->transaction->status;
+                        }
+                    }
+                    ?>
+                    <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">Visualizar</a>
+                    @endif
                 </div>
             </div>
             @endif
@@ -213,6 +226,26 @@
             @empty
             <div class="col-sm-12">
                 Não existem videos cadastrados.
+            </div>
+            @endforelse
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="title-section"><b>ESCOLHA A MELHOR EMPRESA PARA TRABALHAR</b></p>
+            </div>
+        </div>
+        <div class="row">
+            @forelse($partners as $partner)
+            <a href="{{$partner->link}}" target="_blank">
+                <div class="col-sm-5ths">
+                    <div class="box-company">
+                        <img src="{{asset('images/partner/')}}/{{$partner->logo}}" alt="Parceiro">
+                    </div>
+                </div>
+            </a>
+            @empty
+            <div class="col-sm-6">
+                <p>Não possuimos parceiros para recomendar</p>
             </div>
             @endforelse
         </div>

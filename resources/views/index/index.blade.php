@@ -229,6 +229,26 @@
             </div>
             @endforelse
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="title-section"><b>ESCOLHA A MELHOR EMPRESA PARA TRABALHAR</b></p>
+            </div>
+        </div>
+        <div class="row">
+            @forelse($partners as $partner)
+            <a href="{{$partner->link}}" target="_blank">
+                <div class="col-sm-5ths">
+                    <div class="box-company">
+                        <img src="{{asset('images/partner/')}}/{{$partner->logo}}" alt="Parceiro">
+                    </div>
+                </div>
+            </a>
+            @empty
+            <div class="col-sm-6">
+                <p>Não possuimos parceiros para recomendar</p>
+            </div>
+            @endforelse
+        </div>
             
         </div>
     </div>

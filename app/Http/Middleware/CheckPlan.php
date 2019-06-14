@@ -15,10 +15,15 @@ class CheckPlan
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->guard('candidate')->check())
-            return redirect('/');
+        $type = 'candidate';
+        if(!auth()->guard('candidate')->check()){
+            $type = 'company';
+            if(!auth()->guard('company')->check()){
+                return redirect('/');
+            }
+        }
 
-        $status = auth()->guard('candidate')->user()->transaction->status;
+        $status = auth()->guard($type)->user()->transaction->status;
         if ($status != 'ACTIVE') {
             return redirect('/');
         }

@@ -48,6 +48,11 @@
             <i class="fa fa-play-circle-o" aria-hidden="true"></i> <span>VIDEOS</span>
           </a>
         </li>
+        <li {{ (Request::is('admin/parceiros') ? 'class=active' : '') }} {{ (Request::is('admin/parceiros/*') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.partner')}}">
+            <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>PARCEIROS</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -60,7 +60,7 @@
                             <p for="name"><b>Nome: </b>{{$plan->name}}</p>
                             <p for="name"><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
                             @if(isset($company->transaction))
-                                @if($candidate->transaction->status == 'AVALIABLE')
+                                @if($company->transaction->status == 'ACTIVE')
                                 <a href="{{route('company.transaction.cancel')}}" class="act-delete" >
                                     <button class="btn btn-danger">Suspender Assinatura</button>
                                 </a>

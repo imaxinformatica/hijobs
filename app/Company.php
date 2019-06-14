@@ -51,7 +51,7 @@ class Company extends Authenticatable
     
      public function card()
     {
-        return $this->hasOne('App\Card', 'candidate_id');
+        return $this->hasOne('App\Card', 'user_id');
     }
 
     public function transaction()

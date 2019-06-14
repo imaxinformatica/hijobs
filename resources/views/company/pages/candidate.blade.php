@@ -114,7 +114,18 @@
                             @isset($candidate->state_id)
                             <p><b>Estado: </b>{{$candidate->state->name}}</p>
                             @endisset
-                            <a href="{{route('company.cv', ['id'=> $candidate->id])}}">
+                            @if(Auth::guard('company')->check())
+                            <?php 
+
+                            $auth = Auth::guard('company')->user();
+                            $status = ' SUSPENDED'; 
+                            if ($auth) {
+                                if ($auth->transaction) {
+                                    $status = $auth->transaction->status;
+                                }
+                            }
+                            ?>
+                            <a href="{{route('company.cv', ['id'=> $candidate->id])}}" data-plan="{{$status}}" class="act-plan">
                                 <button class="btn-result" type="button">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -122,6 +133,7 @@
                                     <p>Mais detalhes do candidato</p>
                                 </button>
                             </a>
+                            @endif
                         </div>   
                     </div>
                 </div>

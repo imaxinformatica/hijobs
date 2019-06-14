@@ -10,7 +10,17 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="box-result-search">
-                    <a href="{{route('opportunity.create')}}">
+                    <?php 
+
+                    $auth = Auth::guard('company')->user();
+                    $status = ' SUSPENDED'; 
+                    if ($auth) {
+                        if ($auth->transaction) {
+                            $status = $auth->transaction->status;
+                        }
+                    }
+                    ?>
+                    <a href="{{route('opportunity.create')}}" data-plan="{{$status}}" class="act-plan">
                         <button class="btn-blue">
                             <p>Criar vaga</p>
                         </button>
@@ -74,7 +84,7 @@
                         <div class="box-result-search result-vacancies">
                             <span>{{$opportunity->name}}</span>
                             <span style="float: right;">
-                                <a href="{{route('opportunity.show', ['id'=> $opportunity->id])}}"><button type="button" class="btn btn-info">    
+                                <a href="{{route('opportunity.show', ['id'=> $opportunity->id])}}" data-plan="{{$status}}" class="act-plan"><button type="button" class="btn btn-info">    
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </button></a>
                             </span>
@@ -88,7 +98,7 @@
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p><b>Tipo de Contrato: </b> {{$opportunity->contract->name}}</p>
                             <p>{{$opportunity->activity}}</p>
-                            <a href="{{route('opportunity.edit', ['id' => $opportunity->id])}}">
+                            <a href="{{route('opportunity.edit', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">
                                 <button class="btn-result">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -97,7 +107,7 @@
                                 </button>
                             </a>
                             @if($opportunity->publish == 1)
-                            <a href="{{route('opportunity.publish', ['id' => $opportunity->id])}}">
+                            <a href="{{route('opportunity.publish', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">
                                 <button class="btn-result">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">

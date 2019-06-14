@@ -74,6 +74,18 @@
 <script type="text/javascript">
 
      //Evento de Clique botão assinar plano
+    $('.act-plan').on('click', function (e) {
+    e.preventDefault();
+    var status = $(this).data('plan');
+    if (status == 'ACTIVE') {
+        var href = $(this).attr('href');
+        window.location.href=href;
+    }else{
+        $('#planModal .modal-title').html('Assine um de nossos planos');
+        $('#planModal .modal-body p').html('Para ter acesso a esta tela, assine um de nossos planos');
+        $('#planModal').modal('show')
+    }
+});
     $('.act-payment').on('click', function (e) {
         e.preventDefault(); //Impede de confirmar a ação
         var url = $(this).data('url'); //seta a url a acessar 

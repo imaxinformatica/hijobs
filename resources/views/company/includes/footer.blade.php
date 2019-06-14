@@ -172,6 +172,15 @@
     });
 
 //Modals
+  $('.act-delete').on('click', function (e) {
+    e.preventDefault();
+    $('#confirmationModal .modal-title').html('Confirmação');
+    $('#confirmationModal .modal-body p').html('Tem certeza que deseja realizar esta ação?');
+    var href = $(this).attr('href');
+    $('#confirmationModal').modal('show').on('click', '#confirm', function() {
+      window.location.href=href;
+    });
+  });
     //Formação
 $('.act-formation').on('click', function (e) {
     e.preventDefault();

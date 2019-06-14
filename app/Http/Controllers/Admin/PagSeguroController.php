@@ -57,7 +57,62 @@ class PagSeguroController extends Controller
 		$plan->save();
 
 		return redirect(route('admin.plan'))->with('success', 'Plano criado com sucesso');
-}
+    }
+
+    public function edit($id)
+    {
+        $plan = Plan::find($id);
+        $plan->value = number_format($plan->value, 2, ',', '.');
+
+        return view('admin.pages.plans.edit')->with('plan', $plan);
+    }
+
+    public function update(Request $request)
+    {
+        $data['email'] = config('services.pagseguro.pagseguro_email');
+        $data['token'] = config('services.pagseguro.pagseguro_token');
+        $value = str_replace(',','.', str_replace('.','', $request->value));
+        $code = $request->code;
+
+        $data = http_build_query($data);
+
+        $url = "https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/request/{$code}/payment/?{$data}";
+        $payload = array(
+            'amountPerPayment'      => $value,
+            'updateSubscriptions'   => false
+        ); 
+
+        $data_json = json_encode($payload);
+
+        $headers = array('Content-Type: application/json', 'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); 
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $resp = json_decode($response);
+
+        curl_close($ch);
+        if (isset($resp->error)) {
+            foreach ($resp->errors as $resp) {
+                return redirect()->back()->with('warning', "Ops,Tivemos um problema, entre em contato com o administrador. Erro: {$resp}");
+            }
+        }
+        if (!$resp) {
+            $plan = Plan::where('code', $code)->first();
+            $plan->name = $request->preApprovalName;
+            $plan->value = $value;
+            $plan->save();
+
+            return redirect()->back()->with('success', 'Plano editado com sucesso');
+        } else{
+            
+
+        }
+    }
 
 	//tela para assinar o plano
     public function subscriptions()
@@ -115,12 +170,24 @@ class PagSeguroController extends Controller
     	$card->exp_month	= $request->expirationMonth;
     	$card->exp_year		= $request->expirationYear;
     	$card->hash			= $request->hash;
-    	$card->candidate_id = $auth->id;
+    	$card->user_id      = $auth->id;
+
+        if ($user == 'company') {
+            $card->type = 2;
+        }else{
+            $card->type = 1;
+
+        }
     	$card->save();
 
     	$transaction = new TransactionUser;
     	$transaction->user_id = $auth->id;
     	$transaction->plan_id    = $request->plan;
+        if ($user == 'company') {
+            $transaction->type    = 2;
+        }else{
+            $transaction->type    = 1;
+        }
     	$transaction->save();
         if ($user == 'company') {
             return redirect()->route('company.transaction.checkout')->with('success','Finalize sua compra');
@@ -227,18 +294,69 @@ class PagSeguroController extends Controller
 		 
 		$resp = curl_exec($curl);
 		$resp = json_decode($resp);
-		$auth->transaction->code = $resp->code;
-		$auth->transaction->save();
 		curl_close($curl);
+        if (isset($resp->error)) {
+            foreach ($resp->errors as $resp) {
+                return redirect()->back()->with('warning', "Ops,Tivemos um problema, entre em contato com o administrador. Erro: {$resp}");
+            }
+        }
+		$auth->transaction->code = $resp->code;
+        $auth->transaction->status ='ACTIVE';
+		$auth->transaction->save();
         if ($type == 'candidate') {
             return redirect()->route('candidate.subscriptions')->with('success', 'Plano registrado com sucesso');
         }
 		return redirect()->route('company.subscriptions')->with('success', 'Plano registrado com sucesso');
     }
 
-    public function allUsers()
+    public function cancelPlan()
     {
-        $plans = TransactionUser::all();
+        $auth = Auth::guard('candidate')->user();
+        if (!$auth) {
+            $auth = Auth::guard('company')->user();
+        }
+        $status = 'ACTIVE';
+        $code = $auth->transaction->code; 
+        if ($auth->transaction->status == 'ACTIVE') {
+            $status = 'SUSPENDED';
+        }
+        $data['email'] = config('services.pagseguro.pagseguro_email');
+        $data['token'] = config('services.pagseguro.pagseguro_token');
+
+        $data = http_build_query($data);
+
+        $url = "https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/{$code}/status/?{$data}";
+        $payload = array('status'=> $status); // PARA REATIVAR USAR $data = array('status'=>'ACTIVE');
+
+        $data_json = json_encode($payload);
+
+        $headers = array('Content-Type: application/json', 'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); 
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $resp = json_decode($response);
+        if (isset($resp->error)) {
+            foreach ($resp->errors as $resp) {
+                return redirect()->back()->with('warning', "Ops,Tivemos um problema, entre em contato com o administrador. Erro: {$resp}");
+            }
+        }
+        if (!$resp) {
+            $auth->transaction->status = $status;
+            $auth->transaction->save(); 
+            return redirect()->back()->with('success', 'Status do plano alterado     com sucesso');
+        }
+      
+    }
+
+    public function allUsers($id)
+    {
+        $plans = Plan::find($id);
         return view('admin.pages.plans.all-users')->with('plans', $plans);
     }
 

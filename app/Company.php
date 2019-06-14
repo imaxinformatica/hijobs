@@ -56,6 +56,6 @@ class Company extends Authenticatable
 
     public function transaction()
     {
-        return $this->hasOne('App\TransactionUser', 'user_id');
+        return $this->hasOne('App\TransactionUser', 'user_id')->where('type', 2);
     }
 }

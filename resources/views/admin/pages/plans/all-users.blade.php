@@ -14,7 +14,7 @@
           <h1>Planos</h1>
         </div>
         <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan.create')}}'">Novo</button>
+          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan')}}'">VOLTAR</button>
         </div>
       </div>
     </section>
@@ -71,7 +71,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($plans as $plan)
+                  @forelse($plans->transactions as $plan)
                     <tr>
                       <td>{{$plan->user->name}}</td>
                       <td>{{$plan->plan->name}}</td>

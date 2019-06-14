@@ -113,8 +113,21 @@
                     @else
                     <p class="pay">R$ {{number_format($opportunity->salary, 2, ',', '.')}}</p>
                     @endif
-                    <p><b>{{$opportunity->num}} vaga(s)</b> em São Paulo, SP</p>
-                    <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}">Visualizar</a>
+                    <p><b>{{$opportunity->num}} vaga(s)</b> em {{$opportunity->city->name}}, {{$opportunity->state->sigla}}</p>
+
+                    @if(Auth::guard('candidate')->check())
+                    <?php 
+
+                    $auth = Auth::guard('candidate')->user();
+                    $status = ' SUSPENDED'; 
+                    if ($auth) {
+                        if ($auth->transaction) {
+                            $status = $auth->transaction->status;
+                        }
+                    }
+                    ?>
+                    <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">Visualizar</a>
+                    @endif
                 </div>
             </div>
             @endif

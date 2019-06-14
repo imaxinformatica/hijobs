@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <a href="{{route('candidate.subscriptions')}}">
-                                    <button class="btn-blue">Assinaturas</button>
+                                    <button class="btn-blue-dark">Assinaturas</button>
                                 </a>
                             </div>
                         </div>

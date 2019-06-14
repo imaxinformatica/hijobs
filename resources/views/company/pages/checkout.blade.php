@@ -5,7 +5,18 @@
 @section('description', 'Descrição')
 
 @section('content')
+<div class="row">
+<!-- Left col -->
+<section class="col-sm-12">
+  <div class="alert alert-primary alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    Não aceitamos cartões corporativos
+  </div>
+</section>
+</div>
+
 <section class="result-search cadastro-dados">
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12">

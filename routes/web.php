@@ -21,6 +21,9 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/novo/melhorar/{id}', 'Candidate\CandidateController@better')->name('better');
   Route::get('/mensagem', 'Candidate\CandidateController@indexMessage')->name('index.message');
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
+  Route::get('/oportunidade/{id}', 'Candidate\CandidateController@showOpportunity')
+    ->name('show.opportunity')->middleware('check.plan');
+
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
   Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
   Route::get('/candidaturas', 'Candidate\CandidateController@app')->name('app');
@@ -50,7 +53,6 @@ Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
 
   Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');
   Route::get('/pesquisar', 'Candidate\CandidateController@search')->name('search');
-  Route::get('/oportunidade/{id}', 'Candidate\CandidateController@showOpportunity')->name('show.opportunity');
   //Controle de Registro e Login
   Route::get('/novo', 'Candidate\CandidateController@create')->name('create');
   Route::post('/novo/store', 'Candidate\CandidateController@store')->name('store');
@@ -84,7 +86,7 @@ Route::group(['prefix' => 'company', 'as'=>'company.'], function () {
     Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
     Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
     Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
-
+    Route::get('/cancelar/', 'Admin\PagSeguroController@cancelPlan')->name('cancel');
   });
 
   
@@ -169,7 +171,9 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::group(['prefix' => 'planos', 'as' => 'plan.'], function(){
     Route::get('/criar', 'Admin\PagSeguroController@create')->name('create');
     Route::post('/criar', 'Admin\PagSeguroController@store')->name('store');
-    Route::get('/usuarios', 'Admin\PagSeguroController@allUsers')->name('all-users');
+    Route::get('/edit/{id}', 'Admin\PagSeguroController@edit')->name('edit');
+    Route::post('/update', 'Admin\PagSeguroController@update')->name('update');
+    Route::get('/usuarios/{id}', 'Admin\PagSeguroController@allUsers')->name('all-users');
 
   });
   Route::get('/videos', 'Admin\VideoController@index')->name('video');

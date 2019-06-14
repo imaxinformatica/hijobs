@@ -417,6 +417,18 @@ button.btn-blue {
     margin-bottom: 12px;
     border-radius: 2px;
 }
+button.btn-blue-dark {
+    background: #0033cc;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+}
 
 img.icon-vagas {
     float: left;
@@ -441,6 +453,15 @@ div.result-vacancies span{
 }
 
 div.result-vacancies #salario{
+    margin-top: 7px;
+}
+
+div.result-edit{
+    padding: 20px 25px;
+}
+
+
+div.result-edit #salario{
     margin-top: 7px;
 }
 

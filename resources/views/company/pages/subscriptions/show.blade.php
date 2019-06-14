@@ -5,6 +5,20 @@
 @section('description', 'Descrição')
 
 @section('content')
+@if(session()->has('warning'))
+  <div class="container">
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-sm-12">
+        <div class="alert alert-warning alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{session('warning')}}
+        </div>
+      </section>
+    </div>
+  </div>
+@endisset
 <section class="result-search cadastro-dados">
     <div class="container">
         <div class="row">
@@ -46,9 +60,15 @@
                             <p for="name"><b>Nome: </b>{{$plan->name}}</p>
                             <p for="name"><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
                             @if(isset($company->transaction))
-                            <a href="#" >
-                                <button class="btn btn-success">Plano Adquirido</button>
-                            </a>
+                                @if($candidate->transaction->status == 'AVALIABLE')
+                                <a href="{{route('company.transaction.cancel')}}" class="act-delete" >
+                                    <button class="btn btn-danger">Suspender Assinatura</button>
+                                </a>
+                                @else
+                                <a href="{{route('company.transaction.cancel')}}" class="act-delete" >
+                                    <button class="btn btn-success">Ativar Assinatura</button>
+                                </a>
+                                @endif
                             @else
                             <a href="#" class="act-payment" data-plan="{{$plan->code}}" data-url="{{route('company.transaction.generate')}}">
                                 <button class="btn-blue">Assinar Plano</button>

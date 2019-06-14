@@ -51,6 +51,48 @@
     </div>
   </div>
 @endisset
+@if(session()->has('info'))
+  <div class="container">
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-sm-12">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{session('info')}}
+        </div>
+      </section>
+    </div>
+  </div>
+@endisset
+@if(session()->has('danger'))
+  <div class="container">
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-sm-12">
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{session('danger')}}
+        </div>
+      </section>
+    </div>
+  </div>
+@endisset
+@if(session()->has('warning'))
+  <div class="container">
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-sm-12">
+        <div class="alert alert-warning alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{session('warning')}}
+        </div>
+      </section>
+    </div>
+  </div>
+@endisset
 
 @if ($errors->any())
   <div class="container">

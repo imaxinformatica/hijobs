@@ -84,7 +84,18 @@
                                 @endif
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p>{{$opportunity->activity}}.</p>
-                            <a href="{{route('candidate.show.opportunity',['id' => $opportunity->id])}}">
+                            @if(Auth::guard('candidate')->check())
+                            <?php 
+
+                            $auth = Auth::guard('candidate')->user();
+                            $status = ' SUSPENDED'; 
+                            if ($auth) {
+                                if ($auth->transaction) {
+                                    $status = $auth->transaction->status;
+                                }
+                            }
+                            ?>
+                            <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">
                                 <button class="btn-result" type="button">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -92,6 +103,7 @@
                                     <p>Mais detalhes da vaga</p>
                                 </button>
                             </a>
+                            @endif
                         </div>   
                     </div>
                 </div>

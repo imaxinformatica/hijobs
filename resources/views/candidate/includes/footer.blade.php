@@ -75,6 +75,28 @@
 <script type="text/javascript">
 
     //Evento de Clique botão assinar plano
+  $('.act-delete').on('click', function (e) {
+    e.preventDefault();
+    $('#confirmationModal .modal-title').html('Confirmação');
+    $('#confirmationModal .modal-body p').html('Tem certeza que deseja realizar esta ação?');
+    var href = $(this).attr('href');
+    $('#confirmationModal').modal('show').on('click', '#confirm', function() {
+      window.location.href=href;
+    });
+  });
+
+$('.act-plan').on('click', function (e) {
+    e.preventDefault();
+    var status = $(this).data('plan');
+    if (status == 'ACTIVE') {
+        var href = $(this).attr('href');
+        window.location.href=href;
+    }else{
+        $('#planModal .modal-title').html('Assine um de nossos planos');
+        $('#planModal .modal-body p').html('Para ter acesso a esta tela, assine um de nossos planos');
+        $('#planModal').modal('show')
+    }
+});
     $('.act-payment').on('click', function (e) {
         e.preventDefault(); //Impede de confirmar a ação
         var url = $(this).data('url'); //seta a url a acessar 
@@ -118,7 +140,12 @@
             error: function(response) {
             },
             complete: function(response) {
-                console.log(response);
+
+                if (response.hasOwnProperty('error')) {
+                    for (var [key, value] of Object.entries(response.errors)) {
+                        $('#error').html('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" +aria-hidden="true">&times;</button>Ops, tivemos um erro:'+key + ': ' + value +'</div>');
+                    }
+                }
                 $('#paymentModal form input[name="hash"]').val(response['card']['token']);    
                 document.getElementById("key-generate").submit();
             }
@@ -126,8 +153,6 @@
         //cria o token hash
         var hash = PagSeguroDirectPayment.createCardToken(param);
     });
-
-
 
     $('#top-candidate').click( function(){
         $(this).addClass('active');

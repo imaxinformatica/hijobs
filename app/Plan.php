@@ -11,4 +11,9 @@ class Plan extends Model
 		'name',
 		'value',
     ];
+
+    public function transactions()
+    {
+    	return $this->hasMany('App\TransactionUser', 'plan_id', 'code');
+    }
 }

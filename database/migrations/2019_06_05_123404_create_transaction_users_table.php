@@ -16,6 +16,7 @@ class CreateTransactionUsersTable extends Migration
         Schema::create('transaction_users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->integer('type');
             $table->string('plan_id');
             $table->string('status')->nullable();
             $table->string('code')->nullable();

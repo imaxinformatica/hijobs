@@ -110,7 +110,9 @@
                     <p class="pay">R$ {{number_format($opportunity->salary, 2, ',', '.')}}</p>
                     @endif
                     <p><b>{{$opportunity->num}} vaga(s)</b> em São Paulo, SP</p>
+                    @auth
                     <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}">Visualizar</a>
+                    @endauth
                 </div>
             </div>
             @empty

@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="state_id">Estados</label>
-                                <select name="state_id" id="state">
+                                <select name="state_id" id="state-search">
                                     <option selected value="">Selecione</option>
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}">{{$state->name}}</option>
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="city_id">Cidades</label>
-                                <select name="city_id" id="city">
+                                <select name="city_id" id="city-search">
                                     <option selected value="">Selecione</option>
                                 </select>
                             </div>

@@ -333,9 +333,9 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $('#state' ).change(function() {
+    $('#state-search' ).change(function() {
         var url = "{{route('candidate.cities')}}";
-        var state_id = $('#state option:selected').val();
+        var state_id = $('#state-search option:selected').val();
         citiesAjax(url, state_id);
     });
     function citiesAjax(url, state_id){
@@ -350,10 +350,10 @@ $(document).ready(function(){
             success: function(data){
                 var result = $.parseJSON(data);
 
-                $('#city').html('');
-                $('#city').append('<option selected disabled>SELECIONE...</option>');
+                $('#city-search').html('');
+                $('#city-search').append('<option selected disabled>SELECIONE...</option>');
                 for (var i = 0; i < result.length; ++i){
-                    $('#city').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
+                    $('#city-search').append('<option value="'+result[i].id+'" >'+result[i].name+'</option>');
                 }
             }
         });

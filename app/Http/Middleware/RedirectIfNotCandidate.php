@@ -18,7 +18,7 @@ class RedirectIfNotCandidate
 	public function handle($request, Closure $next, $guard = 'candidate')
 	{
 	    if (!Auth::guard($guard)->check()) {
-	        return redirect('candidate/login');
+	        return redirect('candidato/login');
 	    }
 
 	    return $next($request);

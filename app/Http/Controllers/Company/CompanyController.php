@@ -142,18 +142,7 @@ class CompanyController extends Controller
             $company->email            = $request->email;
         }
 
-        // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
-        // }
-        // if (filter_var($request->facebook, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Facebook');
-        // }
-        // if (filter_var($request->twitter, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Twitter');
-        // }
-        // if (filter_var($request->blog, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Blog');
-        // }
+
         $company->linkedin            = $request->linkedin;
         $company->facebook            = $request->facebook;
         $company->twitter             = $request->twitter;

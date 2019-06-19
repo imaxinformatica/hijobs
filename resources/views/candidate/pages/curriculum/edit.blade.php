@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number" value="{{$candidate->state}}" id="number" placeholder="Número e Complemento">
+                                <input type="text" name="number" value="{{$candidate->number}}" id="number" placeholder="Número e Complemento">
                             </div>
                         </div>
                         <div class="row">
@@ -67,9 +67,9 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <select name="state" id="state" >
+                                <select name="state" >
                                 @foreach($states as $state)
-                                    <option value="{{$state->sigla}}" <?php echo $state->value == $candidate->state ? 'selected' : "" ?>>{{$state->sigla}}</option>
+                                    <option value="{{$state->sigla}}" <?php echo $state->sigla == $candidate->state ? 'selected' : "" ?>>{{$state->sigla}}</option>
                                 @endforeach
                                 </select>
                             </div>

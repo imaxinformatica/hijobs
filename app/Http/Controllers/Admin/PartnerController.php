@@ -63,31 +63,34 @@ class PartnerController extends Controller
 
     private function imgValidate(Request $request)
     {
-        $originalPath = public_path().'/images/partner/';
-        $arq_img = $request->file('logo');
-        $name    = basename($arq_img->getClientOriginalName());
-        $type    = strtolower(pathinfo($name,PATHINFO_EXTENSION));
-        $count = 1;
-        //Gera string aleatória
-        while($count != 0){
-            $str            = "";
-            $characters     = array_merge(range('A','Z'), range('a','z'), range('0','9'));
-            $max            = count($characters) - 1;
-
-            for ($i = 0; $i < 7; $i++) {
-                $rand   = mt_rand(0, $max);
-                $str   .= $characters[$rand];
-                $count  = Partner::where('logo', $str)->count();
+        if (isset($request->file)) {
+            $originalPath = public_path().'/images/partner/';
+            $arq_img = $request->file('logo');
+            $name    = basename($arq_img->getClientOriginalName());
+            $type    = strtolower(pathinfo($name,PATHINFO_EXTENSION));
+            $count = 1;
+            //Gera string aleatória
+            while($count != 0){
+                $str            = "";
+                $characters     = array_merge(range('A','Z'), range('a','z'), range('0','9'));
+                $max            = count($characters) - 1;
+                
+                for ($i = 0; $i < 7; $i++) {
+                    $rand   = mt_rand(0, $max);
+                    $str   .= $characters[$rand];
+                    $count  = Partner::where('logo', $str)->count();
+                }
             }
+            $arq_img_name = $str.'.'.$type;
+            $image = Image::make($arq_img);
+            $image->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($originalPath.$arq_img_name); 
+            
+        }else{
+            $arq_img_name = 'partner.png';    
         }
-        $arq_img_name = $str.'.'.$type;
-        $image = Image::make($arq_img);
-        $image->resize(300, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $image->save($originalPath.$arq_img_name); 
-
         return $arq_img_name;  
     }
-
 }

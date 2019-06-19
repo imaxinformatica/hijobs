@@ -29,7 +29,7 @@
           @auth
           <li><a href="{{route('candidate.opportunity')}}">BUSCAR VAGAS</a></li>
           <li><a href="{{route('candidate.show')}}">DADOS PESSOAIS</a></li>
-          <li id="login"><a href="{{url('candidate/logout')}}">SAIR</a></li>
+          <li id="login"><a href="{{url('candidato/logout')}}">SAIR</a></li>
           @endauth
         </ul>
       </div><!-- /.navbar-collapse -->

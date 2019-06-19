@@ -17,7 +17,7 @@
           <div class="form-group" >
             <div class="col-sm-12">
               <label for="name">Nome da Instituição</label>
-              <input type="text" name="name" placeholder="Nome da Instituição" class="form-control" id="name">
+              <input type="text" name="name" placeholder="Nome da Instituição" class="form-control" >
             </div>
           </div>
           <div class="form-group">

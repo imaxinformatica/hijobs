@@ -48,7 +48,7 @@ Route::group(['prefix' => 'candidato', 'as'=>'candidate.', 'middleware' => ['can
   });
 });
 //Candidato
-Route::group(['prefix' => 'candidate', 'as'=>'candidate.',], function () {
+Route::group(['prefix' => 'candidato', 'as'=>'candidate.',], function () {
   Route::get('/nova/cidade', 'Company\OpportunityController@cities')->name('cities');
 
   Route::get('/pesquisa', 'Candidate\CandidateController@opportunity')->name('opportunity');

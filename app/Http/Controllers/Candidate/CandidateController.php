@@ -91,7 +91,9 @@ class CandidateController extends Controller
         curl_close($ch);
 
         $dadosCep = json_decode($result);
-
+        if (isset($dadosCep->erro)) {
+            return redirect()->back()->with('danger', 'Verifique seu CEP se está correto.');            
+        }
         $candidate = new Candidate;
         $candidate->name        = $request->name;
         $candidate->email       = $request->email;
@@ -182,11 +184,12 @@ class CandidateController extends Controller
         $candidate->state            = $request->state;
         $candidate->cpf              = $request->cpf;
         if ($request->cep != NULL) {
-            $candidate->cep              = $request->cep;
-            $candidate->street           = $request->street;
-            $candidate->state            = $request->state;
-            $candidate->nehighbor        = $request->nehighbor;
-            $candidate->city             = $request->city;
+            $candidate->cep          = $request->cep;
+            $candidate->street       = $request->street;
+            $candidate->state        = $request->state;
+            $candidate->nehighbor    = $request->nehighbor;
+            $candidate->number       = $request->number;
+            $candidate->city         = $request->city;
         }
         $candidate->phone            = $request->phone;
         $candidate->marital_status   = $request->marital_status;
@@ -199,19 +202,6 @@ class CandidateController extends Controller
         $candidate->max_hierarchy_id = $request->max_hierarchy_id;
         $candidate->salary           = str_replace(',','.', str_replace('.','', $request->salary));
         $candidate->birthdate        = implode("-", array_reverse(explode("/", $request->birthdate)));
-
-        // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
-        // }
-        // if (filter_var($request->facebook, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Facebook');
-        // }
-        // if (filter_var($request->twitter, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Twitter');
-        // }
-        // if (filter_var($request->blog, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Blog');
-        // }
         $candidate->linkedin            = $request->linkedin;
         $candidate->facebook            = $request->facebook;
         $candidate->twitter             = $request->twitter;
@@ -295,12 +285,10 @@ class CandidateController extends Controller
         $this->validate($request, [
             'name'              => 'required',
             'country_id'        => 'required',
-            'level_id'          => 'required',
-            'course_id'         => 'required',
+            'level'          => 'required',
+            'course'         => 'required',
             'startMonth'        => 'required|min:2',
             'startYear'         => 'required|min:4',
-            'finishMonth'       => 'min:2',
-            'finishYear'        => 'min:4',
             'situation'         => 'required',
         ]);
         $formation = new Formation;

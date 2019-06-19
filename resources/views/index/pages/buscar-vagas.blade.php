@@ -14,7 +14,7 @@
                 <form>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="name" type="text" name="name" placeholder="Cargo ou Área Profissional">
+                            <input type="text" name="name" placeholder="Cargo ou Área Profissional">
                             <p>Exemplos: Vendedor, motorista, estágios etc.</p>
                         </div>
                     </div>

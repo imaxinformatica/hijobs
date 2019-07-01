@@ -254,7 +254,7 @@ class CountriesSeeder extends Seeder
             array('name' => 'Zaire'),
             array('name' => 'Zambia'),
             array('name' => 'Zimbabwe'),
-        );
+      );
 
         DB::table('countries')->insert($countries);
     }

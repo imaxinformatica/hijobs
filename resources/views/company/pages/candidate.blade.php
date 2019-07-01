@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="box-result-search">
-                    <form method="GET">
+                    <form method="GET" id="filterForm">
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="state_id">Estado</label>
-                                <select name="state_id">
+                                <label for="state">Estado</label>
+                                <select name="state">
                                     <option selected value="">Selecione</option>
                                     @foreach($states as $state)
-                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    <option {{request('state') == $state->sigla ? "selected" : ""}} value="{{$state->sigla}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -27,12 +27,12 @@
                                 <label for="salary">Pretensão Salarial</label>
                                 <select name="salary">
                                     <option selected value="">Selecione</option>
-                                    <option value="0">À partir de R$ 0,00</option>
-                                    <option value="1000">À partir de R$ 1.000,00</option>
-                                    <option value="2000">À partir de R$ 2.000,00</option>
-                                    <option value="3000">À partir de R$ 3.000,00</option>
-                                    <option value="5000">À partir de R$ 5.000,00</option>
-                                    <option value="10000">À partir de R$ 10.000,00</option>
+                                    <option {{request('salary') == 0 ? "selected" : ""}} value="0">À partir de R$ 0,00</option>
+                                    <option {{request('salary') == 1000 ? "selected" : ""}} value="1000">À partir de R$ 1.000,00</option>
+                                    <option {{request('salary') == 2000 ? "selected" : ""}} value="2000">À partir de R$ 2.000,00</option>
+                                    <option {{request('salary') == 3000 ? "selected" : ""}} value="3000">À partir de R$ 3.000,00</option>
+                                    <option {{request('salary') == 5000 ? "selected" : ""}} value="5000">À partir de R$ 5.000,00</option>
+                                    <option {{request('salary') == 10000 ? "selected" : ""}} value="10000">À partir de R$ 10.000,00</option>
                                 </select>
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                                 <label for="sex">Sexo</label>
                                 <select name="sex">
                                     <option selected value="">Selecione</option>
-                                    <option value="F">Feminino</option>
-                                    <option value="M">Masculino</option>
+                                    <option {{request('sex') == "F" ? "selected" : ""}} value="F">Feminino</option>
+                                    <option {{request('sex') == "M" ? "selected" : ""}} value="M">Masculino</option>
                                 </select>
                             </div>
                         </div>
@@ -51,8 +51,8 @@
                                 <label for="travel">Pode Viajar</label>
                                 <select name="travel">
                                     <option selected value="">Selecione</option>
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
+                                    <option {{request('travel') == "1" ? "selected" : ""}} value="1">Sim</option>
+                                    <option {{request('travel') == "0" ? "selected" : ""}} value="0">Não</option>
                                 </select>
                             </div>
                         </div>
@@ -61,8 +61,8 @@
                                 <label for="change">Pode Mudar-se </label>
                                 <select name="change">
                                     <option selected value="">Selecione</option>
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
+                                    <option {{request('change') == "1" ? "selected" : ""}} value="1">Sim</option>
+                                    <option {{request('change') == "0" ? "selected" : ""}} value="0">Não</option>
                                 </select>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                 <select name="journey_id">
                                     <option selected value="">Selecione</option>
                                     @foreach($journeys as $journey)
-                                    <option value="{{$journey->id}}">{{$journey->name}}</option>
+                                    <option {{request('journey_id') == $journey->id ? "selected" : ""}} value="{{$journey->id}}">{{$journey->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,15 +83,20 @@
                                 <select name="contract_type_id">
                                     <option selected value="">Selecione</option>
                                     @foreach($contract_types as $contract)
-                                    <option value="{{$contract->id}}">{{$contract->name}}</option>
+                                    <option {{request('contract_type_id') == $contract->id ? "selected" : ""}} value="{{$contract->id}}">{{$contract->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <button class="btn-blue">
                                     Buscar
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn-gray clear-filters">
+                                    Limpar
                                 </button>
                             </div>
                         </div>
@@ -111,8 +116,8 @@
                         <div class="box-result-search result-vacancies">
                             <span><b>Nome: </b>{{$candidate->name}}</span>
                             <p><b>Pretensão Salarial: </b>A partir de R$ {{number_format($candidate->salary, 2, ',', '.')}}</p>
-                            @isset($candidate->state_id)
-                            <p><b>Estado: </b>{{$candidate->state->name}}</p>
+                            @isset($candidate->state)
+                            <p><b>Estado: </b>{{$candidate->state}}</p>
                             @endisset
                             @if(Auth::guard('company')->check())
                             <?php 

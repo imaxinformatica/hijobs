@@ -23,29 +23,41 @@ Route::group(['prefix' => 'candidato', 'as'=>'candidate.', 'middleware' => ['can
   Route::get('/editar', 'Candidate\CandidateController@edit')->name('edit');
   Route::get('/oportunidade/{id}', 'Candidate\CandidateController@showOpportunity')
     ->name('show.opportunity')->middleware('check.plan');
-
   Route::get('/visualizar', 'Candidate\CandidateController@show')->name('show');
   Route::get('/assinaturas', 'Admin\PagSeguroController@subscriptions')->name('subscriptions');
   Route::get('/candidaturas', 'Candidate\CandidateController@app')->name('app');
   Route::get('/candidatura/{id}', 'Candidate\CandidateController@application')->name('application');
-  Route::post('/formacao', 'Candidate\CandidateController@formation')->name('formation');
-  Route::get('/formacao/curso', 'Candidate\CandidateController@courseFormation')->name('course');
-  Route::post('/experiencia', 'Candidate\CandidateController@experience')->name('experience');
-  Route::post('/idiomas', 'Candidate\CandidateController@language')->name('language');
-  Route::post('/conhecimento', 'Candidate\CandidateController@knowledge')->name('knowledge');
-  Route::get('/formacao/{id}', 'Candidate\CandidateController@formationDestroy')->name('formation.destroy');
-  Route::get('/experiencia/{id}', 'Candidate\CandidateController@experienceDestroy')->name('experience.destroy');
-  Route::get('/idiomas/{id}', 'Candidate\CandidateController@languageDestroy')->name('language.destroy');
-  Route::get('/conhecimento/subconhecimento', 'Candidate\CandidateController@subknowledge')->name('subknowledge');
-  Route::get('/conhecimento/{id}', 'Candidate\CandidateController@knowledgeDestroy')->name('knowledge.destroy');
 
+  Route::group(['prefix' => 'formacao', 'as' => 'formation.'], function () {
+    Route::post('store', 'Candidate\FormationController@store')->name('store');
+    Route::post('update', 'Candidate\FormationController@update')->name('update');
+    Route::get('delete/{formation}', 'Candidate\FormationController@delete')->name('delete');
+  });
+  Route::group(['prefix' => 'experiencia-profissional', 'as' => 'professional.'], function () {
+    Route::post('store', 'Candidate\ProfessionalController@store')->name('store');
+    Route::post('update', 'Candidate\ProfessionalController@update')->name('update');
+    Route::get('delete/{professional}', 'Candidate\ProfessionalController@delete')->name('delete');
+  });
+
+  Route::group(['prefix' => 'idioma', 'as' => 'language.'], function () {
+    Route::post('store', 'Candidate\LanguageController@store')->name('store');
+    Route::post('update', 'Candidate\LanguageController@update')->name('update');
+    Route::get('delete/{language}', 'Candidate\LanguageController@delete')->name('delete');
+  });
+
+  Route::group(['prefix' => 'conhecimentos-informatica', 'as' => 'knowledge.'], function () {
+    Route::post('store', 'Candidate\KnowledgeController@store')->name('store');
+    Route::post('update', 'Candidate\KnowledgeController@update')->name('update');
+    Route::get('delete/{knowledge}', 'Candidate\KnowledgeController@delete')->name('delete');
+  });
+// Transações
   Route::group(['prefix' => 'transacao', 'as' => 'transaction.'], function (){
     Route::get('/generate', 'Admin\PagSeguroController@getSession')->name('generate');
     Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
     Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
     Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
-
   });
+
 });
 //Candidato
 Route::group(['prefix' => 'candidato', 'as'=>'candidate.',], function () {
@@ -199,5 +211,9 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   });
 });
 
+Route::post('cursos/', 'Candidate\CandidateController@getCourses')->name('get-courses');
+Route::post('cidades/', 'Candidate\CandidateController@getCities')->name('get-cities');
+Route::post('conhecimentos/', 'Candidate\CandidateController@getSubknowledges')->name('get-subknowledges');
+
 Route::get('perguntas-frequentes', 'Admin\AdminController@showFrequently')->name('frequentlys');
-Route::get('/{urn}', 'Admin\AdminController@footer')->name('footer');
+Route::get('/paginas/{urn}', 'Admin\AdminController@footer')->name('footer');

@@ -82,26 +82,25 @@ class Candidate extends Authenticatable
     {
         return $this->belongsToMany('App\State');
     }
-
-
     public function formations()
     {
         return $this->hasMany('App\Formation');
     }
-
-    public function experiences()
+    public function professionals()
     {
-        return $this->hasMany('App\Experience');
+        return $this->hasMany('App\Professional');
     }
-
-    public function languages()
+    public function language_candidates()
     {
-        return $this->belongsToMany('App\Language', 'candidate_language')->withPivot('level');
+        return $this->hasMany('App\CandidateLanguage');
     }
-
     public function knowledges()
     {
-        return $this->belongsToMany('App\Knowledge')->withPivot('subknowledge_id');
+        return $this->hasMany('App\CandidateKnowledge');
+    }
+    public function occupation_area()
+    {
+        return $this->belongsTo('App\OccupationArea');
     }
 
 

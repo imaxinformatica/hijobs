@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-4 search-job col-sm-offset-4">
                 <h1>Login</h1>
-                <form role="form" method="POST" action="{{ url('/company/login') }}" >
+                <form role="form" method="POST" action="{{ url('/empresa/login') }}" >
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-12">

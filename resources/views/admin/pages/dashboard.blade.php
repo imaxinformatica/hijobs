@@ -109,7 +109,7 @@
                     @if($opportunity->salary == 0)
                     <td>A combinar</td>
                     @else
-                    <td>{{$opportunity->salary}}</td>
+                    <td>{{number_format($opportunity->salary, 2, ',', '.')}}</td>
                     @endif
                     <td>{{$opportunity->contract->name}}</td>
                     <td>{{$opportunity->company->name}}</td>

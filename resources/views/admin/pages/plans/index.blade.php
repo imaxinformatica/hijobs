@@ -78,7 +78,7 @@
                         <a href="{{route('admin.plan.edit', ['id' => $plan->id])}}" title="Editar" class="act-list">
                           <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
-                        <a href="{{route('admin.plan.all-users', ['id' => $plan->id])}}" title="Pessoas" class="act-list">
+                        <a href="{{route('admin.plan.all-users', ['id' => $plan->id])}}" title="Usuários com plano ativo" class="act-list">
                           <i class="fa fa-users" aria-hidden="true"></i>
                         </a>
                       </td>

@@ -186,9 +186,9 @@ class CompanyController extends Controller
             }
         }
 
-        if($request->has('state_id')){
-            if(request('state_id') != ''){
-                $candidates = $candidates->where('state_id', request('state_id'));
+        if($request->has('state')){
+            if(request('state') != ''){
+                $candidates = $candidates->where('state', request('state'));
             }
         }
         if($request->has('sex')){

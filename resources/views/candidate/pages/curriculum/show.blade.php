@@ -14,7 +14,7 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="cosl-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
                     <div class="row">
                         <div class="col-sm-3">
@@ -73,19 +73,18 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4>Formação acadêmica</h4>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-sm-6">
-                            <table class="table">
+                    <div class=" row">
+                        <div class="col-xs-12">
+                            <h4>Formação</h4>
+                            <table class="table table-bordered table-striped">
+
                                 <thead>
                                     <tr>
-                                        <th scope="col">Instituição</th>
-                                        <th scope="col">Formação</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Nível</th>
                                         <th scope="col">Curso</th>
+                                        <th scope="col">Situação</th>
+                                        <th scope="col">Conclusão</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,10 +93,13 @@
                                         <td>{{$formation->name}}</td>
                                         <td>{{$formation->level->name}}</td>
                                         <td>{{$formation->course->name}}</td>
+                                        <td>{{ucfirst($formation->situation)}}</td>
+                                        <td>{{$formation->situation == 'trancado' ? "Trancado" : str_pad($formation->finish_month, 2, "0", STR_PAD_LEFT) ."/".$formation->finish_year}}
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td>Nenhuma Cadastrada</td>
+                                        <td colspan="5">Não possui nenhuma formação cadastrada</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
@@ -105,47 +107,42 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4>Experiência profissional</h4>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-sm-6">
-                            <table class="table">
+                    <div class=" row">
+                        <div class="col-xs-12">
+                            <h4>Experiência Profissional</h4>
+                            <table class="table table-bordered table-striped">
+
                                 <thead>
                                     <tr>
+                                        <th scope="col">Nome Empresa</th>
                                         <th scope="col">Cargo</th>
-                                        <th scope="col">Empresa</th>
-                                        <th scope="col">Hierarquia</th>
-                                        <th scope="col">Atividades</th>
+                                        <th scope="col">Nível hierárquico</th>
+                                        <th scope="col">Data início</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($candidate->experiences as $experience)
+                                    @forelse($candidate->professionals as $professional)
                                     <tr>
-                                        <td>{{$experience->occupation}}</td>
-                                        <td>{{$experience->name}}</td>
-                                        <td>{{$experience->hierarchy->name}}</td>
-                                        <td>{{$experience->description}}</td>
+                                        <td>{{$professional->name}}</td>
+                                        <td>{{$professional->occupation}}</td>
+                                        <td>{{$professional->hierarchy->name}}</td>
+                                        <td>{{str_pad($professional->start_month, 2, "0", STR_PAD_LEFT) ."/".$professional->start_year}}
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td>Nenhuma Cadastrada</td>
+                                        <td colspan="4">Não possui nenhuma experiência cadastrada</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
+                    <div class=" row">
+                        <div class="col-xs-12">
                             <h4>Idiomas</h4>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-sm-6">
-                            <table class="table">
+                            <table class="table table-bordered table-striped">
+
                                 <thead>
                                     <tr>
                                         <th scope="col">Idioma</th>
@@ -153,29 +150,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($candidate->languages as $language)
+                                    @forelse($candidate->language_candidates as $lang)
                                     <tr>
-                                        <td>{{$language->name}}</td>
-                                        <td>{{$language->pivot->level}}</td>
-
+                                        <td>{{$lang->language->name}}</td>
+                                        <td>{{$lang->level}}</td>
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td>Nenhuma Cadastrada</td>
+                                        <td colspan="2">Não possui nenhum idioma cadastrado</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4>Conhecimentos de informática</h4>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-sm-6">
-                            <table class="table">
+                    <div class=" row">
+                        <div class="col-xs-12">
+                            <h4>Conhecimentos em Informática</h4>
+                            <table class="table table-bordered table-striped">
+
                                 <thead>
                                     <tr>
                                         <th scope="col">Categoria</th>
@@ -185,13 +179,13 @@
                                 <tbody>
                                     @forelse($candidate->knowledges as $know)
                                     <tr>
-                                        <td>{{$know->name}}</td>
-                                        <td>{{$know->subknowledges->where('id', $know->pivot->subknowledge_id)->first()->name}}
+                                        <td>{{$know->knowledge->name}}</td>
+                                        <td>{{$know->subknowledge->name}}</td>
                                         </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td>Nenhuma Cadastrada</td>
+                                        <td colspan="6">Não possui nenhum conhecimento em informática cadastrado</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
@@ -253,7 +247,7 @@
                                 @foreach($candidate->driver as $driver)
                                 {{$driver->name}}
                                 @endforeach
-                                @else Não Possui Habilitação @endif
+                                @else colspan="6" Não Possui Habilitação @endif
                             </p>
                         </div>
                     </div>
@@ -267,7 +261,7 @@
                                     {{$vehicle->name}}
                                 </p>
                                 @endforeach
-                                @else Não Possui Veículo @endif
+                                @else colspan="6" Não Possui Veículo @endif
                             </p>
                         </div>
                     </div>
@@ -298,5 +292,4 @@
         </div>
     </div>
 </section>
-
 @stop

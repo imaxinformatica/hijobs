@@ -105,7 +105,12 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <input type="text"  name="state" value="{{old('state')}}" placeholder="Estado">
+                                <select name="state" >
+                                    <option value="" selected hidden disabled>SELECIONE...</option>
+                                    @foreach($states as $state)
+                                    <option value="{{$state->sigla}}">{{$state->sigla}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>

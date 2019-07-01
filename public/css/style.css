@@ -213,6 +213,17 @@ button.btn-orange {
     margin-top: 15px;
     outline: none;
 }
+a.act-list {
+    text-decoration: none;
+    font-size: 24px;
+    margin-right: 5px;
+}
+a.act-list-blue {
+    color: #367FA9;
+}
+a.act-list-red {
+    color: #d9534f;
+}
 
 section.new-job {
     text-align: center;
@@ -417,6 +428,18 @@ button.btn-blue {
     margin-bottom: 12px;
     border-radius: 2px;
 }
+button.btn-gray {
+    background: #aec7ce;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+}
 button.btn-blue-dark {
     background: #0033cc;
     border: none;
@@ -427,7 +450,10 @@ button.btn-blue-dark {
     outline: none;
     margin-top: 10px;
     margin-bottom: 12px;
-    border-radius: 2px;
+}
+button.btn-password {
+    padding: 12px;
+    margin-top: 29px;
 }
 
 img.icon-vagas {

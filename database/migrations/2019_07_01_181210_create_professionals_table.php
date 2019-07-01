@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExperiencesTable extends Migration
+class CreateProfessionalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('professionals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('occupation');       
@@ -21,8 +21,11 @@ class CreateExperiencesTable extends Migration
             $table->longText('description');
             $table->integer('country_id');
             $table->integer('state_id')->nullable();
-            $table->string('start');
-            $table->string('finish')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->integer('start_month');
+            $table->integer('start_year');
+            $table->integer('finish_month')->nullable();
+            $table->integer('finish_year')->nullable();
             $table->integer('candidate_id');
             $table->timestamps();
         });
@@ -35,6 +38,6 @@ class CreateExperiencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('professionals');
     }
 }

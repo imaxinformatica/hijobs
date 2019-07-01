@@ -37,11 +37,7 @@ class KnowledgesSeeder extends Seeder
                 "name"       => "Sistemas Operacionais",
                 "created_at" => $now,
                 "updated_at" => $now,
-            ], [
-                "name"       => "Outros Programas",
-                "created_at" => $now,
-                "updated_at" => $now,
-            ], 
+            ],
         ]);
     }
 }

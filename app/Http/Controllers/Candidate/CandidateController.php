@@ -23,7 +23,7 @@ use App\Candidate;
 use App\Hierarchy;
 use App\Knowledge;
 use App\Formation;
-use App\Experience;
+use App\Professional;
 use App\Opportunity;
 use App\ContractType;
 use App\Subknowledge;
@@ -143,6 +143,8 @@ class CandidateController extends Controller
         return view('candidate.pages.curriculum.edit')
         ->with('states', State::all())
         ->with('countries', Country::all())
+        ->with('cities', City::all())
+        ->with('courses', Course::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
         ->with('vehicles', Vehicle::all())
@@ -280,151 +282,15 @@ class CandidateController extends Controller
         return redirect()->back()->with('success', 'Senha alterada!');
     }
 
-    public function formation(Request $request)
-    {
-        $this->validate($request, [
-            'name'              => 'required',
-            'country_id'        => 'required',
-            'level'          => 'required',
-            'course'         => 'required',
-            'startMonth'        => 'required|min:2',
-            'startYear'         => 'required|min:4',
-            'situation'         => 'required',
-        ]);
-        $formation = new Formation;
-        $formation->name            = $request->name;
-        $formation->country_id      = $request->country_id;
-        $formation->state_id        = $request->state_id;
-        $formation->level_id        = $request->level;
-        $formation->course_id       = $request->course;
-        $formation->situation       = $request->situation;
-        $formation->start_month     = $request->startMonth;
-        $formation->start_year      = $request->startYear;
-        $formation->finish_month    = $request->finishMonth;
-        $formation->finish_year     = $request->finishYear;
-        $formation->candidate_id    = $request->candidate_id;
-
-        $formation->save();
-
-        return redirect()->back()->with('success', 'Formação incluída com sucesso!');
-    }
-
-    public function formationDestroy($id)
-    {
-        $formation = Formation::find($id);
-
-        $formation->delete();
-
-        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
-    }
-
-    public function courseFormation(Request $request)
-    {
-        $course = Course::where('level_id', $request->level_id)->get();
-
-        return json_encode($course);
-    }
-
-    public function experience(Request $request)
-    {
-        $this->validate($request, [
-            'name'              => 'required',
-            'occupation'        => 'required',
-            'hierarchy_id'      => 'required',
-            'description'       => 'required',
-            'country_id'        => 'required',
-            'start'             => 'required',
-        ]);
-        $experience = new Experience;
-        $experience->name           = $request->name;
-        $experience->occupation     = $request->occupation;
-        $experience->hierarchy_id   = $request->hierarchy_id;
-        $experience->description    = $request->description;
-        $experience->country_id     = $request->country_id;
-        $experience->state_id       = $request->state_id;
-        $experience->start          = $request->start;
-        $experience->finish         = $request->finish;
-        $experience->candidate_id   = $request->candidate_id;
-
-        $experience->save();
-
-        return redirect()->back()->with('success', 'Experiência incluída com sucesso!');
-    }
-    
-
-    public function language(Request $request)
-    {
-        $this->validate($request, [
-            'language_id'   => 'required',
-            'level'         => 'required',
-        ]);
-
-        $language = new CandidateLanguage;
-        $language->language_id      = $request->language_id;
-        $language->level            = $request->level;
-        $language->candidate_id    = $request->candidate_id;
-
-        $language->save();
-        return redirect()->back()->with('success', 'Idioma incluída com sucesso!');
-    }
-
-    public function languageDestroy($id)
-    {
-        $language = CandidateLanguage::find($id);
-
-        $language->delete();
-
-        return redirect()->back()->with('success', 'Idioma removido com sucesso');
-    }
-
-    public function knowledge(Request $request)
-    {
-        $this->validate($request, [
-            'knowledge_id'      => 'required',
-            'subknowledge_id'   => 'required',
-        ]);
-        foreach ($request->subknowledge_id as $subknowledge) {
-            $know = CandidateKnowledge::where('knowledge_id', $request->knowledge_id)->where('subknowledge_id', $subknowledge)->where('candidate_id', $request->candidate_id);
-            if ($know->count() == 0) {
-                $knowledge = new CandidateKnowledge;
-                $knowledge->knowledge_id        = $request->knowledge_id;
-                $knowledge->subknowledge_id     = $subknowledge;
-                $knowledge->candidate_id        = $request->candidate_id;
-                $knowledge->save();
-            }
-        }
-
-        return redirect()->back()->with('success', 'Área de Conhecimento incluída com sucesso!');
-    }
-
-    public function subknowledge(Request $request)
-    {
-        $subknowledge = Subknowledge::where('knowledge_id', $request->knowledge_id)->get();
-
-        return json_encode($subknowledge);
-    }
-
-    public function knowledgeDestroy($id)
-    {
-        $knowledge = CandidateKnowledge::find($id);
-
-        $knowledge->delete();
-
-        return redirect()->back()->with('success', 'Conhecimento removido com sucesso');
-    }
-
     public function better($id)
     {
         $candidate = Candidate::find($id);
-        foreach ($candidate->languages as $language) {
-            $lang = CandidateLanguage::where('candidate_id', $candidate->id)->where('language_id', $language->id)->first();
-            $language->level = $lang->level;
-        }
         return view('candidate.pages.curriculum.better')
         ->with('states', State::all())
         ->with('countries', Country::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
+        ->with('cities', City::all())
         ->with('levels', Level::all())
         ->with('courses', Course::all())
         ->with('vehicles', Vehicle::all())
@@ -538,15 +404,30 @@ class CandidateController extends Controller
         return view('candidate.pages.application.all-application')->with('candidate', $candidate);
     }
 
-    public function cities(Request $request)
-    {
-        $cities = City::where('state_id', $request->state_id)->get();
-        return json_encode($cities);
-    }
-
     public function indexMessage()
     {
         $candidate = Auth::guard('candidate')->user();
         return view('candidate.pages.messages.all-messages')->with('candidate', $candidate);
+    }
+
+    public function getCourses(Request $request)
+    {
+        $courses = Course::where('level_id', $request->level_id)->get();
+
+        return json_encode($courses);
+    }
+
+    public function getCities(Request $request)
+    {
+        $cities = City::where('state_id', $request->state_id)->get();
+
+        return json_encode($cities);
+    }
+
+    public function getSubknowledges(Request $request)
+    {
+        $subknowledges = Subknowledge::where('knowledge_id', $request->knowledge_id)->get();
+
+        return json_encode($subknowledges);
     }
 }

@@ -37,10 +37,6 @@ class LanguagesSeeder extends Seeder
                 "name"       => "Italiano",
                 "created_at" => $now,
                 "updated_at" => $now,
-            ], [
-                "name"       => "Outras",
-                "created_at" => $now,
-                "updated_at" => $now,
             ],
         ]);
     }

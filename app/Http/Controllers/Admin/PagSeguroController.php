@@ -103,7 +103,6 @@ class PagSeguroController extends Controller
         }
         if (!$resp) {
             $plan = Plan::where('code', $code)->first();
-            $plan->name = $request->preApprovalName;
             $plan->value = $value;
             $plan->save();
 

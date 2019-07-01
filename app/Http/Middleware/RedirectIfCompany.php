@@ -18,7 +18,7 @@ class RedirectIfCompany
 	public function handle($request, Closure $next, $guard = 'company')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('empresa/home');
+	        return redirect('empresa/');
 	    }
 
 	    return $next($request);

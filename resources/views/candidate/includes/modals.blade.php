@@ -19,114 +19,6 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!--Formação-->
-<div class="modal fade" tabindex="-1" role="dialog" id="candidateFormation">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Incluir Formação</h4>
-            </div>
-            <form action="{{route('candidate.formation')}}" method="POST">
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    @isset($candidate)
-                    <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
-                    @endisset
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="name">Nome da Instituição</label>
-                            <input type="text" name="name" placeholder="Nome da Instituição" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="country_id">País</label>
-                            <select name="country_id" class="form-control country_id">
-                                <option selected disabled>País..</option>
-                                @isset($countries)
-                                @foreach($countries as $country)
-                                <option value="{{$country->id}}">{{$country->name}}</option>
-                                @endforeach
-                                @endisset
-                            </select>
-                        </div>
-                        <div class="col-sm-6 state_id">
-                            <label for="state_id">Estado</label>
-                            <select name="state_id" class="form-control">
-                                <option selected disabled>Estado..</option>
-                                @isset($states)
-                                @foreach($states as $state)
-                                <option value="{{$state->id}}">{{$state->name}}</option>
-                                @endforeach
-                                @endisset
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="level">Nível</label>
-                            <select id="level" name="level" class="form-control">
-                                <option selected disabled>Nível..</option>
-                                @isset($levels)
-                                @foreach($levels as $level)
-                                <option value="{{$level->id}}">{{$level->name}}</option>
-                                @endforeach
-                                @endisset
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="course">Curso..</label>
-                            <select id="course" name="course" class="form-control">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="situation">Situação</label>
-                            <select id="situation" name="situation" class="form-control">
-                                <option selected disabled>Situação..</option>
-                                <option value="concluido">Concluído</option>
-                                <option value="cursando">Cursando</option>
-                                <option value="trancado">Trancado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-3">
-                            <label for="startMonth">Mês Início</label>
-                            <input type="text" name="startMonth" placeholder="MM" class="form-control input-month">
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="startYear">Ano Início</label>
-                            <input type="text" name="startYear" placeholder="YYYY" class="form-control input-year">
-                        </div>
-                        <div class="col-sm-3 finishMonth">
-                            <label for="finishMonth">Mês Conclusão</label>
-                            <input type="text" name="finishMonth" placeholder="MM" class="form-control input-month">
-                        </div>
-                        <div class="col-sm-3 finishYear">
-                            <label for="finishYear">Ano Conclusão</label>
-                            <input type="text" name="finishYear" placeholder="YYYY" class="form-control input-year">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button type="button" class="btn btn-default pull-left"
-                                data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 <!--Senha-->
 <div class="modal fade" id="candidatePassword">
@@ -168,8 +60,282 @@
     <!-- /.modal-dialog -->
 </div>
 <!--/.Senha-->
-<!--Experiencia Profissional-->
-<div class="modal fade" id="candidateExperience">
+<!--/.Forma de pagamento-->
+
+<div class="modal fade" id="planModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirm" data-dismiss="modal">Confirmar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+@section('modals')
+<!--Inclur formação-->
+<div class="modal fade" tabindex="-1" role="dialog" id="formationModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Incluir Formação</h4>
+            </div>
+            <form action="{{route('candidate.formation.store')}}" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="candidate_id" value="">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="name">Nome da Instituição</label>
+                            <input type="text" name="name" placeholder="Nome da Instituição" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="country_id">País</label>
+                            <select name="country_id" class="form-control country_id">
+                                <option selected disabled hidden>País..</option>
+                                @isset($countries)
+                                @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6 state_formation">
+                            <label for="state_id">Estado</label>
+                            <select name="state_id" class="form-control state_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="level_id">Nível</label>
+                            <select name="level_id" class="form-control level_id">
+                                <option selected disabled hidden>Nível..</option>
+                                @isset($levels)
+                                @foreach($levels as $level)
+                                <option value="{{$level->id}}">{{$level->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="course_id">Curso..</label>
+                            <select name="course_id" class="form-control course_id">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="situation">Situação</label>
+                            <select name="situation" class="form-control situation">
+                                <option selected disabled hidden>Situação..</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="cursando">Cursando</option>
+                                <option value="trancado">Trancado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="start_month">Mês Início</label>
+                            <select name="start_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <?php $y = date("Y");$y += 10?>
+                        <div class="col-sm-3">
+                            <label for="start_year">Ano Início</label>
+                            <select name="start_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_month">Mês Conclusão</label>
+                            <select name="finish_month" class="form-control">
+                                <option selected disabled hidden> Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_year">Ano Conclusão</label>
+                            <select name="finish_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.Incluir formação -->
+
+<!--Editar formação-->
+<div class="modal fade" tabindex="-1" role="dialog" id="formationEditModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Editar Formação</h4>
+            </div>
+            <form action="{{route('candidate.formation.update')}}" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="formation_id" value="">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="name">Nome da Instituição</label>
+                            <input type="text" name="name" placeholder="Nome da Instituição" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="country_id">País</label>
+                            <select name="country_id" class="form-control country_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($countries)
+                                @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6 state_formation">
+                            <label for="state_id">Estado</label>
+                            <select name="state_id" class="form-control state_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($states)
+                                @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="level_id">Nível</label>
+                            <select name="level_id" class="form-control level_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($levels)
+                                @foreach($levels as $level)
+                                <option value="{{$level->id}}">{{$level->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="course_id">Curso..</label>
+                            <select name="course_id" class="form-control course_id">
+                                @isset($courses)
+                                @foreach($courses as $course)
+                                <option value="{{$course->id}}">{{$course->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="situation">Situação</label>
+                            <select name="situation" class="form-control situation">
+                                <option selected disabled hidden>Situação..</option>
+                                <option value="concluido">Concluído</option>
+                                <option value="cursando">Cursando</option>
+                                <option value="trancado">Trancado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="start_month">Mês Início</label>
+                            <select name="start_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <?php $y = date("Y");$y += 10?>
+                        <div class="col-sm-3">
+                            <label for="start_year">Ano Início</label>
+                            <select name="start_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_month">Mês Conclusão</label>
+                            <select name="finish_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_year">Ano Conclusão</label>
+                            <select name="finish_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.Editar formação -->
+
+<!--Incluir experiencia profissional-->
+<div class="modal fade" id="professionalModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -178,12 +344,10 @@
                 </button>
                 <h4 class="modal-title">Incluir Experiência Profissional</h4>
             </div>
-            <form method="POST" action="{{route('candidate.experience')}}">
+            <form method="POST" action="{{route('candidate.professional.store')}}">
                 <div class="modal-body">
                     {{csrf_field()}}
-                    @isset($candidate)
-                    <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
-                    @endisset
+                    <input type="hidden" name="candidate_id" value="">
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <label for="name">Nome da Empresa</label>
@@ -198,7 +362,7 @@
                         <div class="col-sm-6">
                             <label for="hierarchy_id">Nível Hierárquico</label>
                             <select id="hierarchy_id" name="hierarchy_id" class="form-control">
-                                <option selected disabled>Selecione..</option>
+                                <option selected disabled hidden>Selecione..</option>
                                 @isset($hierarchies)
                                 @foreach($hierarchies as $hierarchy)
                                 <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
@@ -210,14 +374,14 @@
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <label for="description">Descrição das Atividadees</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="country_id">País</label>
                             <select name="country_id" class="form-control country_id">
-                                <option selected disabled>País..</option>
+                                <option selected disabled hidden>SELECIONE..</option>
                                 @isset($countries)
                                 @foreach($countries as $country)
                                 <option value="{{$country->id}}">{{$country->name}}</option>
@@ -225,37 +389,63 @@
                                 @endisset
                             </select>
                         </div>
-                        <div class="col-sm-6 state_id">
+                        <div class="col-sm-6 state_professional">
                             <label for="state_id">Estado</label>
-                            <select name="state_id" class="form-control" id="state">
-                                <option selected disabled>Estado..</option>
-                                @isset($states)
-                                @foreach($states as $state)
-                                <option value="{{$state->id}}">{{$state->name}}</option>
-                                @endforeach
-                                @endisset
+                            <select name="state_id" class="form-control state_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-6 city_id">
+                        <div class="col-sm-6 city_professional">
                             <label for="city_id">Cidade</label>
-                            <select name="city_id" id="city" class="form-control">
-                                <option selected disabled>Cidade..</option>
+                            <select name="city_id" class="form-control city_id">
+                                <option selected disabled hidden>SELECIONE..</option>
                             </select>
                         </div>
-                        <div class="col-sm-2" id="started">
-                            <label for="start">Entrada</label>
-                            <input type="text" name="start" placeholder="MM/AAAA" class="form-control input-month">
+                        <div class="col-sm-6">
+                            <label for="actually">Atual</label>
+                              <select name="actually" class="form-control actually">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
                         </div>
-                        <div class="col-sm-2" id="finished">
-                            <label for="finish">Saída</label>
-                            <input type="text" name="finish" placeholder="MM/AAAA" class="form-control input-month"
-                                id="finish">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="start_month">Mês Início</label>
+                            <select name="start_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
                         </div>
-                        <div class="col-sm-2">
-                            <label class="lbl-caracteristicas actually"><input type="checkbox" id="actually"
-                                    name="actually"><span class="checkmark"></span>Atual</label>
+                        <?php $y = date("Y");$y += 10?>
+                        <div class="col-sm-3">
+                            <label for="start_year">Ano Início</label>
+                            <select name="start_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_month">Mês Saída</label>
+                            <select name="finish_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                                <label for="finish_year">Ano Saída</label>
+                            <select name="finish_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -274,12 +464,152 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!--/.Experiencia Profissional-->
+<!--/.Incluir experiencia profissional-->
 
-
-<!--Idioma-->
-<div class="modal fade" id="candidateLanguage">
+<!--Editar experiencia profissional-->
+<div class="modal fade" id="professionalEditModal">
     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Editar Experiência Profissional</h4>
+            </div>
+            <form method="POST" action="{{route('candidate.professional.update')}}">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="professional_id" value="">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="name">Nome da Empresa</label>
+                            <input type="text" name="name" placeholder="Nome da Empresa" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="occupation">Cargo</label>
+                            <input type="text" name="occupation" placeholder="Indique seu Cargo.." class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="hierarchy_id">Nível Hierárquico</label>
+                            <select id="hierarchy_id" name="hierarchy_id" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @isset($hierarchies)
+                                @foreach($hierarchies as $hierarchy)
+                                <option value="{{$hierarchy->id}}">{{$hierarchy->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="description">Descrição das Atividades</label>
+                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="country_id">País</label>
+                            <select name="country_id" class="form-control country_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($countries)
+                                @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6 state_professional">
+                            <label for="state_id">Estado</label>
+                            <select name="state_id" class="form-control state_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($states)
+                                @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 city_professional">
+                            <label for="city_id">Cidade</label>
+                            <select name="city_id" class="form-control city_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($cities)
+                                @foreach($cities as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="actually">Atual</label>
+                              <select name="actually" class="form-control actually">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="start_month">Mês Início</label>
+                            <select name="start_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <?php $y = date("Y");$y += 10?>
+                        <div class="col-sm-3">
+                            <label for="start_year">Ano Início</label>
+                            <select name="start_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                            <label for="finish_month">Mês Saída</label>
+                            <select name="finish_month" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 0; $i < 12; $i++) <option value="{{$i + 1}}">{{$i +1}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                        <div class="col-sm-3 finish">
+                                <label for="finish_year">Ano Saída</label>
+                            <select name="finish_year" class="form-control">
+                                <option selected disabled hidden>Selecione..</option>
+                                @for($i = 1950; $i <= $y; $i++) <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--/.Editar experiencia profissional-->
+
+<!--Inclur idioma-->
+<div class="modal fade" tabindex="-1" role="dialog" id="languageModal">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -287,17 +617,16 @@
                 </button>
                 <h4 class="modal-title">Incluir Idioma</h4>
             </div>
-            <div class="modal-body">
-                <form method="POST" action="{{route('candidate.language')}}">
+            <form action="{{route('candidate.language.store')}}" method="POST">
+                <div class="modal-body">
                     {{csrf_field()}}
-                    @isset($candidate)
-                    <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
-                    @endisset
+                    <input type="hidden" name="candidate_id" value="">
+                   
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="language_id">Idioma</label>
-                            <select id="language_id" name="language_id" class="form-control">
-                                <option selected disabled>Selecione..</option>
+                            <select name="language_id" class="form-control">
+                                <option selected disabled hidden>SELECIONE..</option>
                                 @isset($languages)
                                 @foreach($languages as $language)
                                 <option value="{{$language->id}}">{{$language->name}}</option>
@@ -308,53 +637,106 @@
                         <div class="col-sm-6">
                             <label for="level">Nível</label>
                             <select name="level" class="form-control">
-                                <option selected disabled>Selecione..</option>
+                                <option selected disabled hidden>SELECIONE..</option>
                                 <option value="Básico">Básico</option>
                                 <option value="Intermediário">Intermediário</option>
                                 <option value="Avançado">Avançado</option>
                                 <option value="Fluente">Fluente</option>
-                                <option value="Nativo">Nativo</option>
                             </select>
                         </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!--/.Idioma-->
+<!-- /.Incluir Idioma -->
 
-<!--Área de Conhecimento-->
-<div class="modal fade" id="candidateKnowledge">
-    <div class="modal-dialog">
+<!--Editar idioma-->
+<div class="modal fade" tabindex="-1" role="dialog" id="languageEditModal">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Incluir Conhecimentos em Informática</h4>
+                <h4 class="modal-title">Editar Idioma</h4>
             </div>
-            <div class="modal-body">
-                <form method="POST" action="{{route('candidate.knowledge')}}">
+            <form action="{{route('candidate.language.update')}}" method="POST">
+                <div class="modal-body">
                     {{csrf_field()}}
-                    @isset($candidate)
-                    <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
-                    @endisset
+                    <input type="hidden" name="lang_id" value="">
+                   
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="language_id">Idioma</label>
+                            <select name="language_id" class="form-control">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($languages)
+                                @foreach($languages as $language)
+                                <option value="{{$language->id}}">{{$language->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="level">Nível</label>
+                            <select name="level" class="form-control">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermediário">Intermediário</option>
+                                <option value="Avançado">Avançado</option>
+                                <option value="Fluente">Fluente</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.Editar Idioma -->
+
+<!--Incluir Conhecimento-->
+<div class="modal fade" tabindex="-1" role="dialog" id="knowledgeModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Incluir Conhecimento em Informática</h4>
+            </div>
+            <form action="{{route('candidate.knowledge.store')}}" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="candidate_id" value="">
+                   
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="knowledge_id">Tipo</label>
-                            <select id="knowledge_id" name="knowledge_id" class="form-control">
-                                <option selected disabled>Selecione..</option>
+                            <select name="knowledge_id" class="form-control knowledge_id">
+                                <option selected disabled hidden>SELECIONE..</option>
                                 @isset($knowledges)
                                 @foreach($knowledges as $knowledge)
                                 <option value="{{$knowledge->id}}">{{$knowledge->name}}</option>
@@ -362,33 +744,86 @@
                                 @endisset
                             </select>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="subknowledge_id">Habilidades</label>
-                            <select id="subknowledge_id" name="subknowledge_id[]" class="form-control subknowledge"
-                                multiple="multiple">
-
+                        <div class="col-sm-6 subknowledge_know">
+                            <label for="subknowledge_id">Habilidade</label>
+                            <select name="subknowledge_id" class="form-control subknowledge_id">
+                                <option selected disabled hidden>SELECIONE..</option>
                             </select>
                         </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!--/.Área de Conhecimento-->
+<!-- /.Incluir Conhecimento -->
 
+<!--Editar Conhecimento-->
+<div class="modal fade" tabindex="-1" role="dialog" id="knowledgeEditModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Editar Conhecimento em Informática</h4>
+            </div>
+            <form action="{{route('candidate.knowledge.update')}}" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="know_id" value="">
+                   
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="knowledge_id">Tipo</label>
+                            <select name="knowledge_id" class="form-control knowledge_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($knowledges)
+                                @foreach($knowledges as $knowledge)
+                                <option value="{{$knowledge->id}}">{{$knowledge->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                        <div class="col-sm-6 subknowledge_know">
+                            <label for="subknowledge_id">Habilidade</label>
+                            <select name="subknowledge_id" class="form-control subknowledge_id">
+                                <option selected disabled hidden>SELECIONE..</option>
+                                @isset($subknowledges)
+                                @foreach($subknowledges as $subknowledge)
+                                <option value="{{$subknowledge->id}}">{{$subknowledge->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.Editar Conhecimento -->
 
-<!--Área de Conhecimento-->
 <div class="modal fade" id="paymentModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -470,26 +905,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!--/.Área de Conhecimento-->
 
-<div class="modal fade" id="planModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <p></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirm" data-dismiss="modal">Confirmar</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+
+@endsection
+@yield('modals')

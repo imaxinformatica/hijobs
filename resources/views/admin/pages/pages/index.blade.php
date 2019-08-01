@@ -70,8 +70,8 @@
                     <tr>
                       <td>Perguntas Frequentes</td>
                       <td>
-                        <a href="{{ route('admin.frequentlys')}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <a href="{{ route('admin.frequentlys')}}" title="Editar" class="act-list act-list-blue">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -79,20 +79,14 @@
                     <tr>
                       <td>{{$page->name}}</td>
                       <td>
-                        <a href="{{ route('admin.pages.edit', ['id' => $page->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <a href="{{ route('admin.pages.edit', ['id' => $page->id])}}" title="Editar" class="act-list act-list-blue">
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
                   @empty
                   @endforelse
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Página</th>
-                    <th>Ações</th>
-                  </tr>
-                </tfoot>   
               </table>
             </div>
             <!-- /.box-body -->

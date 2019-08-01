@@ -20,8 +20,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="place" type="text" name="place" placeholder="Cidade, estado ou região">
-                            <p>Exemplos: São Paulo, Rio de Janeiro etc.</p>
+                            <select name="state_id" class="form-control">
+                                <option selected value="">Selecione</option>
+                                @foreach($states as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row">

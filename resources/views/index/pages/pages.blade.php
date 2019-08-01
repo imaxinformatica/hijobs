@@ -13,7 +13,7 @@
                 <h1>{{$page->name}}</h1>
                 <div class="row">
                     <div class="col-sm-12">
-                        <p>{{$page->desc}}</p>
+                        <p><?php echo $page->desc ?></p>
                     </div>
                 </div>
             </div>

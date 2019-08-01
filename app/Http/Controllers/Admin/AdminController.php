@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Page;
 use App\Company;
 use App\Candidate;
 use App\State;
@@ -25,35 +24,6 @@ use App\OccupationArea;
 
 class AdminController extends Controller
 {
-    public function pages()
-    {
-        $pages = Page::all();
-        return view('admin.pages.pages.index')
-        ->with('pages', $pages);
-    }
-
-    public function editPages($id)
-    {
-        $page = Page::find($id);
-        return view('admin.pages.pages.edit')
-        ->with('page', $page);
-    }
-
-    public function updatePages(Request $request)
-    {
-        $page = Page::find($request->id);
-        $page->desc = ($request->desc);
-        $page->save();
-
-        return redirect()->back()->with('success', 'Alterado com Sucesso');
-    }
-
-    public function footer($urn)
-    {
-        $page = Page::where('urn', $urn)->first();
-        return view('index.pages.pages')->with('page', $page);
-    }
-
     public function indexCompany(Request $request)
     {
         $companies = new Company;
@@ -119,19 +89,6 @@ class AdminController extends Controller
         if ($request->email != null || $request->email != '') {
             $company->email            = $request->email;
         }
-
-        // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
-        // }
-        // if (filter_var($request->facebook, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Facebook');
-        // }
-        // if (filter_var($request->twitter, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Twitter');
-        // }
-        // if (filter_var($request->blog, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Blog');
-        // }
         $company->linkedin            = $request->linkedin;
         $company->facebook            = $request->facebook;
         $company->twitter             = $request->twitter;
@@ -183,136 +140,6 @@ class AdminController extends Controller
     	return view('admin.pages.candidate.index')
     	->with('candidates', $candidates);
     }
-
-    public function editCandidate($id)
-    {
-    	$candidate = Candidate::find($id);
-        $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
-    	return view('admin.pages.candidate.edit')
-    	->with('states', State::all())
-        ->with('countries', Country::all())
-        ->with('drivers', Driver::all())
-        ->with('journeys', Journey::all())
-        ->with('vehicles', Vehicle::all())
-        ->with('specials', Special::all())
-        ->with('languages', Language::all())
-        ->with('knowledges', Knowledge::all())
-        ->with('subknowledges', Subknowledge::all())
-        ->with('hierarchies', Hierarchy::all())
-        ->with('contract_types', ContractType::all())
-    	->with('candidate', $candidate);    
-    }
-
-    public function updateCandidate(Request $request)
-    {
-        $this->validate($request, [
-            'state_id'          => 'required',
-            'cpf'               => [
-                'required',
-                Rule::unique('candidates')->ignore($request->candidate_id)
-            ],
-            'marital_status'    => 'required',
-            'birthdate'         => 'required',
-            'sex'               => 'required',
-            'travel'            => 'required',
-            'change'            => 'required',
-            'journey_id'        => 'required',
-            'contract_type_id'  => 'required',
-            'min_hierarchy_id'  => 'required',
-            'max_hierarchy_id'  => 'required',
-            'salary'            => 'required',
-        ]);
-
-        $candidate                   = Candidate::find($request->candidate_id);
-        $finish = 0;
-        if ($candidate->cpf == NULL) {
-            $finish = 1;
-        }
-
-        $candidate->state_id         = $request->state_id;
-        $candidate->cpf              = $request->cpf;
-        $candidate->phone            = $request->phone;
-        $candidate->marital_status   = $request->marital_status;
-        $candidate->sex              = $request->sex;
-        $candidate->travel           = $request->travel;
-        $candidate->change           = $request->change;
-        $candidate->journey_id       = $request->journey_id;
-        $candidate->contract_type_id = $request->contract_type_id;
-        $candidate->min_hierarchy_id = $request->min_hierarchy_id;
-        $candidate->max_hierarchy_id = $request->max_hierarchy_id;
-        $candidate->salary           = str_replace(',','.', str_replace('.','', $request->salary));
-        $candidate->birthdate        = implode("-", array_reverse(explode("/", $request->birthdate)));
-
-        // if (filter_var($request->linkedin, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Linkedin');
-        // }
-        // if (filter_var($request->facebook, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Facebook');
-        // }
-        // if (filter_var($request->twitter, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Twitter');
-        // }
-        // if (filter_var($request->blog, FILTER_VALIDATE_URL) === FALSE) {
-        //     return redirect()->back()->with('success', 'Informar URL válida do Blog');
-        // }
-        $candidate->linkedin            = $request->linkedin;
-        $candidate->facebook            = $request->facebook;
-        $candidate->twitter             = $request->twitter;
-        $candidate->blog                = $request->blog;
-        foreach ($candidate->special()->get() as $special) {
-            $special->pivot->delete();
-        }
-        if (isset($request->isSpecial)) {
-            foreach ($request->specials as $specials) {
-                $special               = new CandidateSpecial;
-                $special->candidate_id = $candidate->id; 
-                $special->special_id   = $specials;
-                $special->save();
-            }
-            $candidate->special_description = $request->special_description;
-            $candidate->special             = 1;
-        }
-
-        foreach ($candidate->driver as $driver) {
-            $driver->pivot->delete();
-        }
-        if (isset($request->drivers)) {
-            foreach ($request->drivers as $drivers) {
-                $driver               = new CandidateDriver;
-                $driver->candidate_id = $candidate->id; 
-                $driver->driver_id   = $drivers;
-                $driver->save();
-            }
-        }
-
-        foreach ($candidate->vehicle as $vehicles) {
-            $vehicles->pivot->delete();
-        }
-        if (isset($request->vehicles)) {
-            foreach ($request->vehicles as $vehicles) {
-                $vehicle               = new CandidateVehicle;
-                $vehicle->candidate_id = $candidate->id; 
-                $vehicle->vehicle_id   = $vehicles;
-                $vehicle->save();
-            }
-        }
-
-        foreach ($candidate->stateWork as $state_work) {
-            $state_work->pivot->delete();
-        }
-        if (isset($request->state_work)) {
-            foreach ($request->state_work as $works) {
-                $work               = new CandidateState;
-                $work->candidate_id = $candidate->id; 
-                $work->state_id   = $works;
-                $work->save();
-            }
-        }
-        $candidate->save();
-
-        return redirect()->back()->with('success', 'Candidato Editado.');
-    }
-
     public function indexOpportunity(Request $request)
     {
         $opportunities = new Opportunity;
@@ -461,7 +288,6 @@ class AdminController extends Controller
        $frequently = Frequently::find($id);
        return view('admin.pages.frequently.edit')->with('frequently', $frequently);
     }
-
 
     public function updateFrequently(Request $request)
     {

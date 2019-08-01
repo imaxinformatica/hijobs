@@ -1,6 +1,6 @@
 @extends('admin.templates.default')
 
-@section('title', 'Vídeos')
+@section('title', 'Parceiros')
 
 @section('description', 'Descrição')
 
@@ -11,7 +11,7 @@
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Vídeos</h1>
+          <h1>Parceiros</h1>
         </div>
         <div class="col-sm-6">
           <button class="btn-header" onclick="window.location.href='{{ route('admin.partner.create')}}'">Novo</button>

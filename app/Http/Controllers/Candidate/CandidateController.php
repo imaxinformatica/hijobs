@@ -183,6 +183,7 @@ class CandidateController extends Controller
             $finish = 1;
         }
 
+        $candidate->name             = $request->name;
         $candidate->state            = $request->state;
         $candidate->cpf              = $request->cpf;
         if ($request->cep != NULL) {
@@ -194,6 +195,7 @@ class CandidateController extends Controller
             $candidate->city         = $request->city;
         }
         $candidate->phone            = $request->phone;
+        $candidate->special          = $request->isSpecial;
         $candidate->marital_status   = $request->marital_status;
         $candidate->sex              = $request->sex;
         $candidate->travel           = $request->travel;
@@ -222,6 +224,9 @@ class CandidateController extends Controller
             }
             $candidate->special_description = $request->special_description;
             $candidate->special             = 1;
+        }else{
+            $candidate->special_description = null;
+
         }
 
         foreach ($candidate->driver as $driver) {
@@ -321,7 +326,8 @@ class CandidateController extends Controller
 
     public function opportunity()
     {
-        return view('candidate.pages.buscar-vagas');
+        return view('candidate.pages.buscar-vagas')
+        ->with('states', State::all());
     }
 
     public function search(Request $request)

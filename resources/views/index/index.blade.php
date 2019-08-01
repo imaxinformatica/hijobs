@@ -242,7 +242,7 @@
                 @forelse($partners as $partner)
                 <a href="{{$partner->link}}" target="_blank">
                     <div class="col-sm-5ths">
-                        <div class="box-company">
+                        <div class="box-company box-partner">
                             <img src="{{asset('images/partner/')}}/{{$partner->logo}}" alt="Parceiro">
                         </div>
                     </div>

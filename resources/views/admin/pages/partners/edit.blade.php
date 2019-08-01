@@ -69,7 +69,7 @@
                 <div class="form-group  row">
                   <div class="col-xs-12">
                     <label for="logo">Logo Parceiro</label>
-                    <input class="form-control" type="file" name="logo">
+                    <input type="file" name="logo">
                   </div>
                 </div>
                 <div class="form-group  row">
@@ -82,7 +82,7 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <a href="{{route('admin.partner')}}">
-                  <button type="button" class="btn btn-primary">Voltar</button>
+                  <button type="button" class="btn btn-default">Voltar</button>
                 </a>
               </div>
             </form>

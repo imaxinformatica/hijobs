@@ -155,9 +155,12 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
 
 Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], function(){
   Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
-  Route::get('/pages', 'Admin\AdminController@pages')->name('pages');
-  Route::get('/pages/edit/{id}', 'Admin\AdminController@editPages')->name('pages.edit');
-  Route::post('/pages/update', 'Admin\AdminController@updatePages')->name('pages.update');
+  Route::get('/paginas', 'Admin\PagesController@index')->name('pages');
+Route::group(['prefix' => 'paginas','as'=>'pages.'], function(){
+  Route::get('/edit/{id}', 'Admin\PagesController@edit')->name('edit');
+  Route::post('/update', 'Admin\PagesController@update')->name('update');
+});
+
   Route::get('frequentes/', 'Admin\AdminController@frequently')->name('frequentlys');
   Route::get('/frequentes/create/', 'Admin\AdminController@createFrequently')->name('frequently.create');
   Route::post('/frequentes/store', 'Admin\AdminController@storeFrequently')->name('frequently.store');
@@ -177,8 +180,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
 
   Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
-  Route::get('/candidatos/edit/{id}', 'Admin\AdminController@editCandidate')->name('candidate.edit');
-  Route::post('/candidatos/update', 'Admin\AdminController@updateCandidate')->name('candidate.update');
+  Route::get('/candidatos/edit/{id}', 'Admin\CandidateController@edit')->name('candidate.edit');
+  Route::post('/candidatos/update', 'Admin\CandidateController@update')->name('candidate.update');
   Route::get('/planos', 'Admin\PagSeguroController@index')->name('plan');
   
   Route::group(['prefix' => 'planos', 'as' => 'plan.'], function(){
@@ -216,4 +219,4 @@ Route::post('cidades/', 'Candidate\CandidateController@getCities')->name('get-ci
 Route::post('conhecimentos/', 'Candidate\CandidateController@getSubknowledges')->name('get-subknowledges');
 
 Route::get('perguntas-frequentes', 'Admin\AdminController@showFrequently')->name('frequentlys');
-Route::get('/paginas/{urn}', 'Admin\AdminController@footer')->name('footer');
+Route::get('/paginas/{urn}', 'Admin\PagesController@footer')->name('footer');

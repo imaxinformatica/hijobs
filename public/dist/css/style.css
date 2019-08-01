@@ -13,15 +13,22 @@
     line-height: 40px;
 }
 
+
+
 button.btn-header {
-    border: 0;
+    border: solid 0;
     background: #8BC34A;
-    padding: 10px 30px;
+    padding: 10px 25px;
     vertical-align: middle;
     float: right;
     color: #fff;
     font-weight: bold;
-    text-transform: uppercase;
+    text-transform: capitalize;
+}
+button.btn-back {
+    background: #c0c0c0;
+    color: #494747;
+
 }
 
 @media(max-width: 767px){
@@ -31,9 +38,18 @@ button.btn-header {
 }
 a.act-list {
     text-decoration: none;
-    color: #8bc34a;
+    color: #367FA9;
     font-size: 24px;
     margin-right: 5px;
+}
+a.act-list-blue {
+    color: #367FA9;
+}
+a.act-list-red {
+    color: #d9534f;
+}
+a.act-delete {
+    color: #d9534f;
 }
 
 .box-auth {

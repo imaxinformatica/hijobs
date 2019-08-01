@@ -1,7 +1,7 @@
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{route('admin.dashboard')}}" class="logo">
       <span class="logo-lg"><b>CONTROLE</b></span>
       <span class="logo-mini"><b>CTR</b></span>
     </a>

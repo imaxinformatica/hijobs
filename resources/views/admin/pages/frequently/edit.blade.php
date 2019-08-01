@@ -68,20 +68,20 @@
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <label for="question" style="margin-top: 20px;">Perguntas</label>
-                    <textarea name="question" required class="form-control" rows="5" placeholder="Conteúdo da Página">{{$frequently->question}}</textarea>
+                    <textarea name="question" required class="form-control medium-text-editor" rows="5" placeholder="Conteúdo da Página">{{$frequently->question}}</textarea>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <label for="answer" style="margin-top: 20px;">Respostas</label>
-                    <textarea name="answer" required class="form-control" rows="5" placeholder="Conteúdo da Página">{{$frequently->answer}}</textarea>
+                    <textarea name="answer" required class="form-control medium-text-editor" rows="5" placeholder="Conteúdo da Página">{{$frequently->answer}}</textarea>
                   </div>
                 </div>
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
                 <a href="{{route('admin.frequentlys')}}">
-                  <button type="button" class="btn btn-primary">Voltar</button>
+                  <button type="button" class="btn btn-defaullt">Voltar</button>
                 </a>
               </div>
             </form>

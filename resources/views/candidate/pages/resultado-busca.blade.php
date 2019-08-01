@@ -10,18 +10,18 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="box-result-search">
-                    <form method="GET" >
+                    <form method="GET">
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="name">Cargo ou área profissional</label>
-                                
+
                                 <input type="text" name="name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="state_id">Estados</label>
-                                <select name="state_id" id="state-search">
+                                <select name="state_id" class="state_id">
                                     <option selected value="">Selecione</option>
                                     @foreach($states as $state)
                                     <option value="{{$state->id}}">{{$state->name}}</option>
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="city_id">Cidades</label>
-                                <select name="city_id" id="city-search">
+                                <select name="city_id" class="city_id">
                                     <option selected value="">Selecione</option>
                                 </select>
                             </div>
@@ -59,6 +59,9 @@
                                 <button class="btn-blue">
                                     Buscar
                                 </button>
+                                <button type="button" class="btn-gray clear-filters">
+                                    Limpar
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -77,11 +80,13 @@
                     <div class="col-sm-12">
                         <div class="box-result-search result-vacancies">
                             <span>{{$opportunity->name}}</span>
-                            <p id="salario">@if($opportunity->salary == 0)
-                                    A combinar
+                            <p id="salario">
+                                @if($opportunity->salary == 0)
+                                A combinar
                                 @else
-                                   R$ {{number_format($opportunity->salary, 2, ',', '.')}}<p>
-                                @endif
+                                R$ {{number_format($opportunity->salary, 2, ',', '.')}}
+                            <p>
+                            @endif
                             <p><b>{{$opportunity->num}} vaga(s)</b></p>
                             <p>{{$opportunity->activity}}.</p>
                             @if(Auth::guard('candidate')->check())
@@ -95,7 +100,9 @@
                                 }
                             }
                             ?>
-                            <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}" data-plan="{{$status}}" class="act-plan">
+                            
+                            <a href="{{route('candidate.show.opportunity', ['id' => $opportunity->id])}}"
+                                data-plan="{{$status}}" class="act-plan">
                                 <button class="btn-result" type="button">
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
@@ -104,13 +111,13 @@
                                 </button>
                             </a>
                             @endif
-                        </div>   
+                        </div>
                     </div>
                 </div>
                 @endif
                 @endforeach
             </div>
-        </div>        
-    </div> 
+        </div>
+    </div>
 </section>
 @stop

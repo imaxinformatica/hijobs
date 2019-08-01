@@ -61,13 +61,15 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <p><b>Pessoa com deficiência física?</b> @if($candidate->special == 1) Sim
-                                @foreach($candidate->special()->get() as $special)
+                            <p><b>Pessoa com deficiência física:</b> @if($candidate->special == 1) Sim
+                                @foreach($candidate->specials()->get() as $special)
+                                <h5>Tipo de deficiência</h5>
                                 <p>
                                     {{$special->name}}
                                 </p>
                                 @endforeach
-                                {{$candidate->special_description}}
+                                <h5>Comentários Sobre</h5>
+                                <p>{{$candidate->special_description}}</p>
                                 @else Não @endif
                             </p>
                         </div>
@@ -253,9 +255,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <p><b>Possui veículo próprio?</b>@if($candidate->vehicle()->count()!= 0)
+                            <p><b>Possui veículo próprio:</b>@if($candidate->vehicle()->count()!= 0)
                                 Sim
-                                <p><b>Qual? </b></p>
+                                <p><b>Tipos de veículos: </b></p>
                                 @foreach($candidate->vehicle as $vehicle)
                                 <p>
                                     {{$vehicle->name}}
@@ -267,7 +269,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <p><b>Tem disponibilidade para viajar? </b> @if($candidate->travel ==1)
+                            <p><b>Tem disponibilidade para viajar: </b> @if($candidate->travel ==1)
                                 Sim
                                 @else
                                 Não
@@ -277,7 +279,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <p><b>Tem disponibilidade para mudar de residência? </b> @if($candidate->change ==1)
+                            <p><b>Tem disponibilidade para mudar de residência: </b> @if($candidate->change ==1)
                                 Sim
                                 @else
                                 Não

@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <button class="btn-orange">
-                                BUSCAR
+                                ENTRAR
                             </button>
                         </div>
                     </div>

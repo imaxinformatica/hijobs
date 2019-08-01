@@ -18,7 +18,7 @@
             <i class="fa fa-tachometer"></i> <span>DASHBOARD</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/user/pages') ? 'class=active' : '') }} {{ (Request::is('admin/user/pages/*') ? 'class=active' : '') }} >
+        <li {{ (Request::is('admin/paginas') ? 'class=active' : '') }} {{ (Request::is('admin/paginas/*') ? 'class=active' : '') }} >
           <a href="{{route('admin.pages')}}">
             <i class="fa fa-file" aria-hidden="true"></i> <span>PÁGINAS</span>
           </a>
@@ -33,7 +33,7 @@
             <i class="fa fa-building" aria-hidden="true"></i> <span>EMPRESAS</span>
           </a>
         </li>
-        <li {{ (Request::is('admin/user/vagas') ? 'class=active' : '') }} {{ (Request::is('admin/user/vagas/*') ? 'class=active' : '') }} >
+        <li {{ (Request::is('admin/vagas') ? 'class=active' : '') }} {{ (Request::is('admin/vagas/*') ? 'class=active' : '') }} >
           <a href="{{route('admin.opportunities')}}">
             <i class="fa fa-address-card-o" aria-hidden="true"></i> <span>VAGAS</span>
           </a>

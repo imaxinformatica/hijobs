@@ -75,7 +75,7 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <a href="{{route('admin.video')}}">
-                  <button type="button" class="btn btn-primary">Voltar</button>
+                  <button type="button" class="btn btn-default">Voltar</button>
                 </a>
               </div>
             </form>

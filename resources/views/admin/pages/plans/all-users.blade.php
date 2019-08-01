@@ -14,7 +14,7 @@
           <h1>Planos</h1>
         </div>
         <div class="col-sm-6">
-          <button class="btn-header" onclick="window.location.href='{{ route('admin.plan')}}'">VOLTAR</button>
+          <button class="btn-header btn-back" onclick="window.location.href='{{ route('admin.plan')}}'">VOLTAR</button>
         </div>
       </div>
     </section>

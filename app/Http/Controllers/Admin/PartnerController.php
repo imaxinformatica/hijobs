@@ -21,6 +21,10 @@ class PartnerController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:191',
+            'link' => 'required|max:191',
+        ]);
         $logo = $this->imgValidate($request);
         $partner = new Partner;
         
@@ -63,7 +67,10 @@ class PartnerController extends Controller
 
     private function imgValidate(Request $request)
     {
-        if (isset($request->file)) {
+        if (isset($request->logo)) {
+            $request->validate([
+                'logo' => 'mimes:png,jpeg,jpg',
+            ]);
             $originalPath = public_path().'/images/partner/';
             $arq_img = $request->file('logo');
             $name    = basename($arq_img->getClientOriginalName());

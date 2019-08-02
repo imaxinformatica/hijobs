@@ -410,6 +410,8 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Formação</h3>
+                        <button class="btn-new act-formation" data-candidate_id="{{$candidate->id}}">Novo</button>
+
                     </div>
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-striped">
@@ -419,8 +421,6 @@
                                     <th scope="col">Nome</th>
                                     <th scope="col">Nível</th>
                                     <th scope="col">Curso</th>
-                                    <th scope="col">Situação</th>
-                                    <th scope="col">Conclusão</th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
@@ -430,8 +430,6 @@
                                     <td>{{$formation->name}}</td>
                                     <td>{{$formation->level->name}}</td>
                                     <td>{{$formation->course->name}}</td>
-                                    <td>{{ucfirst($formation->situation)}}</td>
-                                    <td>{{$formation->situation == 'trancado' ? "Trancado" : str_pad($formation->finish_month, 2, "0", STR_PAD_LEFT) ."/".$formation->finish_year}}
                                     </td>
                                     <td>
                                         <a href="#" title="Editar" data-formation=""
@@ -468,6 +466,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Experiência Profissional</h3>
+                        <button class="btn-new act-professional" data-candidate_id="{{$candidate->id}}">Novo</button>
                     </div>
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-striped">
@@ -477,7 +476,6 @@
                                     <th scope="col">Nome Empresa</th>
                                     <th scope="col">Cargo</th>
                                     <th scope="col">Nível hierárquico</th>
-                                    <th scope="col">Data início</th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
@@ -487,7 +485,6 @@
                                     <td>{{$professional->name}}</td>
                                     <td>{{$professional->occupation}}</td>
                                     <td>{{$professional->hierarchy->name}}</td>
-                                    <td>{{str_pad($professional->start_month, 2, "0", STR_PAD_LEFT) ."/".$professional->start_year}}
                                     </td>
                                     <td>
                                         <a href="#" title="Editar" data-formation=""
@@ -525,6 +522,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Idiomas</h3>
+                        <button class="btn-new act-language" data-candidate_id="{{$candidate->id}}">Novo</button>
                     </div>
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-striped">
@@ -568,6 +566,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Conhecimento em Informática</h3>
+                        <button class="btn-new act-knowledge" data-candidate_id="{{$candidate->id}}">Novo</button>
                     </div>
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-striped">

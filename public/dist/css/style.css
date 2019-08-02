@@ -25,12 +25,24 @@ button.btn-header {
     font-weight: bold;
     text-transform: capitalize;
 }
+
+
 button.btn-back {
     background: #c0c0c0;
     color: #494747;
 
 }
-
+button.btn-new {
+    border: 0;
+    border-radius: 2px;
+    background: #8BC34A;
+    padding: 5px 10px;
+    vertical-align: middle;
+    float: right;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+}
 @media(max-width: 767px){
     button.btn-header {
         margin-top: 10px;

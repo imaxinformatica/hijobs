@@ -198,6 +198,21 @@ $('.input-phone').focusout(function() {
         });
     }
 });
+
+$('.level_id').change(function() {
+    var level_id = $(this).val();
+    getCoursesScript(level_id);
+});
+
+$('.situation').change(function() {
+    var situation = $(this).val();
+    getSituation(situation);
+});
+$('.actually').change(function() {
+    var actually = $(this).val();
+    isActually(actually);
+});
+
 $(document).ready(function(){
     isSpecial();
 });
@@ -209,10 +224,135 @@ function isSpecial(){
         $('#special').slideUp();
     }
 }
+
+function validateCountryScript(country_id) {
+    if (country_id == 1) {
+        getStatesScript();
+    } else {
+        $('.state_formation').slideUp();
+        $('.state_professional').slideUp();
+        $('.city_professional').slideUp();
+        $('.state_id').html('');
+    }
+}
+
+function isActually(actually) {
+    if (actually == 0) {
+        $('.finish').show();
+    } else {
+        $('.finish').hide();
+    }
+}
+function getSituation(situation) {
+    if (situation == 'trancado') {
+        $('.finish').hide();
+    } else {
+        $('.finish').show();
+    }
+}
+
+function getStatesScript() {
+    var states = <?php echo getStates() ?>;
+
+    $('.state_formation').slideDown();
+    $('.state_professional').slideDown();
+    $('.city_professional').slideDown();
+    $('.state_id').html('');
+    $('.state_id').append('<option selected disabled>SELECIONE...</option>');
+    for (var i = 0; i < states.length; ++i) {
+        $('.state_id').append('<option value="' + states[i].id + '" >' + states[i].name +
+            '</option>');
+    }
+}
+
+function getCoursesScript(level_id) {
+    $.ajax({
+        type: 'POST',
+        url: "{{route('get-courses')}}",
+        data: {
+            level_id: level_id,
+        },
+        beforeSend: function() {},
+        success: function(data) {
+            var courses = $.parseJSON(data);
+            $('.course_id').html('');
+            $('.course_id').append('<option selected disabled>SELECIONE...</option>');
+            for (var i = 0; i < courses.length; ++i) {
+                $('.course_id').append('<option value="' + courses[i].id + '" >' + courses[i].name +
+                    '</option>');
+            }
+        }
+    });
+}
+
+function getCitiesScript(state_id) {
+    $.ajax({
+        type: 'POST',
+        url: "{{route('get-cities')}}",
+        data: {
+            state_id: state_id,
+        },
+        beforeSend: function() {},
+        success: function(data) {
+            var cities = $.parseJSON(data);
+            $('.city_id').html('');
+            $('.city_id').append('<option selected disabled>SELECIONE...</option>');
+            for (var i = 0; i < cities.length; ++i) {
+                $('.city_id').append('<option value="' + cities[i].id + '" >' + cities[i].name +
+                    '</option>');
+            }
+        }
+    });
+}
+
+function getSubknowledgeScript(knowledge_id) {
+    $.ajax({
+        type: 'POST',
+        url: "{{route('get-subknowledges')}}",
+        data: {
+            knowledge_id: knowledge_id,
+        },
+        beforeSend: function() {},
+        success: function(data) {
+            var subknowledges = $.parseJSON(data);
+            $('.subknowledge_id').html('');
+            $('.subknowledge_id').append('<option selected disabled>SELECIONE...</option>');
+            for (var i = 0; i < subknowledges.length; ++i) {
+                $('.subknowledge_id').append('<option value="' + subknowledges[i].id + '" >' +
+                    subknowledges[i].name +
+                    '</option>');
+            }
+        }
+    });
+}
+
 $('.isSpecial').change(function() {
     isSpecial();
 });
 
+$('.text_know').hide();
+$('.country_id').change(function() {
+    var country_id = $(this).val();
+    validateCountryScript(country_id);
+});
+$('.state_id').change(function() {
+    var state_id = $(this).val();
+    getCitiesScript(state_id);
+});
+
+$('.knowledge_id').change(function() {
+    var knowledge_id = $(this).val();
+    getSubknowledgeScript(knowledge_id);
+});
+
+$('.situation').change(function() {
+    var situation = $(this).val();
+    getSituation(situation);
+});
+$('.actually').change(function() {
+    var actually = $(this).val();
+    isActually(actually);
+});
 $('.alert .close').click(function() {
     $(this).parent().hide();
 });

@@ -18,6 +18,9 @@ use App\Hierarchy;
 use App\Journey;
 use App\CandidateState;
 use App\CandidateVehicle;
+use App\City;
+use App\Course;
+use App\Level;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -32,12 +35,15 @@ class CandidateController extends Controller
     	return view('admin.pages.candidate.edit')
     	->with('states', State::all())
         ->with('countries', Country::all())
+        ->with('cities', City::all())
+        ->with('courses', Course::all())
         ->with('drivers', Driver::all())
         ->with('journeys', Journey::all())
         ->with('vehicles', Vehicle::all())
         ->with('specials', Special::all())
         ->with('languages', Language::all())
         ->with('knowledges', Knowledge::all())
+        ->with('levels', Level::all())
         ->with('subknowledges', Subknowledge::all())
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())

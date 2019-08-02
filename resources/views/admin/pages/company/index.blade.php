@@ -124,16 +124,16 @@
                       <td>{{$company->phone}}</td>
                       <td>
                         <a href="{{ route('admin.company.edit', ['id' => $company->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                         @if($company->publish == 1)
 
-                        <a href="{{ route('admin.company.remove', ['id' => $company->id])}}" title="Disponibilizar na Home" class="act-list act-delete">
-                          <i class="fa fa-window-close-o" aria-hidden="true"></i>
+                        <a href="{{ route('admin.company.remove', ['id' => $company->id])}}" title="Remover da Home" class="act-list act-delete">
+                          <i class="fa fa-toggle-on" aria-hidden="true"></i>
                         </a>
                         @else
                         <a href="{{ route('admin.company.show', ['id' => $company->id])}}" title="Disponibilizar na Home" class="act-list act-delete">
-                          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                          <i class="fa fa-toggle-off" aria-hidden="true"></i>
                         </a>
                         @endif
                       </td>

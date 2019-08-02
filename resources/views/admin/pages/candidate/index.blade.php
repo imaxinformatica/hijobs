@@ -120,7 +120,7 @@
                       <td>{{$candidate->phone}}</td>
                       <td>
                         <a href="{{ route('admin.candidate.edit', ['id' => $candidate->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>

@@ -119,12 +119,12 @@
                       <td>{{$opportunity->company->name}}</td>
                       <td>
                         <a href="{{ route('admin.opportunities.edit', ['id' => $opportunity->id])}}" title="Editar" class="act-list">
-                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                          <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                         @if($opportunity->publish == 2)
 
                         <a href="{{ route('admin.opportunities.remove', ['id' => $opportunity->id])}}" title="Remover Vaga" class="act-list act-delete">
-                          <i class="fa fa-window-close-o" aria-hidden="true"></i>
+                          <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                         @else
                         <a href="{{ route('admin.opportunities.show', ['id' => $opportunity->id])}}" title="Disponibilizar vaga" class="act-list act-delete">

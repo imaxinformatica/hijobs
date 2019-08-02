@@ -156,10 +156,33 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
 Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], function(){
   Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
   Route::get('/paginas', 'Admin\PagesController@index')->name('pages');
-Route::group(['prefix' => 'paginas','as'=>'pages.'], function(){
-  Route::get('/edit/{id}', 'Admin\PagesController@edit')->name('edit');
-  Route::post('/update', 'Admin\PagesController@update')->name('update');
-});
+
+  Route::group(['prefix' => 'paginas','as'=>'pages.'], function(){
+    Route::get('/edit/{id}', 'Admin\PagesController@edit')->name('edit');
+    Route::post('/update', 'Admin\PagesController@update')->name('update');
+  });
+  Route::group(['prefix' => 'formacao', 'as' => 'formation.'], function () {
+    Route::post('store', 'Candidate\FormationController@store')->name('store');
+    Route::post('update', 'Candidate\FormationController@update')->name('update');
+    Route::get('delete/{formation}', 'Candidate\FormationController@delete')->name('delete');
+  });
+  Route::group(['prefix' => 'experiencia-profissional', 'as' => 'professional.'], function () {
+    Route::post('store', 'Candidate\ProfessionalController@store')->name('store');
+    Route::post('update', 'Candidate\ProfessionalController@update')->name('update');
+    Route::get('delete/{professional}', 'Candidate\ProfessionalController@delete')->name('delete');
+  });
+
+  Route::group(['prefix' => 'idioma', 'as' => 'language.'], function () {
+    Route::post('store', 'Candidate\LanguageController@store')->name('store');
+    Route::post('update', 'Candidate\LanguageController@update')->name('update');
+    Route::get('delete/{language}', 'Candidate\LanguageController@delete')->name('delete');
+  });
+
+  Route::group(['prefix' => 'conhecimentos-informatica', 'as' => 'knowledge.'], function () {
+    Route::post('store', 'Candidate\KnowledgeController@store')->name('store');
+    Route::post('update', 'Candidate\KnowledgeController@update')->name('update');
+    Route::get('delete/{knowledge}', 'Candidate\KnowledgeController@delete')->name('delete');
+  });
 
   Route::get('frequentes/', 'Admin\AdminController@frequently')->name('frequentlys');
   Route::get('/frequentes/create/', 'Admin\AdminController@createFrequently')->name('frequently.create');
@@ -174,8 +197,8 @@ Route::group(['prefix' => 'paginas','as'=>'pages.'], function(){
   Route::get('/vagas/remove/{id}', 'Admin\AdminController@removeOpportunity')->name('opportunities.remove');
 
   Route::get('/empresas', 'Admin\AdminController@indexCompany')->name('company');
-  Route::get('/empresas/edit/{id}', 'Admin\AdminController@editCompany')->name('company.edit');
-  Route::post('/empresas/update', 'Admin\AdminController@updateCompany')->name('company.update');
+  Route::get('/empresas/edit/{id}', 'Admin\CompanyController@edit')->name('company.edit');
+  Route::post('/empresas/update', 'Admin\CompanyController@update')->name('company.update');
   Route::get('/empresas/show/{id}', 'Admin\AdminController@showCompany')->name('company.show');
   Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
 

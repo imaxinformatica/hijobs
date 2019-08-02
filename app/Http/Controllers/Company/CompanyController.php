@@ -132,8 +132,8 @@ class CompanyController extends Controller
         $company->cep         		   = $request->cep;
         $company->street               = $request->street;
         $company->neighborhood 		   = $request->neighborhood;
-        $company->city_id              = $request->city;
-        $company->state_id             = $request->state;
+        $company->city              = $request->city;
+        $company->state             = $request->state;
         $company->number               = $request->number;
         if ($request->name != null ||  $request->name != '') {
             $company->name             = $request->name;

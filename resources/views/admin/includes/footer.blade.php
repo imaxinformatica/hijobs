@@ -250,3 +250,4 @@ $('#no_due').change(function() {
     }
 });
 </script>
+@yield('scripts')

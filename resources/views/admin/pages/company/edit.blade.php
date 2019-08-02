@@ -1,6 +1,6 @@
 @extends('admin.templates.default')
 
-@section('title', 'Editar Cliente')
+@section('title', 'Editar Empresa')
 
 @section('description', 'Descrição')
 
@@ -11,7 +11,7 @@
     <section class="content-header">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Editar Cliente</h1>
+          <h1>Editar Empresa</h1>
         </div>
       </div>
     </section>
@@ -69,7 +69,7 @@
                 <div class="form-group row box-nome" >
                   <div class="col-xs-12">
                     <label for="name">Nome Fantasia</label>
-                    <input type="text" name="trade" class="form-control" id="name" value="{{$company->name}}">
+                    <input type="text" name="name" class="form-control" id="name" value="{{$company->name}}">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -127,7 +127,12 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="state">Estado</label>
-                    <input type="text" class="form-control"  name="state" value="{{$company->state}}" placeholder="Estado">
+                    <select name="state" id="state" class="form-control">
+                      <option value=""> Selecione</option>
+                      @foreach($states as $state)
+                      <option value="{{$state->sigla}}" {{$state->sigla == $company->state ? "selected" : ""}}>{{$state->sigla}}</option>
+                      @endforeach
+                    </select>
                 </div>
                 <div class="col-sm-4">
                     <label for="city">Cidade</label>
@@ -167,7 +172,7 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
                 <a href="{{route('admin.company')}}">
-                  <button type="button" class="btn btn-primary">Voltar</button>
+                  <button type="button" class="btn btn-default">Voltar</button>
                 </a>
               </div>
             </form>

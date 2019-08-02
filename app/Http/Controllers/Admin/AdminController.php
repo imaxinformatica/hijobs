@@ -49,54 +49,7 @@ class AdminController extends Controller
     	return view('admin.pages.company.index')
     	->with('companies', $companies);
     }
-
-    public function editCompany($id)
-    {
-    	$company = Company::find($id);
-    	return view('admin.pages.company.edit')
-    	->with('states', State::all())
-        ->with('countries', Country::all())
-        ->with('occupations', OccupationArea::all())
-    	->with('company', $company);
-    }
-
-    public function updateCompany(Request $request)
-    {
-
-        $this->validate($request, [
-            'trade'                 => 'required',
-            'phone'                 => 'required',
-            'description'           => 'required|max:500',
-            'cnpj'                  => 'required',
-            'occupation_area_id'    => 'required',
-            'cep'                   => 'required',
-        ]);
-        $company                       = Company::find($request->id);
-        $company->trade                = $request->trade;
-        $company->phone                = $request->phone;
-        $company->description          = $request->description;
-        $company->cnpj                 = $request->cnpj;
-        $company->occupation_area_id   = $request->occupation_area_id;
-        $company->cep                  = $request->cep;
-        $company->street               = $request->street;
-        $company->neighborhood         = $request->neighborhood;
-        $company->city                 = $request->city;
-        $company->state                = $request->state;
-        $company->number               = $request->number;
-        if ($request->name != null ||  $request->name != '') {
-            $company->name             = $request->name;
-        }
-        if ($request->email != null || $request->email != '') {
-            $company->email            = $request->email;
-        }
-        $company->linkedin            = $request->linkedin;
-        $company->facebook            = $request->facebook;
-        $company->twitter             = $request->twitter;
-        $company->blog                = $request->blog;
-        $company->save();
-
-        return redirect()->back()->with('success','Empresa Salva com sucesso!');
-    }
+    
 
     public function showCompany($id)
     {

@@ -113,7 +113,12 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <input type="text"  name="state" value="{{$company->state}}" placeholder="Estado">
+                                <select name="state" id="state">
+                                    <option value="">Selecione...</option>
+                                    @foreach($states as $state)
+                                    <option value="{{$state->sigla}}" {{$state->sigla == $company->state ? "selected" : ""}}>{{$state->sigla}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>

@@ -98,7 +98,7 @@ Route::group(['prefix' => 'empresa', 'as'=>'company.'], function () {
     Route::post('/hash', 'Admin\PagSeguroController@hash')->name('hash');
     Route::get('/checkout', 'Admin\PagSeguroController@checkout')->name('checkout');
     Route::post('/checkout', 'Admin\PagSeguroController@finishCheckout')->name('finishCheckout');
-    Route::get('/cancelar/', 'Admin\PagSeguroController@cancelPlan')->name('cancel');
+    Route::get('/cancelar', 'Admin\PagSeguroController@cancelPlan')->name('cancel');
   });
 
   

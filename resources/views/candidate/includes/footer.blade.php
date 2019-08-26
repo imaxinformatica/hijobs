@@ -289,7 +289,7 @@ function getStatesScript() {
     $('.state_professional').slideDown();
     $('.city_professional').slideDown();
     $('.state_id').html('');
-    $('.state_id').append('<option selected disabled>SELECIONE...</option>');
+    $('.state_id').append('<option selected disabled>Selecione...</option>');
     for (var i = 0; i < states.length; ++i) {
         $('.state_id').append('<option value="' + states[i].id + '" >' + states[i].name +
             '</option>');
@@ -307,7 +307,7 @@ function getCoursesScript(level_id) {
         success: function(data) {
             var courses = $.parseJSON(data);
             $('.course_id').html('');
-            $('.course_id').append('<option selected disabled>SELECIONE...</option>');
+            $('.course_id').append('<option selected disabled>Selecione...</option>');
             for (var i = 0; i < courses.length; ++i) {
                 $('.course_id').append('<option value="' + courses[i].id + '" >' + courses[i].name +
                     '</option>');
@@ -327,7 +327,7 @@ function getCitiesScript(state_id) {
         success: function(data) {
             var cities = $.parseJSON(data);
             $('.city_id').html('');
-            $('.city_id').append('<option selected disabled>SELECIONE...</option>');
+            $('.city_id').append('<option selected disabled>Selecione...</option>');
             for (var i = 0; i < cities.length; ++i) {
                 $('.city_id').append('<option value="' + cities[i].id + '" >' + cities[i].name +
                     '</option>');
@@ -347,7 +347,7 @@ function getSubknowledgeScript(knowledge_id) {
         success: function(data) {
             var subknowledges = $.parseJSON(data);
             $('.subknowledge_id').html('');
-            $('.subknowledge_id').append('<option selected disabled>SELECIONE...</option>');
+            $('.subknowledge_id').append('<option selected disabled>Selecione...</option>');
             for (var i = 0; i < subknowledges.length; ++i) {
                 $('.subknowledge_id').append('<option value="' + subknowledges[i].id + '" >' +
                     subknowledges[i].name +

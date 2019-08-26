@@ -374,7 +374,7 @@
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <label for="description">Descrição das Atividadees</label>
-                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                            <textarea class="form-control" name="description" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -493,7 +493,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="hierarchy_id">Nível Hierárquico</label>
-                            <select id="hierarchy_id" name="hierarchy_id" class="form-control">
+                            <select  name="hierarchy_id" class="form-control">
                                 <option selected disabled hidden>Selecione..</option>
                                 @isset($hierarchies)
                                 @foreach($hierarchies as $hierarchy)

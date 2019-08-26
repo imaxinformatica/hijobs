@@ -202,6 +202,11 @@ class CompanyController extends Controller
                 $candidates = $candidates->where('travel', request('travel'));
             }
         }
+        if($request->has('salary')){
+            if(request('salary') != ''){
+                $candidates = $candidates->where('salary', '<=' , request('salary'));
+            }
+        }
 
         if($request->has('change')){
             if(request('change') != ''){

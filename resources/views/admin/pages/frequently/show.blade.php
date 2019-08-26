@@ -19,7 +19,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <p>{{$frequently->answer}}</p>
+                        <p><?php echo $frequently->answer ?></p>
                     </div>
                 </div>
                 <hr>

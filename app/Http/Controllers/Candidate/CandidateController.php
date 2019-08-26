@@ -176,15 +176,17 @@ class CandidateController extends Controller
             'max_hierarchy_id'  => 'required',
             'salary'            => 'required',
         ]);
-
         $candidate                   = Candidate::find($request->candidate_id);
         $finish = 0;
         if ($candidate->cpf == NULL) {
             $finish = 1;
         }
 
-        $candidate->name             = $request->name;
+        if($request->name != null){
+            $candidate->name             = $request->name;
+        }
         $candidate->state            = $request->state;
+
         $candidate->cpf              = $request->cpf;
         if ($request->cep != NULL) {
             $candidate->cep          = $request->cep;

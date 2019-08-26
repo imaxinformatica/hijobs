@@ -164,6 +164,54 @@ $(document).ready(function() {
     });
 });
 
+// Consulta por CEP
+$(document).ready(function() {
+
+//Quando o campo cep perde o foco.
+$("#cep").blur(function() {
+
+    //Nova variável "cep" somente com dígitos.
+    var cep = $(this).val().replace(/\D/g, '');
+
+    //Verifica se campo cep possui valor informado.
+    if (cep != "") {
+
+        //Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+
+        //Valida o formato do CEP.
+        if (validacep.test(cep)) {
+
+            //Preenche os campos com "..." enquanto consulta webservice.
+            $("#street").val("...");
+            $("#nehighbor").val("...");
+            $("#city").val("...");
+            $("#state").val("...");
+
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+
+                if (!("erro" in dados)) {
+                    //Atualiza os campos com os valores da consulta.
+                    $("#street").val(dados.logradouro);
+                    $("#neighborhood").val(dados.bairro);
+                    $("#city").val(dados.localidade);
+                    $("#state").val(dados.uf);
+                } //end if.
+                else {
+                    //CEP pesquisado não foi encontrado.
+                    alert("CEP não encontrado.");
+                }
+            });
+        } //end if.
+        else {
+            //cep é inválido.
+            alert("Formato de CEP inválido.");
+        }
+    } //end if.
+});
+});
+
 $('.input-phone').focusout(function() {
     var phone = $(this).val().replace(/\D/g, '');
     if (phone.length > 10) {
@@ -178,6 +226,21 @@ $('.input-phone').focusout(function() {
         });
     }
 });
+$('.input-phone').click(function() {
+    var phone = $(this).val().replace(/\D/g, '');
+    if (phone.length > 10) {
+        $(this).inputmask({
+            "mask": "(99) 99999-9999",
+            "placeholder": " "
+        });
+    } else {
+        $(this).inputmask({
+            "mask": "(99) 9999-99999",
+            "placeholder": " "
+        });
+    }
+});
+
 
 $(".input-money").maskMoney({
     thousands: '.',

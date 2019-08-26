@@ -135,7 +135,7 @@
                                     <div class="border">
                                         <img src="{{asset('images/icon-plus.png')}}">
                                     </div>
-                                    <p>Mais detalhes do candidato</p>
+                                    <p>Mais detalhes</p>
                                 </button>
                             </a>
                             @endif

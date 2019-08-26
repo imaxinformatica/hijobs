@@ -15,7 +15,7 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="email" class="n-icon" type="text" name="email" placeholder="E-mail">
+                            <input id="email" class="n-icon" type="email" name="email" value="{{old('email')}}" placeholder="E-mail">
                         </div>
                     </div>
                     <div class="row">

@@ -87,25 +87,25 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="cep">CEP</label>
-                                <input type="text" class="input-cep" value="{{old('cep')}}" name="cep" placeholder="Seu CEP">
+                                <input type="text" class="input-cep" value="{{old('cep')}}" id="cep" name="cep" placeholder="Seu CEP">
                             </div>
                             <div class="col-sm-6">
                                 <label for="street">Logradouro / Rua</label>
-                                <input type="text" name="street" value="{{old('street')}}" placeholder="Logradouro">
+                                <input type="text" name="street" id="street" value="{{old('street')}}" placeholder="Logradouro">
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number" value="{{old('number')}}" placeholder="Número / Complemento">
+                                <input type="text" name="number" id="number" value="{{old('number')}}" placeholder="Número / Complemento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="neighborhood">Bairro</label>
-                                <input type="text" name="neighborhood" value="{{old('neighborhood')}}" placeholder="Bairro">
+                                <input type="text" name="neighborhood" id="neighborhood" value="{{old('neighborhood')}}" placeholder="Bairro">
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
-                                <select name="state" >
+                                <select name="state" id="state" >
                                     <option value="" selected hidden disabled>SELECIONE...</option>
                                     @foreach($states as $state)
                                     <option value="{{$state->sigla}}">{{$state->sigla}}</option>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>
-                                <input type="text"  name="city" value="{{old('city')}}" placeholder="Cidade">
+                                <input type="text" id="city" name="city" value="{{old('city')}}" placeholder="Cidade">
                             </div>
                         </div>
                         <div class="row">

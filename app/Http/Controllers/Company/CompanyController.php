@@ -117,6 +117,7 @@ class CompanyController extends Controller
         $this->validate($request, [
             'trade'                 => 'required',
             'phone'    			    => 'required',
+            'city'    			    => 'required',
             'description'   	    => 'required|max:500',
             'cnpj'          	    => 'required',
             'occupation_area_id'    => 'required',
@@ -225,7 +226,6 @@ class CompanyController extends Controller
                 $candidates = $candidates->where('contract_type_id', request('contract_type_id') );
             }
         }
-
         $candidates = $candidates->orderBy('name', 'asc')->paginate(10);
 
         $company = Auth::guard('company')->user();

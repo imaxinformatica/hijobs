@@ -167,6 +167,21 @@ $('#top-company').click(function() {
     $(this).addClass('active');
     $('#top-candidate').removeClass('active');
 });
+$(document).ready(function(){
+    isSpecial();
+});
+$('.isSpecial').on('click', function(){
+    isSpecial();
+});
+
+function isSpecial(){
+    if($('.isSpecial').is(':checked')){
+        $('#special').slideDown();
+    }else{
+        $('#special').slideUp();
+
+    }
+}
 
 //Mascaras
 $(document).ready(function() {

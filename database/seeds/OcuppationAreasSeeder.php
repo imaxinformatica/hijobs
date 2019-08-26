@@ -14,51 +14,51 @@ class OcuppationAreasSeeder extends Seeder
     	$now = date("Y-m-d H:i:s");
         DB::table("occupation_areas")->insert([
             [
-                "name"       => " Area Administrativa-Financeira",
+                "name"       => " Área Administrativa-Financeira",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area Comercial",
+                "name"       => "Área Comercial",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Departamento Médico",
+                "name"       => "Área de Departamento Médico",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Educação",
+                "name"       => "Área de Educação",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Processamento de Dados",
+                "name"       => "Área de Processamento de Dados",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Recursos Humanos",
+                "name"       => "Área de Recursos Humanos",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Relações",
+                "name"       => "Área de Relações",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Suprimentos/Materiais",
+                "name"       => "Área de Suprimentos/Materiais",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area de Turismo",
+                "name"       => "Área de Turismo",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area Industrial/Operações",
+                "name"       => "Área Industrial/Operações",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area Jurídica",
+                "name"       => "Área Jurídica",
                 "created_at" => $now,
                 "updated_at" => $now,
             ], [
-                "name"       => "Area Presidencial",
+                "name"       => "Área Presidencial",
                 "created_at" => $now,
                 "updated_at" => $now,
             ],

@@ -12,7 +12,7 @@ class PagSeguroController extends Controller
 	//Tela admin com todos os plano
     public function index()
     {
-    	return view('admin.pages.plans.index')->with('plans', Plan::all());
+    	return view('admin.pages.plans.index')->with('plans', Plan::get());
     }
 
     //tela admin para criar os planos
@@ -29,7 +29,8 @@ class PagSeguroController extends Controller
 		$data['token'] = config('services.pagseguro.pagseguro_token');
     	$data['preApprovalName'] = $request->preApprovalName;
     	$data['preApprovalCharge'] = 'AUTO';
-    	$data['preApprovalPeriod'] = 'MONTHLY';
+        $data['preApprovalPeriod'] = 'MONTHLY';
+        $data['trialPeriodDuration '] = $request->trialPeriodDuration;
     	$data['preApprovaldayOfMonth'] = 1;
     	$data['preApprovalAmountPerPayment'] = $value;
   		
@@ -53,6 +54,7 @@ class PagSeguroController extends Controller
 		$plan->code = $xml->code;
 		$plan->name = $request->preApprovalName;
 		$plan->type = $request->type;
+		$plan->trial_period_duration = $request->trialPeriodDuration;
 		$plan->value = $value;
 		$plan->save();
 
@@ -69,19 +71,21 @@ class PagSeguroController extends Controller
 
     public function update(Request $request)
     {
+        $value = str_replace(',','.', str_replace('.','', $request->value));
+
         $data['email'] = config('services.pagseguro.pagseguro_email');
         $data['token'] = config('services.pagseguro.pagseguro_token');
-        $value = str_replace(',','.', str_replace('.','', $request->value));
         $code = $request->code;
-
+        
         $data = http_build_query($data);
-
+        
         $url = "https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/request/{$code}/payment/?{$data}";
         $payload = array(
             'amountPerPayment'      => $value,
-            'updateSubscriptions'   => false
+            'updateSubscriptions'   => false,
+            // 'trialPeriodDuration'       => $request->trialPeriodDuration,
         ); 
-
+        
         $data_json = json_encode($payload);
 
         $headers = array('Content-Type: application/json', 'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
@@ -94,7 +98,6 @@ class PagSeguroController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         $resp = json_decode($response);
-
         curl_close($ch);
         if (isset($resp->error)) {
             foreach ($resp->errors as $resp) {
@@ -137,7 +140,6 @@ class PagSeguroController extends Controller
     	$data['email'] = config('services.pagseguro.pagseguro_email');
 		$data['token'] = config('services.pagseguro.pagseguro_token');
 
-
 		$curl = curl_init();
 		 
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -150,8 +152,7 @@ class PagSeguroController extends Controller
 		 
 		$resp = curl_exec($curl);
 		curl_close($curl);
-
-		$resp = simplexml_load_string($resp);
+        $resp = simplexml_load_string($resp);
 		return ($resp->id);
     }
     //gera hash do cartao de credito
@@ -171,12 +172,7 @@ class PagSeguroController extends Controller
     	$card->hash			= $request->hash;
     	$card->user_id      = $auth->id;
 
-        if ($user == 'company') {
-            $card->type = 2;
-        }else{
-            $card->type = 1;
-
-        }
+        $card->type = $user == 'company' ? 2 : 1;
     	$card->save();
 
     	$transaction = new TransactionUser;
@@ -203,6 +199,7 @@ class PagSeguroController extends Controller
         	->with('states', State::all())
         	->with('company', $company);
         }
+
     	$candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
         return view('candidate.pages.checkout')
         ->with('states', State::all())
@@ -230,7 +227,7 @@ class PagSeguroController extends Controller
     		'hash' 	=> $request->hash_comprador,
     		'phone' 	=> ([
     			'areaCode' 			=> substr($request->phone, 1,2),
-    			'number' 		=> $this->numberPhone($request->phone),
+    			'number' 		=> numberPhone($request->phone),
     		]),
     		'address'=> ([
     			'street' 		=> $request->street, 
@@ -244,7 +241,7 @@ class PagSeguroController extends Controller
     		]),
     		'documents' 	=> ([[
     			'type' 			=> 'CPF',
-    			'value' 		=> $this->limpaCPF_CNPJ($request->cpf),
+    			'value' 		=> limpaCPF_CNPJ($request->cpf),
     		]]),
     	]);
     	$payload['paymentMethod'] = ([
@@ -256,7 +253,7 @@ class PagSeguroController extends Controller
 	    			'birthDate' 	=> $request->birthdate,
 	    			'documents' 	=> ([[
 	    				'type' 			=> 'CPF',
-	    				'value' 		=> $this->limpaCPF_CNPJ($request->cpf),
+	    				'value' 		=> limpaCPF_CNPJ($request->cpf),
 					]]),
 	    			'billingAddress'=> ([
 	    				'street' 		=> $request->street, 
@@ -270,7 +267,7 @@ class PagSeguroController extends Controller
 	    			]),
 		    		'phone' 	=> ([
 	    			'areaCode' 		=> substr($request->phone, 1,2),
-	    			'number' 		=> $this->numberPhone($request->phone),
+	    			'number' 		=> numberPhone($request->phone),
 	    		]),
     		]),
     		]),
@@ -359,20 +356,32 @@ class PagSeguroController extends Controller
         return view('admin.pages.plans.all-users')->with('plans', $plans);
     }
 
-    private function limpaCPF_CNPJ($valor){
-		$valor = trim($valor);
-		$valor = str_replace(".", "", $valor);
-		$valor = str_replace(",", "", $valor);
-		$valor = str_replace("-", "", $valor);
-		$valor = str_replace("/", "", $valor);
-		return $valor;
-	}
-	private function numberPhone($valor){
-		$valor = trim($valor);
-		$valor = substr($valor, 5);
-		$valor = str_replace(" ", "", $valor);
-		$valor = str_replace("-", "", $valor);
-		return $valor;
-	}
+    public function getNotification(Request $request)
+    {
+        $req = json_decode($request);
+
+        $notificationCode = $req['notificationCode']; 
+
+        $data['email'] = config('services.pagseguro.pagseguro_email');
+        $data['token'] = config('services.pagseguro.pagseguro_token');
+        
+        $data = http_build_query($data);
+        
+        $url = "https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/{$notificationCode}?{$data}";
+        
+        $headers = array('Content-Type: application/json', 'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET'); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $xml = curl_exec($ch);
+        curl_close($ch);
+        	
+        $xml= simplexml_load_string($xml); 
+        return dd($xml);
+
+    }
  
 }

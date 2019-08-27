@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Editar Currículo</h1>
+                <h1>Editar dados pessoais</h1>
             </div>
         </div>
 

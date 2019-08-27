@@ -67,11 +67,15 @@
                             @if(isset($candidate->transaction))
                                 @if($candidate->transaction->status == 'ACTIVE')
                                 <a href="{{route('company.transaction.cancel')}}" class="act-delete" >
-                                    <button class="btn btn-danger">Suspender Assinatura</button>
+                                    <button class="btn-red">Suspender Assinatura</button>
+                                </a>
+                                @elseif($candidate->transaction->status === null)
+                                <a href="{{route('company.transaction.checkout')}}" >
+                                    <button class="btn-blue">Finalizar Assinatura</button>
                                 </a>
                                 @else
                                 <a href="{{route('company.transaction.cancel')}}" class="act-delete" >
-                                    <button class="btn btn-success">Ativar Assinatura</button>
+                                    <button class="btn-green">Ativar Assinatura</button>
                                 </a>
                                 @endif
                             @else

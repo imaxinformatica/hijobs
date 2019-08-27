@@ -58,6 +58,8 @@ class LoginController extends Controller
      */
     protected function guard()
     {
+        Auth::guard('candidate')->logout();
+        Auth::guard('company')->logout();
         return Auth::guard('admin');
     }
 }

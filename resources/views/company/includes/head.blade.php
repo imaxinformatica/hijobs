@@ -15,9 +15,8 @@
 <!-- Última versão JavaScript compilada e minificada -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}?ver=2.0.0">
-
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}?ver=2.0.0">

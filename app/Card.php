@@ -12,6 +12,6 @@ class Card extends Model
 		'exp_month',	
 		'exp_year',		
 		'hash',			
-		'candidate_id', 
+		'user_id', 
     ]; 
 }

@@ -103,7 +103,6 @@ class Candidate extends Authenticatable
         return $this->belongsTo('App\OccupationArea');
     }
 
-
     public function opportunity()
     {
         return $this->belongsToMany('App\Opportunity', 'opportunity_candidate');
@@ -116,7 +115,7 @@ class Candidate extends Authenticatable
 
     public function card()
     {
-        return $this->hasOne('App\Card');
+        return $this->hasOne('App\Card', 'user_id');
     }
 
     public function transaction()

@@ -140,4 +140,20 @@ function convertDateUSAtoBrazil($date)
     return $date;
 }
 
+function limpaCPF_CNPJ($valor){
+    $valor = trim($valor);
+    $valor = str_replace(".", "", $valor);
+    $valor = str_replace(",", "", $valor);
+    $valor = str_replace("-", "", $valor);
+    $valor = str_replace("/", "", $valor);
+    return $valor;
+}
+function numberPhone($valor){
+    $valor = trim($valor);
+    $valor = substr($valor, 5);
+    $valor = str_replace(" ", "", $valor);
+    $valor = str_replace("-", "", $valor);
+    return $valor;
+}
+
 

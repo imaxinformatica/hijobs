@@ -37,8 +37,8 @@ return [
 
     'pagseguro' => [
         'pagseguro_sandbox' => 'true',
-        'pagseguro_email' => 'informaticaimax@gmail.com',
-        'pagseguro_token' => 'CA316749D1E146FDB42D57726424D2C9',
+        'pagseguro_email' => 'andre@hijobs.com.br',
+        'pagseguro_token' => 'EBCFF8A4C371408CAC4B85619B4517D4',
     ],
 
 ];

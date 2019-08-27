@@ -13,16 +13,19 @@ class PlansSeeder extends Seeder
     {
         DB::table("plans")->insert([
             [
-                "code" => 'CB124BB89898BBDDD4DA0F9503D7C966',
+                "code" => 'C72809486767F7B44406FF9D6EAD1B1F',
                 "name"       => "Empresa",
                 "type" => 'empresa',
                 "value" => 250.00,
-            ], [
-                "code" => '9E472BDD3636774EE44CEFB097C76CA4',
-                "name"       => "Candidato",
-                "type" => 'candidato',
-                "value" => 89.90,
-            ],
+                "trial_period_duration" => "7",
+            ], 
+            [
+                "code" => 'F12BFF845050F29114F8AF95D72113A8',
+                "name"       => "Empresa",
+                "type" => 'empresa',
+                "value" => 250.00,
+                "trial_period_duration" => "7",
+            ], 
         ]); 
     }
 }

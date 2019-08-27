@@ -10,6 +10,29 @@
     margin-top: 20px;
 }
 
+.alerts {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.alert-danger {
+    color: #000;
+    background-color: #d11612;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    outline: none;
+    color: #000;
+    opacity: 0.8;
+}
+
+.alert-success {
+    color: #000;
+    background-color: #13c216;
+}
+
 span.select2.select2-container {
     width: 100% !important;
 }
@@ -421,6 +444,30 @@ div.box-result-search input, div.box-result-search select{
 
 button.btn-blue {
     background: #00bff3;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+}
+button.btn-red {
+    background: #ff3030;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 7px;
+    font-size: 15px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+}
+button.btn-green {
+    background: #5cbb5c;
     border: none;
     color: #fff;
     width: 100%;

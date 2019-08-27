@@ -59,7 +59,7 @@
         <section class="col-lg-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de Páginas</h3>
+              <h3 class="box-title">Lista de Plano</h3>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-striped">

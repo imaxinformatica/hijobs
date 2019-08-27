@@ -80,6 +80,13 @@
                     <input type="text" name="value" class="form-control input-money">
                   </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="trialPeriodDuration">Período Trial</label>
+                        <input type="number" name="trialPeriodDuration"
+                            class="form-control" required>
+                    </div>
+                </div>
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Criar</button>

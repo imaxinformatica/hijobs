@@ -97,6 +97,7 @@
                                         <th scope="col">Cargo</th>
                                         <th scope="col">Nível hierárquico</th>
                                         <th scope="col">Data início</th>
+                                        <th scope="col">Descrição</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,6 +107,11 @@
                                         <td>{{$professional->occupation}}</td>
                                         <td>{{$professional->hierarchy->name}}</td>
                                         <td>{{str_pad($professional->start_month, 2, "0", STR_PAD_LEFT) ."/".$professional->start_year}}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="more-details" data-name_empresa="{{$professional->name}}"
+                                                data-description="{{$professional->description}}">Mais Detalhes</a>
+
                                         </td>
                                     </tr>
                                     @empty
@@ -279,7 +285,39 @@
 </section>
 @stop
 
+@section('scripts')
+<script type="text/javascript">
+$('.more-details').on('click', function(e) {
+    e.preventDefault();
+    let name_empresa = $(this).data('name_empresa');
+    let description = $(this).data('description');
+    $('#moreDetailsModal .modal-title').html('Mais detalhes sobre ' + name_empresa);
+    $('#moreDetailsModal .content').html(description);
+    $('#moreDetailsModal').modal('show');
+});
+</script>
+@endsection
+
 @section('modals')
+<div class="modal fade" id="moreDetailsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p class="content"></p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
 <div class="modal fade" id="companyMessage">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -289,25 +327,26 @@
                 </button>
                 <h4 class="modal-title">Mensagem para {{$candidate->name}}</h4>
             </div>
-            <div class="modal-body">
-                <form method="POST" action="{{route('company.message')}}">
+            <form method="POST" action="{{route('company.message')}}">
+                <div class="modal-body">
                     {{csrf_field()}}
                     <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                     <div class="form-group row">
-                    <div class="col-sm-12">
+                        <div class="col-sm-12">
                             <label for="message">Mensagem</label>
                             <textarea name="message" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
         <!-- /.modal-content -->

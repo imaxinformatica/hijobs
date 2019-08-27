@@ -8,7 +8,7 @@
 <div class="row">
 <!-- Left col -->
 <section class="col-sm-12">
-  <div class="alert alert-primary alert-dismissible">
+  <div class="alert alert-warning alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     Não aceitamos cartões corporativos
   </div>
@@ -41,43 +41,43 @@
                             <div class="row">
                                 <div class="col-sm-4 form-group">
                                     <label for="name">Nome</label>
-                                    <input type="text" name="name" value="{{$company->name}}" class="form-control" required>
+                                    <input type="text" name="name" value="{{$company->name}}" required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="email">E-mail</label>
-                                    <input type="email" name="email" value="{{$company->email}}" class="form-control" required>
+                                    <input type="email" name="email" value="{{$company->email}}" required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="phone">Telefone</label>
-                                    <input type="text" name="phone" value="{{$company->phone}}" class="form-control input-phone" required>
+                                    <input type="text" name="phone" value="{{$company->phone}}" class=" input-phone" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2 form-group">
                                     <label for="cep">CEP</label>
-                                    <input type="text" name="cep" value="{{$company->cep}}" class="form-control input-cep" required>
+                                    <input type="text" name="cep" value="{{$company->cep}}" class=" input-cep" required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="street">Rua</label>
-                                    <input type="text" name="street" value="{{$company->street}}" class="form-control" required>
+                                    <input type="text" name="street" value="{{$company->street}}" required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="number">Número</label>
-                                    <input type="text" name="number" value="{{$company->number}}" class="form-control" required>
+                                    <input type="text" name="number" value="{{$company->number}}" required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="complement">Complemento</label>
-                                    <input type="text" name="complement" value="{{$company->complement}}" class="form-control">
+                                    <input type="text" name="complement" value="{{$company->complement}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-5 form-group">
                                     <label for="nehighbor">Bairro</label>
-                                    <input type="text" name="nehighbor" value="{{$company->nehighbor}}" class="form-control" required>
+                                    <input type="text" name="nehighbor" value="{{$company->nehighbor}}" required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="city">Cidade</label>
-                                    <input type="text" name="city" value="{{$company->city}}" class="form-control" required>
+                                    <input type="text" name="city" value="{{$company->city}}" required>
                                 </div>
                                 <div class="col-sm-1 form-group">
                                     <label for="state">Estado</label>
@@ -89,11 +89,11 @@
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="birthdate">Data Nascimento</label>
-                                    <input type="text" name="birthdate" value="{{$company->birthdate}}" class="form-control input-date" required>
+                                    <input type="text" name="birthdate" value="{{$company->birthdate}}" class=" input-date" required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" name="cpf" value="{{$company->cpf}}" class="form-control input-cpf" required>
+                                    <input type="text" name="cpf" value="{{$company->cpf}}" class=" input-cpf" required>
                                 </div>
                             </div>
                         <div class="col-sm-3">

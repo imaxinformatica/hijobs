@@ -243,3 +243,4 @@ Route::post('conhecimentos/', 'Candidate\CandidateController@getSubknowledges')-
 
 Route::get('perguntas-frequentes', 'Admin\AdminController@showFrequently')->name('frequentlys');
 Route::get('/paginas/{urn}', 'Admin\PagesController@footer')->name('footer');
+Route::post('/notificacoes', 'Admin\PagSeguroController@getNotification')->name('get-notification');

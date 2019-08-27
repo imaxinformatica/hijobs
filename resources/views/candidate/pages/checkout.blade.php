@@ -51,43 +51,43 @@
                             <div class="row">
                                 <div class="col-sm-4 form-group">
                                     <label for="name">Nome</label>
-                                    <input type="text" name="name" value="{{$candidate->name}}" class="form-control" required>
+                                    <input type="text" name="name" value="{{$candidate->name}}"  required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="email">E-mail</label>
-                                    <input type="email" name="email" value="{{$candidate->email}}" class="form-control" required>
+                                    <input type="email" name="email" value="{{$candidate->email}}"  required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="phone">Telefone</label>
-                                    <input type="text" name="phone" value="{{$candidate->phone}}" class="form-control input-phone" required>
+                                    <input type="text" name="phone" value="{{$candidate->phone}}" class=" input-phone" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2 form-group">
                                     <label for="cep">CEP</label>
-                                    <input type="text" name="cep" value="{{$candidate->cep}}" class="form-control input-cep" required>
+                                    <input type="text" name="cep" value="{{$candidate->cep}}" class=" input-cep" required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="street">Rua</label>
-                                    <input type="text" name="street" value="{{$candidate->street}}" class="form-control" required>
+                                    <input type="text" name="street" value="{{$candidate->street}}"  required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="number">Número</label>
-                                    <input type="text" name="number" value="{{$candidate->number}}" class="form-control" required>
+                                    <input type="text" name="number" value="{{$candidate->number}}"  required>
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label for="complement">Complemento</label>
-                                    <input type="text" name="complement" value="{{$candidate->complement}}" class="form-control">
+                                    <input type="text" name="complement" value="{{$candidate->complement}}" >
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-5 form-group">
                                     <label for="nehighbor">Bairro</label>
-                                    <input type="text" name="nehighbor" value="{{$candidate->nehighbor}}" class="form-control" required>
+                                    <input type="text" name="nehighbor" value="{{$candidate->nehighbor}}"  required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="city">Cidade</label>
-                                    <input type="text" name="city" value="{{$candidate->city}}" class="form-control" required>
+                                    <input type="text" name="city" value="{{$candidate->city}}"  required>
                                 </div>
                                 <div class="col-sm-1 form-group">
                                     <label for="state">Estado</label>
@@ -99,11 +99,11 @@
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="birthdate">Data Nascimento</label>
-                                    <input type="text" name="birthdate" value="{{$candidate->birthdate}}" class="form-control input-date" required>
+                                    <input type="text" name="birthdate" value="{{$candidate->birthdate}}" class=" input-date" required>
                                 </div>
                                 <div class="col-sm-2 form-group">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" name="cpf" value="{{$candidate->cpf}}" class="form-control input-cpf" required>
+                                    <input type="text" name="cpf" value="{{$candidate->cpf}}" class=" input-cpf" required>
                                 </div>
                             </div>
                         <div class="col-sm-3">

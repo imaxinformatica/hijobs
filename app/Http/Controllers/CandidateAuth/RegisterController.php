@@ -87,6 +87,8 @@ class RegisterController extends Controller
      */
     protected function guard()
     {
+        Auth::guard('company')->logout();
+        Auth::guard('admin')->logout();
         return Auth::guard('candidate');
     }
 }

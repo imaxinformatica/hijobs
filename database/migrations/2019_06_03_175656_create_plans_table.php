@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->double('value');
+            $table->integer('trial_period_duration');
             $table->timestamps();
         });
     }

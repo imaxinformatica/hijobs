@@ -358,6 +358,8 @@ class PagSeguroController extends Controller
 
     public function getNotification(Request $request)
     {
+    
+
         $req = json_decode($request);
 
         $notificationCode = $req['notificationCode']; 
@@ -372,14 +374,16 @@ class PagSeguroController extends Controller
         $headers = array('Content-Type: application/json', 'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
 
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET'); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $xml = curl_exec($ch);
         curl_close($ch);
         	
         $xml= simplexml_load_string($xml); 
+
+        $reference = $xml->reference;
+        $status = $xml->status;
         return dd($xml);
 
     }

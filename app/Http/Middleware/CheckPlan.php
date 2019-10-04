@@ -22,8 +22,11 @@ class CheckPlan
                 return redirect('/');
             }
         }
-
-        $status = auth()->guard($type)->user()->transaction->status;
+        if(auth()->guard('company')->user()->special_company == 1){
+            $status = 'ACTIVE';
+        }else{
+            $status = auth()->guard($type)->user()->transaction->status;
+        }
         if ($status != 'ACTIVE') {
             return redirect('/');
         }

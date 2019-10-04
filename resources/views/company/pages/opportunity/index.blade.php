@@ -18,6 +18,9 @@
                         if ($auth->transaction) {
                             $status = $auth->transaction->status;
                         }
+                        if($auth->special_company == 1){
+                            $status = 'ACTIVE';
+                        }
                     }
                     ?>
                     <a href="{{route('opportunity.create')}}" data-plan="{{$status}}" class="act-plan">

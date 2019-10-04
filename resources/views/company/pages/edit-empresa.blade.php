@@ -25,9 +25,11 @@
                                 </a>
                             </div>
                             <div class="col-sm-4">
+                                @if($company->special_company == 1)
                                 <a href="{{route('company.subscriptions')}}">
                                     <button type="button" class="btn-blue">Assinaturas</button>
                                 </a>
+                                @endif
                             </div>
                             <div class="col-sm-4">
                                 <a href="{{route('opportunity.index')}}">
@@ -52,7 +54,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="phone">Telefone</label>
-                                <input type="text" name="phone" value="{{$company->phone}}" class="input-phone" placeholder="Telefone">
+                                <input type="text" name="phone" value="{{$company->phone}}" class="input-phone"
+                                    placeholder="Telefone">
                             </div>
                         </div>
                         <div class="row">
@@ -62,7 +65,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="thumbnail">Logo Empresa</label>
-                                <input class="form-control-file" type="file"  name="thumbnail">
+                                <input class="form-control-file" type="file" name="thumbnail">
                             </div>
                             <div class="col-sm-4">
                                 <a class="act-password">
@@ -73,21 +76,24 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="description" style="margin-top: 20px;">Breve Descrição</label>
-                                <textarea name="description" placeholder="Descrição sobre a empresa">{{$company->description}}</textarea>
+                                <textarea name="description"
+                                    placeholder="Descrição sobre a empresa">{{$company->description}}</textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="cnpj">CNPJ</label>
-                                <input type="text" name="cnpj" value="{{$company->cnpj}}" class="input-cnpj" placeholder="CNPJ">
+                                <input type="text" name="cnpj" value="{{$company->cnpj}}" class="input-cnpj"
+                                    placeholder="CNPJ">
                             </div>
                             <div class="col-sm-6">
                                 <label for="occupation_area_id">Área de Atuação</label>
                                 <select name="occupation_area_id">
                                     <option selected disabled>Selecione</option>
                                     @foreach($occupations as $occupation)
-                                    <option value="{{$occupation->id}}" <?php if ($company->occupation_area_id == $occupation->id): echo "selected"; ?>
-                                    <?php endif ?>>{{$occupation->name}}</option>
+                                    <option value="{{$occupation->id}}"
+                                        <?php if ($company->occupation_area_id == $occupation->id): echo "selected"; ?>
+                                        <?php endif ?>>{{$occupation->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -95,7 +101,8 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="cep">CEP</label>
-                                <input type="text" class="input-cep" value="{{$company->cep}}"  name="cep" placeholder="Seu CEP">
+                                <input type="text" class="input-cep" value="{{$company->cep}}" name="cep"
+                                    placeholder="Seu CEP">
                             </div>
                             <div class="col-sm-6">
                                 <label for="street">Logradouro / Rua</label>
@@ -103,26 +110,30 @@
                             </div>
                             <div class="col-sm-2">
                                 <label for="number">Número</label>
-                                <input type="text" name="number" value="{{$company->number}}"  placeholder="Número / Complemento">
+                                <input type="text" name="number" value="{{$company->number}}"
+                                    placeholder="Número / Complemento">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="neighborhood">Bairro</label>
-                                <input type="text" name="neighborhood" value="{{$company->neighborhood}}" placeholder="Bairro">
+                                <input type="text" name="neighborhood" value="{{$company->neighborhood}}"
+                                    placeholder="Bairro">
                             </div>
                             <div class="col-sm-4">
                                 <label for="state">Estado</label>
                                 <select name="state" id="state">
                                     <option value="">Selecione...</option>
                                     @foreach($states as $state)
-                                    <option value="{{$state->sigla}}" {{$state->sigla == $company->state ? "selected" : ""}}>{{$state->sigla}}</option>
+                                    <option value="{{$state->sigla}}"
+                                        {{$state->sigla == $company->state ? "selected" : ""}}>{{$state->sigla}}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for="city">Cidade</label>
-                                <input type="text"  name="city" value="{{$company->city}}" placeholder="Cidade">
+                                <input type="text" name="city" value="{{$company->city}}" placeholder="Cidade">
                             </div>
                         </div>
                         <div class="row">
@@ -133,21 +144,25 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="linkedin">Linkedin</label>
-                                <input type="text" name="linkedin" value="{{$company->linkedin}}" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="linkedin" value="{{$company->linkedin}}"
+                                    placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="facebook">Facebook</label>
-                                <input type="text" name="facebook" value="{{$company->facebook}}" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="facebook" value="{{$company->facebook}}"
+                                    placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="twitter">Twitter</label>
-                                <input type="text" name="twitter" value="{{$company->twitter}}" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="twitter" value="{{$company->twitter}}"
+                                    placeholder="Informe a url do seu perfil">
                             </div>
                             <div class="col-sm-6">
                                 <label for="blog">Blog</label>
-                                <input type="text" name="blog" value="{{$company->blog}}" placeholder="Informe a url do seu perfil">
+                                <input type="text" name="blog" value="{{$company->blog}}"
+                                    placeholder="Informe a url do seu perfil">
                             </div>
                         </div>
                         <div class="row">
@@ -155,12 +170,12 @@
                                 <button class="btn-blue">Atualizar cadastro</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
-        </div>        
-    </div> 
+        </div>
+    </div>
 </section>
 
 @stop

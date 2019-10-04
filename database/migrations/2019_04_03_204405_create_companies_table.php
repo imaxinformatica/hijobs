@@ -34,6 +34,7 @@ class CreateCompaniesTable extends Migration
             $table->string('blog', 191)->nullable();
             $table->string('password', 191);
             $table->integer('publish')->nullable();
+            $table->integer('special_company')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

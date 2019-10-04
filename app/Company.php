@@ -16,7 +16,27 @@ class Company extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'trade',
+        'phone',
+        'description',
+        'cnpj',
+        'occupation_area_id',
+        'cep',
+        'street',
+        'state',
+        'city',
+        'neighborhood',
+        'number',
+        'thumbnail',
+        'linkedin',
+        'facebook',
+        'twitter',
+        'blog',
+        'password',
+        'publish',
+        'special_company',
     ];
 
     /**
@@ -48,8 +68,8 @@ class Company extends Authenticatable
     {
         return $this->hasMany('App\Message');
     }
-    
-     public function card()
+
+    public function card()
     {
         return $this->hasOne('App\Card', 'user_id');
     }

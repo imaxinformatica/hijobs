@@ -113,7 +113,6 @@ class CompanyController extends Controller
 
     public function update(Request $request)
     {
-
         $this->validate($request, [
             'trade'                 => 'required',
             'phone'    			    => 'required',
@@ -142,7 +141,6 @@ class CompanyController extends Controller
         if ($request->email != null || $request->email != '') {
             $company->email            = $request->email;
         }
-
 
         $company->linkedin            = $request->linkedin;
         $company->facebook            = $request->facebook;

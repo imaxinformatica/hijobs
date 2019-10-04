@@ -126,7 +126,7 @@ Route::group(['prefix' => 'empresa', 'as'=>'company.', 'middleware' => ['company
 
 //Vagas
 Route::group(['prefix' => 'vaga', 'as'=>'opportunity.', 'middleware' => ['company']], function () {
-  Route::get('/empresa/', 'Company\OpportunityController@index')->name('index');
+  Route::get('/empresa', 'Company\OpportunityController@index')->name('index');
   Route::get('/criar', 'Company\OpportunityController@create')->name('create')->middleware('check.plan');
   Route::post('/store', 'Company\OpportunityController@store')->name('store');
   Route::get('/nova/cidade', 'Company\OpportunityController@cities')->name('cities');

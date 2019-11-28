@@ -58,6 +58,7 @@
         </div>
     </div>
     @endisset
+    
     @if(session()->has('info'))
     <div class="container-fluid">
         <!-- Main row -->

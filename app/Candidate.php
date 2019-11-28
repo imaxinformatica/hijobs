@@ -16,13 +16,13 @@ class Candidate extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'cpf', 'state_id','phone', 'birthdate',
-        'marital_status', 'sex', 'special','special_description',
-        'linkedin', 'facebook','twitter', 'blog', 'travel', 'change',
-        'journey_id','contract_type_id', 'max_hierarchy_id', 'salary', 'complement'
+        'name', 'email', 'cpf', 'state_id', 'phone', 'birthdate',
+        'marital_status', 'sex', 'special', 'special_description',
+        'linkedin', 'facebook', 'twitter', 'blog', 'travel', 'change',
+        'journey_id', 'contract_type_id', 'max_hierarchy_id', 'salary', 'complement'
     ];
-            
-           
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -55,22 +55,22 @@ class Candidate extends Authenticatable
 
     public function journey()
     {
-        return $this->belongsTo('App\Journey');   
+        return $this->belongsTo('App\Journey');
     }
 
     public function contract_type()
     {
-        return $this->belongsTo('App\ContractType');   
+        return $this->belongsTo('App\ContractType');
     }
 
     public function max_hierarchy()
     {
-        return $this->belongsTo('App\Hierarchy', 'max_hierarchy_id');   
+        return $this->belongsTo('App\Hierarchy', 'max_hierarchy_id');
     }
 
     public function min_hierarchy()
     {
-        return $this->belongsTo('App\Hierarchy', 'min_hierarchy_id');   
+        return $this->belongsTo('App\Hierarchy', 'min_hierarchy_id');
     }
 
     public function vehicle()
@@ -122,5 +122,4 @@ class Candidate extends Authenticatable
     {
         return $this->hasOne('App\TransactionUser', 'user_id')->where('type', 1);
     }
-    
 }

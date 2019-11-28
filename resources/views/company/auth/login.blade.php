@@ -29,6 +29,9 @@
                                 ENTRAR
                             </button>
                         </div>
+                        <div class="col-sm-8">
+                            <a href="{{url('empresa/password/reset')}}">Esqueceu a senha?</a>
+                        </div>
                     </div>
                 </form>
             </div>

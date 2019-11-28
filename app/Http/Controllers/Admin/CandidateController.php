@@ -22,11 +22,33 @@ use App\City;
 use App\Course;
 use App\Level;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CandidateRequest;
+use App\Notifications\SendData;
+use App\Services\CandidateService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class CandidateController extends Controller
 {
+
+    public function create()
+    {
+        return view('admin.pages.candidate.create')
+        ->with('states', State::all())
+        ->with('countries', Country::all())
+        ->with('cities', City::all())
+        ->with('courses', Course::all())
+        ->with('drivers', Driver::all())
+        ->with('journeys', Journey::all())
+        ->with('vehicles', Vehicle::all())
+        ->with('specials', Special::all())
+        ->with('languages', Language::all())
+        ->with('knowledges', Knowledge::all())
+        ->with('levels', Level::all())
+        ->with('subknowledges', Subknowledge::all())
+        ->with('hierarchies', Hierarchy::all())
+        ->with('contract_types', ContractType::all());
+    }
 
     public function edit($id)
     {
@@ -34,7 +56,6 @@ class CandidateController extends Controller
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
     	return view('admin.pages.candidate.edit')
     	->with('states', State::all())
-        ->with('countries', Country::all())
         ->with('cities', City::all())
         ->with('courses', Course::all())
         ->with('drivers', Driver::all())
@@ -48,6 +69,18 @@ class CandidateController extends Controller
         ->with('hierarchies', Hierarchy::all())
         ->with('contract_types', ContractType::all())
     	->with('candidate', $candidate);    
+    }
+
+    public function store(CandidateRequest $request, CandidateService $sv)
+    {
+        try {
+            $sv->create($request->all());
+        } catch (\Exception $e) {
+            return dd($e->getMessage());
+            return redirect()->back()->with('error', 'Ops, tivemos um problema no servidor:' .$e->getMessage());
+        }
+        $candidate = Candidate::get()->last();
+        return redirect()->route('admin.candidate.edit', ['id' => $candidate->id]);
     }
     public function update(Request $request)
     {
@@ -155,5 +188,14 @@ class CandidateController extends Controller
         $candidate->save();
 
         return redirect()->back()->with('success', 'Candidato Editado.');
+    }
+
+    public function sendData(Candidate $candidate)
+    {
+
+        $candidate->notify(new SendData(
+            $candidate
+        ));
+        return redirect()->back()->with('success', 'Dados enviados com sucesso');
     }
 }

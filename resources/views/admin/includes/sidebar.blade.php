@@ -53,6 +53,11 @@
             <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>PARCEIROS</span>
           </a>
         </li>
+        <li {{ (Request::is('admin/configuracao') ? 'class=active' : '') }} >
+          <a href="{{ route('admin.configuration.edit')}}">
+            <i class="fa fa-cog" aria-hidden="true"></i> <span>CONFIGURAÇÃO</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

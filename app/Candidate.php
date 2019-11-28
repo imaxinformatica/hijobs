@@ -19,7 +19,7 @@ class Candidate extends Authenticatable
         'name', 'email', 'cpf', 'state_id', 'phone', 'birthdate',
         'marital_status', 'sex', 'special', 'special_description',
         'linkedin', 'facebook', 'twitter', 'blog', 'travel', 'change',
-        'journey_id', 'contract_type_id', 'max_hierarchy_id', 'salary', 'complement'
+        'journey_id', 'contract_type_id', 'max_hierarchy_id', 'salary', 'complement', 'password'
     ];
 
 

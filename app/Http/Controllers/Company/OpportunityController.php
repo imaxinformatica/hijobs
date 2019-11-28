@@ -87,8 +87,8 @@ class OpportunityController extends Controller
             'num'               => 'required',
         ]); 
             
-        $company = Auth::guard('company')->user();
-        $totalOpportunities = $company->opportunities()->count();
+        $auth = Auth::guard('company')->user();
+        $totalOpportunities = $auth->opportunities()->count();
 
         $limit = Limit::first();
         if($totalOpportunities >= $limit->qty){

@@ -8,6 +8,7 @@ use App\CandidateSpecial;
 use App\CandidateState;
 use App\CandidateVehicle;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class CandidateService
 {
@@ -15,11 +16,12 @@ class CandidateService
     {
         $data['salary'] = str_replace(',', '.', str_replace('.', '', $data['salary']));
         $data['birthdate'] = implode("-", array_reverse(explode("/", $data['birthdate'])));
-        
+        $data['password'] = bcrypt($data['password']);
         DB::transaction(function () use ($data) {
 
             $candidate = Candidate::create($data);
 
+            $a = Auth::guard('admin')->user();
             if (isset($data['isSpecial'])) {
                 $this->setSpecial($data['specials'], $candidate->id, $data['special_description']);
             }

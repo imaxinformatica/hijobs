@@ -34,41 +34,41 @@ class CandidateController extends Controller
     public function create()
     {
         return view('admin.pages.candidate.create')
-        ->with('states', State::all())
-        ->with('countries', Country::all())
-        ->with('cities', City::all())
-        ->with('courses', Course::all())
-        ->with('drivers', Driver::all())
-        ->with('journeys', Journey::all())
-        ->with('vehicles', Vehicle::all())
-        ->with('specials', Special::all())
-        ->with('languages', Language::all())
-        ->with('knowledges', Knowledge::all())
-        ->with('levels', Level::all())
-        ->with('subknowledges', Subknowledge::all())
-        ->with('hierarchies', Hierarchy::all())
-        ->with('contract_types', ContractType::all());
+            ->with('states', State::all())
+            ->with('countries', Country::all())
+            ->with('cities', City::all())
+            ->with('courses', Course::all())
+            ->with('drivers', Driver::all())
+            ->with('journeys', Journey::all())
+            ->with('vehicles', Vehicle::all())
+            ->with('specials', Special::all())
+            ->with('languages', Language::all())
+            ->with('knowledges', Knowledge::all())
+            ->with('levels', Level::all())
+            ->with('subknowledges', Subknowledge::all())
+            ->with('hierarchies', Hierarchy::all())
+            ->with('contract_types', ContractType::all());
     }
 
     public function edit($id)
     {
-    	$candidate = Candidate::find($id);
+        $candidate = Candidate::find($id);
         $candidate->birthdate = implode("/", array_reverse(explode("-", $candidate->birthdate)));
-    	return view('admin.pages.candidate.edit')
-    	->with('states', State::all())
-        ->with('cities', City::all())
-        ->with('courses', Course::all())
-        ->with('drivers', Driver::all())
-        ->with('journeys', Journey::all())
-        ->with('vehicles', Vehicle::all())
-        ->with('specials', Special::all())
-        ->with('languages', Language::all())
-        ->with('knowledges', Knowledge::all())
-        ->with('levels', Level::all())
-        ->with('subknowledges', Subknowledge::all())
-        ->with('hierarchies', Hierarchy::all())
-        ->with('contract_types', ContractType::all())
-    	->with('candidate', $candidate);    
+        return view('admin.pages.candidate.edit')
+            ->with('states', State::all())
+            ->with('cities', City::all())
+            ->with('courses', Course::all())
+            ->with('drivers', Driver::all())
+            ->with('journeys', Journey::all())
+            ->with('vehicles', Vehicle::all())
+            ->with('specials', Special::all())
+            ->with('languages', Language::all())
+            ->with('knowledges', Knowledge::all())
+            ->with('levels', Level::all())
+            ->with('subknowledges', Subknowledge::all())
+            ->with('hierarchies', Hierarchy::all())
+            ->with('contract_types', ContractType::all())
+            ->with('candidate', $candidate);
     }
 
     public function store(CandidateRequest $request, CandidateService $sv)
@@ -77,10 +77,11 @@ class CandidateController extends Controller
             $sv->create($request->all());
         } catch (\Exception $e) {
             return dd($e->getMessage());
-            return redirect()->back()->with('error', 'Ops, tivemos um problema no servidor:' .$e->getMessage());
+            return redirect()->back()->with('error', 'Ops, tivemos um problema no servidor:' . $e->getMessage());
         }
         $candidate = Candidate::get()->last();
-        return redirect()->route('admin.candidate.edit', ['id' => $candidate->id]);
+        return redirect()->route('admin.candidate.edit', ['id' => $candidate->id])
+            ->with('success', 'Usuario adicionado com sucesso');
     }
     public function update(Request $request)
     {

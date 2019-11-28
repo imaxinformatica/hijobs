@@ -66,7 +66,7 @@ class RegisterController extends Controller
         return Candidate::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => encrypt($data['password']),
         ]);
     }
 

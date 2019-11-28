@@ -45,7 +45,7 @@ class SendData extends Notification
     {
         $data['name'] = $this->candidate->name; 
         $data['email'] = $this->candidate->email; 
-        $data['password'] = ($this->candidate->password); 
+        $data['password'] = decrypt($this->candidate->password); 
         return (new MailMessage)
             ->subject('Dados de login')
             ->view(

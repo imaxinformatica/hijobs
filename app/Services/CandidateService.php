@@ -16,7 +16,7 @@ class CandidateService
     {
         $data['salary'] = str_replace(',', '.', str_replace('.', '', $data['salary']));
         $data['birthdate'] = implode("-", array_reverse(explode("/", $data['birthdate'])));
-        $data['password'] = bcrypt($data['password']);
+        $data['password'] = encrypt($data['password']);
         DB::transaction(function () use ($data) {
 
             $candidate = Candidate::create($data);

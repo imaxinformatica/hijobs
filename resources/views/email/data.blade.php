@@ -304,7 +304,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Mensagem de orçamento</span>
+    <span class="preheader">Redefinição de senha</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>

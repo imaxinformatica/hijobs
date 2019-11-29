@@ -41,10 +41,10 @@ return [
             'provider' => 'companies',
         ],
 
-        'candidate' => [
-            'driver' => 'session',
-            'provider' => 'candidates',
-        ],
+        // 'candidate' => [
+        //     'driver' => 'session',
+        //     'provider' => 'candidates',
+        // ],
 
         'admin' => [
             'driver' => 'session',
@@ -60,6 +60,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'candidate' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ]
     ],
 
     /*
@@ -99,6 +104,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'candidates' => [
+            'driver' => 'candidate',
+            'model' => App\Candidate::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

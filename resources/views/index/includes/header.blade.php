@@ -27,6 +27,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                <li {{ (Request::is('candidato/assinaturas') ? 'class=active' : '') }}><a href="{{route('candidate.subscriptions')}}">ASSINATURA</a></li>
+
                     <li {{ (Request::is('/') ? 'class=active' : '') }}
                         {{ (Request::is('candidato/pesquisa') ? 'class=active' : '') }} {{ (Request::is('candidato/pesquisar*') ? 'class=active' : '') }}><a
                             href="{{route('candidate.opportunity')}}">BUSCAR VAGAS</a></li>

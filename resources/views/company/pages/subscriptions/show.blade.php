@@ -37,11 +37,6 @@
                                 </a>
                             </div>
                             <div class="col-sm-4">
-                                <a href="{{route('company.subscriptions')}}">
-                                    <button type="button" class="btn-blue">Assinaturas</button>
-                                </a>
-                            </div>
-                            <div class="col-sm-4">
                                 <a href="{{route('opportunity.index')}}">
                                     <button type="button" class="btn-blue">Voltar</button>
                                 </a>
@@ -57,8 +52,9 @@
                     <div class="row">
                     @forelse($plans as $plan)
                         <div class="col-sm-4">
-                            <p for="name"><b>Nome: </b>{{$plan->name}}</p>
-                            <p for="name"><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
+                            <p><b>Nome: </b>{{$plan->name}}</p>
+                            <p><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
+                            <p><b>Prazo gratuito: </b>20 dias</p>
                             @if(isset($company->transaction))
                                 @if($company->transaction->status == 'ACTIVE')
                                 <a href="{{route('company.transaction.cancel')}}" class="act-delete" >

@@ -28,6 +28,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     @auth
+                    <li><a href="{{route('candidate.subscriptions')}}">ASSINATURA</a></li>
                     <li><a href="{{route('candidate.opportunity')}}">BUSCAR VAGAS</a></li>
                     <li><a href="{{route('candidate.show')}}">DADOS PESSOAIS</a></li>
                     <li id="login"><a href="{{url('candidato/logout')}}">SAIR</a></li>

@@ -17,8 +17,8 @@
                 <div class="etapas box-result-search">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="number">
-                                <div class="evolucao">
+                            <div class="number active">
+                                <div class="evolucao active">
                                     <p>1</p>
                                 </div>
                                 <h3>Dados de acesso</h3>

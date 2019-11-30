@@ -24,7 +24,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
+                            <a href="{{url('empresa/password/reset')}}">Esqueceu a senha?</a>
                             <button class="btn-orange">
                                 ENTRAR
                             </button>

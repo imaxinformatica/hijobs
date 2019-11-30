@@ -32,11 +32,7 @@
                                 <button class="btn-blue">Mensagens</button>
                             </a>
                         </div>
-                        <div class="col-sm-3">
-                            <a href="{{route('candidate.subscriptions')}}">
-                                <button class="btn-blue-dark">Assinaturas</button>
-                            </a>
-                        </div>
+                       
                     </div>
                     <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                     <div class="row">

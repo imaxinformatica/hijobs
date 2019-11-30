@@ -18,7 +18,9 @@ use App\Subknowledge;
 use App\OpportunityCity;
 use App\ContractType;
 use App\Hierarchy;
+use App\Limit;
 use App\Opportunity;
+use App\Rules\MaxOpportunity;
 use Auth;
 
 class OpportunityController extends Controller
@@ -84,9 +86,15 @@ class OpportunityController extends Controller
             'city_id'           => 'required',
             'num'               => 'required',
         ]); 
-
-
+            
         $auth = Auth::guard('company')->user();
+        $totalOpportunities = $auth->opportunities()->count();
+
+        $limit = Limit::first();
+        if($totalOpportunities >= $limit->qty){
+            return redirect()->back()
+            ->with('warning', 'Você já atingiu o limite de vagas para o seu plano ativo');
+        }
 
     	$opportunity = new Opportunity;
         $opportunity->name              = $request->name;

@@ -16,32 +16,32 @@
             <div class="col-sm-12">
                 <div class="etapas box-result-search">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="number">
-                                <div class="evolucao">
+                        <div class="col-sm-6">
+                            <div class="number active">
+                                <div class="evolucao active">
                                     <p>1</p>
                                 </div>
                                 <h3>Dados de acesso</h3>
                             </div>
                             <img src="{{asset('images/barra.png')}}">
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="number">
                                 <div class="evolucao">
                                     <p>2</p>
                                 </div>
                                 <h3>Dados do currículo</h3>
                             </div> 
-                            <img src="{{asset('images/barra.png')}}">                       
+                            <!-- <img src="{{asset('images/barra.png')}}">                        -->
                         </div>
-                        <div class="col-sm-4">
+                        <!-- <div class="col-sm-4">
                             <div class="number">
                                 <div class="evolucao">
                                     <p>3</p>
                                 </div>
                                 <h3>Melhorar currículo</h3>
                             </div>                        
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/candidate/home';
+    public $redirectTo = '/candidato/visualizar';
 
 
     /**

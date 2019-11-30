@@ -582,6 +582,9 @@ div.etapas h3 {
     margin: 13px 0 14px;
     color: #ccc;
 }
+div.number.active h3 {
+    color: rgb(15, 15, 15);
+}
 
 div.etapas img{
     float: right;
@@ -601,10 +604,20 @@ div.evolucao {
     text-align: center;
 }
 
+
 div.evolucao p{
     margin-top: 4px;
     color: #ccc;
     font-weight: bold;
+}
+div.evolucao.active {
+    border: 2px solid rgb(15, 15, 15);
+}
+div.evolucao.active p{
+    color: rgb(15, 15, 15);
+}
+div.evolucao.active h3{
+    color: rgb(15, 15, 15);
 }
 
 div.dados-pessoais input, div.dados-pessoais select{

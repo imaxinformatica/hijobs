@@ -30,40 +30,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="box-result-search result-vacancies dados-pessoais">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <a href="{{route('candidate.edit')}}">
-                                <button class="btn-blue">Editar meu currículo</button>
-                            </a>
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="{{route('candidate.app')}}">
-                                <button class="btn-blue">Candidaturas</button>
-                            </a>
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="{{route('candidate.index.message')}}">
-                                <button class="btn-blue">Mensagens</button>
-                            </a>
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="{{route('candidate.subscriptions')}}">
-                                <button class="btn-blue-dark">Assinaturas</button>
-                            </a>
-                        </div>
-                    </div>
                     <input type="hidden" name="candidate_id" value="{{$candidate->id}}">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h2>Assinaturas</h2>
+                            <h2>Assinatura</h2>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                     @forelse($plans as $plan)
                         <div class="col-sm-4">
-                            <p for="name"><b>Nome assinatura: </b>{{$plan->name}}</p>
-                            <p for="name"><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
+                            <p><b>Nome assinatura: </b>{{$plan->name}}</p>
+                            <p><b>Valor: </b>R$ {{number_format($plan->value,2, ',','.')}}</p>
+                            <p><b>Prazo gratuito: </b>20 dias</p>
                             @if(isset($candidate->transaction))
                                 @if($candidate->transaction->status == 'ACTIVE')
                                 <a href="{{route('company.transaction.cancel')}}" class="act-delete" >

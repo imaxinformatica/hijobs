@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Schema;
 use Illuminate\Support\ServiceProvider;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         if(!$this->app->isLocal()){
             \URL::forceScheme('https');
         }
+        Auth::provider('candidate', function ($app, array $config) {
+            return $app->make(CustomEloquentCandidateProvider::class, ['model' => $config['model']]);
+        });
     }
 
     /**

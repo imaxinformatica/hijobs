@@ -26,8 +26,8 @@
                             <img src="{{asset('images/barra.png')}}">
                         </div>
                         <div class="col-sm-6">
-                            <div class="number">
-                                <div class="evolucao">
+                            <div class="number active">
+                                <div class="evolucao active">
                                     <p>2</p>
                                 </div>
                                 <h3>Finalizar Cadastro</h3>

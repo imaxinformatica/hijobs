@@ -24,13 +24,7 @@
                                     <button type="button" class="btn-blue">Mensagens Enviadas</button>
                                 </a>
                             </div>
-                            <div class="col-sm-4">
-                                @if($company->special_company == 1)
-                                <a href="{{route('company.subscriptions')}}">
-                                    <button type="button" class="btn-blue">Assinaturas</button>
-                                </a>
-                                @endif
-                            </div>
+                        
                             <div class="col-sm-4">
                                 <a href="{{route('opportunity.index')}}">
                                     <button type="button" class="btn-blue">Voltar</button>

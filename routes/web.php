@@ -157,6 +157,12 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('dashboard');
   Route::get('/paginas', 'Admin\PagesController@index')->name('pages');
 
+  Route::group(['prefix' => 'configuracao','as'=>'configuration.'], function(){
+    Route::get('/', 'Admin\ConfigurationController@edit')->name('edit');
+    Route::post('/update', 'Admin\ConfigurationController@update')->name('update');
+    Route::post('/limit', 'Admin\ConfigurationController@limit')->name('limit');
+  });
+
   Route::group(['prefix' => 'paginas','as'=>'pages.'], function(){
     Route::get('/edit/{id}', 'Admin\PagesController@edit')->name('edit');
     Route::post('/update', 'Admin\PagesController@update')->name('update');
@@ -203,7 +209,10 @@ Route::group(['prefix' => 'admin','as'=>'admin.', 'middleware' =>['admin']], fun
   Route::get('/empresas/remove/{id}', 'Admin\AdminController@removeCompany')->name('company.remove');
 
   Route::get('/candidatos', 'Admin\AdminController@indexCandidate')->name('candidate');
+  Route::get('/candidatos/create/', 'Admin\CandidateController@create')->name('candidate.create');
   Route::get('/candidatos/edit/{id}', 'Admin\CandidateController@edit')->name('candidate.edit');
+  Route::get('/candidatos/enviar/{candidate}', 'Admin\CandidateController@sendData')->name('candidate.send.data');
+  Route::post('/candidatos/store', 'Admin\CandidateController@store')->name('candidate.store');
   Route::post('/candidatos/update', 'Admin\CandidateController@update')->name('candidate.update');
   Route::get('/planos', 'Admin\PagSeguroController@index')->name('plan');
   

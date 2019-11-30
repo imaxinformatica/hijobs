@@ -103,7 +103,7 @@ class CandidateController extends Controller
         $candidate->nehighbor   = $dadosCep->bairro;
         $candidate->city        = $dadosCep->localidade;
         $candidate->occupation  = $request->occupation;
-        $candidate->password    = bcrypt($request->password);
+        $candidate->password    = encrypt($request->password);
 
         $candidate->save();
 
@@ -283,7 +283,7 @@ class CandidateController extends Controller
 
         $candidate = Auth::guard('candidate')->user();
 
-        $candidate->password = bcrypt($request->password);
+        $candidate->password = encrypt($request->password);
         $candidate->save();
         return redirect()->back()->with('success', 'Senha alterada!');
     }

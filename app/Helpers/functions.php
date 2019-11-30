@@ -96,7 +96,7 @@ function validateCandidate(Request $request)
     
     $data = $request->except('_token', 'candidate_id', 'thumbnail');
     if(isset($request->password)){
-        $data['password'] =  bcrypt($request->password);
+        $data['password'] =  encrypt($request->password);
     }
     return $data;
 }

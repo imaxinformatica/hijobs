@@ -320,7 +320,7 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                      	<!-- <img src="{{ asset('images/logo-email.png')}}" alt="Logo" width="160" height="112" border="0" style="border:0; outline:none; text-decoration:none; display:block; margin-bottom:30px;"> -->
+                      	<img src="{{ asset('images/email.png')}}" alt="Logo" width="160" height="112" border="0" style="border:0; outline:none; text-decoration:none; display:block; margin-bottom:30px;">
                       </td>
                     </tr>
                     <tr>
@@ -333,6 +333,8 @@
                             <b>E-mail: </b> {{$data['email']}} 
                             <br><br>
                             <b>Senha: </b> {{$data['password']}}
+                            <br><br>
+                            <p>Faça login agora mesmo, clicando <a href="{{route('candidate.login')}}">aqui</a></p>
                         </td>
                     </tr>
                   </table>
@@ -345,7 +347,7 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block powered-by">
-                    Enviado por <a href="https://lirabrindes.com.br">Lira Brindes</a>.
+                    Enviado por <b> <a href="https://hijobs.com.br/">Hijobs</a></b>.
                   </td>
                 </tr>
               </table>

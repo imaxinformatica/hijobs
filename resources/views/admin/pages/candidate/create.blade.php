@@ -382,7 +382,7 @@
 
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
                             <a href="{{route('admin.candidate')}}">
                                 <button type="button" class="btn btn-default">Voltar</button>
                             </a>

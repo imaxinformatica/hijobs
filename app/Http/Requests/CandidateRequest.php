@@ -24,20 +24,21 @@ class CandidateRequest extends FormRequest
     public function rules()
     {
         return [
-            'state' => 'required',
-            'cpf' => 'required|unique:candidates',
+            'name' => 'required',
             'email' => 'required|unique:candidates',
-            'marital_status' => 'required',
-            'birthdate' => 'required',
             'password' => 'required|min:6|confirmed',
-            'sex' => 'required',
-            'travel' => 'required',
-            'change' => 'required',
-            'journey_id' => 'required',
-            'contract_type_id' => 'required',
-            'min_hierarchy_id' => 'required',
-            'max_hierarchy_id' => 'required',
-            'salary' => 'required',
+            // 'cpf' => 'required|unique:candidates',
+            // 'state' => 'required',
+            // 'marital_status' => 'required',
+            // 'birthdate' => 'required',
+            // 'sex' => 'required',
+            // 'travel' => 'required',
+            // 'change' => 'required',
+            // 'journey_id' => 'required',
+            // 'contract_type_id' => 'required',
+            // 'min_hierarchy_id' => 'required',
+            // 'max_hierarchy_id' => 'required',
+            // 'salary' => 'required',
         ];
     }
 }

@@ -76,7 +76,6 @@ class CandidateController extends Controller
         try {
             $sv->create($request->all());
         } catch (\Exception $e) {
-            return dd($e->getMessage());
             return redirect()->back()->with('error', 'Ops, tivemos um problema no servidor:' . $e->getMessage());
         }
         $candidate = Candidate::get()->last();
@@ -86,25 +85,26 @@ class CandidateController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'state' => 'required',
+            'name' => 'required',
             'cpf' => [
-                'required',
+                'nullable',
                 Rule::unique('candidates')->ignore($request->id),
             ],
             'email' => [
                 'required',
                 Rule::unique('candidates')->ignore($request->id),
             ],
-            'marital_status' => 'required',
-            'birthdate' => 'required',
-            'sex' => 'required',
-            'travel' => 'required',
-            'change' => 'required',
-            'journey_id' => 'required',
-            'contract_type_id' => 'required',
-            'min_hierarchy_id' => 'required',
-            'max_hierarchy_id' => 'required',
-            'salary' => 'required',
+            // 'state' => 'required',
+            // 'marital_status' => 'required',
+            // 'birthdate' => 'required',
+            // 'sex' => 'required',
+            // 'travel' => 'required',
+            // 'change' => 'required',
+            // 'journey_id' => 'required',
+            // 'contract_type_id' => 'required',
+            // 'min_hierarchy_id' => 'required',
+            // 'max_hierarchy_id' => 'required',
+            // 'salary' => 'required',
         ]);
 
         $candidate = Candidate::find($request->id);
@@ -131,8 +131,8 @@ class CandidateController extends Controller
         $candidate->contract_type_id = $request->contract_type_id;
         $candidate->min_hierarchy_id = $request->min_hierarchy_id;
         $candidate->max_hierarchy_id = $request->max_hierarchy_id;
-        $candidate->salary = str_replace(',', '.', str_replace('.', '', $request->salary));
-        $candidate->birthdate = implode("-", array_reverse(explode("/", $request->birthdate)));
+        $candidate->salary = $request->salary ? str_replace(',', '.', str_replace('.', '', $request->salary)) : null;
+        $candidate->birthdate = $request->birthdate ? implode("-", array_reverse(explode("/", $request->birthdate))) : null;
         $candidate->linkedin = $request->linkedin;
         $candidate->facebook = $request->facebook;
         $candidate->twitter = $request->twitter;

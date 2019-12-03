@@ -57,6 +57,7 @@ class CandidateController extends Controller
         return view('admin.pages.candidate.edit')
             ->with('states', State::all())
             ->with('cities', City::all())
+            ->with('countries', Country::all())
             ->with('courses', Course::all())
             ->with('drivers', Driver::all())
             ->with('journeys', Journey::all())

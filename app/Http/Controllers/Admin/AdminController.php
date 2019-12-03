@@ -88,11 +88,12 @@ class AdminController extends Controller
             }
         }
 
-        $candidates = $candidates->orderBy('name', 'asc')->paginate(10);
+        $candidates = $candidates->orderBy('name', 'asc')->get();
 
     	return view('admin.pages.candidate.index')
     	->with('candidates', $candidates);
     }
+
     public function indexOpportunity(Request $request)
     {
         $opportunities = new Opportunity;
